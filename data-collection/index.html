@@ -344,6 +344,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#before-day-of-scan" class="md-nav__link">
+    BEFORE DAY OF SCAN
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#day-of-scan-prior-to-participant-arrival" class="md-nav__link">
     DAY OF SCAN, prior to participant arrival
   </a>
@@ -358,8 +365,43 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#day-of-scan-participant-setup" class="md-nav__link">
+    DAY OF SCAN, participant setup
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#scan-time" class="md-nav__link">
     SCAN TIME
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#during-scan" class="md-nav__link">
+    DURING SCAN
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#end-of-recording" class="md-nav__link">
+    END OF RECORDING
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#after-scan-inside-scanner-room" class="md-nav__link">
+    AFTER SCAN, inside scanner room
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#after-scan-outside-scanner-room" class="md-nav__link">
+    AFTER SCAN, outside scanner room
   </a>
   
 </li>
@@ -492,6 +534,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#before-day-of-scan" class="md-nav__link">
+    BEFORE DAY OF SCAN
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#day-of-scan-prior-to-participant-arrival" class="md-nav__link">
     DAY OF SCAN, prior to participant arrival
   </a>
@@ -506,8 +555,43 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#day-of-scan-participant-setup" class="md-nav__link">
+    DAY OF SCAN, participant setup
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#scan-time" class="md-nav__link">
     SCAN TIME
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#during-scan" class="md-nav__link">
+    DURING SCAN
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#end-of-recording" class="md-nav__link">
+    END OF RECORDING
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#after-scan-inside-scanner-room" class="md-nav__link">
+    AFTER SCAN, inside scanner room
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#after-scan-outside-scanner-room" class="md-nav__link">
+    AFTER SCAN, outside scanner room
   </a>
   
 </li>
@@ -546,7 +630,123 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> remark the participant they will be given a gown and they will need to change before every session.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> If participant has indicated nervousness or history of claustrophobia, utilize mock scanner </li>
 </ul>
+<h4 id="before-day-of-scan">BEFORE DAY OF SCAN<a class="headerlink" href="#before-day-of-scan" title="Permanent link">&para;</a></h4>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Make sure you have internet access, and update the fMRI-Control-Task repository. Assuming the repository is cloned from your <username>/fMRI-Control-Task and you have another remote <code>upstream</code> pulling from <code>git@github.com:theaxonlab/fMRI-Control-Task.git</code>:
+    <div class="highlight"><pre><span></span><code>git fetch upstream
+git checkout main
+git rebase upstream/main
+</code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> On the hos68752 laptop, open a terminal and execute <code>conda deactivate</code>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open psychopy 3 by typing <code>psychopy</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Load in the different experiments and check for proper functioning if there were changes.</li>
+</ul>
 <h4 id="day-of-scan-prior-to-participant-arrival">DAY OF SCAN, prior to participant arrival<a class="headerlink" href="#day-of-scan-prior-to-participant-arrival" title="Permanent link">&para;</a></h4>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Remove the head coil that is currently installed. If it is the 64-channel, you can just temporarily move it into the scanner's bore. Otherwise, store it on the shelve where the other coils are and bring the 64-channel one in the proximity of the bed (e.g., inside the scanner's bore).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> With no head-coil installed, remove the spine coil by lifting the corresponding lock and replace it with the back paddings.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Take the 64-channel head and neck coil and fixate it onto the head end of the bed. This operation may require the removal of paddings and fittings of other coils, if they were present.</li>
+</ul>
+<p><strong>Setting up the eye-tracker</strong></p>
+<div class="admonition info">
+<p class="admonition-title">Thanks</p>
+<p>All the documentation about the eye-tracker is derived from Benedetta Franceschiello's user guide.</p>
+</div>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> The eye-tracker (ET) computer is kept on its designated rolling table, which is stored under the projector in room BH07/075. Behind the rolling table, there is a transparent panel where the ET camera will be set up inside the scanner bore.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify that the monitor and the cable, as well as the ET over the PC tower are fixed to the rolling table with scotch tape.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Bring the table with the ET computer to the access closet (outside) of the scanner room. Be very attentive during the displacement and lift the front wheels when passing steps or cables. The transparent panel can also be brought to the scanning room simultaneously, if done with care.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> From room BH07/071 (first cabinet on the left), take the box with the «fMRI usage» label, containing the ET camera, lenses, and the special infrared mirror. </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Take out of the lenses box the MR-Compatible lense. It is easy to recognize it, from its two golden screws.</li>
+</ul>
+<p><img alt="cover-mri-compatible-lens" src="../assets/ETimages/cover-mri-compatible-lens.png" title="Cover MRI compatible lens" />
+<img alt="mri-compatible-lens" src="../assets/ETimages/mri-compatible-lens.png" title="MRI compatible lens" /></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Un-screw any present lenses, being very careful: one hand must be hold under the lens, to avoid crashes, as it is a bit tricky to screw and un-screw it. In case a lens it’s already present, un-screw it and put it back to its plastic bag, inside the lenses box. </li>
+</ul>
+<p><img alt="screw-mri-compatible-lens" src="../assets/ETimages/screw-lens.png" title="Screw the MRI compatible lens" /></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Be Careful: the lens needs to be substituted before entering inside the Scanner Room</li>
+</ul>
+<p><strong> Now you can enter the scanner room</strong></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Place the transparent standing panel inside the scanner bore, following the indications stuck on the panel (i.e., it has indication of which side goes up and tape markers for the position of the ET).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Take the ET inside the scanner room, and put it on top of the plastic base. The two back "feet" of Base of the ET have to be within two corners made of transparent scotch and already attached to the plexiglass. <strong>BE CAREFUL, HOLD IT STRONGLY, CAUSE THE MAGNETIC FIELD GENERATES RESISTANCES.</strong> Connect the cables (two plugs for the black, one plug for the orange).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open the door of the cable section between the recording room and the scanner room.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> First pass the optic fiber (orange wire) and the power cable (the one with a fabric sheet) through the access point (TODO: ATTACH PICTURE). This operation requires two people, one handling the cables from outside the scanner, and the other gently pulling them from inside. Both people will lift the cable to avoid its abrasion with the edges of the metallic cylinder, which is the passage between exterior and interior of the scanner room. Once the sliding of the cable is finished, leave the extremities inside the scanner room in the left-top corner, far from the scanner. These parts are magnetic.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Place the plastic base into the bore of the MR, top side. DON’T PUSH IT inside, it needs to be adjusted once the subject is placed inside the scanner, to ensure the repeatible positioning of the ET.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Detach the mirror frame from the head coil, if it is placed there. Remove unnecessary items from the scanning bed, and prepare the mirror to attach the infrared mirror of the ET at a later step.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Prepare two long stripes of scotch tape and leave them in a convenient place to then attach the ET mirror with them on to the standard mirror. E.g., attach the corner of each strip to the back part of the mirror frame.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Take out the box containing the infrared mirror from the «fMRI usage» box. <strong><span style="color:red">DO NOT EXTRACT THE MIRROR OUT FROM ITS BOX YET</span></strong>. The mirror's box is labeled as <a href="https://it.wikipedia.org/wiki/San_Gennaro#La_reliquia"><em>RELIQUIA DI SAN GENNARO</em></a> to emphasize that <strong>THIS IS THE MOST DELICATE PART, BECAUSE THE MIRROR CANNOT BE REPLACED <span style="color:red">NOR CLEANED</span></strong>. This mirror is <strong>EXTREMELY EXPENSIVE</strong>. </li>
+</ul>
+<p><img alt="infrared-mirror" src="../assets/ETimages/infrared-mirror.png" /></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Get two gloves (e.g., from the box hanging at the entrance of the scanner room), then approach the scanner bed. Put the gloves on, and <strong>DON’T TOUCH ANYTHING</strong>. You MUST have the standard mirror dismounted and in front of you at this point. <strong>WITH THE GLOVES</strong> proceed to extract the infra-red mirror from its box, being extremely careful. <strong>YOU CAN ONLY TOUCH THE MIRROR WITH GLOVES</strong>, because it cannot be cleaned up. Watch out for <strong>FINGERPRINTS</strong> and once taken out of its box, <strong>IMMEDIATELY PROCEED TO ATTACH IT</strong> to the standard coil mirror. The mirror MUST NOT be placed anywhere else if not in its box.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <strong>WITH YOUR GLOVES ON</strong>, attach the ET mirror to the standard coil mirror (the larger mirror that points toward projector's screen at the back of the scanning room). Put it more or less in the center, although <span style="color:red">this position may need to be adjusted</span> (being careful and with the same precautions explained before) and stick it with the paper scotch. <strong>Do not touch the surface of the ET mirror.</strong></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Place the mirror frame back on the head coil. As always, <strong>DO NOT TOUCH THE MIRROR</strong>. </li>
+</ul>
+<p><strong>Back OUTSIDE THE SCANNER ROOM</strong></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Connect the Power cable to the metallic extremity belonging to the PC-tower</li>
+</ul>
+<p><img alt="connect-power-cable" src="../assets/ETimages/connect-power-cable.png" title="Connect power cable" /></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Plug in the Power strip containing the ET Power Cable, the PC-tower power, etc</li>
+</ul>
+<p><img alt="powerstrip" src="../assets/ETimages/powerstrip.png" />
+<img alt="plug-powerstrip" src="../assets/ETimages/plug-powerstrip.png" /></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Switch on the PC-tower, as well as the laptop:</li>
+</ul>
+<p><img alt="pctower" src="../assets/ETimages/pctower.png" /></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> This is the sync box of the scanner, allowing a synchronization of the triggers between the scanner sequence and the ET recordings.</li>
+</ul>
+<p><img alt="syncbox" src="./assets/ETimages/syncbox.png" /></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Connect to the laptop the ET- ethernet blue cable and the USB sync box. If it’s plugged into the sync box, it needs to be re-plugged in after usage.</li>
+</ul>
+<p><img alt="connect-ethernet-to-laptop" src="../assets/ETimages/connect-ethernet-to-laptop.png" />
+<img alt="ubs-syncbox" src="./assets/ETimages/ubs-syncbox.png" /></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Connect the <strong>hos68752</strong> laptop to the screen switch box (see picture below) with the corresponding HDMI cable. This should project your screen on the second screen.</li>
+</ul>
+<p><img alt="switchbox_hdmi" src="./assets/ETimages/switchbox_hdmi.png" /></p>
+<ul class="task-list">
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Double check that the IP address corresponding to the ethernet interface of the <strong>hos68752</strong> laptop is correct. You can either run <code>ifconfig -a</code> or use the GUI. Make sure the IP/mask is <strong>100.1.1.2/24</strong>, and the protocol is IP version 4. Execute <code>ping 100.1.1.1</code> to see if the eye-tracker is responding with echoes.</p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Now it’s time to check that the sync box correctly [WRITE ON HOW TO SEND TEST TRIGGER MANUALLY]</p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the previous has been checked, it’s time to put the sync box in “Synchronization” mode. Start the session: the box it’s ready to receive the trigger from the sequence and they will be available for Experiment builder / Python / whatever is used to register the trigger and the ET signal.</p>
+</li>
+</ul>
+<p><img alt="choose-synchronisation-syncbox" src="../assets/ETimages/choose-synchronisation-syncbox.png" />
+<img alt="start-session-syncbox" src="../assets/ETimages/start-session-syncbox.png" />
+<img alt="run-session-syncbox" src="../assets/ETimages/run-session-syncbox.png" /></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Switch the projector on by hitting the power button on on its right side. The projector is found in room BH07/075. If the projection is not well located, the projector needs to be adjusted. E.g., change the height of the paper pile that supports it (see images, FENS papers).</li>
+</ul>
+<p><img alt="projector" src="../assets/ETimages/projector.png" />
+<em>The hole is the part through which we should check the quality of the projection</em></p>
+<p><img alt="paper-projector" src="../assets/ETimages/paper-projector.png" />
+<img alt="adjust-projector" src="../assets/ETimages/adjust-projector.png" /></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Go back to the hos68752 laptop, open a terminal and execute <code>conda deactivate</code>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open psychopy 3 by typing <code>psychopy</code></li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open the <ENTER_TASK_NAME></p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Check stimulus display and response device:</p>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Check the movie to be displayed is ready</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Check the execution of the Breath holding task</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Check the execution of the finger tapping task</li>
+</ul>
+<p><strong>Set-up of documents and equipment</strong></p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Prepare consent documents (first session only)</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Prepare an MRI safety screener </li>
@@ -558,26 +758,16 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> prepare a new pair of earplugs</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> prepare the respiration belt, as well as the placeholder for the ECG and other physio sensors</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> connect the cable from the RJ-45 output of the syncbox to the first filter (VNC connector; has a label "External signal") in the cupboard covering the access panel to the Faraday cage. The cable might be stored in the lower left cupboard of office 071. Make sure you will have access to the cable with sufficient time ahead.<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> On the scanner console, checke the external signal input registers triggers from the syncbox</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> On the scanner console, check the external signal input registers triggers from the syncbox</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> prepare a thermometer</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> prepare a blood preasure meter</li>
 </ul>
 </li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> connect the USB cable from the syncbox to the PC HOS54938 (next to the DVD printer/burner)</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Set up the eye-tracking:<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> </li>
-</ul>
-</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Open psychopy 3 and this protocol's files, make sure you have internet access to a Git repository and check files are up-to-date.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Prepare the gas-analyzer:<ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Prepare the canule tube, which is introduced through the tube in the access panel</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Prepare a new canule</li>
 </ul>
 </li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Check stimulus display and response device:</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Check the movie to be displayed is ready</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Check the execution of the Breath holding task</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Check the execution of the finger tapping task</li>
 </ul>
 <h4 id="day-of-scan-right-when-the-participant-arrives">DAY OF SCAN, right when the participant arrives<a class="headerlink" href="#day-of-scan-right-when-the-participant-arrives" title="Permanent link">&para;</a></h4>
 <ul class="task-list">
@@ -592,6 +782,31 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Check the scanner's screen that the three coils [SAY MORE SPECIFIC] are connected and active</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Solicit feedback on participant’s comfort while positioning them on the scanner bed and suggest ergonomic positioning of arms to avoid discomfort</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Make sure the speaker is audible (and not annoying) and confirm the participant's feedback</li>
+</ul>
+<h4 id="day-of-scan-participant-setup">DAY OF SCAN, participant setup<a class="headerlink" href="#day-of-scan-participant-setup" title="Permanent link">&para;</a></h4>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Take the half-circle one-direction screen from the table behind the scanner and put it on the back of the scanner, behind the ET system (don't push the plexiglas yet)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Memorize where the other tools for the recordings are, to put those back in place at the end (coil, emergency button, ears cover.) </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Bring the participant inside the room, and give him the ear-plugs to protect the hearing during acquisition.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Give to the participant the emergency button. Make the participant try it, so they can see it works. To switch off the alarm, there’s a button on the scanner (circular, both on the left and on the right of the hole) </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Adjust the participant inside. With the pillow, its head position needs to be adjusted and elevated until the head can’t move anymore and the nose and the front of the participants are both adherent to the upper coil. This procedure guarantees that the ET "sees" the eyes. If not, the experiment gets stuck.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> This part needs to be repeated taking out and putting back the upper part of the head-coil, adjusting the pillow at every step, until the head is fixed and the nose and front of the participant touch the coil. In case of need, ask the participant to "say yes" with the head (chin on neck) and keep this position, place the pillows, place the coil and check that the participants' front touches the coil. Now the nose can also be a bit far from the coil. Tell the participant to relax the neck, so the nose should go a bit up and touch the coil.  </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Take the Ears -protection pillow, stick it on top of the ears of the participant, one by one. Once they are settled, you can pump it, until the participant is comfortable, the head is fixed and the ears are protected.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the previous part is insured, the participant is ready. If he’s cold, put a blanket on top of him. Give to the participant the emergency button. </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Gently move the participant with the manual regulation. Stop when the head is under the head-localizer. Ask the participant to close it’s eyes, localize the head with the infrareds.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Switch off the infrareds, now the participant can open the eyes. You can move the participant (always gently as before) inside the scanner, until the mm counter marks “Isometric”.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Go behind the scanner, push the plastic base until it touches the bed. Hold on the Eye-Tracker.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Regulate the Eye-tracker position until you see from the projector screen the Eye. In case of need, you can adjust the strength of the infrared light (emitter). This is the black box on the other side with respect to the lens. Under the emitter there are two little screws. Unscrew, move the emitter front/back, check the contrast of the face image, re-screw. Once the eye is well seen, the image is zoomed (externally by the operator in front of the PC-tower) to the pupil. The right lens needs to be manipulated rotating the roller, like what you would do with your reflex to obtain the focus. If the position of the Eye-tracker is not satisfying, you can move the base. </li>
+</ul>
+<p><img alt="base-eye-tracker" src="../assets/ETimages/base-eye-tracker.png" /></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If the pupil is correctly seen, as well as the eye, you can go out. The calibration needs to start. </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Tell the participant that he will need to follow some point with its eyes, without moving his head.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Tell the participant to move the eyes ONLY after the point moves (do not anticipate).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> The ET software needs to show a cross performed during the calibration. If not, the ET inside the scanner needs to be adjusted.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If not, the head of the participant needs to be adjusted again.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If not, the mirror needs to be moved up or down (being careful as mentioned before). Just a few mm can ruin the calibration and the eye-position.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <span style="color:red"> If the calibration is ok, you can move forward and record. text</span></li>
 </ul>
 <h4 id="scan-time">SCAN TIME<a class="headerlink" href="#scan-time" title="Permanent link">&para;</a></h4>
 <p><strong>Scan console checklist</strong></p>
@@ -728,15 +943,47 @@ Let us know when you’re ready to begin by pressing any button.</p>
 </ul>
 </li>
 </ul>
-<p><strong>DURING SCAN</strong></p>
+<h4 id="during-scan">DURING SCAN<a class="headerlink" href="#during-scan" title="Permanent link">&para;</a></h4>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Check in with participant frequently</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Watch for motion if you can see the participant, or use motion monitoring equipment</li>
 </ul>
-<p><strong>AFTER SCAN</strong></p>
+<h4 id="end-of-recording">END OF RECORDING<a class="headerlink" href="#end-of-recording" title="Permanent link">&para;</a></h4>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Solicit more feedback on participant’s comfort for future sessions</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> Run MRIQC to evaluate data</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Everything that is removed for the experiment needs to be put back in place and the end of the experiment, i.e. position of the bed, coil, emergency button, ears cover.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Before doing anything else, put the plastic base far from the bed, again. Do not remove the projector screen yet, otherwise the participant would be flashed by the lights.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Take out the participant gently as before. </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Remove the upper part of the coil</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Remove the ear-pillow.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Let him go. </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Switch off the projector.</li>
+</ul>
+<h4 id="after-scan-inside-scanner-room">AFTER SCAN, inside scanner room<a class="headerlink" href="#after-scan-inside-scanner-room" title="Permanent link">&para;</a></h4>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Take the upper part of the coil. Take the plastic container of the infrared mirror. Take the gloves. Put them on.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Remove the scotch. Put the mirror back in its custody. Then back in its plastic bag.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Place it back in the fMRI external box, with extreme care.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Clean the coil mirror from the scotch. Clean the coil.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Remove it and put it back in place.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Put the pillows back in place.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Put the projector screen back in place.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Unplug the Eye tracker from the Optic Fiber and the Power. Put those extremities aside far from the scanner. Take the Eye-Tracker back outside. Put it in a stable place.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Remove the plastic base, put that outside next to the box.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> With someone from the other side, pass being extremely careful the cables (fiber and power of the ET) back thought the hole. Roll them around their support being extremely careful. </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Put the bed back in place = push the "home" button on the scanner</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Take a glove, on the right there is some cleaning napkins. Use them to clean the bed. </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> exit and Close the External door.</li>
+</ul>
+<h4 id="after-scan-outside-scanner-room">AFTER SCAN, outside scanner room<a class="headerlink" href="#after-scan-outside-scanner-room" title="Permanent link">&para;</a></h4>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Solicit more feedback on participant’s comfort for future sessions</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Switch off laptop and ET PC Tower. Plug back the sync box and the VGA projector where they were. </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Fix the rolled cable with the scotch on the PC Tower base.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Take the ET, Remove (always with and hand under the lens) the MRI compatible LENS. Put it back to its contained inside the box. </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Put back the regular Lens. </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Bring back the box and the base at CIBM EEG lab. Put the keys back under old Nora’s desk.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Fix the ET with the scotch at the chariot.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Bring back the chariot and the TMS laptop at the TMS lab</li>
 </ul>
 
 
