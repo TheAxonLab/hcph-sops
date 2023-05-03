@@ -19,7 +19,7 @@
         <link rel="next" href="../data-storage/">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.9">
     
     
       
@@ -27,10 +27,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.558e4712.min.css">
-      
-        
-        <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.85bb2934.min.css">
       
       
 
@@ -58,14 +55,11 @@
   </head>
   
   
-    
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+    <body dir="ltr">
   
     
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -85,7 +79,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href=".." title="HCPh :: SOPs" class="md-header__button md-logo" aria-label="HCPh :: SOPs" data-md-component="logo">
       
@@ -227,16 +223,16 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
       
       
       
-        <label class="md-nav__link" for="__nav_3" tabindex="0" aria-expanded="false">
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
           Recruitment, Scheduling, and Screening
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="Recruitment, Scheduling, and Screening" data-md-level="1">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
           Recruitment, Scheduling, and Screening
@@ -302,7 +298,7 @@
   
     <li class="md-nav__item md-nav__item--active">
       
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
       
@@ -616,7 +612,6 @@
                   
 
 
-
   <h1>Data collection</h1>
 
 <h3 id="scheduling">Scheduling<a class="headerlink" href="#scheduling" title="Permanent link">&para;</a></h3>
@@ -629,6 +624,8 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> if allowed to wear street clothes, remind participant to avoid clothing with metal or that would uncomfortable to lie in for the duration of the scan; otherwise</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> remark the participant they will be given a gown and they will need to change before every session.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> If participant has indicated nervousness or history of claustrophobia, utilize mock scanner </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Save the protocol by selecting all the sequences in the sequence list, click right to copy</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Go in the dot Cockpit, paste the sequences and save.</li>
 </ul>
 <h4 id="before-day-of-scan">BEFORE DAY OF SCAN<a class="headerlink" href="#before-day-of-scan" title="Permanent link">&para;</a></h4>
 <ul class="task-list">
@@ -714,6 +711,10 @@ git rebase upstream/main
 <p><img alt="switchbox_hdmi" src="./assets/ETimages/switchbox_hdmi.png" /></p>
 <ul class="task-list">
 <li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> In the Linux parameters go to Display in order to adjust the resolution of both primary and secondary screens to <strong>800x600</strong>.
+!! It is crucial that the resolution of both screens, as well as the resolution in the Psychopy code is 800x600, for the eye-tracker calibration to work !! </p>
+</li>
+<li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Double check that the IP address corresponding to the ethernet interface of the <strong>hos68752</strong> laptop is correct. You can either run <code>ifconfig -a</code> or use the GUI. Make sure the IP/mask is <strong>100.1.1.2/24</strong>, and the protocol is IP version 4. Execute <code>ping 100.1.1.1</code> to see if the eye-tracker is responding with echoes.</p>
 </li>
 <li class="task-list-item">
@@ -790,25 +791,61 @@ git rebase upstream/main
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Bring the participant inside the room, and give him the ear-plugs to protect the hearing during acquisition.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Give to the participant the emergency button. Make the participant try it, so they can see it works. To switch off the alarm, there’s a button on the scanner (circular, both on the left and on the right of the hole) </li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Adjust the participant inside. With the pillow, its head position needs to be adjusted and elevated until the head can’t move anymore and the nose and the front of the participants are both adherent to the upper coil. This procedure guarantees that the ET "sees" the eyes. If not, the experiment gets stuck.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> This part needs to be repeated taking out and putting back the upper part of the head-coil, adjusting the pillow at every step, until the head is fixed and the nose and front of the participant touch the coil. In case of need, ask the participant to "say yes" with the head (chin on neck) and keep this position, place the pillows, place the coil and check that the participants' front touches the coil. Now the nose can also be a bit far from the coil. Tell the participant to relax the neck, so the nose should go a bit up and touch the coil.  </li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Take the Ears -protection pillow, stick it on top of the ears of the participant, one by one. Once they are settled, you can pump it, until the participant is comfortable, the head is fixed and the ears are protected.</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> This part needs to be repeated taking out and putting back the upper part of the head-coil, adjusting the pillow at every step, until the head is fixed and the nose and front of the participant touch the coil. In case of need, ask the participant to "say yes" with the head (chin on neck) and keep this position, place the pillows, place the coil and check that the participants' front touches the coil. Now the nose can also be a bit far from the coil. Tell the participant to relax the neck, so the nose should go a bit up and touch the coil. For our HCPH participant, we found that the adapted height of pillow is obtained by superposing the two pillows in the picture below .
+<img alt="two_pillows" src="./assets/two_pillows.png" />
+<img alt="superpose_pillows" src="./assets/superpose_pillows.png" /></p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Take the Ears -protection pillow, stick it on top of the ears of the participant, one by one. Once they are settled, you can pump it, until the participant is comfortable, the head is fixed and the ears are protected.</p>
+</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the previous part is insured, the participant is ready. If he’s cold, put a blanket on top of him. Give to the participant the emergency button. </li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Gently move the participant with the manual regulation. Stop when the head is under the head-localizer. Ask the participant to close it’s eyes, localize the head with the infrareds.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Switch off the infrareds, now the participant can open the eyes. You can move the participant (always gently as before) inside the scanner, until the mm counter marks “Isometric”.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Go behind the scanner, push the plastic base until it touches the bed. Hold on the Eye-Tracker.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Regulate the Eye-tracker position until you see from the projector screen the Eye. In case of need, you can adjust the strength of the infrared light (emitter). This is the black box on the other side with respect to the lens. Under the emitter there are two little screws. Unscrew, move the emitter front/back, check the contrast of the face image, re-screw. Once the eye is well seen, the image is zoomed (externally by the operator in front of the PC-tower) to the pupil. The right lens needs to be manipulated rotating the roller, like what you would do with your reflex to obtain the focus. If the position of the Eye-tracker is not satisfying, you can move the base. </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Regulate the Eye-tracker position until you see from the projector screen the Eye. The optimal position for the eye tracker is to see the eye in the middle of the square delineated by the coil. If the eye is correctly tracked, two crosses should appear on it. The right lens needs to be manipulated rotating the roller, like what you would do with your reflex to obtain the focus. Alternatively, you can also try to click the button "Autofocus" on the console.</li>
+<li>In case of need, you can adjust the strength of the infrared light (emitter). This is the black box on the other side with respect to the lens. Under the emitter there are two little screws. Unscrew, move the emitter front/back, check the contrast of the face image, re-screw. Once the eye is well seen, the image is zoomed (externally by the operator in front of the PC-tower) to the pupil. </li>
+<li>If the position of the Eye-tracker is not satisfying, you can move the base. </li>
 </ul>
 <p><img alt="base-eye-tracker" src="../assets/ETimages/base-eye-tracker.png" /></p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If the pupil is correctly seen, as well as the eye, you can go out. The calibration needs to start. </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If the pupil and the eye are correctly seen (indicated by the crosses following them), you can go out. The calibration needs to start. </li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Tell the participant that he will need to follow some point with its eyes, without moving his head.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Tell the participant to move the eyes ONLY after the point moves (do not anticipate).</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> The ET software needs to show a cross performed during the calibration. If not, the ET inside the scanner needs to be adjusted.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If not, the head of the participant needs to be adjusted again.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If not, the mirror needs to be moved up or down (being careful as mentioned before). Just a few mm can ruin the calibration and the eye-position.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <span style="color:red"> If the calibration is ok, you can move forward and record. text</span></li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <span style="color:red"> If the calibration is ok, you can move forward and record. text</span></p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Start a new exam by clicking on examination</p>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Search the patient by clicking on the "Patient Browser" in the top left corner</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Search for "Oscar esteban"</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Right click and select "New examination"</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Enter the weight and height of patient</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Select the right protocol under "Oscar" </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Select Brain as the organ</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Select the Position as "Head supline"</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Start Exam</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> !!! Adapt the reproin name of the sequence according to its "Phase Encoding Dir." field !!!</li>
 </ul>
 <h4 id="scan-time">SCAN TIME<a class="headerlink" href="#scan-time" title="Permanent link">&para;</a></h4>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the AAhead_scout by pressing "Continue"</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the T1w by pressing "Continue"</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the T1w is finished, you can drag the T1w into the scan viewing window by draging the three superposed squares next to the sequence name. This will allow to tweek the field-of-view (FOV) for the DWI and BOLD sequences</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Make sure that the FOV (yellow square) includes the whole brain. If the full brain, including the cerebellum, do not fit in the FOV, favorise making sure that the cortex is fully enclosed in the yellow square. Careful for reproduciblity do not tilt the FOV; just translate it.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the FOV is well placed, launch the sequence by pressing "Go"</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If two sequences have the same resolution and the same number of slices, you can copy paste the FOV by clicking right clicking on the sequence for which the FOV was set, select "copy parameters&gt;[WHAT WAS THE NAME]"</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> You can set the worker icon on the left of the sequence if you want to pause before starting that sequence. If the worker is not present, the sequence will launch automatically.</p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> !!! Adapt the reproin name of the sequence according to its "Phase Encoding Dir." field !!!</p>
+</li>
+</ul>
 <p><strong>Scan console checklist</strong></p>
 <p>Parameters to double check</p>
 <ul class="task-list">
@@ -1026,10 +1063,10 @@ Let us know when you’re ready to begin by pressing any button.</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["tabs"], "search": "../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["tabs"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.51d95adb.min.js"></script>
+      <script src="../assets/javascripts/bundle.fac441b0.min.js"></script>
       
     
   </body>
