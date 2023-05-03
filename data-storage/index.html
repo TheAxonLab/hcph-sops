@@ -496,7 +496,7 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Mount a remote filesystem through sshfs:
       <div class="highlight"><pre><span></span><code>sshfs hos65851:/data/datasets/hcph-pilot/rawdata /home/oesteban/data/hcph-pilot -p 3389 -o idmap=user,gid=100
 </code></pre></div></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Edit a query file (most likely, update with the session's date</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Edit the query file <code>vim ~/queries/mydata-onesession.csv</code> (most likely, just update with the session's date)</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Prepare and run PACSMAN, pointing the output to the mounted directory.
       <div class="highlight"><pre><span></span><code>conda activate
 python /home/localadmin/Bureau/PACSMAN/PACSMAN/pacsman.py --save -q ~/queries/mydata-onesession.csv --out_directory /home/oesteban/data/hcph-pilot/ --config /home/localadmin/Bureau/PACSMAN/PACSMAN/files/config_RESEARCH.json
@@ -506,10 +506,10 @@ python /home/localadmin/Bureau/PACSMAN/PACSMAN/pacsman.py --save -q ~/queries/my
 </code></pre></div></li>
 </ul>
 </li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Convert data to BIDS with HeudiConv [will change when we adopt reproin]
-    <div class="highlight"><pre><span></span><code>heudiconv -s &quot;pilot&quot; -ss &quot;08&quot; -f ~/tmp/heuristic.py -b -o . --files rawdata/sub-2022_11_07_15_37_06_STD_1_3_12_2_1107_5_99_3/ses-20230116131825/
-</code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Convert data to BIDS with HeudiConv. Careful to change the number of the session ! Note that we use the heuristic -f reproin, because we have name the sequences at the console following ReproIn convention.
+```python:../../code/heudiconv_reproin.sh</li>
 </ul>
+<p>```</p>
 
 
 
