@@ -557,38 +557,41 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <strong>Download the data from the PACS with PACSMAN</strong> (only authorized users)<ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Login into the PACSMAN computer  (<code>hos54889</code>)</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Mount a remote filesystem through sshfs:
-      <div class="highlight"><pre><span></span><code>sshfs hos65851:/data/datasets/hcph-pilot/rawdata \
-               /home/oesteban/data/hcph-pilot \
-      -p 3389 -o idmap=user,gid=100
-</code></pre></div></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Edit the query file <code>vim ~/queries/mydata-onesession.csv</code> (most likely, just update with the session's date)
-<div class="highlight"><pre><span></span><code>PatientId,SessionId
-2022_11_07_15*,20230315163232
-</code></pre></div></li>
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sshfs<span class="w"> </span>hos65851:/data/datasets/hcph-pilot/rawdata<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">               </span><span class="nv">$HOME</span>/data/hcph-pilot<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">      </span>-p<span class="w"> </span><span class="m">3389</span><span class="w"> </span>-o<span class="w"> </span><span class="nv">idmap</span><span class="o">=</span>user,gid<span class="o">=</span><span class="m">100</span>
+</span></code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Edit the query file <code>vim $HOME/queries/mydata-onesession.csv</code> (most likely, just update with the session's date)
+<div class="language-text highlight"><span class="filename">mydata-onesession.csv</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>PatientId,SessionId
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>2022_11_07_15*,20230315163232
+</span></code></pre></div></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Prepare and run PACSMAN, pointing the output to the mounted directory.
-      <div class="highlight"><pre><span></span><code>conda<span class="w"> </span>activate
-python<span class="w"> </span>/home/localadmin/Bureau/PACSMAN/PACSMAN/pacsman.py<span class="w"> </span>--save<span class="w"> </span><span class="se">\</span>
-<span class="w">       </span>-q<span class="w"> </span>~/queries/mydata-onesession.csv<span class="w"> </span><span class="se">\</span>
-<span class="w">       </span>--out_directory<span class="w"> </span>/home/oesteban/data/hcph-pilot/<span class="w"> </span><span class="se">\</span>
-<span class="w">       </span>--config<span class="w"> </span>/home/localadmin/Bureau/PACSMAN/PACSMAN/files/config_RESEARCH.json
-</code></pre></div></li>
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>conda<span class="w"> </span>activate
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>python<span class="w"> </span>/home/localadmin/Bureau/PACSMAN/PACSMAN/pacsman.py<span class="w"> </span>--save<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">       </span>-q<span class="w"> </span><span class="nv">$HOME</span>/queries/mydata-onesession.csv<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">       </span>--out_directory<span class="w"> </span><span class="nv">$HOME</span>/data/hcph-pilot/<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">       </span>--config<span class="w"> </span>/home/localadmin/Bureau/PACSMAN/PACSMAN/files/config_RESEARCH.json
+</span></code></pre></div></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Remove write permissions on the newly downloaded data:
-      <div class="highlight"><pre><span></span><code>chmod<span class="w"> </span>-R<span class="w"> </span>a-w<span class="w"> </span>rawdata/<span class="se">\</span>
-<span class="w">             </span>sub-2022_11_07_15_37_06_STD_1_3_12_2_1107_5_99_3/ses-*
-</code></pre></div></li>
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>chmod<span class="w"> </span>-R<span class="w"> </span>a-w<span class="w"> </span><span class="nv">$HOME</span>/data/hcph-pilot/rawdata/<span class="se">\</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">             </span>sub-2022_11_07_15_37_06_STD_1_3_12_2_1107_5_99_3/ses-*
+</span></code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Unmount the remote filesystem:
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo<span class="w"> </span>umount<span class="w"> </span><span class="nv">$HOME</span>/data/hcph-pilot
+</span></code></pre></div></li>
 </ul>
 </li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <strong>Copy original DICOMs into the archive of Stockage HOrUs</strong>.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <strong>Convert data to BIDS with HeudiConv and Phys2BIDS</strong>.<ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Careful to change the number of the session ! Note that we use the heuristic -f reproin, because we have name the sequences at the console following ReproIn convention.
-<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
-heudiconv<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;pilot&quot;</span><span class="w"> </span>-ss<span class="w"> </span><span class="s2">&quot;08&quot;</span><span class="w"> </span>-f<span class="w"> </span>heuristic_reproin.py<span class="w"> </span>-b<span class="w"> </span><span class="se">\</span>
-<span class="w">          </span>-o<span class="w"> </span>/data/datasets/hcph-pilot/<span class="w"> </span><span class="se">\</span>
-<span class="w">          </span>--files<span class="w"> </span>/data/datasets/hcph-pilot/sourcedata/<span class="se">\</span>
-<span class="w">                  </span>sub-2022_11_07_15_37_06_STD_1_3_12_2_1107_5_99_3/<span class="se">\</span>
-<span class="w">                  </span>ses-20230315163232/<span class="w"> </span><span class="se">\</span>
-<span class="w">          </span>-l<span class="w"> </span>.
-</code></pre></div></li>
+<div class="language-bash highlight"><span class="filename">Executing HeudiConv</span><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="ch">#!/bin/bash</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>heudiconv<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;pilot&quot;</span><span class="w"> </span>-ss<span class="w"> </span><span class="s2">&quot;08&quot;</span><span class="w"> </span>-f<span class="w"> </span>heuristic_reproin.py<span class="w"> </span>-b<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">          </span>-o<span class="w"> </span>/data/datasets/hcph-pilot/<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">          </span>--files<span class="w"> </span>/data/datasets/hcph-pilot/sourcedata/<span class="se">\</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">                  </span>sub-2022_11_07_15_37_06_STD_1_3_12_2_1107_5_99_3/<span class="se">\</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">                  </span>ses-20230315163232/<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">          </span>-l<span class="w"> </span>.
+</span></code></pre></div></li>
 </ul>
 </li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <strong>Incorporate into version control with DataLad</strong></li>
@@ -634,7 +637,7 @@ heudiconv<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quo
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["tabs"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["tabs", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../assets/javascripts/bundle.fac441b0.min.js"></script>
