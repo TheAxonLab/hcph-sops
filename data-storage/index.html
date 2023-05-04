@@ -23,7 +23,7 @@
     
     
       
-        <title>Data storage - HCPh :: SOPs</title>
+        <title>Data management - HCPh :: SOPs</title>
       
     
     
@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#data-management" class="md-skip">
+        <a href="#within-one-week-from-the-completed-session" class="md-skip">
           Skip to content
         </a>
       
@@ -102,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Data storage
+              Data management
             
           </span>
         </div>
@@ -408,12 +408,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Data storage
+          Data management
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Data storage
+        Data management
       </a>
       
         
@@ -430,22 +430,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#data-management" class="md-nav__link">
-    Data management
-  </a>
-  
-    <nav class="md-nav" aria-label="Data management">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#within-one-week-from-the-completed-session" class="md-nav__link">
     Within one week from the completed session
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -542,22 +529,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#data-management" class="md-nav__link">
-    Data management
-  </a>
-  
-    <nav class="md-nav" aria-label="Data management">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#within-one-week-from-the-completed-session" class="md-nav__link">
     Within one week from the completed session
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -576,30 +550,49 @@
                   
 
 
-  <h1>Data storage</h1>
+  <h1>Data management</h1>
 
-<h3 id="data-management">Data management<a class="headerlink" href="#data-management" title="Permanent link">&para;</a></h3>
-<h4 id="within-one-week-from-the-completed-session">Within one week from the completed session<a class="headerlink" href="#within-one-week-from-the-completed-session" title="Permanent link">&para;</a></h4>
+<h2 id="within-one-week-from-the-completed-session">Within one week from the completed session<a class="headerlink" href="#within-one-week-from-the-completed-session" title="Permanent link">&para;</a></h2>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Download the data from the PACS with PACSMAN (only authorized users)<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <strong>Download the data from the PACS with PACSMAN</strong> (only authorized users)<ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Login into the PACSMAN computer  (<code>hos54889</code>)</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Mount a remote filesystem through sshfs:
-      <div class="highlight"><pre><span></span><code>sshfs hos65851:/data/datasets/hcph-pilot/rawdata /home/oesteban/data/hcph-pilot -p 3389 -o idmap=user,gid=100
+      <div class="highlight"><pre><span></span><code>sshfs hos65851:/data/datasets/hcph-pilot/rawdata \
+               /home/oesteban/data/hcph-pilot \
+      -p 3389 -o idmap=user,gid=100
 </code></pre></div></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Edit the query file <code>vim ~/queries/mydata-onesession.csv</code> (most likely, just update with the session's date)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Edit the query file <code>vim ~/queries/mydata-onesession.csv</code> (most likely, just update with the session's date)
+<div class="highlight"><pre><span></span><code>PatientId,SessionId
+2022_11_07_15*,20230315163232
+</code></pre></div></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Prepare and run PACSMAN, pointing the output to the mounted directory.
-      <div class="highlight"><pre><span></span><code>conda activate
-python /home/localadmin/Bureau/PACSMAN/PACSMAN/pacsman.py --save -q ~/queries/mydata-onesession.csv --out_directory /home/oesteban/data/hcph-pilot/ --config /home/localadmin/Bureau/PACSMAN/PACSMAN/files/config_RESEARCH.json
+      <div class="highlight"><pre><span></span><code>conda<span class="w"> </span>activate
+python<span class="w"> </span>/home/localadmin/Bureau/PACSMAN/PACSMAN/pacsman.py<span class="w"> </span>--save<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>-q<span class="w"> </span>~/queries/mydata-onesession.csv<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>--out_directory<span class="w"> </span>/home/oesteban/data/hcph-pilot/<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>--config<span class="w"> </span>/home/localadmin/Bureau/PACSMAN/PACSMAN/files/config_RESEARCH.json
 </code></pre></div></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Remove write permissions on the newly downloaded data:
-      <div class="highlight"><pre><span></span><code>chmod -R a-w rawdata/sub-2022_11_07_15_37_06_STD_1_3_12_2_1107_5_99_3/ses-*
+      <div class="highlight"><pre><span></span><code>chmod<span class="w"> </span>-R<span class="w"> </span>a-w<span class="w"> </span>rawdata/<span class="se">\</span>
+<span class="w">             </span>sub-2022_11_07_15_37_06_STD_1_3_12_2_1107_5_99_3/ses-*
 </code></pre></div></li>
 </ul>
 </li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Convert data to BIDS with HeudiConv. Careful to change the number of the session ! Note that we use the heuristic -f reproin, because we have name the sequences at the console following ReproIn convention.
-```python:../../code/heudiconv_reproin.sh</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <strong>Copy original DICOMs into the archive of Stockage HOrUs</strong>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <strong>Convert data to BIDS with HeudiConv and Phys2BIDS</strong>.<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Careful to change the number of the session ! Note that we use the heuristic -f reproin, because we have name the sequences at the console following ReproIn convention.
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+heudiconv<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;pilot&quot;</span><span class="w"> </span>-ss<span class="w"> </span><span class="s2">&quot;08&quot;</span><span class="w"> </span>-f<span class="w"> </span>heuristic_reproin.py<span class="w"> </span>-b<span class="w"> </span><span class="se">\</span>
+<span class="w">          </span>-o<span class="w"> </span>/data/datasets/hcph-pilot/<span class="w"> </span><span class="se">\</span>
+<span class="w">          </span>--files<span class="w"> </span>/data/datasets/hcph-pilot/sourcedata/<span class="se">\</span>
+<span class="w">                  </span>sub-2022_11_07_15_37_06_STD_1_3_12_2_1107_5_99_3/<span class="se">\</span>
+<span class="w">                  </span>ses-20230315163232/<span class="w"> </span><span class="se">\</span>
+<span class="w">          </span>-l<span class="w"> </span>.
+</code></pre></div></li>
 </ul>
-<p>```</p>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <strong>Incorporate into version control with DataLad</strong></li>
+</ul>
 
 
 
