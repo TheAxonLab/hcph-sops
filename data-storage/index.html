@@ -691,9 +691,24 @@
 </span></code></pre></div></li>
 </ul>
 <h3 id="incorporate-into-version-control-with-datalad">Incorporate into version control with DataLad<a class="headerlink" href="#incorporate-into-version-control-with-datalad" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
+<p class="admonition-title">Initiating the version-controled dataset</p>
+<p>Once at the beginning of the project, the datalad dataset will be created:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Add stockage horus as an SSH remote.</li>
+</ul>
+</div>
 <h3 id="run-quality-control-with-mriqc">Run quality control with MRIQC<a class="headerlink" href="#run-quality-control-with-mriqc" title="Permanent link">&para;</a></h3>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Run MRIQC to evaluate data quality</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Register the MRIQC container with DataLad containers-run</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Run MRIQC:
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>datalad<span class="w"> </span>containers-run<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span>--container-name<span class="w"> </span>containers/mriqc<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span>--input<span class="w"> </span>sourcedata<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span>--output<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="s1">&#39;{inputs}&#39;</span><span class="w"> </span><span class="s1">&#39;{outputs}&#39;</span><span class="w"> </span>participant<span class="w"> </span>--session<span class="w"> </span>lastsession<span class="w"> </span>-w<span class="w"> </span>workdir
+</span></code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Screen the T1w, DWI and BOLD visual reports, assign a quality assessment using <em>Q'Kay</em></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If either the dMRI or the RSfMRI quality is insufficient, schedule an extra session after the initially-planned scanning
 period to reacquire it.</li>
 </ul>
