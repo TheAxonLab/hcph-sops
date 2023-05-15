@@ -19,7 +19,7 @@
         <link rel="next" href="../pre-session/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.9">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.12">
     
     
       
@@ -362,8 +362,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#one-week-before-the-first-session" class="md-nav__link">
-    One week BEFORE THE FIRST SESSION
+  <a href="#three-days-before-the-first-session" class="md-nav__link">
+    Three days BEFORE THE FIRST SESSION
   </a>
   
 </li>
@@ -543,8 +543,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#one-week-before-the-first-session" class="md-nav__link">
-    One week BEFORE THE FIRST SESSION
+  <a href="#three-days-before-the-first-session" class="md-nav__link">
+    Three days BEFORE THE FIRST SESSION
   </a>
   
 </li>
@@ -581,8 +581,8 @@
 <h3 id="preliminary-work">Preliminary work<a class="headerlink" href="#preliminary-work" title="Permanent link">&para;</a></h3>
 <h4 id="once-at-the-beginning-of-the-project">Once, at the beginning of the project<a class="headerlink" href="#once-at-the-beginning-of-the-project" title="Permanent link">&para;</a></h4>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <a href="https://github.com/TheAxonLab/HCPh-fMRI-tasks/fork">Fork the HCPh-fMRI-tasks repository</a> under your user on GitHub.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Prepare a laptop with a running Psychopy 3 installation AND the EyeTracker software. For these SOPs, the designated laptop for the experiments is <em>███</em>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <a href="https://github.com/TheAxonLab/HCPh-fMRI-tasks/fork">Fork the HCPh-fMRI-tasks repository</a> under your user on GitHub.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Clone the <a href="https://github.com/TheAxonLab/HCPh-fMRI-tasks">HCPh-fMRI-tasks repository</a>:
     <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git clone git@github.com:&lt;your-gh-username&gt;/HCPh-fMRI-tasks.git
 </span></code></pre></div></li>
@@ -595,7 +595,7 @@
       Your browser does not support the video. <a href="./assets/files/GA_video.mp4">Click here to download it</a>
     </video></li>
 </ul>
-<p><strong>Setting up the scanner protocol</strong></p>
+<p><strong>Set up the scanner protocol at the MR console</strong></p>
 <div class="admonition warning">
 <p class="admonition-title">Important: follow Reproin conventions</p>
 <p>When assigning names to the MR sequences in the protocol, make sure to follow the <a href="https://dbic-handbook.readthedocs.io/en/latest/mri/reproin.html">Reproin conventions</a> to maximally facilitate the conversion into BIDS.</p>
@@ -604,6 +604,7 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the protocol is decided upon, and after any updates, make sure of storing the protocol:<ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Save the protocol by selecting all the sequences in the sequence list, click right to copy.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open the Dot-Cockpit, paste the sequences and save.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If desired, the protocol details can also be downloaded as a pdf on a peripherical USB key. [HOW?]</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Repeat the operation after creating the four variants of the protocol, one per PE direction.</li>
 </ul>
 </li>
@@ -612,16 +613,17 @@
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Set up the line frequency switches on the back of the BIOPAC amplifier depending on your country frequency to reduce noise. Both switches should be DOWN if your country's line frequency is 50Hz. Both switches should be UP if your country's line frequency line is 60Hz.
     <img alt="biopack-frequency-switch" src="../../assets/images/biopack-frequency-switch.jpg" title="BIOPAC frequency switch" /></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Plug the different units of the BIOPAC together if it has not been done yet. We use the BIOPAC to synchronize and output in a single file all the physiological signals we record: cardiac pulsation, respiration and CO2 concentration.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install the BIOPAC recording software.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Get familiar with the BIOPAC system:
-    <img alt="biopack-front" src="../../assets/images/biopack-front.jpg" title="BIOPAC front side" /><ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Plug the different units of the BIOPAC together if it has not been done yet.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Get familiar with the BIOPAC system:<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> We use the BIOPAC to synchronize and output in a single file all the physiological recordings: cardiac pulsation, respiration and CO<sub>2</sub>  concentration.
+<img alt="Biopac_setup" src="../assets/images/Biopac_setup.jpg" title="BIOPAC front side" /></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> The AMI100C unit can receive up to 16 analog signals. </li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> The DA100C unit records the signal coming from the respiration belt. Plug the TSD160A unit on the DA100C.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> The ECG100C MRI unit records the electrical signal coming from the heart via the ECG. Plug the MECMRI-2 unit on the ECG100C unit.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> The SPT100 (solid state relay driver unit) is used to record triggers. A trigger appears as a vertical red line on your physiological recordings [INCLUDE IMAGE]. Plug the trigger to the TRIG entrance.</li>
 </ul>
 </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install the BIOPAC recording software AcqKnowledge.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install the GA on the wooden platform behind the MRI consoles.</li>
 </ul>
 <h4 id="every-two-months-calibrate-the-ga">Every two months - calibrate the GA<a class="headerlink" href="#every-two-months-calibrate-the-ga" title="Permanent link">&para;</a></h4>
@@ -630,10 +632,11 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Connect the GA to the BIOPAC as described below and start recording signal.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Edit the configuration of the inputs, making sure you update the voltage range for input 3 (the GA), estimated as described in <a href="../../assets/files/GA_manual.pdf">the GA's manual</a></li>
 </ul>
-<h4 id="one-week-before-the-first-session">One week BEFORE THE FIRST SESSION<a class="headerlink" href="#one-week-before-the-first-session" title="Permanent link">&para;</a></h4>
+<h4 id="three-days-before-the-first-session">Three days BEFORE THE FIRST SESSION<a class="headerlink" href="#three-days-before-the-first-session" title="Permanent link">&para;</a></h4>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Send a copy of the MRI Safety and screening form (<a href="../../assets/files/safety_form_EN.pdf">EN</a>|<a href="../../assets/files/safety_form_FR.pdf">FR</a>) to the participant over email and confirm reception.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Confirm that the participant has read and understood the document, and in particular, double-check that they do not have any MRI contraindications.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify that as part of the <a href="../../recruitment-scheduling-screening/recruitment/">recruitement and screening procedure</a>, you have sent a copy of the MRI Safety and screening form (<a href="../../assets/files/safety_form_EN.pdf">EN</a>|<a href="../../assets/files/safety_form_FR.pdf">FR</a>) to the participant over email and confirm reception by checking the 'First contact email sent' column in <a href="/redacted.html">our recruits spreadsheet</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify also that you confirmed that the participant has read and understood the document, and in particular, you double-checked that they do not have any MRI contraindications, by checking the 'Phone interview done' and 'Participant volunteer and eligible' column in <a href="/redacted.html">our recruits spreadsheet</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If the phone call interview was more than three days before the first session, call the participant again to reconfirm the following informations: <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Remind the participant that any jewelry should be removed prior to the scan.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Indicate that they MUST shave the upper area of their chest where the ECG electrodes will be placed, if there is hair. The ECG electrodes MUST directly contact the skin.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Confirm clothing:<ul class="task-list">
@@ -641,10 +644,15 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> remark the participant they will be given a gown and they will need to change before every session.</li>
 </ul>
 </li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If participant has indicated nervousness or history of claustrophobia, use the mock scanner.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Repeat at what time and where will you meet the participant.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify that the participant has your phone number ███ to call you in case he gets lost.</li>
+</ul>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If participant has indicated nervousness or history of claustrophobia, organize a session to use the mock scanner.</li>
 </ul>
 <h4 id="before-day-of-scan">BEFORE DAY OF SCAN<a class="headerlink" href="#before-day-of-scan" title="Permanent link">&para;</a></h4>
 <ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Print <a href="../../assets/files/icf_FR.pdf">the informed consent form</a> (<strong>first session only</strong>), an MRI safety screener (<a href="../../assets/files/safety_form_EN.pdf">EN</a>|<a href="../../assets/files/safety_form_FR.pdf">FR</a>) and a receipt form for each participant that will get scanned.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Make sure you have internet access, and update the <a href="https://github.com/TheAxonLab/HCPh-fMRI-tasks">HCPh-fMRI-tasks repository</a> on <em>███</em>:
     <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>git fetch upstream
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>git checkout main
@@ -703,7 +711,7 @@
     <script id="__config" type="application/json">{"base": "../..", "features": ["tabs", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.fac441b0.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c2be25ad.min.js"></script>
       
     
   </body>
