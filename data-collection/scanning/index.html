@@ -461,6 +461,20 @@
 
   <h1>Running the scanning session</h1>
 
+<div class="admonition danger">
+<p class="admonition-title">BE REACTIVE in case the alarm rings</p>
+<p>If at any point the participant rings the alarm, it is crucial to enter the scanning room and check on the participant IMMEDIATELY.</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Enter the scanning room </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Only then turn off the alarm using the circular button either on the left or on the right of the bore.
+    <img alt="alarm_button" src="../../assets/images/alarm_button.png" /></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Ask to the participant what's wrong. <ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If he needs reassurance or information, provide it and confirm he can continue the scanning session. However, if you cannot communicate efficiently, take the participant out of the scanner.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If the participant does not feel well, provide assistance or call [WHO?] if it is really serious or if you have any doubts.</li>
+</ul>
+</li>
+</ul>
+</div>
 <ul class="task-list">
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Indicate the participant that the scanning will soon start:</p>
@@ -473,35 +487,41 @@ Are you ready?</p>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Start Exam</p>
 </li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the AAhead_scout by pressing "Continue" [INSERT PICTURE].</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the scout is finished, you can drag the localizer into the scan viewing window by draging the three superposed squares next to the sequence name to check its quality. A localizer of bad quality will present noise in the background. If the localizer is not ok [WHAT?]</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the T1w by pressing "Continue".</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the AAhead_scout by pressing <code>Go</code>.</li>
+</ul>
+<p><img alt="launch_sequence.jpg" src="../../assets/images/launch_sequence.jpg" /></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the scout is finished, you can drag the localizer into the scan viewing window by draging the three superposed squares next to the sequence name to check its quality. A localizer of bad quality will present noise in the background. If the localizer is not ok, unplug and replug the head coil and reacquire the AAhead_scout sequence.</li>
+</ul>
+<p><img alt="drag_t1w.jpg" src="../../assets/images/drag_t1w.jpg" /></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the T1w by pressing <code>Go</code>.</li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While you run the T1w, there are a few important points to address:</p>
 <div class="admonition warning">
 <p class="admonition-title">Important</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Adapt the reproin name of the sequence according to its "Phase Encoding Dir." field.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open the parameters of the sequence named "fmap-phasediff__gre" and ensure that under Contrast&gt;resc. the option "Magnitude et phase" is selected. This is crucial so that both the magnitude and the phase difference field map images are saved.</li>
 </ul>
 </div>
 </li>
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open the parameters of the sequence named "fmap-phasediff__gre" and ensure that under Contrast&gt;resc. the option "Magnitude et phase" is selected. This is crucial so that both the magnitude and the phase difference field map images are saved.</p>
-</li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Similarly, once the T1w is finished, you can drag the T1w into the scan viewing window. This will allow to tweek the field-of-view (FOV) for the DWI and BOLD sequences.</p>
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the T1w is finished, you can drag the T1w into the scan viewing window. This will allow to tweek the field-of-view (FOV) for the DWI and BOLD sequences.</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Make sure that the FOV (yellow square) includes the whole brain. If the full brain, including the cerebellum, do not fit in the FOV, favorise making sure that the cortex is fully enclosed in the yellow square. Careful for reproduciblity do not tilt the FOV; just translate it.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If two sequences have the same resolution and the same number of slices, you can copy paste the FOV by clicking right clicking on the sequence for which the FOV was set, select "copy parameters&gt;[WHAT WAS THE NAME]".</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If two sequences have the same resolution and the same number of slices, you can copy paste the FOV by right clicking on the sequence for which the FOV was set, select "copy parameters&gt;[WHAT WAS THE NAME]".</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the FOV is well placed, launch the sequence by pressing "Go".</li>
 </ul>
+<p><img alt="adjustFOV.jpg" src="../../assets/images/adjustFOV.jpg" /></p>
 </li>
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> You can set the worker icon on the left of the sequence if you want to pause before starting that sequence. If the worker is not present, the sequence will launch automatically.</p>
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> You can set the worker icon on the left of the sequence by clicking on it if you want to pause before starting that sequence. If the worker is not present, the sequence will launch automatically. The bloc with "__x___" introduces break. The scanner will warn you [WHAT IS THE MESSAGE?], just click "Ok" as it is not relevant to these sequences.</p>
 </li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check in with participant frequently.</p>
-</li>
+</ul>
+<p><img alt="worker_icon.jpg" src="../../assets/images/worker_icon.jpg" /></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check in with participant frequently.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Watch for motion if you can see the participant, or use motion monitoring equipment.</li>
 </ul>
 
