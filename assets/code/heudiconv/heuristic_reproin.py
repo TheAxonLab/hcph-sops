@@ -117,7 +117,7 @@ def infotodict(seqinfo):
         elif s.protocol_name.startswith("dwi-dwi"):
             thiskey = dwi
         elif s.protocol_name.startswith("fmap-phasediff"):
-            thiskey = phdiff if s.series_files == 60 else mag
+            thiskey = phdiff if s.series_files < 100 else mag
         elif s.protocol_name.startswith("fmap-epi"):
             thiskey = epi
             thisitem["acquisition"] = "b0" if s.sequence_name.endswith("ep_b0") else "bold"
