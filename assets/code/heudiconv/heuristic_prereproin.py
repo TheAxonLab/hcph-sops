@@ -36,9 +36,15 @@ def infotodict(seqinfo):
     """
 
     t1w = create_key("sub-{subject}/{session}/anat/sub-{subject}_{session}_T1w")
-    dwi = create_key("sub-{subject}/{session}/dwi/sub-{subject}_{session}_acq-{acquisition}_dwi")
-    phdiff = create_key("sub-{subject}/{session}/fmap/sub-{subject}_{session}_phasediff")
-    func = create_key("sub-{subject}/{session}/func/sub-{subject}_{session}_task-{task}_bold")
+    dwi = create_key(
+        "sub-{subject}/{session}/dwi/sub-{subject}_{session}_acq-{acquisition}_dwi"
+    )
+    phdiff = create_key(
+        "sub-{subject}/{session}/fmap/sub-{subject}_{session}_phasediff"
+    )
+    func = create_key(
+        "sub-{subject}/{session}/func/sub-{subject}_{session}_task-{task}_bold"
+    )
 
     info = {t1w: [], dwi: [], phdiff: [], func: []}
 
@@ -81,19 +87,23 @@ def infotodict(seqinfo):
             info[t1w].append(s.series_id)
 
         if s.protocol_name.startswith("micro_struct"):
-            info[dwi].append({
-                "item": s.series_id,
-                "acquisition": DWI_RES[s.protocol_name.split("_")[-1]],
-            })
+            info[dwi].append(
+                {
+                    "item": s.series_id,
+                    "acquisition": DWI_RES[s.protocol_name.split("_")[-1]],
+                }
+            )
 
         if s.protocol_name.startswith("gre_field"):
             info[phdiff].append(s.series_id)
 
         if s.protocol_name.startswith("cmrr_"):
             task = "rest" if s.series_files > 2000 else "control"
-            info[func].append({
-                "item": s.series_id,
-                "task": task,
-            })
+            info[func].append(
+                {
+                    "item": s.series_id,
+                    "task": task,
+                }
+            )
 
     return info

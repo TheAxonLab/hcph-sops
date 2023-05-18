@@ -1,4 +1,6 @@
-import os
+"""Reproin heuristic."""
+import re
+
 
 DWI_RES = {
     "1.6mm-iso": "highres",
@@ -16,9 +18,10 @@ IGNORE_PROTOCOLS = (
     "ColFA",
     "B0",
     "TENSOR",
-    "mprage", #keep only the non-filtered T1w labeled by *_ND
-    "10meas" #dismiss a trial of fmap acquisition
+    "10meas",  # dismiss a trial of fmap acquisition
 )
+
+bids_regex = re.compile(r"_(?=(dir|acq|task)-([A-Za-z0-9]+))")
 
 
 def create_key(template, outtype=("nii.gz",), annotation_classes=None):
@@ -38,15 +41,27 @@ def infotodict(seqinfo):
     subindex: sub index within group
     """
 
-    t1w = create_key("sub-{subject}/{session}/anat/sub-{subject}_{session}_T1w")
+    t1w = create_key("sub-{subject}/{session}/anat/sub-{subject}_{session}_acq-{acquisition}_T1w")
     t2w = create_key("sub-{subject}/{session}/anat/sub-{subject}_{session}_T2w")
-    dwi = create_key("sub-{subject}/{session}/dwi/sub-{subject}_{session}_acq-{acquisition}_dir-{direction}_dwi")
+    dwi = create_key(
+        "sub-{subject}/{session}/dwi/sub-{subject}_{session}_acq-{acq}_dir-{dir}_dwi"
+    )
     mag = create_key("sub-{subject}/{session}/fmap/sub-{subject}_{session}_magnitude")
-    phdiff = create_key("sub-{subject}/{session}/fmap/sub-{subject}_{session}_phasediff")
-    b0 = create_key("sub-{subject}/{session}/fmap/sub-{subject}_{session}_acq-{acquisition}_dir-{direction}_epi")
-    func = create_key("sub-{subject}/{session}/func/sub-{subject}_{session}_task-{task}_bold")
+    phdiff = create_key(
+        "sub-{subject}/{session}/fmap/sub-{subject}_{session}_phasediff"
+    )
+    epi = create_key(
+        "sub-{subject}/{session}/fmap/sub-{subject}_{session}"
+        "_acq-{acquisition}_dir-{dir}_epi"
+    )
+    func = create_key(
+        "sub-{subject}/{session}/func/sub-{subject}_{session}_task-{task}_bold"
+    )
+    sbref = create_key(
+        "sub-{subject}/{session}/func/sub-{subject}_{session}_task-{task}_sbref"
+    )
 
-    info = {t1w: [], t2w: [], dwi: [], mag: [], phdiff: [], b0: [], func: []}
+    info = {t1w: [], t2w: [], dwi: [], mag: [], phdiff: [], epi: [], func: [], sbref: []}
 
     for s in seqinfo:
         """
@@ -82,37 +97,29 @@ def infotodict(seqinfo):
         ):
             continue
 
+        thisitem = {
+            "item": s.series_id
+        }
+        thiskey = None
+        thisitem.update({k: v for k, v in bids_regex.findall(s.protocol_name)})
+
         if "T1w" in s.protocol_name:
-            info[t1w].append(s.series_id)
+            thiskey = t1w
+            thisitem["acquisition"] = (
+                "original" if s.dcm_dir_name.endswith("_ND") else "undistorted"
+            )
+        elif "T2w" in s.protocol_name:
+            thiskey = t2w
+        elif s.protocol_name.startswith("dwi-dwi"):
+            thiskey = dwi
+        elif s.protocol_name.startswith("fmap-phasediff"):
+            thiskey = phdiff if s.series_files == 60 else mag
+        elif s.protocol_name.startswith("fmap-epi"):
+            thiskey = epi
+            thisitem["acquisition"] = "b0" if s.sequence_name.endswith("ep_b0") else "bold"
+        elif s.protocol_name.startswith("func-bold"):
+            thiskey = func
 
-        if "T2w" in s.protocol_name:
-            info[t2w].append(s.series_id)
-
-        if s.protocol_name.startswith("dwi"):
-            info[dwi].append({
-                "item": s.series_id,
-                "acquisition": s.protocol_name.split("_")[1][4:],
-                "direction": s.protocol_name.split("_")[2][4:]
-            })
-
-        if "phasediff" in s.protocol_name:
-            if s.dim3 == 60:
-                info[phdiff].append(s.series_id)
-            if s.dim3 == 120:
-                info[mag].append(s.series_id)
-
-        if s.protocol_name.startswith("fmap-epi"):
-            info[b0].append({
-                "item": s.series_id,
-                "acquisition": s.protocol_name.split("_")[1][4:],
-                "direction": s.protocol_name.split("_")[2][4:]
-            })
-
-        if "cmrr" in s.protocol_name:
-            task = "rest" if s.series_files > 2000 else "control"
-            info[func].append({
-                "item": s.series_id,
-                "task": task,
-            })
-
+        if thiskey is not None:
+            info[thiskey].append(thisitem)
     return info
