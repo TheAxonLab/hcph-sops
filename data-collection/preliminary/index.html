@@ -640,6 +640,51 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install the BIOPAC recording software AcqKnowledge.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Ensure that the lever of the NEUROSPEC adapter is set on <code>s</code>.</li>
 </ul>
+<p><strong>Psychopy Installation</strong>
+- [ ] Clone the <a href="git@github.com:psychopy/psychopy.git">PsychoPy repository</a>:
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>git clone git@github.com:git@github.com:psychopy/psychopy.git
+</span></code></pre></div>
+- [ ] Navigate to the Psychopy directory:
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>cd psychopy
+</span></code></pre></div>
+- [ ] Psychopy should not be installed with anaconda. If an anaconda environment is activated, run the following command to deactivate it:
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>conda deactivate
+</span></code></pre></div>
+- [ ] Update pip to the lastest version:
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>pip3 install --upgrade pip
+</span></code></pre></div>
+- [ ] Install bdist_mpkg, py2app and attrdict:
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>pip3 attrdict py2app bdist_mpkg
+</span></code></pre></div>
+- [ ] Install Psychopy using the following command:
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>pip3 install -e .
+</span></code></pre></div>
+- [ ] Create an alias by adding the following line to the end of your .bashrc file (Replace /path/to/psychopy/ with the actual path to the Psychopy directory on your machine)
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>alias psychopy=&#39;python /path/to/psychopy/app/psychopyApp.py&#39;
+</span></code></pre></div>
+- [ ] Open Psycopy with the following command and check that it is correctly installed:
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>psychopy
+</span></code></pre></div>
+<strong>EyeLink Software Installation</strong></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Enable Canonical's universe repository with the following command:
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>sudo add-apt-repository universe
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>sudo apt update
+</span></code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install and update the ca-certificates package:
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>sudo apt update
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>sudo apt install ca-certificates
+</span></code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Add the SR Research Software Repository signing key:
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>sudo apt-key adv --fetch-keys https://apt.sr-research.com/SRResearch_key
+</span></code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install the EyeLink Developers Kit:
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>sudo apt install eyelink-display-software
+</span></code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install the EyeLink Data Viewer:
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>sudo apt install eyelink-dataviewer
+</span></code></pre></div></li>
+</ul>
 <h4 id="every-two-months-calibrate-the-ga">Every two months - calibrate the GA<a class="headerlink" href="#every-two-months-calibrate-the-ga" title="Permanent link">&para;</a></h4>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Get a gas bottle with a known CO<sub>2</sub> concentration between 5% and 10%.</li>
@@ -668,9 +713,9 @@
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Print <a href="../../assets/files/icf_FR.pdf">the informed consent form</a> (<strong>first session only</strong>), an MRI safety screener (<a href="../../assets/files/safety_form_EN.pdf">EN</a>|<a href="../../assets/files/safety_form_FR.pdf">FR</a>) and a receipt form for each participant that will get scanned.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Make sure you have internet access, and update the <a href="https://github.com/TheAxonLab/HCPh-fMRI-tasks">HCPh-fMRI-tasks repository</a> on <em>███</em>:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>git fetch upstream
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>git checkout main
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>git rebase upstream/main
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>git fetch upstream
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>git checkout main
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>git rebase upstream/main
 </span></code></pre></div></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> On the <em>███</em> laptop, open a terminal and execute <code>conda deactivate</code>.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open psychopy 3 by typing <code>psychopy</code></li>
