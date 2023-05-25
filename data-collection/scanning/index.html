@@ -503,26 +503,139 @@ Are you ready?</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Adapt the reproin name of the sequence according to its "Phase Encoding Dir." field.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open the parameters of the sequence named "fmap-phasediff__gre" and ensure that under Contrast&gt;resc. the option "Magnitude et phase" is selected. This is crucial so that both the magnitude and the phase difference field map images are saved.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open the DWI sequence and under the section [WHAT?], uncheck all the derivatives except <code>Diffusion weighted image</code>.</li>
 </ul>
 </div>
 </li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the T1w is finished, you can drag the T1w into the scan viewing window. This will allow to tweek the field-of-view (FOV) for the DWI and BOLD sequences.</p>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Essentials for running an MRI session</p>
+<p>Once the T1w is finished, you can drag the T1w into the scan viewing window. This will allow to tweek the field-of-view (FOV) for the DWI and BOLD sequences.</p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Make sure that the FOV (yellow square) includes the whole brain. If the full brain, including the cerebellum, do not fit in the FOV, favorise making sure that the cortex is fully enclosed in the yellow square. Careful for reproduciblity do not tilt the FOV; just translate it.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If two sequences have the same resolution and the same number of slices, you can copy paste the FOV by right clicking on the sequence for which the FOV was set, select "copy parameters&gt;[WHAT WAS THE NAME]".</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the FOV is well placed, launch the sequence by pressing "Go".</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open the next sequence by double clicking on it.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Make sure that the FOV (yellow square) includes the whole brain by tilting or translating the FOV. If the full brain, including the cerebellum, do not fit in the FOV, favorise making sure that the cortex is fully enclosed in the yellow square. For reproduciblity, it is better if the FOV across sequences have a similar center and a similar tilt. However, if it is not possible, the priority remains to include the whole brain in the FOV. </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If two sequences have the same resolution and the same number of slices, you can copy paste the FOV<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Right click on the sequence for which the FOV was set</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Select <code>Copy Parameters</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <code>Center [WHAT WAS THE NAME]</code></li>
+</ul>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the FOV is well placed, launch the sequence by pressing <code>Go</code>.</li>
 </ul>
 <p><img alt="adjustFOV.jpg" src="../../assets/images/adjustFOV.jpg" /></p>
-</li>
+<ul class="task-list">
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> You can set the worker icon on the left of the sequence by clicking on it if you want to pause before starting that sequence. If the worker is not present, the sequence will launch automatically. The bloc with "__x___" introduces break. The scanner will warn you [WHAT IS THE MESSAGE?], just click "Ok" as it is not relevant to these sequences.</p>
-</li>
-</ul>
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> You can set the worker icon on the left of the sequence by clicking on it if you want to pause before starting that sequence. If the worker is not present, the sequence will launch automatically.</p>
 <p><img alt="worker_icon.jpg" src="../../assets/images/worker_icon.jpg" /></p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check in with participant frequently.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Note that the bloc with <code>__x__</code> introduces a break.
+    The scanner will warn you that <em>Exam Paused</em>. Click <code>Continue</code>.
+    The <code>Patient has Contrast Agent</code> checkbox MUST always be unchecked, as this protocol does not involve a contrast agent.</li>
+</ul>
+<p><img alt="exam_paused.jpg" src="../../assets/images/exam_paused.jpg" /></p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check in with the participant frequently.</p>
+</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Watch for motion if you can see the participant, or use motion monitoring equipment.</li>
+</ul>
+</div>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the fieldmap <code>fmap-epi_dir-PA</code> sequence.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While the fieldmap sequence is running,<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> check the FOV for the resting-state functional MRI (rsfMRI) sequence following the steps explained above.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify that the resting-state task <code>resting_state.psyexp</code> is open in psychopy, that you calibrated the ET and that the task is ready to receive the scanner trigger to start. </li>
+</ul>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Inform the participant that the next sequence is rsfMRI.</p>
+<blockquote>
+<p>Hey [NAME], we are about to start resting-state fMRI.
+For this scan, all you have to do is stay still, and look at the movie.
+Please do not close your eyes.
+Are you ready?</p>
+</blockquote>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the rsfMRI <code>func-bold_task-rest_dir-AP</code> sequence.</p>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While it is running, tweak the FoV for the following sequence.</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the sequence is over, close the resting-state task and open the breath-holding one <code>breath_holding_task.psyexp</code>.</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Run the experiment by pressing the green play button. </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Enter the session and participant number in the pop up window. The Eyelink system setup page opens.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> [DO WE HAVE TO DO THE CALIBRATION EVERYTIME OR NOT?]</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify that the task is ready to receive input trigger to start.</li>
+</ul>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Inform the participant that the next sequence is breath-holding task fMRI. Repeat the instructions for the task.</p>
+<blockquote>
+<p>Hey [NAME], we will proceed with the breath holding task.
+I remind you that you have to breath following the rectangle color.
+Green means inhale, orange means exhale and red means hold.
+Remember to not follow the breathing instructions during the first block and to exhale the small amount of air you have remaining at the end of the hold.
+Are you ready?</p>
+</blockquote>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the <code>func-bold_task-bht_dir-AP</code> sequence.</p>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While it is running, <ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Adjust the FoV for the next sequence.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify that in the next sequence parameters under Contrast&gt;resc. the option <code>Magnitude et phase</code> is selected!</li>
+</ul>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the sequence is over, you need to stop manually the psychopy task by clicking on <code>t</code> (as fast as possible to avoid collecting more data than needed).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the fieldmap <code>fmap_phasediff_gre</code> sequence.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While it is running, <ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Tweek the FOV for the next sequence.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify that in the next sequence parameters under [WHERE?] that all the derivatives are unchecked except <code>Diffusion weighted image</code>.</li>
+</ul>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Inform the participant that the diffusion scan will follow.</p>
+<blockquote>
+<p>Hey [NAME], the next sequence is diffusion. You can close your eyes if you want and just relax.
+It will last XX minutes.</p>
+</blockquote>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the diffusion <code>dwi-dwi_dir-PA</code> sequence.</p>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While it is running, tweek the FOV for the next sequence.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the fieldmap <code>fmap-epi_acq-highres_dir-AP</code> sequence.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While it is running, <ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Tweek the FOV for the next sequence.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Prepare the the quality control task <ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open <code>control_task.psyexp</code> in psychopy</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Run the experiment by pressing the green play button. </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Enter the session and participant number in the pop up window. The Eyelink system setup page opens.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> [DO WE HAVE TO DO THE CALIBRATION EVERYTIME OR NOT?]</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify that the task is ready to receive input trigger to start.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Inform the participant that we will proceed with the quality control task. Repeat task instructions.</p>
+<blockquote>
+<p>Hey [NAME], the next scan is the quality control task.
+I remind you that this task is composed of different subtasks.
+In the first subtask, you must fix the cross.
+In the second subtask, you must follow the points with your eyes. 
+In the third subtask, tap the finger of your left or right hand depending on the word that flashes.
+I remind you that during the finger tapping you MUST leave the alarm button, e.g., on your belly.</p>
+</blockquote>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the control task fMRI <code>func-bold_task-qc_dir-AP</code> sequence.</p>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While it is running, tweek the FOV for the next sequence.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> [SINGLE_ECHO BOLD ?]</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the T2w sequence.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> The exam is over, you can proceed with the <a href="../tear-down/">tear-down protocol</a>.</li>
 </ul>
 
 
