@@ -600,15 +600,28 @@
 <p class="admonition-title">Important: follow Reproin conventions</p>
 <p>When assigning names to the MR sequences in the protocol, make sure to follow the <a href="https://dbic-handbook.readthedocs.io/en/latest/mri/reproin.html">Reproin conventions</a> to maximally facilitate the conversion into BIDS.</p>
 </div>
+<p>Once the protocol is decided upon, and after any updates, make sure of storing the protocol.</p>
+<div class="admonition warning">
+<p class="admonition-title">Login as an advanced user to save protocol</p>
+<p>As a good practice, always work as <em>meduser</em>. Change for <em>advanced user mode</em> if you want to save the protocol.</p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the protocol is decided upon, and after any updates, make sure of storing the protocol:<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open the Dot-Cockpit
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Simultaneously press the <code>Tab</code> + <code>Delete</code> + <code>+</code> (on a classical keyboard) keys of the keyboard of the control computer</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> user: medadmin</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> pwd: xxx</li>
+</ul>
+<div class="admonition danger">
+<p class="admonition-title">After three wrong password entries, access will be denied, and only a Siemens engineer will be able to unlock the MR scanner.</p>
+</div>
+</div>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Now that you are logged in as an advanced user, save your protocol:<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open the Dot-Cockpit window
     <img alt="" src="../../assets/images/save_protocol1.jpg" /></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> In <code>Browse</code>, find the right folder to save the protocol in (RESEARCH &gt; Oscar).</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Right click on the folder and select <code>New &gt; Program</code>. This opens an empty page in the program editor
     <img alt="" src="../../assets/images/save_protocol2.jpg" />
     <img alt="" src="../../assets/images/save_protocol3.jpg" /></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Select all the sequences in the sequence list and click right to copy.
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Select all the sequences you want to run from the sequence list and click right to copy.
     <img alt="" src="../../assets/images/save_protocol4.jpg" /></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Drag or paste the copied sequences in the program editor.
     <img alt="" src="../../assets/images/save_protocol5.jpg" /></li>
@@ -619,9 +632,9 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Save the PDF in your USB key.</li>
 </ul>
 </li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Repeat the operation to create the four variants of the protocol, one per PE direction.</li>
 </ul>
 </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Make sure you save a different protocol for each of the four PE directions (i.e., AP, PA, LR, RL).</li>
 </ul>
 <p><strong>Install the BIOPAC</strong></p>
 <ul class="task-list">

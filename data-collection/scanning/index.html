@@ -463,9 +463,10 @@
 
 <div class="admonition danger">
 <p class="admonition-title">BE REACTIVE in case the alarm rings</p>
-<p>If at any point the participant rings the alarm, it is crucial to enter the scanning room and check on the participant IMMEDIATELY.</p>
+<p>If at any point the participant rings the alarm, it is crucial to check on the participant IMMEDIATELY.</p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Enter the scanning room </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Ask through the speaker if everything is alright because it might be that the participant pressed the alarm by mistake.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If you do not get a clear answer that everything is ok, enter the scanning room </li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Only then turn off the alarm using the circular button either on the left or on the right of the bore.
     <img alt="alarm_button" src="../../assets/images/alarm_button.png" /></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Ask to the participant what's wrong. <ul class="task-list">
@@ -480,47 +481,47 @@
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Indicate the participant that the scanning will soon start:</p>
 <blockquote>
 <p>Hey [NAME], we are about to start our first scan run.
-For this scan, all you have to do is stay still, and look at the screen.
+For this scan, all you have to do is stay still; you can relax and close your eyes if it helps.
 Are you ready?</p>
 </blockquote>
 </li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Start Exam</p>
 </li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the AAhead_scout by pressing <code>Go</code>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the AAhead_scout by pressing <code>Continue</code>.</li>
 </ul>
 <p><img alt="launch_sequence.jpg" src="../../assets/images/launch_sequence.jpg" /></p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the scout is finished, you can drag the localizer into the scan viewing window by draging the three superposed squares next to the sequence name to check its quality. A localizer of bad quality will present noise in the background. If the localizer is not ok, unplug and replug the head coil and reacquire the AAhead_scout sequence.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the scout is finished, you can drag the corresponding images (four superposed squares next to the sequence name that correspond to the images actually acquired in a sagittal view, and the interpolated images in the strict coronal, sagittal and transverse planes) to the MR image viewer to check their quality. A localizer of bad quality will present noise in the background. If the localizer is not ok, unplug and replug the head coil and reacquire the AAhead_scout sequence.</li>
 </ul>
 <p><img alt="drag_t1w.jpg" src="../../assets/images/drag_t1w.jpg" /></p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the T1w by pressing <code>Go</code>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the T1-weighted MPRAGE sequence by pressing <code>Go</code>.</li>
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While you run the T1w, there are a few important points to address:</p>
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While you run the MPRAGE sequence, there are a few important points to address:</p>
 <div class="admonition warning">
 <p class="admonition-title">Important</p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Adapt the reproin name of the sequence according to its "Phase Encoding Dir." field.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open the parameters of the sequence named "fmap-phasediff__gre" and ensure that under Contrast&gt;resc. the option "Magnitude et phase" is selected. This is crucial so that both the magnitude and the phase difference field map images are saved.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open the DWI sequence and under the section [WHAT?], uncheck all the derivatives except <code>Diffusion weighted image</code>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open the DWI sequence and under the section <code>Diff</code>, uncheck all the derivatives except <code>Diffusion weighted image</code>.</li>
 </ul>
 </div>
 </li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Essentials for running an MRI session</p>
-<p>Once the T1w is finished, you can drag the T1w into the scan viewing window. This will allow to tweek the field-of-view (FOV) for the DWI and BOLD sequences.</p>
+<p>Once the T1-weighted sequence is finished, you can drag the corresponding high-resolution images to the MR image viewer. This will allow to position the field-of-view (FOV) for the DWI and BOLD sequences more accurately than the initial scout.</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open the next sequence by double clicking on it.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Make sure that the FOV (yellow square) includes the whole brain by tilting or translating the FOV. If the full brain, including the cerebellum, do not fit in the FOV, favorise making sure that the cortex is fully enclosed in the yellow square. For reproduciblity, it is better if the FOV across sequences have a similar center and a similar tilt. However, if it is not possible, the priority remains to include the whole brain in the FOV. </li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If two sequences have the same resolution and the same number of slices, you can copy paste the FOV<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Right click on the sequence for which the FOV was set</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open the sequence for which you want to adjust the FOV/geometry</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Right click on the sequence for which the FOV has already been carefully positioned</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Select <code>Copy Parameters</code></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <code>Center [WHAT WAS THE NAME]</code></li>
 </ul>
 </li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the FOV is well placed, launch the sequence by pressing <code>Go</code>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the FOV is well positioned, launch the sequence by pressing <code>Go</code>.</li>
 </ul>
 <p><img alt="adjustFOV.jpg" src="../../assets/images/adjustFOV.jpg" /></p>
 <ul class="task-list">
