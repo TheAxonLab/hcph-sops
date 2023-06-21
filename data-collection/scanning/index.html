@@ -539,14 +539,62 @@ Are you ready?</p>
 </ul>
 </div>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the fieldmap <code>fmap-epi_dir-PA</code> sequence.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While the fieldmap sequence is running,<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> check the FOV for the resting-state functional MRI (rsfMRI) sequence following the steps explained above.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify that the resting-state task <code>resting_state.psyexp</code> is open in psychopy, that you calibrated the ET and that the task is ready to receive the scanner trigger to start. </li>
-</ul>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Inform the participant that the diffusion scan will follow.</p>
+<blockquote>
+<p>Hey [NAME], the next block is a bit long, around 30 minutes.
+You can close your eyes and even sleep if you wish.
+I'm going to give you a short time (ten seconds or so) to swallow, and perhaps accommodate your back or your arms. However, please try not to move your head.
+It is critical that you don't move, especially at all at the very beginning and the next 20 seconds after you hear the first blipping sounds.
+Try to minimize swallowing, and eye movements (for example, blinking) and try to maintain comfortable and shallow breathing.</p>
+</blockquote>
 </li>
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Inform the participant that the next sequence is rsfMRI.</p>
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify in the next sequence parameters under section <code>Diff.</code> that all the derivatives are unchecked except <code>Diff. Weighted Image</code>.</p>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the diffusion <code>dwi-dwi_dir-XX</code> sequence.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While it is running, adjust the FOV for the following sequence.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the DWI B0 fieldmapping sequence <code>fmap-epi_acq-highres_dir-XX</code>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While it is running, adjust the FOV for the following sequence.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the fieldmap GRE B0 fieldmapping sequence <code>fmap_phasediff_gre</code>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While it is running, <ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Adjust the FOV for the following sequence.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify that in the next sequence parameters under Contrast&gt;Reconstruction the option <code>Magnitude et phase</code> is selected!</li>
+</ul>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the EPI BOLD B0 fieldmapping sequence <code>fmap-epi_dir-PA</code>. </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While the fieldmap sequence is running,<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> check the FOV for the quality-control-task (<code>task-qct</code>) fMRI sequence following the abovementioned steps.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify that the quality-control task <code>control_task.psyexp</code> is open in psychopy, that you calibrated the ET.</li>
+</ul>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the calibration of the ET is concluded, hit the <code>Esc</code> key on the laptop <em>███</em> to exit the calibration mode continue the task's program.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify that the task's program is awaiting the scanner's trigger to start.</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Inform the participant that we will proceed with the quality control task. Repeat task instructions.</p>
+<blockquote>
+<p>Hey [NAME], the following block will collect some behavioral data and requires your collaboration.
+You will be exposed to several activities.
+Whenever you see a red circle, please fix your gaze on it, wherever it is shown on the screen.
+If the red circle moves, we ask you to follow it with your eyes.
+Some other times, you'll see either "RIGHT" or "LEFT" written on the screen. During those times, please tap your thumb and the other fingers of your right or left hand as indicated on the screen.
+Before we start, please leave the alarm button on your tummy to free your hand for finger tapping. Please do not hesitate to grab it in case you need to squeeze it.</p>
+</blockquote>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the QCT (<code>func-bold_task-qct_dir-XX</code>).</p>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While it is running, adjust the FoV for the following sequence.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the sequence is over, you need to stop manually the psychopy task by clicking on <code>t</code> (as fast as possible to avoid collecting more data than needed).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Prepare the resting-state task.
+        - [ ] Open <code>resting_state.psyexp</code> in psychopy.
+        - [ ] Run the experiment by pressing the green play button. 
+        - [ ] Enter the session and participant number in the pop up window. The Eyelink system setup page opens.
+        - [ ] Press <code>C</code> to open the calibration mode and proceed as described in <a href="../participant-prep/">the participant setup page</a> to perform the calibration and validation.
+        - [ ] Exit the calibration mode by clicking on [WHAT?].
+        - [ ] Verify that the task is ready to receive input trigger to start.</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Inform the participant that the next sequence is resting-state fMRI (rsfMRI).</p>
 <blockquote>
 <p>Hey [NAME], we are about to start resting-state fMRI.
 For this scan, all you have to do is stay still, and look at the movie.
@@ -555,7 +603,7 @@ Are you ready?</p>
 </blockquote>
 </li>
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the rsfMRI <code>func-bold_task-rest_dir-AP</code> sequence.</p>
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the rsfMRI sequence <code>func-bold_task-rest_dir-XX</code>.</p>
 </li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While it is running, tweak the FoV for the following sequence.</li>
 <li class="task-list-item">
@@ -563,7 +611,8 @@ Are you ready?</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Run the experiment by pressing the green play button. </li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Enter the session and participant number in the pop up window. The Eyelink system setup page opens.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> [DO WE HAVE TO DO THE CALIBRATION EVERYTIME OR NOT?]</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Press <code>C</code> to open the calibration mode and proceed as described in <a href="../participant-prep/">the participant setup page</a> to perform the calibration and validation.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Exit the calibration mode by clicking on <code>Esc</code></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify that the task is ready to receive input trigger to start.</li>
 </ul>
 </li>
@@ -578,60 +627,10 @@ Are you ready?</p>
 </blockquote>
 </li>
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the <code>func-bold_task-bht_dir-AP</code> sequence.</p>
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the <code>func-bold_task-bht_dir-XX</code> sequence.</p>
 </li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While it is running, <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Adjust the FoV for the next sequence.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify that in the next sequence parameters under Contrast&gt;Reconstruction the option <code>Magnitude et phase</code> is selected!</li>
-</ul>
-</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While it is running, adjust the FoV for the following sequence. </li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the sequence is over, you need to stop manually the psychopy task by clicking on <code>t</code> (as fast as possible to avoid collecting more data than needed).</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the fieldmap <code>fmap_phasediff_gre</code> sequence.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While it is running, <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Tweek the FOV for the next sequence.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify that in the next sequence parameters under [WHERE?] that all the derivatives are unchecked except <code>Diffusion weighted image</code>.</li>
-</ul>
-</li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Inform the participant that the diffusion scan will follow.</p>
-<blockquote>
-<p>Hey [NAME], the next sequence is diffusion. You can close your eyes if you want and just relax.
-It will last XX minutes.</p>
-</blockquote>
-</li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the diffusion <code>dwi-dwi_dir-PA</code> sequence.</p>
-</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While it is running, tweek the FOV for the next sequence.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the fieldmap <code>fmap-epi_acq-highres_dir-AP</code> sequence.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While it is running, <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Tweek the FOV for the next sequence.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Prepare the the quality control task <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open <code>control_task.psyexp</code> in psychopy</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Run the experiment by pressing the green play button. </li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Enter the session and participant number in the pop up window. The Eyelink system setup page opens.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> [DO WE HAVE TO DO THE CALIBRATION EVERYTIME OR NOT?]</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify that the task is ready to receive input trigger to start.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Inform the participant that we will proceed with the quality control task. Repeat task instructions.</p>
-<blockquote>
-<p>Hey [NAME], the next scan is the quality control task.
-I remind you that this task is composed of different subtasks.
-In the first subtask, you must fix the cross.
-In the second subtask, you must follow the points with your eyes. 
-In the third subtask, tap the finger of your left or right hand depending on the word that flashes.
-I remind you that during the finger tapping you MUST leave the alarm button, e.g., on your belly.</p>
-</blockquote>
-</li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the control task fMRI <code>func-bold_task-qc_dir-AP</code> sequence.</p>
-</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While it is running, tweek the FOV for the next sequence.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> [SINGLE_ECHO BOLD ?]</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the T2w sequence.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> The exam is over, you can proceed with the <a href="../tear-down/">tear-down protocol</a>.</li>
 </ul>
@@ -639,11 +638,6 @@ I remind you that during the finger tapping you MUST leave the alarm button, e.g
 <div class="admonition danger">
 <p class="admonition-title">Emergency procedures for MRI acquisition at CHUV</p>
 <p><strong>If at any point the participant rings the alarm</strong>, it is critical to check on the participant IMMEDIATELY with the scanner's speaker system.</p>
-<div class="language-text highlight"><pre><span></span><code>- [ ] Press the speaker button (1 in the picture below) and ask if everything is alright. It is possible that the participant triggered the alarm by mistake.
-    ![speaker](../assets/images/speaker.jpg)
-
-    !!! warning &quot;Pressing the speaker button (1) will turn the alarm off. It is possible to turn it off with the crossed-bell button (4), although discouraged since you should talk to the participant.
-</code></pre></div>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Enter the scanning room if you do not get a response or the answer is unclear.
     !!! danger "If there is an impending risk to the participant's health, immediately initiate the manual extraction protocol"
@@ -688,24 +682,25 @@ I remind you that during the finger tapping you MUST leave the alarm button, e.g
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Immediately call the internal firefighter service at <strong>███</strong>. Again, the phone number of the emergency services can be found on all the phones at CHUV.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Cut the electricity in the MRI room by pressing the red button below. [INSERT PICTURE] This will NOT turn off the magnetic field!</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Remove the subject from the scanner's room, applying the manual extraction procedure described above.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Remind the firefighters not to enter with conventional extinguishers in the room as the magnetic field will heavily attract them. In the corner of the console room, there is an MRI-compatible extinguisher. [INSERT PICTURE]</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Remind the firefighters not to enter with conventional extinguishers in the room as the magnetic field will heavily attract them. In the corner of the console room, there is an MRI-compatible extinguisher.       </li>
 </ul>
 </div>
-<div class="admonition warning">
-<p class="admonition-title">In case you feel unsafe</p>
-<p>If you feel unsafe for any reason (for example, because a patient behaves aggressively or threatens you), <strong>CALL SECURITY at ███</strong>.</p>
 </div>
-<div class="admonition warning">
-<p class="admonition-title">Technical difficulties</p>
-<p>If you are facing technical difficulties:
-    - [ ] Seek help from anyone on the BH7 floor.
-    - [ ] If you still have problems or didn't find anyone (e.g., scanning on a weekend), call the ER's MRI staff at ███.</p>
-</div>
-<div class="admonition danger">
-<p class="admonition-title">Immediately report any issues</p>
-<p>Once the situation is resolved but before anything else, send an email to ███ and ███. Make sure to report <strong>any potential risk you can anticipate to clinical activity the following day</strong>.</p>
-</div>
-</div>
+<p><img alt="fire_extinguisher.jpg" src="../../assets/images/fire_extinguisher.jpg" /></p>
+<div class="language-text highlight"><pre><span></span><code>!!! Warning &quot;In case you feel unsafe&quot;
+
+    If you feel unsafe for any reason (for example, because a patient behaves aggressively or threatens you), **CALL SECURITY at ███**.
+
+!!! warning &quot;Technical difficulties&quot;
+
+    If you are facing technical difficulties:
+        - [ ] Seek help from anyone on the BH7 floor.
+        - [ ] If you still have problems or didn&#39;t find anyone (e.g., scanning on a weekend), call the ER&#39;s MRI staff at ███.
+
+!!! danger &quot;Immediately report any issues&quot;
+
+     Once the situation is resolved but before anything else, send an email to ███ and ███. Make sure to report **any potential risk you can anticipate to clinical activity the following day**.
+</code></pre></div>
 <p>!!! warning "Resetting the scanner's table after it's been manually detached</p>
 <div class="language-text highlight"><pre><span></span><code>- [ ] Dock the table onto the scanner&#39;s bore and push down the manual attachment lock with your foot.
 - [ ] Simultaneously press the up and down buttons to activate the automatic recalibration of the table.
