@@ -2,3 +2,56 @@
 div.recommended.highlight span.hll {
   background-color: #a7e8c8;
 }
+
+span.keypress {
+  border: 1px solid black;
+  box-shadow: 2px 2px darkgrey;
+  font-size: .85em;
+  font-family: monospace;
+  line-height: .85em;
+  display: inline-block;
+  font-weight: 600;
+  letter-spacing: .05em;
+  padding: 3px 10px;
+  white-space: nowrap;
+}
+
+span.consolebutton {
+  font-family: Arial;
+  border-radius: 20px;
+  border: 1px solid grey;
+  padding: 5px 20px;
+  color: white;
+  background-color: darkgrey;
+}
+
+span.consolebutton.red {
+  background-color: tomato;
+}
+
+span.flipud {
+  display: inline-block;
+  -moz-transform: scale(1, -1);
+  -webkit-transform: scale(1, -1);
+  -o-transform: scale(1, -1);
+  -ms-transform: scale(1, -1);
+  transform: scale(1, -1);
+}
+
+span.fliplr {
+  display: inline-block;
+  -moz-transform: scale(-1, 1);
+  -webkit-transform: scale(-1, 1);
+  -o-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  transform: scale(-1, 1);
+}
+
+span.flip {
+  display: inline-block;
+  -moz-transform: scale(-1, -1);
+  -webkit-transform: scale(-1, -1);
+  -o-transform: scale(-1, -1);
+  -ms-transform: scale(-1, -1);
+  transform: scale(-1, -1);
+}
