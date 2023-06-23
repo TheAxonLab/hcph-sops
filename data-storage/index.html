@@ -23,11 +23,14 @@
     
     
       
-        <title>Data management - HCPh :: SOPs</title>
+        <title>Data management - Standard Operating Procedures of the HCPh project</title>
       
     
     
       <link rel="stylesheet" href="../assets/stylesheets/main.26e3688c.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ecc896b0.min.css">
       
       
 
@@ -55,11 +58,14 @@
   </head>
   
   
-    <body dir="ltr">
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
   
     
-    
-      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -67,7 +73,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#within-one-week-after-the-completed-session" class="md-skip">
+        <a href="#within-48h-after-the-first-session" class="md-skip">
           Skip to content
         </a>
       
@@ -83,10 +89,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="HCPh :: SOPs" class="md-header__button md-logo" aria-label="HCPh :: SOPs" data-md-component="logo">
+    <a href=".." title="Standard Operating Procedures of the HCPh project" class="md-header__button md-logo" aria-label="Standard Operating Procedures of the HCPh project" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <img src="../assets/images/chuv_logo.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -96,7 +101,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            HCPh :: SOPs
+            Standard Operating Procedures of the HCPh project
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -108,6 +113,8 @@
         </div>
       </div>
     </div>
+    
+      
     
     
     
@@ -169,13 +176,12 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="HCPh :: SOPs" class="md-nav__button md-logo" aria-label="HCPh :: SOPs" data-md-component="logo">
+    <a href=".." title="Standard Operating Procedures of the HCPh project" class="md-nav__button md-logo" aria-label="Standard Operating Procedures of the HCPh project" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <img src="../assets/images/chuv_logo.svg" alt="logo">
 
     </a>
-    HCPh :: SOPs
+    Standard Operating Procedures of the HCPh project
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -444,6 +450,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#within-48h-after-the-first-session" class="md-nav__link">
+    Within 48h after the FIRST session
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#within-one-week-after-the-completed-session" class="md-nav__link">
     Within one week after the completed session
   </a>
@@ -454,13 +467,6 @@
           <li class="md-nav__item">
   <a href="#download-the-data-from-the-pacs-with-pacsman-only-authorized-users" class="md-nav__link">
     Download the data from the PACS with PACSMAN (only authorized users)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#critical-within-48h-after-the-first-session" class="md-nav__link">
-    CRITICAL: WITHIN 48h after the FIRST session
   </a>
   
 </li>
@@ -493,8 +499,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#convert-data-to-bids-with-heudiconv-and-phys2bids" class="md-nav__link">
-    Convert data to BIDS with HeudiConv and Phys2BIDS
+  <a href="#convert-data-to-bids-with-heudiconv" class="md-nav__link">
+    Convert data to BIDS with HeudiConv
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#convert-physiological-recordings-and-eye-tracking-data-to-bids" class="md-nav__link">
+    Convert physiological recordings and eye-tracking data to BIDS
   </a>
   
 </li>
@@ -581,6 +594,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#within-48h-after-the-first-session" class="md-nav__link">
+    Within 48h after the FIRST session
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#within-one-week-after-the-completed-session" class="md-nav__link">
     Within one week after the completed session
   </a>
@@ -591,13 +611,6 @@
           <li class="md-nav__item">
   <a href="#download-the-data-from-the-pacs-with-pacsman-only-authorized-users" class="md-nav__link">
     Download the data from the PACS with PACSMAN (only authorized users)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#critical-within-48h-after-the-first-session" class="md-nav__link">
-    CRITICAL: WITHIN 48h after the FIRST session
   </a>
   
 </li>
@@ -630,8 +643,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#convert-data-to-bids-with-heudiconv-and-phys2bids" class="md-nav__link">
-    Convert data to BIDS with HeudiConv and Phys2BIDS
+  <a href="#convert-data-to-bids-with-heudiconv" class="md-nav__link">
+    Convert data to BIDS with HeudiConv
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#convert-physiological-recordings-and-eye-tracking-data-to-bids" class="md-nav__link">
+    Convert physiological recordings and eye-tracking data to BIDS
   </a>
   
 </li>
@@ -672,25 +692,40 @@
 
   <h1>Data management</h1>
 
+<h2 id="within-48h-after-the-first-session">Within 48h after the FIRST session<a class="headerlink" href="#within-48h-after-the-first-session" title="Permanent link">&para;</a></h2>
+<div class="admonition danger">
+<p class="admonition-title">Anatomical images must be screened for incidental findings within 48h after the first session</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Send the T1-weighted and T2-weighted scan to ███ for screening and incidental findings.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Indicate on <a href="/redacted.html">our recruits spreadsheet</a> that the participant's first session has been submitted for screening.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Wait for response from ███ and note down the result of the screening in our <a href="/redacted.html">our recruits spreadsheet</a>.</li>
+</ul>
+</div>
+<p>To do so, you'll need to first <a href="#download-the-data-from-the-pacs-with-pacsman-only-authorized-users">download the data from PACS</a> and then <a href="#convert-data-to-bids-with-heudiconv-and-phys2bids">convert the data into BIDS</a> as indicated below.</p>
+<div class="admonition warning">
+<p class="admonition-title">What to do when there are incidental findings</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Discuss with ███ how to proceed with the participant.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Exclude the participant from the study if ███ evaluates they don't meet the participation (inclusion and exclusion) criteria.</li>
+</ul>
+</div>
 <h2 id="within-one-week-after-the-completed-session">Within one week after the completed session<a class="headerlink" href="#within-one-week-after-the-completed-session" title="Permanent link">&para;</a></h2>
 <h3 id="download-the-data-from-the-pacs-with-pacsman-only-authorized-users">Download the data from the PACS with PACSMAN (only authorized users)<a class="headerlink" href="#download-the-data-from-the-pacs-with-pacsman-only-authorized-users" title="Permanent link">&para;</a></h3>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Login into the PACSMAN computer  (**)</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Mount a remote filesystem through sshfs:
-    <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sshfs<span class="w"> </span>&lt;hostname&gt;:/data/datasets/hcph-pilot/rawdata<span class="w"> </span><span class="se">\</span>
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sshfs<span class="w"> </span>&lt;hostname&gt;:/data/datasets/hcph-pilot/sourcedata<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">               </span><span class="nv">$HOME</span>/data/hcph-pilot<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">      </span>&lt;args&gt;
 </span></code></pre></div></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Edit the query file <code>vim $HOME/queries/mydata-onesession.csv</code> (most likely, just update with the session's date)
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Edit the query file <code>vim $HOME/queries/last-session.csv</code> (most likely, just update with the session's date)
 <div class="language-text highlight"><span class="filename">mydata-onesession.csv</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>PatientID,StudyDate
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>2022_11_07*,20230503
 </span></code></pre></div></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Prepare and run PACSMAN, pointing the output to the mounted directory.
-    <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>conda<span class="w"> </span>activate<span class="w"> </span>pacsman_min_dev_v2
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>python<span class="w"> </span>/home/localadmin/Bureau/PACSMAN/PACSMAN/pacsman.py<span class="w"> </span>--save<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">       </span>-q<span class="w"> </span><span class="nv">$HOME</span>/queries/mydata-onesession.csv<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">       </span>--out_directory<span class="w"> </span><span class="nv">$HOME</span>/data/hcph-pilot/<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">       </span>--config<span class="w"> </span>/home/localadmin/Bureau/PACSMAN/PACSMAN/files/config_RESEARCH.json
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>pacsman<span class="w"> </span>--save<span class="w"> </span>-q<span class="w"> </span><span class="nv">$HOME</span>/queries/last-session.csv<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">       </span>--out_directory<span class="w"> </span><span class="nv">$HOME</span>/data/hcph-pilot/<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">       </span>--config<span class="w"> </span>/opt/PACSMAN/files/config.json
 </span></code></pre></div></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Remove write permissions on the newly downloaded data:
     <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>chmod<span class="w"> </span>-R<span class="w"> </span>a-w<span class="w"> </span><span class="nv">$HOME</span>/data/hcph-pilot/sub-01/ses-*
@@ -699,25 +734,33 @@
     <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo<span class="w"> </span>umount<span class="w"> </span><span class="nv">$HOME</span>/data/hcph-pilot
 </span></code></pre></div></li>
 </ul>
-<h3 id="critical-within-48h-after-the-first-session">CRITICAL: <span style="color: red">WITHIN 48h after the FIRST session</span><a class="headerlink" href="#critical-within-48h-after-the-first-session" title="Permanent link">&para;</a></h3>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Send the T1-weighted and T2-weighted scan to ███ for screening and incidental findings.</li>
-</ul>
 <h3 id="retrieve-physiological-recordings-from">Retrieve physiological recordings (from ████)<a class="headerlink" href="#retrieve-physiological-recordings-from" title="Permanent link">&para;</a></h3>
 <h3 id="copy-original-dicoms-into-the-archive-of-stockage-horus">Copy original DICOMs into the archive of Stockage HOrUs<a class="headerlink" href="#copy-original-dicoms-into-the-archive-of-stockage-horus" title="Permanent link">&para;</a></h3>
+<ul class="task-list">
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Setup a cron job to execute automatically the synchronization:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>crontab -e
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>[ within your file editor add the following line ]
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>0 2 * * * rsync -avurP /data/datasets/hcph-pilot/* &lt;user&gt;@&lt;host&gt;:&lt;path&gt; &amp;&gt; $HOME/var/log/data-curnagl.log
+</span></code></pre></div>
+</li>
+</ul>
 <h2 id="within-two-weeks-after-the-completed-session">Within two weeks after the completed session<a class="headerlink" href="#within-two-weeks-after-the-completed-session" title="Permanent link">&para;</a></h2>
-<h3 id="convert-data-to-bids-with-heudiconv-and-phys2bids">Convert data to BIDS with HeudiConv and Phys2BIDS<a class="headerlink" href="#convert-data-to-bids-with-heudiconv-and-phys2bids" title="Permanent link">&para;</a></h3>
+<h3 id="convert-data-to-bids-with-heudiconv">Convert data to BIDS with HeudiConv<a class="headerlink" href="#convert-data-to-bids-with-heudiconv" title="Permanent link">&para;</a></h3>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Careful to change the number of the session ! Note that we use the heuristic -f reproin, because we have name the sequences at the console following ReproIn convention.
-<div class="language-bash highlight"><span class="filename">Executing HeudiConv</span><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="ch">#!/bin/bash</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>heudiconv<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;pilot&quot;</span><span class="w"> </span>-ss<span class="w"> </span><span class="s2">&quot;08&quot;</span><span class="w"> </span>-f<span class="w"> </span>heuristic_reproin.py<span class="w"> </span>-b<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">          </span>-o<span class="w"> </span>/data/datasets/hcph-pilot/<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">          </span>--files<span class="w"> </span>/data/datasets/hcph-pilot/sourcedata/<span class="se">\</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">                  </span>sub-01/<span class="se">\</span>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">                  </span>ses-18950702/<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">          </span>-l<span class="w"> </span>.
+<div class="language-bash highlight"><span class="filename">Executing HeudiConv</span><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="ch">#!/bin/bash</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>heudiconv<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;pilot&quot;</span><span class="w"> </span>-ss<span class="w"> </span><span class="s2">&quot;08&quot;</span><span class="w"> </span>-f<span class="w"> </span>heuristic_reproin.py<span class="w"> </span>-b<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">          </span>-o<span class="w"> </span>/data/datasets/hcph-pilot/<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">          </span>--files<span class="w"> </span>/data/datasets/hcph-pilot/sourcedata/<span class="se">\</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">                  </span>sub-01/<span class="se">\</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">                  </span>ses-18950702/<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">          </span>-l<span class="w"> </span>.
 </span></code></pre></div></li>
 </ul>
+<h3 id="convert-physiological-recordings-and-eye-tracking-data-to-bids">Convert physiological recordings and eye-tracking data to BIDS<a class="headerlink" href="#convert-physiological-recordings-and-eye-tracking-data-to-bids" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>phys2bids -in /data/datasets/hcph-pilot/sourcedata/physio/session-recording.acq -info
+</span></code></pre></div>
 <h3 id="incorporate-into-version-control-with-datalad">Incorporate into version control with DataLad<a class="headerlink" href="#incorporate-into-version-control-with-datalad" title="Permanent link">&para;</a></h3>
 <div class="admonition info">
 <p class="admonition-title">Initiating the version-controled dataset</p>
@@ -730,11 +773,11 @@
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Register the MRIQC container with DataLad containers-run</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Run MRIQC:
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>datalad<span class="w"> </span>containers-run<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span>--container-name<span class="w"> </span>containers/mriqc<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span>--input<span class="w"> </span>sourcedata<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span>--output<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="s1">&#39;{inputs}&#39;</span><span class="w"> </span><span class="s1">&#39;{outputs}&#39;</span><span class="w"> </span>participant<span class="w"> </span>--session<span class="w"> </span>lastsession<span class="w"> </span>-w<span class="w"> </span>workdir
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>datalad<span class="w"> </span>containers-run<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span>--container-name<span class="w"> </span>containers/mriqc<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span>--input<span class="w"> </span>sourcedata<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span>--output<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="s1">&#39;{inputs}&#39;</span><span class="w"> </span><span class="s1">&#39;{outputs}&#39;</span><span class="w"> </span>participant<span class="w"> </span>--session<span class="w"> </span>lastsession<span class="w"> </span>-w<span class="w"> </span>workdir
 </span></code></pre></div></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Screen the T1w, DWI and BOLD visual reports, assign a quality assessment using <em>Q'Kay</em></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If either the dMRI or the RSfMRI quality is insufficient, schedule an extra session after the initially-planned scanning
