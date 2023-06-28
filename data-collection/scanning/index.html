@@ -19,7 +19,7 @@
         <link rel="next" href="../tear-down/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.17">
     
     
       
@@ -803,7 +803,7 @@ This is also a good moment to swallow, and to check your neck and head are in a 
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Wait for the participant confirmation and set the speaker off afterward.</p>
 </li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the <code>AAhead_scout_{32,64}ch-head-coil</code> protocol by pressing <em>Continue</em>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the <code>AAhead_scout_{32,64}ch-head-coil</code> protocol by pressing <em>Continue</em> (<strong>⯈</strong>).</li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the localizer is concluded, you can drag and drop the image stack icon (something like 🗇, with an object on the top stack) onto the image viewer. That will open the localizer on the viewer.</p>
 <p><img alt="drag_t1w.jpg" src="../../assets/images/drag_t1w.jpg" /></p>
@@ -872,18 +872,19 @@ Are you ready?</p>
 </div>
 <h3 id="once-the-main-diffusion-mri-run-is-done-proceed-with-fieldmaps">Once the main diffusion MRI run is done, proceed with fieldmaps<a class="headerlink" href="#once-the-main-diffusion-mri-run-is-done-proceed-with-fieldmaps" title="Permanent link">&para;</a></h3>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the DWI-EPI sequence <code>fmap-epi_acq-b0_dir-{RL,LR,PA,AP}__6dir_monopolar</code> for <em>B<sub>0</sub></em> field mapping.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the DWI-EPI sequence <code>fmap-epi_acq-b0_dir-{RL,LR,PA,AP}__6dir_monopolar</code> for <em>B<sub>0</sub></em> field mapping by pressing <em>Continue</em> (<strong>⯈</strong>).</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While it is running, <a href="../scanning-notes/#setting-the-fov">adjust the FoV</a> for the following sequence.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the GRE (<em>phase difference</em>) sequence <code>fmap-phasediff__gre</code> for <em>B<sub>0</sub></em> field mapping.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the GRE (<em>phase difference</em>) sequence <code>fmap-phasediff__gre</code> for <em>B<sub>0</sub></em> field mapping by pressing <em>Continue</em> (<strong>⯈</strong>).</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While it is running, <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <a href="../scanning-notes/#setting-the-fov">Adjust the FoV</a> for the following sequence.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify that in the next sequence parameters under <em>Contrast&gt;Reconstruction</em> the option <em>Magnitude et phase</em> is selected!</li>
 </ul>
 </li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the BOLD-EPI sequence <code>fmap-epi_acq-bold_dir-{RL,LR,PA,AP}__cmrr_me4_sms4</code> for <em>B<sub>0</sub></em> field mapping.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the BOLD-EPI sequence <code>fmap-epi_acq-bold_dir-{RL,LR,PA,AP}__cmrr_me4_sms4</code> for <em>B<sub>0</sub></em> field mapping by pressing <em>Continue</em> (<strong>⯈</strong>).</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While the fieldmap sequence is running,<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <a href="../scanning-notes/#setting-the-fov">Adjust the FoV</a> for the positive-control-task (<code>func-bold_task-pct_dir-{RL,LR,PA,AP}__cmrr_me4_sms4</code>) fMRI sequence following the abovementioned steps.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify that the positive-control task <code>control_task.psyexp</code> is open in psychopy, that you calibrated the ET.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <a href="../scanning-notes/#setting-the-fov">Adjust the FoV</a> for the positive-control-task (<code>func-bold_task-pct_dir-{RL,LR,PA,AP}__cmrr_me4_sms4</code>) fMRI sequence following the abovementioned steps, and</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> verify the <em>Number of measurements</em> with respect to the <a href="../preliminary/#task-timing">task's timing</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify that the positive-control task <code>task-pct_bold.psyexp</code> is open in psychopy, that you calibrated the ET.</li>
 </ul>
 </li>
 </ul>
@@ -925,7 +926,8 @@ If the red circle moves, we ask you to follow it with your eyes.</p>
 </li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Wait for the calibration scans to be finished (the process is reported on the bottom left corner of the console) and verify that the first volume's trigger signal was received by <em>███</em> (meaning <strong>CHECK that the task program was initiated</strong>).</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While it is running:<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <a href="../scanning-notes/#setting-the-fov">Adjust the FoV</a> for the following sequence, and</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <a href="../scanning-notes/#setting-the-fov">Adjust the FoV</a> for the following sequence,</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> verify the <em>Number of measurements</em> with respect to the <a href="../preliminary/#task-timing">task's timing</a>, and</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> double check that it has the setting <em>Magnitude et phase</em> selected in the drop-down menu under <em>Contrast&gt;Reconstruction</em>.</li>
 </ul>
 </li>
@@ -959,7 +961,8 @@ Please do not close your eyes, and it is particularly critical that you don't mo
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the rsfMRI sequence <code>func-bold_task-rest_dir-{RL,LR,PA,AP}__cmrr_me4_sms4</code> by pressing <em>Continue</em> (<strong>⯈</strong>).</p>
 </li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While it is running:<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <a href="../scanning-notes/#setting-the-fov">Adjust the FoV</a> for the following sequence, and</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <a href="../scanning-notes/#setting-the-fov">Adjust the FoV</a> for the following sequence,</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> verify the <em>Number of measurements</em> with respect to the <a href="../preliminary/#task-timing">task's timing</a>, and</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> double check that it has the setting <em>Magnitude et phase</em> selected in the drop-down menu under <em>Contrast&gt;Reconstruction</em>.</li>
 </ul>
 </li>
@@ -1057,7 +1060,7 @@ Please do not close your eyes, and it is particularly critical that you don't mo
     <script id="__config" type="application/json">{"base": "../..", "features": ["tabs", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.a51614de.min.js"></script>
+      <script src="../../assets/javascripts/bundle.b425cdc4.min.js"></script>
       
         
           <script src="../../js/mathjax.js"></script>
