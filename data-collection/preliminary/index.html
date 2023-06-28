@@ -874,10 +874,11 @@
 <p class="admonition-title">Remember to time the three functional MRI runs (rest, qct, bht)</p>
 <p><a name="task-timing"></a>
 The lengths of the three runs should be:</p>
-<div class="language-text highlight"><pre><span></span><code>* `task-rest_bold.psyexp`  20min 00s
-* `task-bht_bold.psyexp` 5min 41s
-* `task-pct_bold.psyexp` 2min 38s
-</code></pre></div>
+<ul>
+<li><code>task-rest_bold.psyexp</code> ➜ <mark><strong>20min 0s</strong></mark>,</li>
+<li><code>task-bht_bold.psyexp</code> ➜ <mark><strong>5min 41s</strong></mark>, and</li>
+<li><code>task-pct_bold.psyexp</code> ➜ <mark><strong>2min 38s</strong></mark>.</li>
+</ul>
 </div>
 </li>
 </ul>
@@ -931,7 +932,7 @@ Change for <em>advanced user mode</em> if you want to save the protocol.</p>
 </div>
 <ul class="task-list">
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Update the <em>Number of measurements</em> in all <code>func-bold_task-*</code> sequences, according to the previously recorded timings:</p>
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Update the <em>Number of measurements</em> in all <code>func-bold_task-*</code> sequences, according to the <a href="#task-timing">previously recorded timings</a>:</p>
 <div class="arithmatex">\[N_\text{measurements} = L_t / \text{TR}, \quad t \in \{\text{bht}, \text{pct}, \text{rest}\},\]</div>
 <p>where <span class="arithmatex">\(L_t\)</span> is the length of a particular task <span class="arithmatex">\(t\)</span> (either BHT, PCT, or resting state) in seconds as timed before, and
 <span class="arithmatex">\(\text{TR}\)</span> is the <strong>repetition time</strong> of the BOLD sequence, in seconds.</p>
@@ -1009,7 +1010,7 @@ Change for <em>advanced user mode</em> if you want to save the protocol.</p>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> check that the movie is played.</li>
 </ul>
 </li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <code>task-pct_bold.psyexp</code> (positive-control task, PCT) :<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <code>task-pct_bold.psyexp</code> (positive-control task, PCT):<ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> time it to <a href="#task-timing">confirm the length</a>, and</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> check that the movie is played.</li>
 </ul>

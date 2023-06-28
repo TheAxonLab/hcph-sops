@@ -890,22 +890,23 @@ This is also a good moment to swallow, and to check your neck and head are in a 
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify again the <code>dwi-dwi_dir-{RL,LR,PA,AP}__279dir_monopolar</code> parameters under section <em>Diff.</em> All the derivatives MUST be unchecked except for <em>Diff. Weighted Image</em>.</li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Inform the participant that the diffusion scan will follow.</p>
-<blockquote>
+<details class="quote">
+<summary>Only for the participant of Cohort I</summary>
+<p>Hey Oscar, we are ready to proceed with the diffusion scan.
+The BIOPAC is functional and <em>AcqKnowledge</em> is properly registering the respiration belt and ECG.
+The gas analyzer is ON, but it is still warming up.
+The psychopy computer is ready.
+Are you ready?</p>
+</details>
+<details class="quote" open="open">
+<summary>Participant of Cohort II</summary>
 <p>Hey [NAME], the next block is a bit long, around 30 minutes.</p>
 <p>You can close your eyes and even sleep if you wish.</p>
 <p>I'm going to give you a short time (ten seconds or so) to swallow, and perhaps accommodate your back or your arms. However, please try not to move your head.</p>
 <p>It is critical that you don't move, especially at all at the very beginning and the next 20 seconds after you hear the first blipping sounds.</p>
 <p>Try to minimize swallowing, and eye movements (for example, blinking) and try to maintain comfortable and shallow breathing.</p>
 <p>Are you ready?</p>
-</blockquote>
-<div class="admonition note">
-<p class="admonition-title">Only for the participant of Cohort I</p>
-<p>Hey Oscar, we are ready to proceed with the diffusion scan.
-The BIOPAC is functional and <em>AcqKnowledge</em> is properly registering the respiration belt and ECG.
-The gas analyzer is ON, but it is still warming up.
-The psychopy computer is ready.
-Are you ready?</p>
-</div>
+</details>
 </li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the diffusion <code>dwi-dwi_dir-{RL,LR,PA,AP}__279dir_monopolar</code> sequence by pressing <em>Continue</em> (<strong>⯈</strong>).</p>
@@ -931,7 +932,7 @@ Are you ready?</p>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the BOLD-EPI sequence <code>fmap-epi_acq-bold_dir-{RL,LR,PA,AP}__cmrr_me4_sms4</code> for <em>B<sub>0</sub></em> field mapping by pressing <em>Continue</em> (<strong>⯈</strong>).</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While the fieldmap sequence is running,<ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <a href="../scanning-notes/#setting-the-fov">Adjust the FoV</a> for the positive-control-task (<code>func-bold_task-pct_dir-{RL,LR,PA,AP}__cmrr_me4_sms4</code>) fMRI sequence following the abovementioned steps, and</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> verify the <em>Number of measurements</em> with respect to the <a href="../preliminary/#task-timing">task's timing</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> verify the <em>Number of measurements</em> with respect to the <a href="../preliminary/#task-timing">task's timing</a> (2min 38s).</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify that the positive-control task <code>task-pct_bold.psyexp</code> is open in psychopy, that you calibrated the ET.</li>
 </ul>
 </li>
@@ -975,12 +976,12 @@ If the red circle moves, we ask you to follow it with your eyes.</p>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Wait for the calibration scans to be finished (the process is reported on the bottom left corner of the console) and verify that the first volume's trigger signal was received by <em>███</em> (meaning <strong>CHECK that the task program was initiated</strong>).</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While it is running:<ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <a href="../scanning-notes/#setting-the-fov">Adjust the FoV</a> for the following sequence,</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> verify the <em>Number of measurements</em> with respect to the <a href="../preliminary/#task-timing">task's timing</a>, and</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> verify the <em>Number of measurements</em> with respect to the <a href="../preliminary/#task-timing">task's timing</a> (20min 0s), and</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> double check that it has the setting <em>Magnitude et phase</em> selected in the drop-down menu under <em>Contrast&gt;Reconstruction</em>.</li>
 </ul>
 </li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the sequence is over, you need to stop manually the psychopy task by pressing the key <span class="keypress">t</span> on the keyboard (as fast as possible to avoid collecting more data than needed).</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the sequence is over, close the current experiment on psychopy and open <code>resting_state.psyexp</code>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the sequence is over, close the current experiment on psychopy and open <code>task-rest_bold.psyexp</code>.</li>
 </ul>
 <h3 id="resting-state-fmri">Resting state fMRI<a class="headerlink" href="#resting-state-fmri" title="Permanent link">&para;</a></h3>
 <ul class="task-list">
@@ -1010,11 +1011,11 @@ Please do not close your eyes, and it is particularly critical that you don't mo
 </li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While it is running:<ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <a href="../scanning-notes/#setting-the-fov">Adjust the FoV</a> for the following sequence,</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> verify the <em>Number of measurements</em> with respect to the <a href="../preliminary/#task-timing">task's timing</a>, and</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> verify the <em>Number of measurements</em> with respect to the <a href="../preliminary/#task-timing">task's timing</a> (5min 41s), and</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> double check that it has the setting <em>Magnitude et phase</em> selected in the drop-down menu under <em>Contrast&gt;Reconstruction</em>.</li>
 </ul>
 </li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the sequence is over, close the current experiment on psychopy and open <code>breath_holding_task.psyexp</code>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the sequence is over, close the current experiment on psychopy and open <code>task-bht_bold.psyexp</code>.</li>
 </ul>
 <h3 id="breath-holding-task-bht">Breath-holding task (BHT)<a class="headerlink" href="#breath-holding-task-bht" title="Permanent link">&para;</a></h3>
 <ul class="task-list">
