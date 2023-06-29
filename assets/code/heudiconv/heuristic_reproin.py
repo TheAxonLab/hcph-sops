@@ -1,4 +1,5 @@
 """Reproin heuristic."""
+from warnings import warn
 import re
 from collections import Counter
 
@@ -55,16 +56,19 @@ def infotodict(seqinfo):
     )
     epi = create_key(
         "sub-{subject}/{session}/fmap/sub-{subject}_{session}"
-        "_acq-{acquisition}_dir-{dir}{run_entity}_epi"
+        "_acq-{acquisition}_dir-{dir}{part_entity}{run_entity}_epi"
     )
     func = create_key(
-        "sub-{subject}/{session}/func/sub-{subject}_{session}_task-{task}{run_entity}_bold"
+        "sub-{subject}/{session}/func/sub-{subject}_{session}"
+        "_task-{task}{part_entity}{run_entity}_bold"
     )
     sbref = create_key(
         "sub-{subject}/{session}/func/sub-{subject}_{session}_task-{task}{run_entity}_sbref"
     )
 
     info = {t1w: [], t2w: [], dwi: [], mag: [], phdiff: [], epi: [], func: [], sbref: []}
+    epi_desc = []
+    bold_desc = []
 
     for s in seqinfo:
         """
@@ -117,12 +121,38 @@ def infotodict(seqinfo):
         elif s.protocol_name.startswith("dwi-dwi"):
             thiskey = dwi
         elif s.protocol_name.startswith("fmap-phasediff"):
-            thiskey = phdiff if s.series_files < 100 else mag
+            thiskey = phdiff if "P" in s.image_type else mag
         elif s.protocol_name.startswith("fmap-epi"):
             thiskey = epi
             thisitem["acquisition"] = "b0" if s.sequence_name.endswith("ep_b0") else "bold"
+
+            # Check whether phase was written out
+            thisdesc = s.series_id.split("-", 1)[-1]
+            if thisdesc in epi_desc:
+                thisitem["part_entity"] = "_part-phase"
+                info[thiskey][epi_desc.index(thisdesc)]["part_entity"] = "_part-mag"
+            else:
+                thisitem["part_entity"] = ""
+
+            epi_desc.append(thisdesc)
+
         elif s.protocol_name.startswith("func-bold"):
+            # Likely an error
+            if s.series_files < 100:
+                warn(f"Dropping exceedingly short BOLD file with {s.series_files} time points.")
+                continue
+
             thiskey = func
+
+            # Check whether phase was written out
+            thisdesc = s.series_id.split("-", 1)[-1]
+            if thisdesc in bold_desc:
+                thisitem["part_entity"] = "_part-phase"
+                info[thiskey][bold_desc.index(thisdesc)]["part_entity"] = "_part-mag"
+            else:
+                thisitem["part_entity"] = ""
+
+            bold_desc.append(thisdesc)
 
         if thiskey is not None:
             info[thiskey].append(thisitem)
@@ -179,6 +209,17 @@ def _assign_run_on_repeat(modality_items):
     [{'item': 'discard1', 'acq': 'bold', 'dir': 'PA', 'run_entity': '_run-1'},
      {'item': 'discard2', 'acq': 'bold', 'dir': 'AP'},
      {'item': 'discard3', 'acq': 'bold', 'dir': 'PA', 'run_entity': '_run-2'}]
+
+    >>> _assign_run_on_repeat([
+    ...     {"item": "discard1", "acq": "bold", "dir": "PA", "part_entity": "_part-mag"},
+    ...     {"item": "discard2", "acq": "bold", "dir": "PA", "part_entity": "_part-phase"},
+    ...     {"item": "discard3", "acq": "bold", "dir": "AP", "part_entity": "_part-mag"},
+    ...     {"item": "discard4", "acq": "bold", "dir": "AP", "part_entity": "_part-phase"},
+    ... ])  # doctest: +NORMALIZE_WHITESPACE
+    [{'item': 'discard1', 'acq': 'bold', 'dir': 'PA', 'part_entity': '_part-mag'},
+     {'item': 'discard2', 'acq': 'bold', 'dir': 'PA', 'part_entity': '_part-phase'},
+     {'item': 'discard3', 'acq': 'bold', 'dir': 'AP', 'part_entity': '_part-mag'},
+     {'item': 'discard4', 'acq': 'bold', 'dir': 'AP', 'part_entity': '_part-phase'}]
 
     """
     modality_items = modality_items.copy()
