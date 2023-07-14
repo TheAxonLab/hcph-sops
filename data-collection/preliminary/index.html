@@ -368,6 +368,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#setting-up-the-connection-between-the-biopac-and-the-psychopy-laptop" class="md-nav__link">
+    Setting up the Connection between the Biopac and the Psychopy Laptop:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verifying-trigger-transfer-without-biopac-connection" class="md-nav__link">
+    Verifying Trigger Transfer Without BIOPAC Connection:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#stimuli-presentation-psychopy" class="md-nav__link">
     Stimuli presentation: psychopy
   </a>
@@ -666,6 +680,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#setting-up-the-connection-between-the-biopac-and-the-psychopy-laptop" class="md-nav__link">
+    Setting up the Connection between the Biopac and the Psychopy Laptop:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verifying-trigger-transfer-without-biopac-connection" class="md-nav__link">
+    Verifying Trigger Transfer Without BIOPAC Connection:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#stimuli-presentation-psychopy" class="md-nav__link">
     Stimuli presentation: psychopy
   </a>
@@ -773,7 +801,7 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> The <a href="../../assets/files/STP100D.pdf">SPT100D (solid state relay driver unit)</a> is used to input digital signals that must be recorded (e.g., the trigger signals from the scanner)</li>
 </ul>
 </li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Ensure that the <em>Mode</em> switch of the <a href="../../assets/files/MMBT-S_instruction_manual_v2.2.pdf">MMBT-S Trigger Interface Box adapter (pink color box)</a> is set on the <strong>S</strong> position.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Ensure that the <em>Mode</em> switch of the <a href="../../assets/files/MMBT-S_instruction_manual_v2.2.pdf">MMBT-S Trigger Interface Box adapter (pink color box)</a> is set on the <strong>P</strong> position.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install the BIOPAC recording software (<em>AcqKnowledge</em>).</li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Create a template <em>graph file</em> (<a href="../../assets/files/EXP_BASE.gtl"><code>EXP_BASE.gtl</code></a>)</p>
@@ -817,39 +845,95 @@
 </div>
 </li>
 </ul>
+<h3 id="setting-up-the-connection-between-the-biopac-and-the-psychopy-laptop">Setting up the Connection between the Biopac and the Psychopy Laptop:<a class="headerlink" href="#setting-up-the-connection-between-the-biopac-and-the-psychopy-laptop" title="Permanent link">&para;</a></h3>
+<div class="admonition important">
+<p class="admonition-title">It's fundamental to have a reliable means of communication with the BIOPAC digital inputs</p>
+<p>The following guidelines set up a little service on a linux box that keeps listening for key presses (mainly, the <span class="keypress">s</span> trigger from the trigger box), and RPC (remote procedure calls) from typically <em>Psychopy</em> or similar software.</p>
+<p>The service is spun up automatically when you connect the MMBT-S modem interface that communicates with the BIOPAC (that is, the <em>N-shaped pink box</em>)</p>
+</div>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Copy the <a href="https://github.com/TheAxonLab/hcph-sops/blob/mkdocs/code/synchronization/forward-trigger-service.py">latest version of the code to send triggers</a></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> To automatically start the program when the BIOPAC is connected, create a udev rule as follows:
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sudo nano /etc/udev/rules.d/99-forward-trigger.rules
+</span></code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Add the following rule to the file:
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ACTION==&quot;add&quot;, KERNEL==&quot;ttyACM0&quot;, SUBSYSTEM==&quot;tty&quot;, TAG+=&quot;systemd&quot;, ENV{SYSTEMD_WANTS}=&quot;forward-trigger.service&quot;
+</span></code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Save the file and exit the editor.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Run the following command to reload the udev rules:
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo udevadm control --reload-rules
+</span></code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Create a systemd service unit file:
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo nano /etc/systemd/system/forward-trigger.service
+</span></code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Add the following content to the file (Adapt the path to forward-trigger.py to the location on your computer):
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>[Unit]
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>Description=Forward Trigger Service
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>After=network.target
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>[Service]
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>ExecStart=/usr/bin/python3 /path/to/forward-trigger.py
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>WorkingDirectory=/path/to/forward-trigger/directory
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>StandardOutput=null
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>[Install]
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>WantedBy=multi-user.target
+</span></code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Save the file and exit the text editor.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Run the following command to enable the service to start at boot:
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo systemctl enable forward-trigger
+</span></code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Run the following command to reload the systemd daemon:
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>sudo systemctl daemon-reload
+</span></code></pre></div></li>
+</ul>
+<h3 id="verifying-trigger-transfer-without-biopac-connection">Verifying Trigger Transfer Without BIOPAC Connection:<a class="headerlink" href="#verifying-trigger-transfer-without-biopac-connection" title="Permanent link">&para;</a></h3>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Ensure <code>socat</code> and <code>screen</code> are installed (if not already):
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sudo apt-get update
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>sudo apt-get install socat screen
+</span></code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Create a virtual serial port and establish a symbolic link to <code>/dev/ttyACM0</code> using the following command:
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sudo socat PTY,link=/tmp/virtual_serial_port PTY,link=/dev/ttyACM0,group-late=dialout,mode=666,b9600
+</span></code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> With <code>screen</code>, listen to the new virtual serial port:
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>screen /dev/ttyACM0
+</span></code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Press <span class="keypress">s</span> and verify that <code>^A</code> appears in the screen terminal.</li>
+</ul>
 <h3 id="stimuli-presentation-psychopy">Stimuli presentation: <em>psychopy</em><a class="headerlink" href="#stimuli-presentation-psychopy" title="Permanent link">&para;</a></h3>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Prepare a laptop with a running Psychopy 3 installation AND the EyeTracker software.
     For these SOPs, the designated laptop for the experiments is <em>███</em>.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <a href="https://github.com/TheAxonLab/HCPh-fMRI-tasks/fork">Fork the HCPh-fMRI-tasks repository</a> under your user on GitHub.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Clone the <a href="https://github.com/TheAxonLab/HCPh-fMRI-tasks">HCPh-fMRI-tasks repository</a>:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git clone git@github.com:&lt;your-gh-username&gt;/HCPh-fMRI-tasks.git
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>git clone git@github.com:&lt;your-gh-username&gt;/HCPh-fMRI-tasks.git
 </span></code></pre></div></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Set-up the original repository as upstream remote:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>git remote add upstream git@github.com:theaxonlab/HCPh-fMRI-tasks.git
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>git remote add upstream git@github.com:theaxonlab/HCPh-fMRI-tasks.git
 </span></code></pre></div></li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Log on <em>███</em> with the username <em>███</em> and password <em>███</em>.</p>
 </li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Clone the <a href="https://github.com/psychopy/psychopy.git">PsychoPy repository</a>:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>git clone git@github.com:psychopy/psychopy.git
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>git clone git@github.com:psychopy/psychopy.git
 </span></code></pre></div></p>
 </li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Navigate to the Psychopy directory:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>cd psychopy
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>cd psychopy
 </span></code></pre></div></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Psychopy should not be installed with anaconda. If an anaconda environment is activated, run the following command to deactivate it:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>conda deactivate
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>conda deactivate
 </span></code></pre></div></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Update pip to the lastest version:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>pip3 install --upgrade pip
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>pip3 install --upgrade pip
 </span></code></pre></div></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install bdist_mpkg, py2app and attrdict:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>pip3 attrdict py2app bdist_mpkg
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>pip3 attrdict py2app bdist_mpkg
 </span></code></pre></div></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install Psychopy using the following command:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>pip3 install -e .
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>pip3 install -e .
 </span></code></pre></div></li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open Psychopy, open the experiment-files corresponding to each task:</p>
@@ -889,22 +973,22 @@ The lengths of the three runs should be:</p>
 </li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Enable Canonical's universe repository with the following command:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sudo add-apt-repository universe
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>sudo apt update
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>sudo add-apt-repository universe
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>sudo apt update
 </span></code></pre></div></p>
 </li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install and update the ca-certificates package:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>sudo apt update
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>sudo apt install ca-certificates
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>sudo apt update
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>sudo apt install ca-certificates
 </span></code></pre></div></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Add the SR Research Software Repository signing key:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>sudo apt-key adv --fetch-keys https://apt.sr-research.com/SRResearch_key
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>sudo apt-key adv --fetch-keys https://apt.sr-research.com/SRResearch_key
 </span></code></pre></div></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install the EyeLink Developers Kit:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>sudo apt install eyelink-display-software
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>sudo apt install eyelink-display-software
 </span></code></pre></div></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install the EyeLink Data Viewer:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>sudo apt install eyelink-dataviewer
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>sudo apt install eyelink-dataviewer
 </span></code></pre></div></li>
 </ul>
 <h3 id="setting-up-the-scanner-protocol-at-the-mr-console">Setting up the scanner protocol at the MR console<a class="headerlink" href="#setting-up-the-scanner-protocol-at-the-mr-console" title="Permanent link">&para;</a></h3>
@@ -993,9 +1077,9 @@ Change for <em>advanced user mode</em> if you want to save the protocol.</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Print <a href="../../assets/files/icf_FR.pdf">the informed consent form</a> (<strong>first session only</strong>), an MRI safety screener (<a href="../../assets/files/safety_form_EN.pdf">EN</a>|<a href="../../assets/files/safety_form_FR.pdf">FR</a>) and a receipt form for each participant that will get scanned.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Make sure you have internet access, and update the <a href="https://github.com/TheAxonLab/HCPh-fMRI-tasks">HCPh-fMRI-tasks repository</a> on <em>███</em>:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>git fetch upstream
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>git checkout main
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>git rebase upstream/main
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>git fetch upstream
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>git checkout main
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>git rebase upstream/main
 </span></code></pre></div></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> On the <em>███</em> laptop, open a terminal and execute <code>conda deactivate</code>.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open psychopy 3 by typing <code>psychopy</code></li>
