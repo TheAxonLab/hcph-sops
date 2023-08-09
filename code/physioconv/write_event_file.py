@@ -31,6 +31,18 @@ def write_event_file(tsv_file: str) -> None:
             if row[7] == 5:
                 hold = {"onset": row[0], "duration": 2.7, "trial-type": "hold"}
                 event_dataframe = event_dataframe.append(hold, ignore_index=True)
+            """
+            #For the new version of the psychopy task
+            if row[6] == 5:
+                breathin = {"onset": row[0], "duration": 2.7, "trial-type": "breath-in"}
+                event_dataframe = event_dataframe.append(breathin, ignore_index=True)
+            if row[7] == 5:
+                breathout = {"onset": row[0] + 2.7,"duration": 2.3,"trial-type": "breath-out"}
+                event_dataframe = event_dataframe.append(breathout, ignore_index=True)
+            if row[8] == 5:
+                hold = {"onset": row[0], "duration": 2.7, "trial-type": "hold"}
+                event_dataframe = event_dataframe.append(hold, ignore_index=True)
+            """
     elif (
         "PCT" in tsv_file
     ):  # This condition must be changed following the naming convention for the tasks.
@@ -42,7 +54,7 @@ def write_event_file(tsv_file: str) -> None:
                 cog = {"onset": row[0], "duration": 0.5, "trial-type": "cog"}
                 event_dataframe = event_dataframe.append(cog, ignore_index=True)
             if row[8] == 5:
-                mot = {"onset": row[0], "duration": 0.5, "trial-type": "mot"}
+                mot = {"onset": row[0], "duration": 5, "trial-type": "mot"}
                 event_dataframe = event_dataframe.append(mot, ignore_index=True)
             """
             #Will be used if an additional channel is added in AcqKnowledge
