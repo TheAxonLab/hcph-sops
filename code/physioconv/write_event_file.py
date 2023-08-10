@@ -3,6 +3,7 @@ import os
 import gzip
 import json
 
+
 def write_event_file(tsv_file: str) -> None:
     """
     This function reads the trigger channels of the physiological file, processes them to create the event file.
@@ -52,6 +53,13 @@ def write_event_file(tsv_file: str) -> None:
                     "breath-out": "A yellow rectangle (orange for the last breath-in before hold) is displayed to indicate breathing out",
                     "hold": "A red rectangle is displayed to indicate breath hold",
                 },
+                "StimulusPresentation": {
+                    "OperatingSystem": "Linux Ubuntu 20.04.5",
+                    "SoftwareName": "PsychoPy",
+                    "SoftwareRRID": "SCR_006571",
+                    "SoftwareVersion": "2022.3.0.dev6",
+                    "Code": "http://www.psychopy.org",
+                },
             }
         }
     elif (
@@ -78,10 +86,17 @@ def write_event_file(tsv_file: str) -> None:
                 "LongName": "Event category",
                 "Description": "Indicator of type of action that is expected",
                 "Levels": {
-                    "vis": "Description",
-                    "cog": "Description",
-                    "mot": "Description",
-                    "blank": "Description",
+                    "vis": "Fixation point on top of grating pattern",
+                    "cog": "Moving fixation points",
+                    "mot": "Finger taping with the left or right hand following the indications on the screen",
+                    "blank": "Fixation point in the center of the screen",
+                },
+                "StimulusPresentation": {
+                    "OperatingSystem": "Linux Ubuntu 20.04.5",
+                    "SoftwareName": "PsychoPy",
+                    "SoftwareRRID": "SCR_006571",
+                    "SoftwareVersion": "2022.3.0.dev6",
+                    "Code": "http://www.psychopy.org",
                 },
             }
         }
@@ -105,5 +120,5 @@ def write_event_file(tsv_file: str) -> None:
 
 
 if __name__ == "__main__":
-    tsv_file = "/home/esavary/Projects/acknowledge_processing/session_07_14/sub-001/ses-01/func/sub-001_ses-01_task-BreathHolding_rec-labchart_physio.tsv.gz"
+    tsv_file = "/home/esavary/Projects/acknowledge_processing/session_07_14/sub-001/ses-01/func/sub-001_ses-01_task-PCT_rec-labchart_physio.tsv.gz"
     write_event_file(tsv_file)
