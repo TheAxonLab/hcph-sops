@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 import gzip
-
+import json
 
 def write_event_file(tsv_file: str) -> None:
     """
@@ -43,6 +43,17 @@ def write_event_file(tsv_file: str) -> None:
                 hold = {"onset": row[0], "duration": 2.7, "trial-type": "hold"}
                 event_dataframe = event_dataframe.append(hold, ignore_index=True)
             """
+        json_content = {
+            "trial_type": {
+                "LongName": "Event category",
+                "Description": "Indicator of type of action that is expected",
+                "Levels": {
+                    "breath-in": "A green rectangle is displayed to indicate breathing in",
+                    "breath-out": "A yellow rectangle (orange for the last breath-in before hold) is displayed to indicate breathing out",
+                    "hold": "A red rectangle is displayed to indicate breath hold",
+                },
+            }
+        }
     elif (
         "PCT" in tsv_file
     ):  # This condition must be changed following the naming convention for the tasks.
@@ -62,6 +73,18 @@ def write_event_file(tsv_file: str) -> None:
                 mot = {"onset": row[0], "duration": 0.5, "trial-type": "blank"}
                 event_dataframe = event_dataframe.append(mot, ignore_index=True)
             """
+        json_content = {
+            "trial_type": {
+                "LongName": "Event category",
+                "Description": "Indicator of type of action that is expected",
+                "Levels": {
+                    "vis": "Description",
+                    "cog": "Description",
+                    "mot": "Description",
+                    "blank": "Description",
+                },
+            }
+        }
     elif (
         "RestingState" in tsv_file
     ):  # This condition must be changed following the naming convention for the tasks.
@@ -75,7 +98,12 @@ def write_event_file(tsv_file: str) -> None:
     event_dataframe.to_csv(output_file, sep="\t", index=False)
     print(f"Event DataFrame saved to {output_file}")
 
+    json_file = os.path.splitext(output_file)[0] + ".json"
+    with open(json_file, "w") as json_output:
+        json.dump(json_content, json_output, indent=4)
+    print(f"JSON metadata saved to {json_file}")
+
 
 if __name__ == "__main__":
-    tsv_file = "/home/esavary/Projects/acknowledge_processing/session_07_14/sub-001/ses-01/func/sub-001_ses-01_task-PCT_rec-labchart_physio.tsv.gz"
+    tsv_file = "/home/esavary/Projects/acknowledge_processing/session_07_14/sub-001/ses-01/func/sub-001_ses-01_task-BreathHolding_rec-labchart_physio.tsv.gz"
     write_event_file(tsv_file)
