@@ -48,7 +48,7 @@ logging.basicConfig(
 async def handle_client(
     reader: asyncio.StreamReader,
     writer: asyncio.StreamWriter,
-    async_q: janus.AsyncQueue[int]
+    async_q: janus.AsyncQueue[int],
 ) -> None:
     """
     Handle client connections.
@@ -76,7 +76,9 @@ async def handle_client(
         # Disallow receiving 00000001 on the socket, replace with 10000001
         if data == b"\x01":
             data = b"\x81"
-            logging.warning("Trigger signal received through socket -- replaced with <\\x81>")
+            logging.warning(
+                "Trigger signal received through socket -- replaced with <\\x81>"
+            )
 
         logging.info(f"Data received: <{data}>")
         await async_q.put(data)
