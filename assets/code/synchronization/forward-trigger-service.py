@@ -25,16 +25,20 @@ from pathlib import Path
 import serial
 import asyncio
 import logging
-
 import janus
 import keyboard
+import usb.core
+import usb.util
 
 
 LISTEN = 2023
 SERIAL_PORT = "/dev/ttyACM0"
 LOG_FILE = Path.home() / "var" / "log" / "forward-trigger-service.log"
-
 LOG_FILE.parent.mkdir(exist_ok=True, parents=True)
+USB_MMBTS_DEVICE_ID = (0x07C0, 0x0101)
+"""Device ID of the Neurospec's MMBT-S trigger adaptor."""
+USB_TESTING_DEVICE_ID = (0x0BC2, 0x2322)
+"""Device ID for testing purposes."""
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -55,9 +59,14 @@ async def handle_client(
 
     Read incoming data from the client and put it into the async queue.
 
-    Parameters:
-        reader (asyncio.StreamReader): The client's stream reader.
-        async_q (janus.AsyncQueue[int]): The async queue for storing incoming signals.
+    Parameters
+    ----------
+    reader : :obj:`asyncio.StreamReader`
+        The client's stream reader.
+    writer : :obj:`asyncio.StreamReader`
+        The client's stream writer.
+    async_q : :obj:`janus.AsyncQueue`
+        The async queue for storing incoming signals.
 
     """
     while True:
@@ -90,10 +99,14 @@ async def start_server(host: str, port: int, async_q: janus.AsyncQueue[int]) -> 
 
     Create a server that listens for client connections and handles them.
 
-    Parameters:
-        host (str): The server's host address.
-        port (int): The server's port number.
-        async_q (janus.AsyncQueue[int]): The async queue for storing incoming signals.
+    Parameters
+    ----------
+    host : :obj:`str`
+        The server's host address.
+    port : :obj:`int`
+        The server's port number.
+    async_q : :obj:`janus.AsyncQueue`
+        The async queue for storing incoming signals.
 
     """
     server = await asyncio.start_server(
@@ -111,9 +124,12 @@ async def forward_signals(serial_port: str, async_q: janus.AsyncQueue[int]) -> N
 
     Read signals from the async queue and write them to the serial port.
 
-    Parameters:
-        serial_port (str): The serial port to forward the signals to.
-        async_q (janus.AsyncQueue[int]): The async queue storing the signals.
+    Parameters
+    ----------
+    serial_port : :obj:`str`
+        The serial port to forward the signals to.
+    async_q : :obj:`janus.AsyncQueue`
+        The async queue storing the signals.
 
     """
     with serial.Serial(serial_port) as ser:
@@ -139,6 +155,42 @@ def _trigger(sync_q: janus.SyncQueue[int]) -> None:
     logging.info("Scanner trigger received")
 
 
+def ensure_usb_device_connected(usb_vendor_id, usb_product_id):
+    """
+    Check if a USB device with the specified vendor and product IDs is connected.
+
+    Parameters
+    ----------
+    usb_vendor_id : :obj:`str`
+        Vendor ID of a USB device.
+    usb_product_id : :obj:`str`
+        Product ID of a USB device.
+
+    Returns
+    -------
+    connected : :obj:`bool`
+        ``True`` when the device is connected. If the device is not connected, this
+        function raises a :obj:`RuntimeError`.
+
+    Raises
+    ------
+    :obj:`RuntimeError`
+        If the USB device is not connected.
+
+    """
+
+    usb_vendor_id = (
+        int(usb_vendor_id, 16) if isinstance(usb_vendor_id, str) else usb_vendor_id
+    )
+    usb_product_id = (
+        int(usb_product_id, 16) if isinstance(usb_product_id, str) else usb_product_id
+    )
+    device = usb.core.find(idVendor=usb_vendor_id, idProduct=usb_product_id)
+    if device is None:
+        raise RuntimeError("MMTB-S (pink cable) is not connected")
+    return True
+
+
 async def main() -> None:
     """
     Main function.
@@ -146,6 +198,8 @@ async def main() -> None:
     Run the signal server and forward the signals to the serial port.
 
     """
+    # Check if the USB device is connected
+    ensure_usb_device_connected(*USB_MMBTS_DEVICE_ID)
 
     # Initiate a Queue that has synchronous and asynchronous endpoints.
     signal_queue: janus.Queue[int] = janus.Queue()

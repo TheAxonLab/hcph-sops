@@ -762,11 +762,9 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Plug in the Ethernet (the plug is on the back side of the BIOPAC) to the multiport adapter connected to the computer <em>███</em>.
     <img alt="biopack-back" src="../../assets/images/biopack-back.jpg" title="BIOPAC back side" />
     <img alt="mac_setup" src="../../assets/images/mac_setup.png" /> </li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Connect one end of the parallel cable on the parallel plug on the back side of the STP100D unit of the BIOPAC and the other end to the parallel port of the NEUROSPEC parallel-to USB-converter.
-    <img alt="biopac-parallel-plug" src="../../assets/images/biopac-parallel-plug.jpg" title="BIOPAC back side" />
-    <img alt="neurospec" src="../../assets/images/neurospec.jpg" /></li>
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Connect that NEUROSPEC adapter to one of the USB port of the laptop <em>███</em>.</p>
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Connect the parallel cable to the 25-pin socket at the back of the SPT100D of the BIOPAC and to the parallel port of the MMBT-S Trigger Interface Box adapter (N-shaped pink box).
+    <img alt="biopac-parallel-plug" src="../../assets/images/biopac-parallel-plug.jpg" title="BIOPAC back side" /></p>
 <p><img alt="neurospec_usb" src="../../assets/images/neurospec_usb.jpg" /></p>
 </li>
 <li class="task-list-item">
@@ -924,6 +922,13 @@ right from the participant's standpoint and cut the scotch tape narrower to occl
 <p><img alt="switch_screen" src="../../assets/images/screen_switch.jpg" /></p>
 </div>
 </li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Connect the MMBT-S Trigger Interface Box adapter (pink USB cable) to one of the USB ports of the laptop <em>███</em>.
+    <img alt="neurospec" src="../../assets/images/neurospec.jpg" /></p>
+<div class="admonition danger">
+<p class="admonition-title">The MMBT-S Trigger Interface MUST be connected to the laptop AFTER the trigger USB cable coming from the SyncBox. </p>
+</div>
+</li>
 <li>
 <p>Your laptop connections should now look like this.</p>
 <p><img alt="laptop_setup" src="../../assets/images/laptop_setup.png" /></p>
@@ -935,7 +940,23 @@ right from the participant's standpoint and cut the scotch tape narrower to occl
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Configure the display settings of the laptop to mirror outputs and set a resolution of 800x600 for both screens.</p>
 </li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Double check that the IP address corresponding to the ethernet interface of the <em>███</em> laptop is correct. You can either run <code>ifconfig -a</code> or use the GUI. Make sure the IP/mask is <strong>100.1.1.2/24</strong>, and the protocol is IP version 4. Execute <code>ping 100.1.1.1</code> to see if the ET is responding to echoes.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check that you can send trigger events manually:<ul class="task-list">
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check that the service to synchronize the triggers is up with <code>sudo systemctl status forward-trigger</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">If the service is down, manually force its start</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Run <code>sudo systemctl start forward-trigger</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Recheck the status with <code>sudo systemctl status forward-trigger</code>.</li>
+</ul>
+</div>
+<div class="admonition important">
+<p class="admonition-title">These commands are executed with <code>sudo</code></p>
+<p>The console will prompt you for the common user password: <code>****</code></p>
+</div>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check that you can send trigger events manually:</p>
+<ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Enter the "Synchronization" menu by selecting it and pushing the enter button (&#x25CF;).</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Hit the down arrow button (&#x25BC;) until you find "Send trigger"</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Push the enter button (&#x25CF;) every time you want to send an <span class="keypress">s</span> character.</li>
