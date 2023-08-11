@@ -794,8 +794,265 @@
 </span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">          </span>-l<span class="w"> </span>.
 </span></code></pre></div></li>
 </ul>
+<p>The output of <em>HeuDiConv</em> with our current heuristics and reproin conventions should be like:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>├── ses-14
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>│   ├── anat
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>│   │   ├── sub-pilot_ses-14_acq-original_T1w.json
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>│   │   ├── sub-pilot_ses-14_acq-original_T1w.nii.gz
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>│   │   ├── sub-pilot_ses-14_acq-undistorted_T1w.json
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>│   │   ├── sub-pilot_ses-14_acq-undistorted_T1w.nii.gz
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>│   │   ├── sub-pilot_ses-14_T2w.json
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>│   │   └── sub-pilot_ses-14_T2w.nii.gz
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>│   ├── dwi
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>│   │   ├── sub-pilot_ses-14_acq-highres_dir-PA_dwi.bval
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>│   │   ├── sub-pilot_ses-14_acq-highres_dir-PA_dwi.bvec
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>│   │   ├── sub-pilot_ses-14_acq-highres_dir-PA_dwi.json
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>│   │   └── sub-pilot_ses-14_acq-highres_dir-PA_dwi.nii.gz
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>│   ├── fmap
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>│   │   ├── sub-pilot_ses-14_acq-b0_dir-AP_epi.json
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>│   │   ├── sub-pilot_ses-14_acq-b0_dir-AP_epi.nii.gz
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>│   │   ├── sub-pilot_ses-14_acq-bold_dir-PA_run-1_epi.json
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>│   │   ├── sub-pilot_ses-14_acq-bold_dir-PA_run-1_epi.nii.gz
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>│   │   ├── sub-pilot_ses-14_acq-bold_dir-PA_run-2_epi.json
+</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>│   │   ├── sub-pilot_ses-14_acq-bold_dir-PA_run-2_epi.nii.gz
+</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>│   │   ├── sub-pilot_ses-14_magnitude1.json
+</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a>│   │   ├── sub-pilot_ses-14_magnitude1.nii.gz
+</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>│   │   ├── sub-pilot_ses-14_magnitude2.json
+</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a>│   │   ├── sub-pilot_ses-14_magnitude2.nii.gz
+</span><span id="__span-7-25"><a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a>│   │   ├── sub-pilot_ses-14_phasediff.json
+</span><span id="__span-7-26"><a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a>│   │   └── sub-pilot_ses-14_phasediff.nii.gz
+</span><span id="__span-7-27"><a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a>│   ├── func
+</span><span id="__span-7-28"><a id="__codelineno-7-28" name="__codelineno-7-28" href="#__codelineno-7-28"></a>│   │   ├── sub-pilot_ses-14_task-bht_echo-1_bold.json
+</span><span id="__span-7-29"><a id="__codelineno-7-29" name="__codelineno-7-29" href="#__codelineno-7-29"></a>│   │   ├── sub-pilot_ses-14_task-bht_echo-1_bold.nii.gz
+</span><span id="__span-7-30"><a id="__codelineno-7-30" name="__codelineno-7-30" href="#__codelineno-7-30"></a>│   │   ├── sub-pilot_ses-14_task-bht_echo-2_bold.json
+</span><span id="__span-7-31"><a id="__codelineno-7-31" name="__codelineno-7-31" href="#__codelineno-7-31"></a>│   │   ├── sub-pilot_ses-14_task-bht_echo-2_bold.nii.gz
+</span><span id="__span-7-32"><a id="__codelineno-7-32" name="__codelineno-7-32" href="#__codelineno-7-32"></a>│   │   ├── sub-pilot_ses-14_task-bht_echo-3_bold.json
+</span><span id="__span-7-33"><a id="__codelineno-7-33" name="__codelineno-7-33" href="#__codelineno-7-33"></a>│   │   ├── sub-pilot_ses-14_task-bht_echo-3_bold.nii.gz
+</span><span id="__span-7-34"><a id="__codelineno-7-34" name="__codelineno-7-34" href="#__codelineno-7-34"></a>│   │   ├── sub-pilot_ses-14_task-bht_echo-4_bold.json
+</span><span id="__span-7-35"><a id="__codelineno-7-35" name="__codelineno-7-35" href="#__codelineno-7-35"></a>│   │   ├── sub-pilot_ses-14_task-bht_echo-4_bold.nii.gz
+</span><span id="__span-7-36"><a id="__codelineno-7-36" name="__codelineno-7-36" href="#__codelineno-7-36"></a>│   │   ├── sub-pilot_ses-14_task-bht_events.tsv
+</span><span id="__span-7-37"><a id="__codelineno-7-37" name="__codelineno-7-37" href="#__codelineno-7-37"></a>│   │   ├── sub-pilot_ses-14_task-bht_run-1_echo-1_bold.json
+</span><span id="__span-7-38"><a id="__codelineno-7-38" name="__codelineno-7-38" href="#__codelineno-7-38"></a>│   │   ├── sub-pilot_ses-14_task-bht_run-1_echo-1_bold.nii.gz
+</span><span id="__span-7-39"><a id="__codelineno-7-39" name="__codelineno-7-39" href="#__codelineno-7-39"></a>│   │   ├── sub-pilot_ses-14_task-bht_run-1_echo-2_bold.json
+</span><span id="__span-7-40"><a id="__codelineno-7-40" name="__codelineno-7-40" href="#__codelineno-7-40"></a>│   │   ├── sub-pilot_ses-14_task-bht_run-1_echo-2_bold.nii.gz
+</span><span id="__span-7-41"><a id="__codelineno-7-41" name="__codelineno-7-41" href="#__codelineno-7-41"></a>│   │   ├── sub-pilot_ses-14_task-bht_run-1_echo-3_bold.json
+</span><span id="__span-7-42"><a id="__codelineno-7-42" name="__codelineno-7-42" href="#__codelineno-7-42"></a>│   │   ├── sub-pilot_ses-14_task-bht_run-1_echo-3_bold.nii.gz
+</span><span id="__span-7-43"><a id="__codelineno-7-43" name="__codelineno-7-43" href="#__codelineno-7-43"></a>│   │   ├── sub-pilot_ses-14_task-bht_run-1_echo-4_bold.json
+</span><span id="__span-7-44"><a id="__codelineno-7-44" name="__codelineno-7-44" href="#__codelineno-7-44"></a>│   │   ├── sub-pilot_ses-14_task-bht_run-1_echo-4_bold.nii.gz
+</span><span id="__span-7-45"><a id="__codelineno-7-45" name="__codelineno-7-45" href="#__codelineno-7-45"></a>│   │   ├── sub-pilot_ses-14_task-bht_run-1_events.tsv
+</span><span id="__span-7-46"><a id="__codelineno-7-46" name="__codelineno-7-46" href="#__codelineno-7-46"></a>│   │   ├── sub-pilot_ses-14_task-bht_run-2_echo-1_bold.json
+</span><span id="__span-7-47"><a id="__codelineno-7-47" name="__codelineno-7-47" href="#__codelineno-7-47"></a>│   │   ├── sub-pilot_ses-14_task-bht_run-2_echo-1_bold.nii.gz
+</span><span id="__span-7-48"><a id="__codelineno-7-48" name="__codelineno-7-48" href="#__codelineno-7-48"></a>│   │   ├── sub-pilot_ses-14_task-bht_run-2_echo-2_bold.json
+</span><span id="__span-7-49"><a id="__codelineno-7-49" name="__codelineno-7-49" href="#__codelineno-7-49"></a>│   │   ├── sub-pilot_ses-14_task-bht_run-2_echo-2_bold.nii.gz
+</span><span id="__span-7-50"><a id="__codelineno-7-50" name="__codelineno-7-50" href="#__codelineno-7-50"></a>│   │   ├── sub-pilot_ses-14_task-bht_run-2_echo-3_bold.json
+</span><span id="__span-7-51"><a id="__codelineno-7-51" name="__codelineno-7-51" href="#__codelineno-7-51"></a>│   │   ├── sub-pilot_ses-14_task-bht_run-2_echo-3_bold.nii.gz
+</span><span id="__span-7-52"><a id="__codelineno-7-52" name="__codelineno-7-52" href="#__codelineno-7-52"></a>│   │   ├── sub-pilot_ses-14_task-bht_run-2_echo-4_bold.json
+</span><span id="__span-7-53"><a id="__codelineno-7-53" name="__codelineno-7-53" href="#__codelineno-7-53"></a>│   │   ├── sub-pilot_ses-14_task-bht_run-2_echo-4_bold.nii.gz
+</span><span id="__span-7-54"><a id="__codelineno-7-54" name="__codelineno-7-54" href="#__codelineno-7-54"></a>│   │   ├── sub-pilot_ses-14_task-bht_run-2_events.tsv
+</span><span id="__span-7-55"><a id="__codelineno-7-55" name="__codelineno-7-55" href="#__codelineno-7-55"></a>│   │   ├── sub-pilot_ses-14_task-qc_echo-1_bold.json
+</span><span id="__span-7-56"><a id="__codelineno-7-56" name="__codelineno-7-56" href="#__codelineno-7-56"></a>│   │   ├── sub-pilot_ses-14_task-qc_echo-1_bold.nii.gz
+</span><span id="__span-7-57"><a id="__codelineno-7-57" name="__codelineno-7-57" href="#__codelineno-7-57"></a>│   │   ├── sub-pilot_ses-14_task-qc_echo-2_bold.json
+</span><span id="__span-7-58"><a id="__codelineno-7-58" name="__codelineno-7-58" href="#__codelineno-7-58"></a>│   │   ├── sub-pilot_ses-14_task-qc_echo-2_bold.nii.gz
+</span><span id="__span-7-59"><a id="__codelineno-7-59" name="__codelineno-7-59" href="#__codelineno-7-59"></a>│   │   ├── sub-pilot_ses-14_task-qc_echo-3_bold.json
+</span><span id="__span-7-60"><a id="__codelineno-7-60" name="__codelineno-7-60" href="#__codelineno-7-60"></a>│   │   ├── sub-pilot_ses-14_task-qc_echo-3_bold.nii.gz
+</span><span id="__span-7-61"><a id="__codelineno-7-61" name="__codelineno-7-61" href="#__codelineno-7-61"></a>│   │   ├── sub-pilot_ses-14_task-qc_echo-4_bold.json
+</span><span id="__span-7-62"><a id="__codelineno-7-62" name="__codelineno-7-62" href="#__codelineno-7-62"></a>│   │   ├── sub-pilot_ses-14_task-qc_echo-4_bold.nii.gz
+</span><span id="__span-7-63"><a id="__codelineno-7-63" name="__codelineno-7-63" href="#__codelineno-7-63"></a>│   │   ├── sub-pilot_ses-14_task-qc_events.tsv
+</span><span id="__span-7-64"><a id="__codelineno-7-64" name="__codelineno-7-64" href="#__codelineno-7-64"></a>│   │   ├── sub-pilot_ses-14_task-rest_echo-1_bold.json
+</span><span id="__span-7-65"><a id="__codelineno-7-65" name="__codelineno-7-65" href="#__codelineno-7-65"></a>│   │   ├── sub-pilot_ses-14_task-rest_echo-1_bold.nii.gz
+</span><span id="__span-7-66"><a id="__codelineno-7-66" name="__codelineno-7-66" href="#__codelineno-7-66"></a>│   │   ├── sub-pilot_ses-14_task-rest_echo-2_bold.json
+</span><span id="__span-7-67"><a id="__codelineno-7-67" name="__codelineno-7-67" href="#__codelineno-7-67"></a>│   │   ├── sub-pilot_ses-14_task-rest_echo-2_bold.nii.gz
+</span><span id="__span-7-68"><a id="__codelineno-7-68" name="__codelineno-7-68" href="#__codelineno-7-68"></a>│   │   ├── sub-pilot_ses-14_task-rest_echo-3_bold.json
+</span><span id="__span-7-69"><a id="__codelineno-7-69" name="__codelineno-7-69" href="#__codelineno-7-69"></a>│   │   ├── sub-pilot_ses-14_task-rest_echo-3_bold.nii.gz
+</span><span id="__span-7-70"><a id="__codelineno-7-70" name="__codelineno-7-70" href="#__codelineno-7-70"></a>│   │   ├── sub-pilot_ses-14_task-rest_echo-4_bold.json
+</span><span id="__span-7-71"><a id="__codelineno-7-71" name="__codelineno-7-71" href="#__codelineno-7-71"></a>│   │   ├── sub-pilot_ses-14_task-rest_echo-4_bold.nii.gz
+</span><span id="__span-7-72"><a id="__codelineno-7-72" name="__codelineno-7-72" href="#__codelineno-7-72"></a>│   │   └── sub-pilot_ses-14_task-rest_events.tsv
+</span><span id="__span-7-73"><a id="__codelineno-7-73" name="__codelineno-7-73" href="#__codelineno-7-73"></a>│   └── sub-pilot_ses-14_scans.tsv
+</span><span id="__span-7-74"><a id="__codelineno-7-74" name="__codelineno-7-74" href="#__codelineno-7-74"></a>├── ses-15
+</span><span id="__span-7-75"><a id="__codelineno-7-75" name="__codelineno-7-75" href="#__codelineno-7-75"></a>│   ├── anat
+</span><span id="__span-7-76"><a id="__codelineno-7-76" name="__codelineno-7-76" href="#__codelineno-7-76"></a>│   │   ├── sub-pilot_ses-15_acq-original_T1w.json
+</span><span id="__span-7-77"><a id="__codelineno-7-77" name="__codelineno-7-77" href="#__codelineno-7-77"></a>│   │   ├── sub-pilot_ses-15_acq-original_T1w.nii.gz
+</span><span id="__span-7-78"><a id="__codelineno-7-78" name="__codelineno-7-78" href="#__codelineno-7-78"></a>│   │   ├── sub-pilot_ses-15_acq-undistorted_T1w.json
+</span><span id="__span-7-79"><a id="__codelineno-7-79" name="__codelineno-7-79" href="#__codelineno-7-79"></a>│   │   ├── sub-pilot_ses-15_acq-undistorted_T1w.nii.gz
+</span><span id="__span-7-80"><a id="__codelineno-7-80" name="__codelineno-7-80" href="#__codelineno-7-80"></a>│   │   ├── sub-pilot_ses-15_T2w.json
+</span><span id="__span-7-81"><a id="__codelineno-7-81" name="__codelineno-7-81" href="#__codelineno-7-81"></a>│   │   └── sub-pilot_ses-15_T2w.nii.gz
+</span><span id="__span-7-82"><a id="__codelineno-7-82" name="__codelineno-7-82" href="#__codelineno-7-82"></a>│   ├── dwi
+</span><span id="__span-7-83"><a id="__codelineno-7-83" name="__codelineno-7-83" href="#__codelineno-7-83"></a>│   │   ├── sub-pilot_ses-15_acq-highres_dir-LR_dwi.bval
+</span><span id="__span-7-84"><a id="__codelineno-7-84" name="__codelineno-7-84" href="#__codelineno-7-84"></a>│   │   ├── sub-pilot_ses-15_acq-highres_dir-LR_dwi.bvec
+</span><span id="__span-7-85"><a id="__codelineno-7-85" name="__codelineno-7-85" href="#__codelineno-7-85"></a>│   │   ├── sub-pilot_ses-15_acq-highres_dir-LR_dwi.json
+</span><span id="__span-7-86"><a id="__codelineno-7-86" name="__codelineno-7-86" href="#__codelineno-7-86"></a>│   │   └── sub-pilot_ses-15_acq-highres_dir-LR_dwi.nii.gz
+</span><span id="__span-7-87"><a id="__codelineno-7-87" name="__codelineno-7-87" href="#__codelineno-7-87"></a>│   ├── fmap
+</span><span id="__span-7-88"><a id="__codelineno-7-88" name="__codelineno-7-88" href="#__codelineno-7-88"></a>│   │   ├── sub-pilot_ses-15_acq-b0_dir-RL_epi.json
+</span><span id="__span-7-89"><a id="__codelineno-7-89" name="__codelineno-7-89" href="#__codelineno-7-89"></a>│   │   ├── sub-pilot_ses-15_acq-b0_dir-RL_epi.nii.gz
+</span><span id="__span-7-90"><a id="__codelineno-7-90" name="__codelineno-7-90" href="#__codelineno-7-90"></a>│   │   ├── sub-pilot_ses-15_acq-bold_dir-RL_part-mag_epi.json
+</span><span id="__span-7-91"><a id="__codelineno-7-91" name="__codelineno-7-91" href="#__codelineno-7-91"></a>│   │   ├── sub-pilot_ses-15_acq-bold_dir-RL_part-mag_epi.nii.gz
+</span><span id="__span-7-92"><a id="__codelineno-7-92" name="__codelineno-7-92" href="#__codelineno-7-92"></a>│   │   ├── sub-pilot_ses-15_acq-bold_dir-RL_part-phase_epi.json
+</span><span id="__span-7-93"><a id="__codelineno-7-93" name="__codelineno-7-93" href="#__codelineno-7-93"></a>│   │   ├── sub-pilot_ses-15_acq-bold_dir-RL_part-phase_epi.nii.gz
+</span><span id="__span-7-94"><a id="__codelineno-7-94" name="__codelineno-7-94" href="#__codelineno-7-94"></a>│   │   ├── sub-pilot_ses-15_magnitude1.json
+</span><span id="__span-7-95"><a id="__codelineno-7-95" name="__codelineno-7-95" href="#__codelineno-7-95"></a>│   │   ├── sub-pilot_ses-15_magnitude1.nii.gz
+</span><span id="__span-7-96"><a id="__codelineno-7-96" name="__codelineno-7-96" href="#__codelineno-7-96"></a>│   │   ├── sub-pilot_ses-15_magnitude2.json
+</span><span id="__span-7-97"><a id="__codelineno-7-97" name="__codelineno-7-97" href="#__codelineno-7-97"></a>│   │   ├── sub-pilot_ses-15_magnitude2.nii.gz
+</span><span id="__span-7-98"><a id="__codelineno-7-98" name="__codelineno-7-98" href="#__codelineno-7-98"></a>│   │   ├── sub-pilot_ses-15_phasediff.json
+</span><span id="__span-7-99"><a id="__codelineno-7-99" name="__codelineno-7-99" href="#__codelineno-7-99"></a>│   │   └── sub-pilot_ses-15_phasediff.nii.gz
+</span><span id="__span-7-100"><a id="__codelineno-7-100" name="__codelineno-7-100" href="#__codelineno-7-100"></a>│   ├── func
+</span><span id="__span-7-101"><a id="__codelineno-7-101" name="__codelineno-7-101" href="#__codelineno-7-101"></a>│   │   ├── sub-pilot_ses-15_task-bht_echo-1_part-mag_bold.json
+</span><span id="__span-7-102"><a id="__codelineno-7-102" name="__codelineno-7-102" href="#__codelineno-7-102"></a>│   │   ├── sub-pilot_ses-15_task-bht_echo-1_part-mag_bold.nii.gz
+</span><span id="__span-7-103"><a id="__codelineno-7-103" name="__codelineno-7-103" href="#__codelineno-7-103"></a>│   │   ├── sub-pilot_ses-15_task-bht_echo-1_part-phase_bold.json
+</span><span id="__span-7-104"><a id="__codelineno-7-104" name="__codelineno-7-104" href="#__codelineno-7-104"></a>│   │   ├── sub-pilot_ses-15_task-bht_echo-1_part-phase_bold.nii.gz
+</span><span id="__span-7-105"><a id="__codelineno-7-105" name="__codelineno-7-105" href="#__codelineno-7-105"></a>│   │   ├── sub-pilot_ses-15_task-bht_echo-2_part-mag_bold.json
+</span><span id="__span-7-106"><a id="__codelineno-7-106" name="__codelineno-7-106" href="#__codelineno-7-106"></a>│   │   ├── sub-pilot_ses-15_task-bht_echo-2_part-mag_bold.nii.gz
+</span><span id="__span-7-107"><a id="__codelineno-7-107" name="__codelineno-7-107" href="#__codelineno-7-107"></a>│   │   ├── sub-pilot_ses-15_task-bht_echo-2_part-phase_bold.json
+</span><span id="__span-7-108"><a id="__codelineno-7-108" name="__codelineno-7-108" href="#__codelineno-7-108"></a>│   │   ├── sub-pilot_ses-15_task-bht_echo-2_part-phase_bold.nii.gz
+</span><span id="__span-7-109"><a id="__codelineno-7-109" name="__codelineno-7-109" href="#__codelineno-7-109"></a>│   │   ├── sub-pilot_ses-15_task-bht_echo-3_part-mag_bold.json
+</span><span id="__span-7-110"><a id="__codelineno-7-110" name="__codelineno-7-110" href="#__codelineno-7-110"></a>│   │   ├── sub-pilot_ses-15_task-bht_echo-3_part-mag_bold.nii.gz
+</span><span id="__span-7-111"><a id="__codelineno-7-111" name="__codelineno-7-111" href="#__codelineno-7-111"></a>│   │   ├── sub-pilot_ses-15_task-bht_echo-3_part-phase_bold.json
+</span><span id="__span-7-112"><a id="__codelineno-7-112" name="__codelineno-7-112" href="#__codelineno-7-112"></a>│   │   ├── sub-pilot_ses-15_task-bht_echo-3_part-phase_bold.nii.gz
+</span><span id="__span-7-113"><a id="__codelineno-7-113" name="__codelineno-7-113" href="#__codelineno-7-113"></a>│   │   ├── sub-pilot_ses-15_task-bht_echo-4_part-mag_bold.json
+</span><span id="__span-7-114"><a id="__codelineno-7-114" name="__codelineno-7-114" href="#__codelineno-7-114"></a>│   │   ├── sub-pilot_ses-15_task-bht_echo-4_part-mag_bold.nii.gz
+</span><span id="__span-7-115"><a id="__codelineno-7-115" name="__codelineno-7-115" href="#__codelineno-7-115"></a>│   │   ├── sub-pilot_ses-15_task-bht_echo-4_part-phase_bold.json
+</span><span id="__span-7-116"><a id="__codelineno-7-116" name="__codelineno-7-116" href="#__codelineno-7-116"></a>│   │   ├── sub-pilot_ses-15_task-bht_echo-4_part-phase_bold.nii.gz
+</span><span id="__span-7-117"><a id="__codelineno-7-117" name="__codelineno-7-117" href="#__codelineno-7-117"></a>│   │   ├── sub-pilot_ses-15_task-bht_part-mag_events.tsv
+</span><span id="__span-7-118"><a id="__codelineno-7-118" name="__codelineno-7-118" href="#__codelineno-7-118"></a>│   │   ├── sub-pilot_ses-15_task-bht_part-phase_events.tsv
+</span><span id="__span-7-119"><a id="__codelineno-7-119" name="__codelineno-7-119" href="#__codelineno-7-119"></a>│   │   ├── sub-pilot_ses-15_task-qct_echo-1_part-mag_bold.json
+</span><span id="__span-7-120"><a id="__codelineno-7-120" name="__codelineno-7-120" href="#__codelineno-7-120"></a>│   │   ├── sub-pilot_ses-15_task-qct_echo-1_part-mag_bold.nii.gz
+</span><span id="__span-7-121"><a id="__codelineno-7-121" name="__codelineno-7-121" href="#__codelineno-7-121"></a>│   │   ├── sub-pilot_ses-15_task-qct_echo-1_part-phase_bold.json
+</span><span id="__span-7-122"><a id="__codelineno-7-122" name="__codelineno-7-122" href="#__codelineno-7-122"></a>│   │   ├── sub-pilot_ses-15_task-qct_echo-1_part-phase_bold.nii.gz
+</span><span id="__span-7-123"><a id="__codelineno-7-123" name="__codelineno-7-123" href="#__codelineno-7-123"></a>│   │   ├── sub-pilot_ses-15_task-qct_echo-2_part-mag_bold.json
+</span><span id="__span-7-124"><a id="__codelineno-7-124" name="__codelineno-7-124" href="#__codelineno-7-124"></a>│   │   ├── sub-pilot_ses-15_task-qct_echo-2_part-mag_bold.nii.gz
+</span><span id="__span-7-125"><a id="__codelineno-7-125" name="__codelineno-7-125" href="#__codelineno-7-125"></a>│   │   ├── sub-pilot_ses-15_task-qct_echo-2_part-phase_bold.json
+</span><span id="__span-7-126"><a id="__codelineno-7-126" name="__codelineno-7-126" href="#__codelineno-7-126"></a>│   │   ├── sub-pilot_ses-15_task-qct_echo-2_part-phase_bold.nii.gz
+</span><span id="__span-7-127"><a id="__codelineno-7-127" name="__codelineno-7-127" href="#__codelineno-7-127"></a>│   │   ├── sub-pilot_ses-15_task-qct_echo-3_part-mag_bold.json
+</span><span id="__span-7-128"><a id="__codelineno-7-128" name="__codelineno-7-128" href="#__codelineno-7-128"></a>│   │   ├── sub-pilot_ses-15_task-qct_echo-3_part-mag_bold.nii.gz
+</span><span id="__span-7-129"><a id="__codelineno-7-129" name="__codelineno-7-129" href="#__codelineno-7-129"></a>│   │   ├── sub-pilot_ses-15_task-qct_echo-3_part-phase_bold.json
+</span><span id="__span-7-130"><a id="__codelineno-7-130" name="__codelineno-7-130" href="#__codelineno-7-130"></a>│   │   ├── sub-pilot_ses-15_task-qct_echo-3_part-phase_bold.nii.gz
+</span><span id="__span-7-131"><a id="__codelineno-7-131" name="__codelineno-7-131" href="#__codelineno-7-131"></a>│   │   ├── sub-pilot_ses-15_task-qct_echo-4_part-mag_bold.json
+</span><span id="__span-7-132"><a id="__codelineno-7-132" name="__codelineno-7-132" href="#__codelineno-7-132"></a>│   │   ├── sub-pilot_ses-15_task-qct_echo-4_part-mag_bold.nii.gz
+</span><span id="__span-7-133"><a id="__codelineno-7-133" name="__codelineno-7-133" href="#__codelineno-7-133"></a>│   │   ├── sub-pilot_ses-15_task-qct_echo-4_part-phase_bold.json
+</span><span id="__span-7-134"><a id="__codelineno-7-134" name="__codelineno-7-134" href="#__codelineno-7-134"></a>│   │   ├── sub-pilot_ses-15_task-qct_echo-4_part-phase_bold.nii.gz
+</span><span id="__span-7-135"><a id="__codelineno-7-135" name="__codelineno-7-135" href="#__codelineno-7-135"></a>│   │   ├── sub-pilot_ses-15_task-qct_part-mag_events.tsv
+</span><span id="__span-7-136"><a id="__codelineno-7-136" name="__codelineno-7-136" href="#__codelineno-7-136"></a>│   │   ├── sub-pilot_ses-15_task-qct_part-phase_events.tsv
+</span><span id="__span-7-137"><a id="__codelineno-7-137" name="__codelineno-7-137" href="#__codelineno-7-137"></a>│   │   ├── sub-pilot_ses-15_task-rest_echo-1_part-mag_bold.json
+</span><span id="__span-7-138"><a id="__codelineno-7-138" name="__codelineno-7-138" href="#__codelineno-7-138"></a>│   │   ├── sub-pilot_ses-15_task-rest_echo-1_part-mag_bold.nii.gz
+</span><span id="__span-7-139"><a id="__codelineno-7-139" name="__codelineno-7-139" href="#__codelineno-7-139"></a>│   │   ├── sub-pilot_ses-15_task-rest_echo-1_part-phase_bold.json
+</span><span id="__span-7-140"><a id="__codelineno-7-140" name="__codelineno-7-140" href="#__codelineno-7-140"></a>│   │   ├── sub-pilot_ses-15_task-rest_echo-1_part-phase_bold.nii.gz
+</span><span id="__span-7-141"><a id="__codelineno-7-141" name="__codelineno-7-141" href="#__codelineno-7-141"></a>│   │   ├── sub-pilot_ses-15_task-rest_echo-2_part-mag_bold.json
+</span><span id="__span-7-142"><a id="__codelineno-7-142" name="__codelineno-7-142" href="#__codelineno-7-142"></a>│   │   ├── sub-pilot_ses-15_task-rest_echo-2_part-mag_bold.nii.gz
+</span><span id="__span-7-143"><a id="__codelineno-7-143" name="__codelineno-7-143" href="#__codelineno-7-143"></a>│   │   ├── sub-pilot_ses-15_task-rest_echo-2_part-phase_bold.json
+</span><span id="__span-7-144"><a id="__codelineno-7-144" name="__codelineno-7-144" href="#__codelineno-7-144"></a>│   │   ├── sub-pilot_ses-15_task-rest_echo-2_part-phase_bold.nii.gz
+</span><span id="__span-7-145"><a id="__codelineno-7-145" name="__codelineno-7-145" href="#__codelineno-7-145"></a>│   │   ├── sub-pilot_ses-15_task-rest_echo-3_part-mag_bold.json
+</span><span id="__span-7-146"><a id="__codelineno-7-146" name="__codelineno-7-146" href="#__codelineno-7-146"></a>│   │   ├── sub-pilot_ses-15_task-rest_echo-3_part-mag_bold.nii.gz
+</span><span id="__span-7-147"><a id="__codelineno-7-147" name="__codelineno-7-147" href="#__codelineno-7-147"></a>│   │   ├── sub-pilot_ses-15_task-rest_echo-3_part-phase_bold.json
+</span><span id="__span-7-148"><a id="__codelineno-7-148" name="__codelineno-7-148" href="#__codelineno-7-148"></a>│   │   ├── sub-pilot_ses-15_task-rest_echo-3_part-phase_bold.nii.gz
+</span><span id="__span-7-149"><a id="__codelineno-7-149" name="__codelineno-7-149" href="#__codelineno-7-149"></a>│   │   ├── sub-pilot_ses-15_task-rest_echo-4_part-mag_bold.json
+</span><span id="__span-7-150"><a id="__codelineno-7-150" name="__codelineno-7-150" href="#__codelineno-7-150"></a>│   │   ├── sub-pilot_ses-15_task-rest_echo-4_part-mag_bold.nii.gz
+</span><span id="__span-7-151"><a id="__codelineno-7-151" name="__codelineno-7-151" href="#__codelineno-7-151"></a>│   │   ├── sub-pilot_ses-15_task-rest_echo-4_part-phase_bold.json
+</span><span id="__span-7-152"><a id="__codelineno-7-152" name="__codelineno-7-152" href="#__codelineno-7-152"></a>│   │   ├── sub-pilot_ses-15_task-rest_echo-4_part-phase_bold.nii.gz
+</span><span id="__span-7-153"><a id="__codelineno-7-153" name="__codelineno-7-153" href="#__codelineno-7-153"></a>│   │   ├── sub-pilot_ses-15_task-rest_part-mag_events.tsv
+</span><span id="__span-7-154"><a id="__codelineno-7-154" name="__codelineno-7-154" href="#__codelineno-7-154"></a>│   │   └── sub-pilot_ses-15_task-rest_part-phase_events.tsv
+</span><span id="__span-7-155"><a id="__codelineno-7-155" name="__codelineno-7-155" href="#__codelineno-7-155"></a>│   └── sub-pilot_ses-15_scans.tsv
+</span><span id="__span-7-156"><a id="__codelineno-7-156" name="__codelineno-7-156" href="#__codelineno-7-156"></a>└── ses-16
+</span><span id="__span-7-157"><a id="__codelineno-7-157" name="__codelineno-7-157" href="#__codelineno-7-157"></a>    ├── anat
+</span><span id="__span-7-158"><a id="__codelineno-7-158" name="__codelineno-7-158" href="#__codelineno-7-158"></a>    │   ├── sub-pilot_ses-16_acq-original_T1w.json
+</span><span id="__span-7-159"><a id="__codelineno-7-159" name="__codelineno-7-159" href="#__codelineno-7-159"></a>    │   ├── sub-pilot_ses-16_acq-original_T1w.nii.gz
+</span><span id="__span-7-160"><a id="__codelineno-7-160" name="__codelineno-7-160" href="#__codelineno-7-160"></a>    │   ├── sub-pilot_ses-16_acq-undistorted_T1w.json
+</span><span id="__span-7-161"><a id="__codelineno-7-161" name="__codelineno-7-161" href="#__codelineno-7-161"></a>    │   ├── sub-pilot_ses-16_acq-undistorted_T1w.nii.gz
+</span><span id="__span-7-162"><a id="__codelineno-7-162" name="__codelineno-7-162" href="#__codelineno-7-162"></a>    │   ├── sub-pilot_ses-16_T2w.json
+</span><span id="__span-7-163"><a id="__codelineno-7-163" name="__codelineno-7-163" href="#__codelineno-7-163"></a>    │   └── sub-pilot_ses-16_T2w.nii.gz
+</span><span id="__span-7-164"><a id="__codelineno-7-164" name="__codelineno-7-164" href="#__codelineno-7-164"></a>    ├── dwi
+</span><span id="__span-7-165"><a id="__codelineno-7-165" name="__codelineno-7-165" href="#__codelineno-7-165"></a>    │   ├── sub-pilot_ses-16_acq-highres_dir-RL_dwi.bval
+</span><span id="__span-7-166"><a id="__codelineno-7-166" name="__codelineno-7-166" href="#__codelineno-7-166"></a>    │   ├── sub-pilot_ses-16_acq-highres_dir-RL_dwi.bvec
+</span><span id="__span-7-167"><a id="__codelineno-7-167" name="__codelineno-7-167" href="#__codelineno-7-167"></a>    │   ├── sub-pilot_ses-16_acq-highres_dir-RL_dwi.json
+</span><span id="__span-7-168"><a id="__codelineno-7-168" name="__codelineno-7-168" href="#__codelineno-7-168"></a>    │   └── sub-pilot_ses-16_acq-highres_dir-RL_dwi.nii.gz
+</span><span id="__span-7-169"><a id="__codelineno-7-169" name="__codelineno-7-169" href="#__codelineno-7-169"></a>    ├── fmap
+</span><span id="__span-7-170"><a id="__codelineno-7-170" name="__codelineno-7-170" href="#__codelineno-7-170"></a>    │   ├── sub-pilot_ses-16_acq-b0_dir-AP_epi.json
+</span><span id="__span-7-171"><a id="__codelineno-7-171" name="__codelineno-7-171" href="#__codelineno-7-171"></a>    │   ├── sub-pilot_ses-16_acq-b0_dir-AP_epi.nii.gz
+</span><span id="__span-7-172"><a id="__codelineno-7-172" name="__codelineno-7-172" href="#__codelineno-7-172"></a>    │   ├── sub-pilot_ses-16_acq-b0_dir-LR_epi.json
+</span><span id="__span-7-173"><a id="__codelineno-7-173" name="__codelineno-7-173" href="#__codelineno-7-173"></a>    │   ├── sub-pilot_ses-16_acq-b0_dir-LR_epi.nii.gz
+</span><span id="__span-7-174"><a id="__codelineno-7-174" name="__codelineno-7-174" href="#__codelineno-7-174"></a>    │   ├── sub-pilot_ses-16_acq-b0_dir-PA_epi.json
+</span><span id="__span-7-175"><a id="__codelineno-7-175" name="__codelineno-7-175" href="#__codelineno-7-175"></a>    │   ├── sub-pilot_ses-16_acq-b0_dir-PA_epi.nii.gz
+</span><span id="__span-7-176"><a id="__codelineno-7-176" name="__codelineno-7-176" href="#__codelineno-7-176"></a>    │   ├── sub-pilot_ses-16_acq-b0_dir-RL_epi.json
+</span><span id="__span-7-177"><a id="__codelineno-7-177" name="__codelineno-7-177" href="#__codelineno-7-177"></a>    │   ├── sub-pilot_ses-16_acq-b0_dir-RL_epi.nii.gz
+</span><span id="__span-7-178"><a id="__codelineno-7-178" name="__codelineno-7-178" href="#__codelineno-7-178"></a>    │   ├── sub-pilot_ses-16_acq-bold_dir-AP_part-mag_epi.json
+</span><span id="__span-7-179"><a id="__codelineno-7-179" name="__codelineno-7-179" href="#__codelineno-7-179"></a>    │   ├── sub-pilot_ses-16_acq-bold_dir-AP_part-mag_epi.nii.gz
+</span><span id="__span-7-180"><a id="__codelineno-7-180" name="__codelineno-7-180" href="#__codelineno-7-180"></a>    │   ├── sub-pilot_ses-16_acq-bold_dir-AP_part-phase_epi.json
+</span><span id="__span-7-181"><a id="__codelineno-7-181" name="__codelineno-7-181" href="#__codelineno-7-181"></a>    │   ├── sub-pilot_ses-16_acq-bold_dir-AP_part-phase_epi.nii.gz
+</span><span id="__span-7-182"><a id="__codelineno-7-182" name="__codelineno-7-182" href="#__codelineno-7-182"></a>    │   ├── sub-pilot_ses-16_acq-bold_dir-LR_part-mag_epi.json
+</span><span id="__span-7-183"><a id="__codelineno-7-183" name="__codelineno-7-183" href="#__codelineno-7-183"></a>    │   ├── sub-pilot_ses-16_acq-bold_dir-LR_part-mag_epi.nii.gz
+</span><span id="__span-7-184"><a id="__codelineno-7-184" name="__codelineno-7-184" href="#__codelineno-7-184"></a>    │   ├── sub-pilot_ses-16_acq-bold_dir-LR_part-phase_epi.json
+</span><span id="__span-7-185"><a id="__codelineno-7-185" name="__codelineno-7-185" href="#__codelineno-7-185"></a>    │   ├── sub-pilot_ses-16_acq-bold_dir-LR_part-phase_epi.nii.gz
+</span><span id="__span-7-186"><a id="__codelineno-7-186" name="__codelineno-7-186" href="#__codelineno-7-186"></a>    │   ├── sub-pilot_ses-16_acq-bold_dir-PA_part-mag_epi.json
+</span><span id="__span-7-187"><a id="__codelineno-7-187" name="__codelineno-7-187" href="#__codelineno-7-187"></a>    │   ├── sub-pilot_ses-16_acq-bold_dir-PA_part-mag_epi.nii.gz
+</span><span id="__span-7-188"><a id="__codelineno-7-188" name="__codelineno-7-188" href="#__codelineno-7-188"></a>    │   ├── sub-pilot_ses-16_acq-bold_dir-PA_part-phase_epi.json
+</span><span id="__span-7-189"><a id="__codelineno-7-189" name="__codelineno-7-189" href="#__codelineno-7-189"></a>    │   ├── sub-pilot_ses-16_acq-bold_dir-PA_part-phase_epi.nii.gz
+</span><span id="__span-7-190"><a id="__codelineno-7-190" name="__codelineno-7-190" href="#__codelineno-7-190"></a>    │   ├── sub-pilot_ses-16_acq-bold_dir-RL_part-mag_epi.json
+</span><span id="__span-7-191"><a id="__codelineno-7-191" name="__codelineno-7-191" href="#__codelineno-7-191"></a>    │   ├── sub-pilot_ses-16_acq-bold_dir-RL_part-mag_epi.nii.gz
+</span><span id="__span-7-192"><a id="__codelineno-7-192" name="__codelineno-7-192" href="#__codelineno-7-192"></a>    │   ├── sub-pilot_ses-16_acq-bold_dir-RL_part-phase_epi.json
+</span><span id="__span-7-193"><a id="__codelineno-7-193" name="__codelineno-7-193" href="#__codelineno-7-193"></a>    │   ├── sub-pilot_ses-16_acq-bold_dir-RL_part-phase_epi.nii.gz
+</span><span id="__span-7-194"><a id="__codelineno-7-194" name="__codelineno-7-194" href="#__codelineno-7-194"></a>    │   ├── sub-pilot_ses-16_magnitude1.json
+</span><span id="__span-7-195"><a id="__codelineno-7-195" name="__codelineno-7-195" href="#__codelineno-7-195"></a>    │   ├── sub-pilot_ses-16_magnitude1.nii.gz
+</span><span id="__span-7-196"><a id="__codelineno-7-196" name="__codelineno-7-196" href="#__codelineno-7-196"></a>    │   ├── sub-pilot_ses-16_magnitude2.json
+</span><span id="__span-7-197"><a id="__codelineno-7-197" name="__codelineno-7-197" href="#__codelineno-7-197"></a>    │   ├── sub-pilot_ses-16_magnitude2.nii.gz
+</span><span id="__span-7-198"><a id="__codelineno-7-198" name="__codelineno-7-198" href="#__codelineno-7-198"></a>    │   ├── sub-pilot_ses-16_phasediff.json
+</span><span id="__span-7-199"><a id="__codelineno-7-199" name="__codelineno-7-199" href="#__codelineno-7-199"></a>    │   └── sub-pilot_ses-16_phasediff.nii.gz
+</span><span id="__span-7-200"><a id="__codelineno-7-200" name="__codelineno-7-200" href="#__codelineno-7-200"></a>    ├── func
+</span><span id="__span-7-201"><a id="__codelineno-7-201" name="__codelineno-7-201" href="#__codelineno-7-201"></a>    │   ├── sub-pilot_ses-16_task-bht_echo-1_part-mag_bold.json
+</span><span id="__span-7-202"><a id="__codelineno-7-202" name="__codelineno-7-202" href="#__codelineno-7-202"></a>    │   ├── sub-pilot_ses-16_task-bht_echo-1_part-mag_bold.nii.gz
+</span><span id="__span-7-203"><a id="__codelineno-7-203" name="__codelineno-7-203" href="#__codelineno-7-203"></a>    │   ├── sub-pilot_ses-16_task-bht_echo-1_part-phase_bold.json
+</span><span id="__span-7-204"><a id="__codelineno-7-204" name="__codelineno-7-204" href="#__codelineno-7-204"></a>    │   ├── sub-pilot_ses-16_task-bht_echo-1_part-phase_bold.nii.gz
+</span><span id="__span-7-205"><a id="__codelineno-7-205" name="__codelineno-7-205" href="#__codelineno-7-205"></a>    │   ├── sub-pilot_ses-16_task-bht_echo-2_part-mag_bold.json
+</span><span id="__span-7-206"><a id="__codelineno-7-206" name="__codelineno-7-206" href="#__codelineno-7-206"></a>    │   ├── sub-pilot_ses-16_task-bht_echo-2_part-mag_bold.nii.gz
+</span><span id="__span-7-207"><a id="__codelineno-7-207" name="__codelineno-7-207" href="#__codelineno-7-207"></a>    │   ├── sub-pilot_ses-16_task-bht_echo-2_part-phase_bold.json
+</span><span id="__span-7-208"><a id="__codelineno-7-208" name="__codelineno-7-208" href="#__codelineno-7-208"></a>    │   ├── sub-pilot_ses-16_task-bht_echo-2_part-phase_bold.nii.gz
+</span><span id="__span-7-209"><a id="__codelineno-7-209" name="__codelineno-7-209" href="#__codelineno-7-209"></a>    │   ├── sub-pilot_ses-16_task-bht_echo-3_part-mag_bold.json
+</span><span id="__span-7-210"><a id="__codelineno-7-210" name="__codelineno-7-210" href="#__codelineno-7-210"></a>    │   ├── sub-pilot_ses-16_task-bht_echo-3_part-mag_bold.nii.gz
+</span><span id="__span-7-211"><a id="__codelineno-7-211" name="__codelineno-7-211" href="#__codelineno-7-211"></a>    │   ├── sub-pilot_ses-16_task-bht_echo-3_part-phase_bold.json
+</span><span id="__span-7-212"><a id="__codelineno-7-212" name="__codelineno-7-212" href="#__codelineno-7-212"></a>    │   ├── sub-pilot_ses-16_task-bht_echo-3_part-phase_bold.nii.gz
+</span><span id="__span-7-213"><a id="__codelineno-7-213" name="__codelineno-7-213" href="#__codelineno-7-213"></a>    │   ├── sub-pilot_ses-16_task-bht_echo-4_part-mag_bold.json
+</span><span id="__span-7-214"><a id="__codelineno-7-214" name="__codelineno-7-214" href="#__codelineno-7-214"></a>    │   ├── sub-pilot_ses-16_task-bht_echo-4_part-mag_bold.nii.gz
+</span><span id="__span-7-215"><a id="__codelineno-7-215" name="__codelineno-7-215" href="#__codelineno-7-215"></a>    │   ├── sub-pilot_ses-16_task-bht_echo-4_part-phase_bold.json
+</span><span id="__span-7-216"><a id="__codelineno-7-216" name="__codelineno-7-216" href="#__codelineno-7-216"></a>    │   ├── sub-pilot_ses-16_task-bht_echo-4_part-phase_bold.nii.gz
+</span><span id="__span-7-217"><a id="__codelineno-7-217" name="__codelineno-7-217" href="#__codelineno-7-217"></a>    │   ├── sub-pilot_ses-16_task-bht_part-mag_events.tsv
+</span><span id="__span-7-218"><a id="__codelineno-7-218" name="__codelineno-7-218" href="#__codelineno-7-218"></a>    │   ├── sub-pilot_ses-16_task-bht_part-phase_events.tsv
+</span><span id="__span-7-219"><a id="__codelineno-7-219" name="__codelineno-7-219" href="#__codelineno-7-219"></a>    │   ├── sub-pilot_ses-16_task-qct_echo-1_part-mag_bold.json
+</span><span id="__span-7-220"><a id="__codelineno-7-220" name="__codelineno-7-220" href="#__codelineno-7-220"></a>    │   ├── sub-pilot_ses-16_task-qct_echo-1_part-mag_bold.nii.gz
+</span><span id="__span-7-221"><a id="__codelineno-7-221" name="__codelineno-7-221" href="#__codelineno-7-221"></a>    │   ├── sub-pilot_ses-16_task-qct_echo-1_part-phase_bold.json
+</span><span id="__span-7-222"><a id="__codelineno-7-222" name="__codelineno-7-222" href="#__codelineno-7-222"></a>    │   ├── sub-pilot_ses-16_task-qct_echo-1_part-phase_bold.nii.gz
+</span><span id="__span-7-223"><a id="__codelineno-7-223" name="__codelineno-7-223" href="#__codelineno-7-223"></a>    │   ├── sub-pilot_ses-16_task-qct_echo-2_part-mag_bold.json
+</span><span id="__span-7-224"><a id="__codelineno-7-224" name="__codelineno-7-224" href="#__codelineno-7-224"></a>    │   ├── sub-pilot_ses-16_task-qct_echo-2_part-mag_bold.nii.gz
+</span><span id="__span-7-225"><a id="__codelineno-7-225" name="__codelineno-7-225" href="#__codelineno-7-225"></a>    │   ├── sub-pilot_ses-16_task-qct_echo-2_part-phase_bold.json
+</span><span id="__span-7-226"><a id="__codelineno-7-226" name="__codelineno-7-226" href="#__codelineno-7-226"></a>    │   ├── sub-pilot_ses-16_task-qct_echo-2_part-phase_bold.nii.gz
+</span><span id="__span-7-227"><a id="__codelineno-7-227" name="__codelineno-7-227" href="#__codelineno-7-227"></a>    │   ├── sub-pilot_ses-16_task-qct_echo-3_part-mag_bold.json
+</span><span id="__span-7-228"><a id="__codelineno-7-228" name="__codelineno-7-228" href="#__codelineno-7-228"></a>    │   ├── sub-pilot_ses-16_task-qct_echo-3_part-mag_bold.nii.gz
+</span><span id="__span-7-229"><a id="__codelineno-7-229" name="__codelineno-7-229" href="#__codelineno-7-229"></a>    │   ├── sub-pilot_ses-16_task-qct_echo-3_part-phase_bold.json
+</span><span id="__span-7-230"><a id="__codelineno-7-230" name="__codelineno-7-230" href="#__codelineno-7-230"></a>    │   ├── sub-pilot_ses-16_task-qct_echo-3_part-phase_bold.nii.gz
+</span><span id="__span-7-231"><a id="__codelineno-7-231" name="__codelineno-7-231" href="#__codelineno-7-231"></a>    │   ├── sub-pilot_ses-16_task-qct_echo-4_part-mag_bold.json
+</span><span id="__span-7-232"><a id="__codelineno-7-232" name="__codelineno-7-232" href="#__codelineno-7-232"></a>    │   ├── sub-pilot_ses-16_task-qct_echo-4_part-mag_bold.nii.gz
+</span><span id="__span-7-233"><a id="__codelineno-7-233" name="__codelineno-7-233" href="#__codelineno-7-233"></a>    │   ├── sub-pilot_ses-16_task-qct_echo-4_part-phase_bold.json
+</span><span id="__span-7-234"><a id="__codelineno-7-234" name="__codelineno-7-234" href="#__codelineno-7-234"></a>    │   ├── sub-pilot_ses-16_task-qct_echo-4_part-phase_bold.nii.gz
+</span><span id="__span-7-235"><a id="__codelineno-7-235" name="__codelineno-7-235" href="#__codelineno-7-235"></a>    │   ├── sub-pilot_ses-16_task-qct_part-mag_events.tsv
+</span><span id="__span-7-236"><a id="__codelineno-7-236" name="__codelineno-7-236" href="#__codelineno-7-236"></a>    │   ├── sub-pilot_ses-16_task-qct_part-phase_events.tsv
+</span><span id="__span-7-237"><a id="__codelineno-7-237" name="__codelineno-7-237" href="#__codelineno-7-237"></a>    │   ├── sub-pilot_ses-16_task-rest_echo-1_part-mag_bold.json
+</span><span id="__span-7-238"><a id="__codelineno-7-238" name="__codelineno-7-238" href="#__codelineno-7-238"></a>    │   ├── sub-pilot_ses-16_task-rest_echo-1_part-mag_bold.nii.gz
+</span><span id="__span-7-239"><a id="__codelineno-7-239" name="__codelineno-7-239" href="#__codelineno-7-239"></a>    │   ├── sub-pilot_ses-16_task-rest_echo-1_part-phase_bold.json
+</span><span id="__span-7-240"><a id="__codelineno-7-240" name="__codelineno-7-240" href="#__codelineno-7-240"></a>    │   ├── sub-pilot_ses-16_task-rest_echo-1_part-phase_bold.nii.gz
+</span><span id="__span-7-241"><a id="__codelineno-7-241" name="__codelineno-7-241" href="#__codelineno-7-241"></a>    │   ├── sub-pilot_ses-16_task-rest_echo-2_part-mag_bold.json
+</span><span id="__span-7-242"><a id="__codelineno-7-242" name="__codelineno-7-242" href="#__codelineno-7-242"></a>    │   ├── sub-pilot_ses-16_task-rest_echo-2_part-mag_bold.nii.gz
+</span><span id="__span-7-243"><a id="__codelineno-7-243" name="__codelineno-7-243" href="#__codelineno-7-243"></a>    │   ├── sub-pilot_ses-16_task-rest_echo-2_part-phase_bold.json
+</span><span id="__span-7-244"><a id="__codelineno-7-244" name="__codelineno-7-244" href="#__codelineno-7-244"></a>    │   ├── sub-pilot_ses-16_task-rest_echo-2_part-phase_bold.nii.gz
+</span><span id="__span-7-245"><a id="__codelineno-7-245" name="__codelineno-7-245" href="#__codelineno-7-245"></a>    │   ├── sub-pilot_ses-16_task-rest_echo-3_part-mag_bold.json
+</span><span id="__span-7-246"><a id="__codelineno-7-246" name="__codelineno-7-246" href="#__codelineno-7-246"></a>    │   ├── sub-pilot_ses-16_task-rest_echo-3_part-mag_bold.nii.gz
+</span><span id="__span-7-247"><a id="__codelineno-7-247" name="__codelineno-7-247" href="#__codelineno-7-247"></a>    │   ├── sub-pilot_ses-16_task-rest_echo-3_part-phase_bold.json
+</span><span id="__span-7-248"><a id="__codelineno-7-248" name="__codelineno-7-248" href="#__codelineno-7-248"></a>    │   ├── sub-pilot_ses-16_task-rest_echo-3_part-phase_bold.nii.gz
+</span><span id="__span-7-249"><a id="__codelineno-7-249" name="__codelineno-7-249" href="#__codelineno-7-249"></a>    │   ├── sub-pilot_ses-16_task-rest_echo-4_part-mag_bold.json
+</span><span id="__span-7-250"><a id="__codelineno-7-250" name="__codelineno-7-250" href="#__codelineno-7-250"></a>    │   ├── sub-pilot_ses-16_task-rest_echo-4_part-mag_bold.nii.gz
+</span><span id="__span-7-251"><a id="__codelineno-7-251" name="__codelineno-7-251" href="#__codelineno-7-251"></a>    │   ├── sub-pilot_ses-16_task-rest_echo-4_part-phase_bold.json
+</span><span id="__span-7-252"><a id="__codelineno-7-252" name="__codelineno-7-252" href="#__codelineno-7-252"></a>    │   ├── sub-pilot_ses-16_task-rest_echo-4_part-phase_bold.nii.gz
+</span><span id="__span-7-253"><a id="__codelineno-7-253" name="__codelineno-7-253" href="#__codelineno-7-253"></a>    │   ├── sub-pilot_ses-16_task-rest_part-mag_events.tsv
+</span><span id="__span-7-254"><a id="__codelineno-7-254" name="__codelineno-7-254" href="#__codelineno-7-254"></a>    │   └── sub-pilot_ses-16_task-rest_part-phase_events.tsv
+</span><span id="__span-7-255"><a id="__codelineno-7-255" name="__codelineno-7-255" href="#__codelineno-7-255"></a>    └── sub-pilot_ses-16_scans.tsv
+</span></code></pre></div>
 <h3 id="convert-physiological-recordings-and-eye-tracking-data-to-bids">Convert physiological recordings and eye-tracking data to BIDS<a class="headerlink" href="#convert-physiological-recordings-and-eye-tracking-data-to-bids" title="Permanent link">&para;</a></h3>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>phys2bids -in /data/datasets/hcph-pilot/sourcedata/physio/session-recording.acq -info
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>phys2bids -in /data/datasets/hcph-pilot/sourcedata/physio/session-recording.acq -info
 </span></code></pre></div>
 <h3 id="incorporate-into-version-control-with-datalad">Incorporate into version control with DataLad<a class="headerlink" href="#incorporate-into-version-control-with-datalad" title="Permanent link">&para;</a></h3>
 <div class="admonition info">
