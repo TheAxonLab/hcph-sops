@@ -58,17 +58,11 @@ def heur(physinfo, take=""):
 
     if fnmatch.fnmatchcase(physinfo, "*multiscan*"):
         if take == "01":
-            info[
-                "task"
-            ] = "PCT"  # This will change following the naming convention of the tasks
+            info["task"] = "qct"
         if take == "02":
-            info[
-                "task"
-            ] = "RestingState"  # This will change following the naming convention of the tasks
+            info["task"] = "rest"
         if take == "03":
-            info[
-                "task"
-            ] = "BreathHolding"  # This will change following the naming convention of the tasks
+            info["task"] = "bht"
         info["rec"] = "labchart"
     elif fnmatch.fnmatchcase(physinfo, "*multifreq*"):
         info["task"] = "SomeTask"

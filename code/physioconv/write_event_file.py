@@ -1,7 +1,83 @@
+# Copyright 2023 The Axon Lab <theaxonlab@gmail.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# We support and encourage derived works from this project, please read
+# about our expectations at
+#
+#     https://www.nipreps.org/community/licensing/
+#
 import pandas as pd
 import os
 import gzip
 import json
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
+
+
+def plot_physio_data_with_events(
+    time_series_df: pd.DataFrame,
+    events_df: pd.DataFrame,
+    tsv_file: str,
+    output_folder: str = ".",
+) -> None:
+    """
+    Plot physiological data along with events.
+
+    Args:
+        time_series_df (pd.DataFrame): DataFrame containing the physiological data.
+        events_df (pd.DataFrame): DataFrame containing the event data.
+        tsv_file (str): Path to the TSV file.
+        output_folder (str, optional): Output folder for saving the plot image. Default is current directory.
+
+    Returns:
+        None: The plot is saved as an PNG file.
+
+    """
+    fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(30, 10), sharex=True)
+    ax1.plot(time_series_df[0], time_series_df[1], label="RB")
+    ax2.plot(time_series_df[0], time_series_df[2], label="ECG")
+    ax3.plot(time_series_df[0], time_series_df[3], label="GA")
+    trial_types = events_df["trial-type"].unique()
+    legend_colors = plt.cm.get_cmap("Set1", len(trial_types))
+    legend_color_dict = {
+        trial_type: legend_colors(i) for i, trial_type in enumerate(trial_types)
+    }
+    color_patches = []
+
+    for trial_type in trial_types:
+        legend_color = legend_color_dict[trial_type]
+        color_patch = mpatches.Patch(color=legend_color, label=trial_type)
+        color_patches.append(color_patch)
+        events_of_type = events_df[events_df["trial-type"] == trial_type]
+
+        for index, row in events_of_type.iterrows():
+            ax1.axvline(row["onset"], color=legend_color, linestyle="--")
+            ax2.axvline(row["onset"], color=legend_color, linestyle="--")
+            ax3.axvline(row["onset"], color=legend_color, linestyle="--")
+    ax1.set_ylabel("V")
+    ax2.set_ylabel("V")
+    ax3.set_ylabel("V")
+    ax3.legend(handles=color_patches, loc="lower right")
+    ax1.set_title("RB")
+    ax2.set_title("ECG")
+    ax3.set_title("GA")
+    base_name = os.path.basename(tsv_file)
+    output_file = os.path.join(
+        output_folder, base_name.replace("_physio.tsv.gz", "_plot.png")
+    )
+    plt.tight_layout()
+    plt.savefig(output_file)
 
 
 def write_event_file(tsv_file: str) -> None:
@@ -15,9 +91,7 @@ def write_event_file(tsv_file: str) -> None:
     with gzip.open(tsv_file, "rt") as file:
         df = pd.read_csv(file, sep="\t", header=None)
     event_dataframe = pd.DataFrame(columns=["onset", "duration", "trial-type"])
-    if (
-        "BreathHolding" in tsv_file
-    ):  # This condition must be changed following the naming convention for the tasks.
+    if "bht" in tsv_file:
         for index, row in df.iterrows():
             if row[6] == 5:
                 breathin = {"onset": row[0], "duration": 2.7, "trial-type": "breath-in"}
@@ -30,7 +104,7 @@ def write_event_file(tsv_file: str) -> None:
                 event_dataframe = event_dataframe.append(breathout, ignore_index=True)
 
             if row[7] == 5:
-                hold = {"onset": row[0], "duration": 2.7, "trial-type": "hold"}
+                hold = {"onset": row[0], "duration": 15, "trial-type": "hold"}
                 event_dataframe = event_dataframe.append(hold, ignore_index=True)
             """
             #For the new version of the psychopy task
@@ -38,7 +112,7 @@ def write_event_file(tsv_file: str) -> None:
                 breathin = {"onset": row[0], "duration": 2.7, "trial-type": "breath-in"}
                 event_dataframe = event_dataframe.append(breathin, ignore_index=True)
             if row[7] == 5:
-                breathout = {"onset": row[0] + 2.7,"duration": 2.3,"trial-type": "breath-out"}
+                breathout = {"onset": row[0],"duration": 2.3,"trial-type": "breath-out"}
                 event_dataframe = event_dataframe.append(breathout, ignore_index=True)
             if row[8] == 5:
                 hold = {"onset": row[0], "duration": 2.7, "trial-type": "hold"}
@@ -62,25 +136,25 @@ def write_event_file(tsv_file: str) -> None:
                 },
             }
         }
-    elif (
-        "PCT" in tsv_file
-    ):  # This condition must be changed following the naming convention for the tasks.
+    elif "qct" in tsv_file:
         for index, row in df.iterrows():
-            if row[6] == 5:
-                vis = {"onset": row[0], "duration": 3, "trial-type": "vis"}
-                event_dataframe = event_dataframe.append(vis, ignore_index=True)
-            if row[7] == 5:
-                cog = {"onset": row[0], "duration": 0.5, "trial-type": "cog"}
-                event_dataframe = event_dataframe.append(cog, ignore_index=True)
-            if row[8] == 5:
-                mot = {"onset": row[0], "duration": 5, "trial-type": "mot"}
-                event_dataframe = event_dataframe.append(mot, ignore_index=True)
-            """
-            #Will be used if an additional channel is added in AcqKnowledge
-            if row[9] == 5: 
-                mot = {"onset": row[0], "duration": 0.5, "trial-type": "blank"}
-                event_dataframe = event_dataframe.append(mot, ignore_index=True)
-            """
+            if int(row[0]) > 0:
+                if row[6] == 5:
+                    vis = {"onset": row[0], "duration": 3, "trial-type": "vis"}
+                    event_dataframe = event_dataframe.append(vis, ignore_index=True)
+                if row[7] == 5:
+                    cog = {"onset": row[0], "duration": 0.5, "trial-type": "cog"}
+                    event_dataframe = event_dataframe.append(cog, ignore_index=True)
+                if row[8] == 5:
+
+                    mot = {"onset": row[0], "duration": 5, "trial-type": "mot"}
+                    event_dataframe = event_dataframe.append(mot, ignore_index=True)
+                """
+                #Will be used if an additional channel is added in AcqKnowledge
+                if row[9] == 5: 
+                    mot = {"onset": row[0], "duration": 0.5, "trial-type": "blank"}
+                    event_dataframe = event_dataframe.append(mot, ignore_index=True)
+                """
         json_content = {
             "trial_type": {
                 "LongName": "Event category",
@@ -100,10 +174,45 @@ def write_event_file(tsv_file: str) -> None:
                 },
             }
         }
-    elif (
-        "RestingState" in tsv_file
-    ):  # This condition must be changed following the naming convention for the tasks.
-        pass
+    elif "rest" in tsv_file:
+        for index, row in df.iterrows():
+            if row[4] == 5:
+                movie = {"onset": row[0], "duration": 1200, "trial-type": "movie"}
+                event_dataframe = event_dataframe.append(movie, ignore_index=True)
+        """
+        for index, row in df.iterrows():
+            if row[6] == 5:
+                fixation = {"onset": row[0], "duration": 3, "trial-type": "fixation point"}
+                event_dataframe = event_dataframe.append(fixation, ignore_index=True)
+            if row[7] == 5:
+                fixation_end = {"onset": row[0], "duration": 0, "trial-type": "end fixation point"}
+                event_dataframe = event_dataframe.append(fixation_end, ignore_index=True)
+            if row[8] == 5:
+                movie = {"onset": row[0], "duration": 1200, "trial-type": "movie"}
+                event_dataframe = event_dataframe.append(movie, ignore_index=True)
+            if row[9] == 5:
+                movie_end = {"onset": row[0], "duration": 1200, "trial-type": "end movie"}
+                event_dataframe = event_dataframe.append(movie_end, ignore_index=True)
+        """
+        json_content = {
+            "trial_type": {
+                "LongName": "Event category",
+                "Description": "Indicator of type of action that is expected",
+                "Levels": {
+                    "fixation point": "Fixation point in the center of the screen",
+                    "end fixation point": "End of fixation",
+                    "movie": "Movie",
+                    "end movie": "End of the movie",
+                },
+                "StimulusPresentation": {
+                    "OperatingSystem": "Linux Ubuntu 20.04.5",
+                    "SoftwareName": "PsychoPy",
+                    "SoftwareRRID": "SCR_006571",
+                    "SoftwareVersion": "2022.3.0.dev6",
+                    "Code": "http://www.psychopy.org",
+                },
+            }
+        }
 
     output_folder = os.path.dirname(tsv_file)
     base_name = os.path.basename(tsv_file)
@@ -118,7 +227,9 @@ def write_event_file(tsv_file: str) -> None:
         json.dump(json_content, json_output, indent=4)
     print(f"JSON metadata saved to {json_file}")
 
+    plot_physio_data_with_events(df, event_dataframe, tsv_file)
+
 
 if __name__ == "__main__":
-    tsv_file = "/home/esavary/Projects/acknowledge_processing/session_07_14/sub-001/ses-01/func/sub-001_ses-01_task-PCT_rec-labchart_physio.tsv.gz"
+    tsv_file = "/home/esavary/Projects/acknowledge_processing/session-07-14/sub-001/ses-01/func/sub-001_ses-01_task-qct_rec-labchart_physio.tsv.gz"
     write_event_file(tsv_file)
