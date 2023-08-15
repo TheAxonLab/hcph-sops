@@ -17,6 +17,7 @@
 #
 #     https://www.nipreps.org/community/licensing/
 #
+import argparse
 import pandas as pd
 import os
 import gzip
@@ -230,6 +231,33 @@ def write_event_file(tsv_file: str) -> None:
     plot_physio_data_with_events(df, event_dataframe, tsv_file)
 
 
+def write_all_event_files(folder_path: str) -> None:
+    """
+    Find all files in the given folder with names containing "_physio.tsv.gz", write the corresponding event files and save a plot of the physiological data.
+
+    Args:
+        folder_path (str): Path to the folder containing the files.
+
+    """
+    file_list = os.listdir(folder_path)
+
+    physio_files = [filename for filename in file_list if "_physio.tsv.gz" in filename]
+
+    for filename in physio_files:
+        file_path = os.path.join(folder_path, filename)
+        write_event_file(file_path)
+
+
 if __name__ == "__main__":
-    tsv_file = "/home/esavary/Projects/acknowledge_processing/session-07-14/sub-001/ses-01/func/sub-001_ses-01_task-qct_rec-labchart_physio.tsv.gz"
-    write_event_file(tsv_file)
+
+    parser = argparse.ArgumentParser(
+        description="Write event files and create plots for physiological data."
+    )
+    parser.add_argument(
+        "--path",
+        type=str,
+        default=".",
+        help="Path to the folder containing the files (default: current folder)",
+    )
+    args = parser.parse_args()
+    write_all_event_files(args.path)
