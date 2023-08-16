@@ -341,7 +341,10 @@ phys2bids -in /data/datasets/hcph-pilot/sourcedata/physio/session-recording.acq 
 ```
 phys2bids -in modified-last-session_multiscan.txt -chtrig 4 -ntp  1 1 1 -tr 158 1200 331 -thr 2 -outdir outputdir -heur heur_physio.py -sub pilot -ses 01
 ```
-- [ ] Execute the script write_event_file.py as shown below to generate task event files. This script not only creates JSON and TSV files containing event information, but it also generates PNG plots for each task, displaying both physiological data and corresponding events. These plots are saved in the current directory.
+- [ ] Execute the script write_event_file.py as shown below to generate task event files. This script not only creates JSON and TSV files containing event information, but it also generates PNG plots for each task, displaying both physiological data and corresponding events. These plots are saved in the current directory. The script must be executed with the following command, where outputdir is the output directory of phys2bids:
+```
+python write_event_file.py --path ./outputdir/sub-pilot/ses-01/func/
+```
 
 Once the script is executed, the BIDS folder (consisting solely of physiological data in this case) will have the following structure:
 ```
