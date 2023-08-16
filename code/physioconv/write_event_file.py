@@ -25,6 +25,14 @@ import json
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
+EVENTS_JSON_BOILERPLATE = {
+    "StimulusPresentation": {
+        "OperatingSystem": "Linux Ubuntu 20.04.5",
+        "SoftwareName": "PsychoPy",
+        "SoftwareRRID": "SCR_006571",
+        "SoftwareVersion": "2022.3.0.dev6"
+    }
+}
 
 def plot_physio_data_with_events(
     time_series_df: pd.DataFrame,
