@@ -128,31 +128,16 @@ def write_event_file(tsv_file: str) -> None:
                 event_dataframe = event_dataframe.append(hold, ignore_index=True)
             """
         json_content = EVENTS_JSON_BOILERPLATE.copy()
-        json_contents["StimulusPresentation"]["Code"] = "https://github.com/TheAxonLab/HCPh-fMRI-tasks/blob/97cc7879622f45129eefb9968890b41631f40851/task-bht_bold.psyexp"
-        json_contents["Description"] = "Indicator of type of action that is expected"
-        json_contents["LongName"] = "Breath-holding task conditions (that is, breath-in, breath-out, and hold)"
-        json_contents["Levels"] = {
+        json_content["StimulusPresentation"]["Code"] = "https://github.com/TheAxonLab/HCPh-fMRI-tasks/blob/97cc7879622f45129eefb9968890b41631f40851/task-bht_bold.psyexp"
+        json_content["trial_type"]={}
+        json_content["trial_type"]["Description"] = "Indicator of type of action that is expected"
+        json_content["trial_type"]["LongName"] = "Breath-holding task conditions (that is, breath-in, breath-out, and hold)"
+        json_content["trial_type"]["Levels"] = {
             "breath-in": "A green rectangle is displayed to indicate breathing in",
             "breath-out": "A yellow rectangle (orange for the last breath-in before hold) is displayed to indicate breathing out",
             "hold": "A red rectangle is displayed to indicate breath hold",
         }
-            "trial_type": {
-                "LongName": "Breath-holding task conditions (that is, breath-in, breath-out, and hold)",
-                "Description": "Indicator of type of action that is expected",
-                "Levels": {
-                    "breath-in": "A green rectangle is displayed to indicate breathing in",
-                    "breath-out": "A yellow rectangle (orange for the last breath-in before hold) is displayed to indicate breathing out",
-                    "hold": "A red rectangle is displayed to indicate breath hold",
-                },
-                "StimulusPresentation": {
-                    "OperatingSystem": "Linux Ubuntu 20.04.5",
-                    "SoftwareName": "PsychoPy",
-                    "SoftwareRRID": "SCR_006571",
-                    "SoftwareVersion": "2022.3.0.dev6",
-                    "Code": "https://github.com/TheAxonLab/HCPh-fMRI-tasks/blob/97cc7879622f45129eefb9968890b41631f40851/task-bht_bold.psyexp",
-                },
-            }
-        }
+
     elif "qct" in tsv_file:
         for index, row in df.iterrows():
             if int(row[0]) > 0:
@@ -172,24 +157,16 @@ def write_event_file(tsv_file: str) -> None:
                     blank = {"onset": row[0], "duration": 3, "trial-type": "blank"}
                     event_dataframe = event_dataframe.append(blank, ignore_index=True)
                 """
-        json_content = {
-            "trial_type": {
-                "LongName": "Event category",
-                "Description": "Indicator of type of action that is expected",
-                "Levels": {
-                    "vis": "Fixation point on top of grating pattern",
-                    "cog": "Moving fixation points",
-                    "mot": "Finger taping with the left or right hand following the indications on the screen",
-                    "blank": "Fixation point in the center of the screen",
-                },
-                "StimulusPresentation": {
-                    "OperatingSystem": "Linux Ubuntu 20.04.5",
-                    "SoftwareName": "PsychoPy",
-                    "SoftwareRRID": "SCR_006571",
-                    "SoftwareVersion": "2022.3.0.dev6",
-                    "Code": "http://www.psychopy.org",
-                },
-            }
+        json_content = EVENTS_JSON_BOILERPLATE.copy()
+        json_content["StimulusPresentation"]["Code"] = "https://github.com/TheAxonLab/HCPh-fMRI-tasks/blob/97cc7879622f45129eefb9968890b41631f40851/task-pct_bold.psyexp"
+        json_content["trial_type"]={}
+        json_content["trial_type"]["Description"] = "Indicator of type of action that is expected"
+        json_content["trial_type"]["LongName"] = "Quality control task"
+        json_content["trial_type"]["Levels"] = {
+            "vis": "Fixation point on top of grating pattern",
+            "cog": "Moving fixation points",
+            "mot": "Finger taping with the left or right hand following the indications on the screen",
+            "blank": "Fixation point in the center of the screen",
         }
     elif "rest" in tsv_file:
         for index, row in df.iterrows():
@@ -211,26 +188,17 @@ def write_event_file(tsv_file: str) -> None:
                 movie_end = {"onset": row[0], "duration": 1200, "trial-type": "end movie"}
                 event_dataframe = event_dataframe.append(movie_end, ignore_index=True)
         """
-        json_content = {
-            "trial_type": {
-                "LongName": "Event category",
-                "Description": "Indicator of type of action that is expected",
-                "Levels": {
-                    "fixation point": "Fixation point in the center of the screen",
-                    "end fixation point": "End of fixation",
-                    "movie": "Movie",
-                    "end movie": "End of the movie",
-                },
-                "StimulusPresentation": {
-                    "OperatingSystem": "Linux Ubuntu 20.04.5",
-                    "SoftwareName": "PsychoPy",
-                    "SoftwareRRID": "SCR_006571",
-                    "SoftwareVersion": "2022.3.0.dev6",
-                    "Code": "http://www.psychopy.org",
-                },
-            }
+        json_content = EVENTS_JSON_BOILERPLATE.copy()
+        json_content["StimulusPresentation"]["Code"] = "https://github.com/TheAxonLab/HCPh-fMRI-tasks/blob/97cc7879622f45129eefb9968890b41631f40851/task-rest_bold.psyexp"
+        json_content["trial_type"]={}
+        json_content["trial_type"]["Description"] = "Indicator of type of action that is expected"
+        json_content["trial_type"]["LongName"] = "Resting state"
+        json_content["trial_type"]["Levels"] = {
+            "fixation point": "Fixation point in the center of the screen",
+            "end fixation point": "End of fixation",
+            "movie": "Movie",
+            "end movie": "End of the movie",
         }
-
     output_folder = os.path.dirname(tsv_file)
     base_name = os.path.basename(tsv_file)
     output_file = os.path.join(
