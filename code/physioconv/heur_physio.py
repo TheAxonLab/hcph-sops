@@ -63,11 +63,13 @@ def heur(physinfo, take=""):
             info["task"] = "rest"
         if take == "03":
             info["task"] = "bht"
-        info["rec"] = "labchart"
-    elif fnmatch.fnmatchcase(physinfo, "*multifreq*"):
-        info["task"] = "SomeTask"
-    elif physinfo == "Example":
-        info["task"] = "sometask"
+    elif fnmatch.fnmatchcase(physinfo, "*.acq*"):
+        if take == "01":
+            info["task"] = "qct"
+        if take == "02":
+            info["task"] = "rest"
+        if take == "03":
+            info["task"] = "bht"
 
     # ############################## #
     # ## Don't modify below this! ## #
