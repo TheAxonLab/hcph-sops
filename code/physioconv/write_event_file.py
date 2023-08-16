@@ -133,7 +133,7 @@ def write_event_file(tsv_file: str) -> None:
                     "SoftwareName": "PsychoPy",
                     "SoftwareRRID": "SCR_006571",
                     "SoftwareVersion": "2022.3.0.dev6",
-                    "Code": "http://www.psychopy.org",
+                    "Code": "https://github.com/TheAxonLab/HCPh-fMRI-tasks/blob/97cc7879622f45129eefb9968890b41631f40851/task-bht_bold.psyexp",
                 },
             }
         }
