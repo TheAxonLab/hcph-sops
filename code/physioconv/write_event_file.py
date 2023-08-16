@@ -119,7 +119,15 @@ def write_event_file(tsv_file: str) -> None:
                 hold = {"onset": row[0], "duration": 2.7, "trial-type": "hold"}
                 event_dataframe = event_dataframe.append(hold, ignore_index=True)
             """
-        json_content = {
+        json_content = EVENTS_JSON_BOILERPLATE.copy()
+        json_contents["StimulusPresentation"]["Code"] = "https://github.com/TheAxonLab/HCPh-fMRI-tasks/blob/97cc7879622f45129eefb9968890b41631f40851/task-bht_bold.psyexp"
+        json_contents["Description"] = "Indicator of type of action that is expected"
+        json_contents["LongName"] = "Breath-holding task conditions (that is, breath-in, breath-out, and hold)"
+        json_contents["Levels"] = {
+            "breath-in": "A green rectangle is displayed to indicate breathing in",
+            "breath-out": "A yellow rectangle (orange for the last breath-in before hold) is displayed to indicate breathing out",
+            "hold": "A red rectangle is displayed to indicate breath hold",
+        }
             "trial_type": {
                 "LongName": "Breath-holding task conditions (that is, breath-in, breath-out, and hold)",
                 "Description": "Indicator of type of action that is expected",
