@@ -153,8 +153,8 @@ def write_event_file(tsv_file: str) -> None:
                 """
                 #Will be used if an additional channel is added in AcqKnowledge
                 if row[9] == 5: 
-                    mot = {"onset": row[0], "duration": 0.5, "trial-type": "blank"}
-                    event_dataframe = event_dataframe.append(mot, ignore_index=True)
+                    blank = {"onset": row[0], "duration": 3, "trial-type": "blank"}
+                    event_dataframe = event_dataframe.append(blank, ignore_index=True)
                 """
         json_content = {
             "trial_type": {
