@@ -121,7 +121,7 @@ def write_event_file(tsv_file: str) -> None:
             """
         json_content = {
             "trial_type": {
-                "LongName": "Event category",
+                "LongName": "Breath-holding task conditions (that is, breath-in, breath-out, and hold)",
                 "Description": "Indicator of type of action that is expected",
                 "Levels": {
                     "breath-in": "A green rectangle is displayed to indicate breathing in",
