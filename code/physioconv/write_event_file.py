@@ -100,8 +100,10 @@ def write_event_file(tsv_file: str) -> None:
     """
     This function reads the trigger channels of the physiological file, processes them to create the event file.
 
-    Parameters:
-        tsv_file (str): The path to the input gzipped TSV file containing physiological data of a task.
+    Parameters
+    ----------
+    tsv_file :obj:`os.pathlike`
+         The path to the input gzipped TSV file containing physiological data of a task.
 
     """
     with gzip.open(tsv_file, "rt") as file:
