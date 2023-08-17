@@ -43,14 +43,20 @@ def plot_physio_data_with_events(
     """
     Plot physiological data along with events.
 
-    Args:
-        time_series_df (pd.DataFrame): DataFrame containing the physiological data.
-        events_df (pd.DataFrame): DataFrame containing the event data.
-        tsv_file (str): Path to the TSV file.
-        output_folder (str, optional): Output folder for saving the plot image. Default is current directory.
+    Parameters
+    ----------
+    time_series_df : :obj:`pandas.DataFrame`
+        Table containing the physiological data.
+    events_df : :obj:`pandas.DataFrame`
+        Table containing the event data.
+    tsv_file : :obj:`os.pathlike`
+        Path to the TSV file.
+    output_folder : :obj:`os.pathfile`
+        Output folder for saving the plot image. Default is current directory.
 
-    Returns:
-        None: The plot is saved as an PNG file.
+    Returns
+    -------
+    The path where the plot was saved as a PNG file.
 
     """
     fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(30, 10), sharex=True)
