@@ -339,7 +339,12 @@ The output of *HeuDiConv* with our current heuristics and reproin conventions sh
 phys2bids -in /data/datasets/hcph-pilot/sourcedata/physio/session-recording.acq -info
 ```
 - [ ] Check the data by opening the PNG plot.
-- [ ] If the data appears satisfactory, proceed to process it using the subsequent command. Use the -ntp argument to specify the number of volumes for each task, and the -tr argument to indicate the task's repetition time. Define the output directory with -outdir and provide the path to the heuristic file using -heur. Adjust the subject and session numbers accordingly. Should scanner trigger transmission encounter issues and manual adjustments are made to the trigger data, it is possible to allocate one trigger per task. Set the repetition time duration as the task length, as demonstrated in the example below.
+- [ ] If the data appears satisfactory, proceed to process it using the subsequent command.
+    Use the `-ntp` argument to specify the number of volumes for each task, and the `-tr` argument to indicate the task's repetition time.
+    Define the output directory with `-outdir` and provide the path to the heuristic file using `-heur`.
+    Adjust the subject and session numbers accordingly.
+    Should scanner trigger transmission encounter issues and manual adjustments are made to the trigger data, it is possible to allocate one trigger per task.
+    Set the repetition time duration as the task length, as demonstrated in the example below.
 ```
 phys2bids -in modified-last-session_multiscan.txt -chtrig 4 -ntp  1 1 1 -tr 158 1200 331 -thr 2 -outdir outputdir -heur heur_physio.py -sub pilot -ses 01
 ```
