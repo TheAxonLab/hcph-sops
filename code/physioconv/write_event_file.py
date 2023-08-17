@@ -39,7 +39,7 @@ def plot_physio_data_with_events(
     events_df: pd.DataFrame,
     tsv_file: str,
     output_folder: str = ".",
-) -> None:
+) -> str:
     """
     Plot physiological data along with events.
 
