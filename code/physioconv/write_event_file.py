@@ -93,6 +93,7 @@ def plot_physio_data_with_events(
     )
     plt.tight_layout()
     plt.savefig(output_file)
+    return output_file
 
 
 def write_event_file(tsv_file: str) -> None:
