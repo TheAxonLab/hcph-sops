@@ -132,10 +132,10 @@ async def forward_signals(serial_port: str, async_q: janus.AsyncQueue[int]) -> N
         The async queue storing the signals.
 
     """
-    with serial.Serial(serial_port) as ser:
+    with serial.Serial(serial_port) as conn:
         while True:
             signal = await async_q.get()
-            ser.write(signal)
+            conn.write(signal)
             async_q.task_done()
             logging.info(f"Forwarded <{signal}>")
 
