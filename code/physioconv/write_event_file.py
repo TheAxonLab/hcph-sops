@@ -30,9 +30,10 @@ EVENTS_JSON_BOILERPLATE = {
         "OperatingSystem": "Linux Ubuntu 20.04.5",
         "SoftwareName": "PsychoPy",
         "SoftwareRRID": "SCR_006571",
-        "SoftwareVersion": "2022.3.0.dev6"
+        "SoftwareVersion": "2022.3.0.dev6",
     }
 }
+
 
 def plot_physio_data_with_events(
     time_series_df: pd.DataFrame,
@@ -98,7 +99,7 @@ def plot_physio_data_with_events(
 
 def write_event_file(tsv_file: str) -> None:
     """
-    This function reads the trigger channels of the physiological file, processes them to create the event file.
+    Create a BIDS events file from the digital channels of the physiological file.
 
     Parameters
     ----------
@@ -137,13 +138,22 @@ def write_event_file(tsv_file: str) -> None:
                 event_dataframe = event_dataframe.append(hold, ignore_index=True)
             """
         json_content = EVENTS_JSON_BOILERPLATE.copy()
-        json_content["StimulusPresentation"]["Code"] = "https://github.com/TheAxonLab/HCPh-fMRI-tasks/blob/97cc7879622f45129eefb9968890b41631f40851/task-bht_bold.psyexp"
-        json_content["trial_type"]={}
-        json_content["trial_type"]["Description"] = "Indicator of type of action that is expected"
-        json_content["trial_type"]["LongName"] = "Breath-holding task conditions (that is, breath-in, breath-out, and hold)"
+        json_content["StimulusPresentation"]["Code"] = (
+            "https://github.com/TheAxonLab/HCPh-fMRI-tasks/blob/"
+            "97cc7879622f45129eefb9968890b41631f40851/task-bht_bold.psyexp"
+        )
+        json_content["trial_type"] = {}
+        json_content["trial_type"][
+            "Description"
+        ] = "Indicator of type of action that is expected"
+        json_content["trial_type"][
+            "LongName"
+        ] = "Breath-holding task conditions (that is, breath-in, breath-out, and hold)"
         json_content["trial_type"]["Levels"] = {
             "breath-in": "A green rectangle is displayed to indicate breathing in",
-            "breath-out": "A yellow rectangle (orange for the last breath-in before hold) is displayed to indicate breathing out",
+            "breath-out": """\
+A yellow rectangle (orange for the last breath-in before hold) is \
+displayed to indicate breathing out""",
             "hold": "A red rectangle is displayed to indicate breath hold",
         }
 
@@ -158,23 +168,29 @@ def write_event_file(tsv_file: str) -> None:
                     event_dataframe = event_dataframe.append(cog, ignore_index=True)
                 if row[8] == 5:
 
-                    mot = {"onset": row[0], "duration": 5, "trial-type": "mot"}
-                    event_dataframe = event_dataframe.append(mot, ignore_index=True)
+                    motor = {"onset": row[0], "duration": 5, "trial-type": "motor"}
+                    event_dataframe = event_dataframe.append(motor, ignore_index=True)
                 """
                 #Will be used if an additional channel is added in AcqKnowledge
-                if row[9] == 5: 
+                if row[9] == 5:
                     blank = {"onset": row[0], "duration": 3, "trial-type": "blank"}
                     event_dataframe = event_dataframe.append(blank, ignore_index=True)
                 """
         json_content = EVENTS_JSON_BOILERPLATE.copy()
-        json_content["StimulusPresentation"]["Code"] = "https://github.com/TheAxonLab/HCPh-fMRI-tasks/blob/97cc7879622f45129eefb9968890b41631f40851/task-pct_bold.psyexp"
-        json_content["trial_type"]={}
-        json_content["trial_type"]["Description"] = "Indicator of type of action that is expected"
+        json_content["StimulusPresentation"]["Code"] = (
+            "https://github.com/TheAxonLab/HCPh-fMRI-tasks/blob/"
+            "97cc7879622f45129eefb9968890b41631f40851/task-pct_bold.psyexp"
+        )
+        json_content["trial_type"] = {}
+        json_content["trial_type"][
+            "Description"
+        ] = "Indicator of type of action that is expected"
         json_content["trial_type"]["LongName"] = "Quality control task"
         json_content["trial_type"]["Levels"] = {
             "vis": "Fixation point on top of grating pattern",
             "cog": "Moving fixation points",
-            "mot": "Finger taping with the left or right hand following the indications on the screen",
+            "motor": """\
+Finger taping with the left or right hand following the indications on the screen""",
             "blank": "Fixation point in the center of the screen",
         }
     elif "rest" in tsv_file:
@@ -198,9 +214,14 @@ def write_event_file(tsv_file: str) -> None:
                 event_dataframe = event_dataframe.append(movie_end, ignore_index=True)
         """
         json_content = EVENTS_JSON_BOILERPLATE.copy()
-        json_content["StimulusPresentation"]["Code"] = "https://github.com/TheAxonLab/HCPh-fMRI-tasks/blob/97cc7879622f45129eefb9968890b41631f40851/task-rest_bold.psyexp"
-        json_content["trial_type"]={}
-        json_content["trial_type"]["Description"] = "Indicator of type of action that is expected"
+        json_content["StimulusPresentation"]["Code"] = (
+            "https://github.com/TheAxonLab/HCPh-fMRI-tasks/blob/"
+            "97cc7879622f45129eefb9968890b41631f40851/task-rest_bold.psyexp"
+        )
+        json_content["trial_type"] = {}
+        json_content["trial_type"][
+            "Description"
+        ] = "Indicator of type of action that is expected"
         json_content["trial_type"]["LongName"] = "Resting state"
         json_content["trial_type"]["Levels"] = {
             "fixation point": "Fixation point in the center of the screen",
@@ -226,7 +247,10 @@ def write_event_file(tsv_file: str) -> None:
 
 def write_all_event_files(folder_path: str) -> None:
     """
-    Find all files in the given folder with names containing "_physio.tsv.gz", write the corresponding event files and save a plot of the physiological data.
+    Write events files.
+
+    Find all files in the given folder with names containing "_physio.tsv.gz",
+    write the corresponding event files and save a plot of the physiological data.
 
     Parameters
     ----------
