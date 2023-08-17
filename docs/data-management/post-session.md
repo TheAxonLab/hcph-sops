@@ -332,7 +332,9 @@ The output of *HeuDiConv* with our current heuristics and reproin conventions sh
 
 ### Convert physiological recordings and eye-tracking data to BIDS
 
-- [ ] Plot an overview of the data with the following command. This command generates a PNG plot of the data within the current directory without processing the data itself. The folder containing the physiological data is specified via the -in command line argument.
+- [ ] Plot an overview of the data with the following command.
+     This command generates a PNG plot of the data within the current directory without processing the data itself.
+     The physiological data folder is specified via the `-in` command line argument.
 ```
 phys2bids -in /data/datasets/hcph-pilot/sourcedata/physio/session-recording.acq -info
 ```
