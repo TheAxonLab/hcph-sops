@@ -339,7 +339,7 @@ The output of *HeuDiConv* with our current heuristics and reproin conventions sh
 phys2bids -in /data/datasets/hcph-pilot/sourcedata/physio/session-recording.acq -info
 ```
 - [ ] Check that all the channels are present in the PNG plot.
-- [ ] If this is the case, proceed to process it using the subsequent command.
+- [ ] If this is the case, proceed to process the file using the subsequent command.
     Use the `-ntp` argument to specify the number of volumes for each task, and the `-tr` argument to indicate the task's repetition time.
     Define the output directory with `-outdir` and provide the path to the heuristic file using `-heur`.
     Adjust the subject and session numbers accordingly.
