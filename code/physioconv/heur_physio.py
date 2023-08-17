@@ -24,21 +24,23 @@ def heur(physinfo, take=""):
 
     Notes
     -----
-    The `if ..` structure should always be similar to
-    ```
-    if physinfo == 'somepattern':
-        info['var'] = 'somethingelse'
-    ```
-    or, in case it's a partial match
-    ```
-    if fnmatch.fnmatchcase(physinfo, '*somepattern?'):
-        info['var'] = 'somethingelse'
-    ```
-    Where:
-        - `physinfo` and `info` are dedicated keywords,
-        - 'somepattern' is the name of the file,
-        - 'var' is a bids key in the list below
-        - 'somethingelse' is the value of the key
+    The `if ..` structure should always be similar to::
+
+        if physinfo == 'somepattern':
+            info['var'] = 'somethingelse'
+
+    or, in case it's a partial match::
+
+        if fnmatch.fnmatchcase(physinfo, '*somepattern?'):
+            info['var'] = 'somethingelse'
+
+    where:
+    
+    - ``physinfo`` and ``info`` are dedicated keywords,
+    - ``'somepattern'`` is the name of the file,
+    - ``'var'`` is a BIDS key in the list below
+    - ``'somethingelse'`` is the value of the key
+
     """
     info = {}
     # ################################# #
@@ -56,20 +58,15 @@ def heur(physinfo, take=""):
     # ##  See example below          ## #
     # ################################# #
 
-    if fnmatch.fnmatchcase(physinfo, "*multiscan*"):
-        if take == "01":
-            info["task"] = "qct"
-        if take == "02":
-            info["task"] = "rest"
-        if take == "03":
-            info["task"] = "bht"
-    elif fnmatch.fnmatchcase(physinfo, "*.acq*"):
-        if take == "01":
-            info["task"] = "qct"
-        if take == "02":
-            info["task"] = "rest"
-        if take == "03":
-            info["task"] = "bht"
+    if not fnmatch.fnmatchcase(physinfo, "*.acq*"):
+        raise RuntimeError("Unknown input file")
+    
+    TAKES = {
+        "01": "qct",
+        "02": "rest",
+        "03": "bht",
+    }
+    info["task"] = TAKES[take]
 
     # ############################## #
     # ## Don't modify below this! ## #
