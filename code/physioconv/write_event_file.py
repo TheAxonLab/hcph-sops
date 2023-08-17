@@ -228,8 +228,10 @@ def write_all_event_files(folder_path: str) -> None:
     """
     Find all files in the given folder with names containing "_physio.tsv.gz", write the corresponding event files and save a plot of the physiological data.
 
-    Args:
-        folder_path (str): Path to the folder containing the files.
+    Parameters
+    ----------
+    folder_path : :obj:`os.pathlike`
+        Path to the folder containing the files.
 
     """
     file_list = os.listdir(folder_path)
