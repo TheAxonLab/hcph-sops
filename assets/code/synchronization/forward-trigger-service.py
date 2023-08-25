@@ -207,6 +207,9 @@ async def main() -> None:
     # Attach an event listener to all `s` key presses.
     keyboard.on_press_key("s", lambda key: _trigger(signal_queue.sync_q))
 
+    # Send a binary zero at the beginning
+    signal_queue.sync_q.put(b"\x00")
+
     # Spin up socket listener and (asynchronously) queue up signals arriving from the socket
     await asyncio.gather(
         start_server("localhost", LISTEN, signal_queue.async_q),
