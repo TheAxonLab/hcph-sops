@@ -468,6 +468,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#eye-tracker-and-projector-setup" class="md-nav__link">
+    Eye Tracker and projector setup
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#final-checks-inside-the-scanning-room" class="md-nav__link">
     Final checks inside the scanning room
   </a>
@@ -778,6 +785,13 @@
         <li class="md-nav__item">
   <a href="#back-outside-the-scanner-room-control-room" class="md-nav__link">
     Back OUTSIDE THE SCANNER ROOM (control room)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#eye-tracker-and-projector-setup" class="md-nav__link">
+    Eye Tracker and projector setup
   </a>
   
 </li>
@@ -1102,6 +1116,13 @@ right from the participant's standpoint and cut the scotch tape narrower to occl
 </tbody>
 </table>
 </li>
+</ul>
+<h2 id="eye-tracker-and-projector-setup">Eye Tracker and projector setup<a class="headerlink" href="#eye-tracker-and-projector-setup" title="Permanent link">&para;</a></h2>
+<p>Please note that some of the images used in this section are sourced from the <a href="https://www.sr-research.com/support/attachment.php?aid=1376">Eye Tracker Instruction Manual</a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">To ensure accurate performance and prevent minor drifts in the pupil and CR thresholds, perform the ET Setup 10-15 minutes after powering the ET on.</p>
+</div>
+<ul class="task-list">
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Switch the projector on by hitting the power button on on its right side. The projector is found in room ███. Adjust the projector tilt and centering if the projection does not properly aim the panel inside the scanner's bore. E.g., change the height of the paper pile that supports it (see images, FENS papers).</p>
 <table>
@@ -1124,22 +1145,24 @@ right from the participant's standpoint and cut the scotch tape narrower to occl
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify that the projector projects your laptop screen by looking through the window of the console room.</p>
 </li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Go back to the <em>███</em> laptop, open a terminal and execute <code>conda deactivate</code>.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open psychopy 3 by typing <code>psychopy</code></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open the PCT experiment in <em>Psychopy</em> (<code>task-pct_bold.psyexp</code> file).<ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Run the experiment by pressing the green play button. </li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Enter the session and participant number in the pop up window. The Eyelink system setup page opens.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Press enter to begin the <em>camera setup mode</em>.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> The camera setup mode contains a view of one eye, and you can switch that view between two modes: one is the field-of-view of the ET, the second is an automatic zoom on the eye itself (or a random part if the eye is not visible).</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> To ease the setup of the ET, switch to the full view in the camera setup mode by pressing the left or right arrow. This will allow you to adjust the ET position as the infrared camera is providing feedback inside the scanning room through the projector.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> On the ET computer, verify that the calibration selected is the 9-points one.<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Click on <code>Set Options</code> on the right of the screen.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> On top left under <code>Calibration type</code>, choose the image containing 9 points.
-    <img alt="9-points_calibration" src="../../assets/images/9-points_calibration.jpg" /></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> To ease the setup of the ET, switch to the field-of-view mode in the camera setup mode by pressing the <span class="keypress">◀</span> or <span class="keypress">▶</span> arrow.
+    This will allow you to adjust the ET position as the infrared camera provides feedback inside the scanning room on the projection screen.</li>
 </ul>
 </li>
-</ul>
-</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Enter the scanning room and adjust the camera's position until the eye is fully visible.
+    To adjust the camera position, slightly unscrew the fixation locks of the camera arm, move the arm in search of the correct position, and tighten the locks again on the desired position.
+    The <strong>right</strong> eye should be visible at the center of the coil's square window for the eye.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If the image appears blurry, fine-tune the focus using the lens barrel.
+    Refer to the example image below.
+  <img alt="focus_example" src="../../assets/images/focus.png" /></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Press the <span class="keypress">A</span> key to set the pupil and CR detection thresholds automatically.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Fine-tune the pupil detection threshold using the <span class="keypress">▲</span> and <span class="keypress">▼</span> arrow keys if necessary.
+    While checking the pupil/CR image and thresholding, ask the participant to look at the screen corners to verify correct detection even in extreme positions.
+      <img alt="pupil_threshold" src="../../assets/images/pupil_threshold.png" /></li>
 </ul>
 <h2 id="final-checks-inside-the-scanning-room">Final checks inside the scanning room<a class="headerlink" href="#final-checks-inside-the-scanning-room" title="Permanent link">&para;</a></h2>
 <ul class="task-list">
