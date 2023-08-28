@@ -34,6 +34,14 @@
         <link rel="stylesheet" href="../../assets/stylesheets/palette.85d0ee34.min.css">
       
       
+  
+  
+    
+    
+  
+  
+  <style>:root{--md-admonition-icon--thanks:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M313.4 32.9c26 5.2 42.9 30.5 37.7 56.5l-2.3 11.4c-5.3 26.7-15.1 52.1-28.8 75.2h144c26.5 0 48 21.5 48 48 0 18.5-10.5 34.6-25.9 42.6C497 275.4 504 288.9 504 304c0 23.4-16.8 42.9-38.9 47.1 4.4 7.3 6.9 15.8 6.9 24.9 0 21.3-13.9 39.4-33.1 45.6.7 3.3 1.1 6.8 1.1 10.4 0 26.5-21.5 48-48 48h-97.5c-19 0-37.5-5.6-53.3-16.1l-38.5-25.7C176 420.4 160 390.4 160 358.3V247.1c0-29.2 13.3-56.7 36-75l7.4-5.9c26.5-21.2 44.6-51 51.2-84.2l2.3-11.4c5.2-26 30.5-42.9 56.5-37.7zM32 192h64c17.7 0 32 14.3 32 32v224c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32V224c0-17.7 14.3-32 32-32z"/></svg>');}</style>
+
 
 
     
@@ -248,7 +256,9 @@
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
         
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
             
@@ -650,7 +660,9 @@
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
         
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
             
@@ -951,7 +963,8 @@ Some of the emergency procedures are found here <a href="../emergency-procedures
 <ul class="task-list">
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Indicate the participant that the scanning will soon start:</p>
-<blockquote>
+<details class="quote" open="open">
+<summary>Tell the participant that we are starting</summary>
 <p>Hey [NAME], we are about to start our first scan run.</p>
 <p>This is going to be a long session, so please make sure you are feeling as comfortable as you possibly can in there.
 Remember not to cross your legs or hold your hands together and check your back is also comfortable.
@@ -962,7 +975,7 @@ If it is too tight, please let me know.</p>
 This is also a good moment to swallow, and to check your neck and head are in a comfortable position.</p>
 <p>For this first part, all you have to do is stay still; you can relax and close your eyes if it helps.</p>
 <p>Are you ready?</p>
-</blockquote>
+</details>
 </li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Wait for the participant confirmation and set the speaker off afterward.</p>
@@ -1040,7 +1053,7 @@ Are you ready?</p>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the DWI-EPI sequence <code>fmap-epi_acq-b0_dir-{RL,LR,PA,AP}__6dir_monopolar</code> for <em>B<sub>0</sub></em> field mapping by pressing <em>Continue</em> (<strong>⯈</strong>).</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While it is running, <a href="../scanning-notes/#setting-the-fov">adjust the FoV</a> for the following sequence.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the GRE (<em>phase difference</em>) sequence <code>fmap-phasediff__gre</code> for <em>B<sub>0</sub></em> field mapping by pressing <em>Continue</em> (<strong>⯈</strong>).</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While it is running, <ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While it is running,<ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <a href="../scanning-notes/#setting-the-fov">Adjust the FoV</a> for the following sequence.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify that in the next sequence parameters under <em>Contrast&gt;Reconstruction</em> the option <em>Magnitude et phase</em> is selected!</li>
 </ul>
@@ -1057,7 +1070,8 @@ Are you ready?</p>
 <ul class="task-list">
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Inform the participant about the fMRI block</p>
-<blockquote>
+<details class="quote" open="open">
+<summary>Starting the fMRI block - calibrating the eye tracker</summary>
 <p>Hey [NAME], we are now to move into measuring the activity of your brain.</p>
 <p>Is everything alright thus far?</p>
 <p>[Allow some time for response]</p>
@@ -1065,7 +1079,7 @@ Are you ready?</p>
 <p>Your are going to see a round fixation point, and the point is going to move randomly over the screen space.
 Please follow it with your gaze, trying to look at it as stable as possible and without moving your head.</p>
 <p>Are you ready?</p>
-</blockquote>
+</details>
 </li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Wait for confirmation, respond to follow-up comments, and <a href="../scanning-notes/#eye-tracker-calibration">initiate the ET calibration (instructions below)</a></p>
@@ -1076,7 +1090,8 @@ Please follow it with your gaze, trying to look at it as stable as possible and 
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify that the task's program is awaiting the scanner's trigger to start.</li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Inform the participant that we will proceed with the positive control task (PCT). Repeat task instructions.</p>
-<blockquote>
+<details class="quote" open="open">
+<summary>Starting the positive control task</summary>
 <p>Hey [NAME], thanks for your collaboration with the eye tracking calibration.</p>
 <p>The following block will collect some behavioral data and requires your collaboration.
 You will be exposed to several activities.</p>
@@ -1084,7 +1099,7 @@ You will be exposed to several activities.</p>
 If the red circle moves, we ask you to follow it with your eyes.</p>
 <p>Some other times, you'll see either "RIGHT" or "LEFT" written on the screen. During those times, please tap your thumb and the other fingers of your right or left hand as indicated on the screen.</p>
 <p>Before we start, please leave the alarm button on your tummy to free your hand for finger tapping. Please do not hesitate to grab it in case you need to squeeze it.</p>
-</blockquote>
+</details>
 </li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the <code>func-bold_task-pct_dir-{RL,LR,PA,AP}__cmrr_me4_sms4</code> protocol by pressing <em>Continue</em> (<strong>⯈</strong>).</p>
@@ -1103,11 +1118,12 @@ If the red circle moves, we ask you to follow it with your eyes.</p>
 <ul class="task-list">
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Inform the participant:</p>
-<blockquote>
+<details class="quote" open="open">
+<summary>Quick re-calibration the ET before continuing</summary>
 <p>Thanks [NAME], that was a short behavioral task.</p>
 <p>Before moving on, we will run another calibration of the eye tracker, please follow the moving fixation point.</p>
 <p>Is everything alright?</p>
-</blockquote>
+</details>
 </li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Wait for confirmation, respond to follow-up comments, and <a href="../scanning-notes/#eye-tracker-calibration">initiate the ET calibration (instructions below)</a></p>
@@ -1115,12 +1131,13 @@ If the red circle moves, we ask you to follow it with your eyes.</p>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the ET is calibrated, verify that the task is left and awaiting for the sequence's trigger to start.</li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Inform the participant that the next sequence is resting-state fMRI (rsfMRI).</p>
-<blockquote>
+<details class="quote" open="open">
+<summary>Starting the resting-state block</summary>
 <p>Hey [NAME], we are about to start resting-state fMRI.</p>
 <p>For this scan, all you have to do is stay still, and look at the movie.
 Please do not close your eyes, and it is particularly critical that you don't move at all in the initial moments of the acquisition block.</p>
 <p>Are you ready?</p>
-</blockquote>
+</details>
 </li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the rsfMRI sequence <code>func-bold_task-rest_dir-{RL,LR,PA,AP}__cmrr_me4_sms4</code> by pressing <em>Continue</em> (<strong>⯈</strong>).</p>
@@ -1137,11 +1154,12 @@ Please do not close your eyes, and it is particularly critical that you don't mo
 <ul class="task-list">
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Inform the participant:</p>
-<blockquote>
+<details class="quote">
+<summary>Quick re-calibration the ET before continuing</summary>
 <p>Thanks [NAME], that was a long behavioral block.</p>
 <p>Before moving on, we will run another calibration of the eye tracker, please follow the moving fixation point.</p>
 <p>Is everything alright?</p>
-</blockquote>
+</details>
 </li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Wait for confirmation, respond to follow-up comments, and <a href="../scanning-notes/#eye-tracker-calibration">initiate the ET calibration (instructions below)</a></p>
@@ -1149,18 +1167,19 @@ Please do not close your eyes, and it is particularly critical that you don't mo
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the ET is calibrated, verify that the task is left and awaiting for the sequence's trigger to start.</li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Inform the participant that the next sequence is breath-holding task fMRI. Repeat the instructions for the task.</p>
-<blockquote>
+<details class="quote" open="open">
+<summary>Starting the breath-holding task</summary>
 <p>Hey [NAME], we will proceed now with a breath-holding task.</p>
 <p>I remind you that you have to breathe following the cues of the colored rectangle.</p>
 <p>Green means "BREATHE IN", orange means "BREATHE OUT" and red means "HOLD YOUR BREATH".</p>
 <p>Remember to not follow the breathing instructions during the first block and to exhale the small amount of air you have remaining at the end of the hold.</p>
 <p>Are you ready?</p>
-</blockquote>
+</details>
 </li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Launch the <code>func-bold_task-bht_dir-{RL,LR,PA,AP}__cmrr_me4_sms4</code> sequence by pressing <em>Continue</em> (<strong>⯈</strong>).</p>
 </li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While it is running, determine whether there is enough time to run the anatomical T2-weighted run. If so, <a href="../scanning-notes/#setting-the-fov">adjust the FoV</a> for the following sequence. </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> While it is running, determine whether there is enough time to run the anatomical T2-weighted run. If so, <a href="../scanning-notes/#setting-the-fov">adjust the FoV</a> for the following sequence.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the sequence is over, you need to stop manually the psychopy task by pressing the key <span class="keypress">t</span> on the keyboard (as fast as possible to avoid collecting more data than needed).</li>
 </ul>
 <h2 id="concluding-the-session">Concluding the session<a class="headerlink" href="#concluding-the-session" title="Permanent link">&para;</a></h2>
@@ -1173,9 +1192,10 @@ Please do not close your eyes, and it is particularly critical that you don't mo
 <ul class="task-list">
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Inform the participant:</p>
-<blockquote>
+<details class="quote" open="open">
+<summary>Session is finished</summary>
 <p>Thanks [NAME], the session has concluded and we will shortly let you out of the scanner.</p>
-</blockquote>
+</details>
 </li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> The exam is over, you can proceed with the <a href="../tear-down/">tear-down protocol</a>.</p>
@@ -1192,6 +1212,12 @@ Please do not close your eyes, and it is particularly critical that you don't mo
           
           
         </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
         
       </main>
       
@@ -1222,7 +1248,7 @@ Please do not close your eyes, and it is particularly critical that you don't mo
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["tabs", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.expand", "navigation.top", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.78eede0e.min.js"></script>

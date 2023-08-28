@@ -55,3 +55,21 @@ span.flip {
   -ms-transform: scale(-1, -1);
   transform: scale(-1, -1);
 }
+
+/*:root {
+  --md-admonition-icon--thanks: fa-thumbs-up;
+}*/
+.md-typeset .admonition.thanks,
+.md-typeset details.thanks {
+  border-color: rgb(43, 155, 70);
+}
+.md-typeset .thanks > .admonition-title,
+.md-typeset .thanks > summary {
+  background-color: rgba(43, 155, 70, 0.1);
+}
+.md-typeset .thanks > .admonition-title::before,
+.md-typeset .thanks > summary::before {
+  background-color: rgb(43, 155, 70);
+  -webkit-mask-image: var(--md-admonition-icon--thanks);
+          mask-image: var(--md-admonition-icon--thanks);
+}
