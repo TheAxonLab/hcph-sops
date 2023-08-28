@@ -20,7 +20,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.2.3">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.2.5">
     
     
       
@@ -1071,7 +1071,7 @@ that you must adapt your breathing to the pace indicated by the color-changing r
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> When completely laying down on the bed, tightly fasten the RB and check with the participant whether they are too uncomfortable.</p>
 </li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Solicit feedback on participant's comfort while positioning them on the scanner bed and suggest ergonomic positioning of their arms to avoid discomfort. </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Solicit feedback on participant's comfort while positioning them on the scanner bed and suggest ergonomic positioning of their arms to avoid discomfort.</li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the subject is lying on the MR bed, check that no arms/legs lie on the GA or the RB tubes.</p>
 <p><img alt="alarm_button" src="../../assets/images/alarm_button.png" /></p>
@@ -1116,22 +1116,61 @@ that you must adapt your breathing to the pace indicated by the color-changing r
 </li>
 </ul>
 <h3 id="final-preparatory-steps-of-the-et">Final preparatory steps of the ET<a class="headerlink" href="#final-preparatory-steps-of-the-et" title="Permanent link">&para;</a></h3>
+<p>Please note that some of the images used in this section are sourced from the <a href="../../assets/files/EL1000Plus_UserManual_1.0.20_GOP.pdf">Eye Tracker Instruction Manual</a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">To ensure accurate performance and prevent minor drifts in the pupil and CR thresholds, perform the ET Setup 10-15 minutes after powering the ET on.</p>
+</div>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> You should see the projection of the calibration mode as you left it open before.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Adjust the ET position to point the camera to the right eye. Adjustment may be easier if you switch to <em>Head camera</em> mode, which has a wider angle.<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> The lens can be focused by rotating it, like a photo camera.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If the position of the ET is still inadequate, you can move the base.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> As a last resort, you can also adjust the strength of the infrared light (emitter). This is the black box on the other side with respect to the lens. Under the emitter there are two little screws. Unscrew, move the emitter front/back, check the contrast of the face image, re-screw.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open the PCT experiment in <em>Psychopy</em> (<code>task-pct_bold.psyexp</code> file).<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Run the experiment by pressing the green play button.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Press enter to begin the <em>camera setup mode</em>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> The camera setup mode contains a view of one eye, and you can switch that view between two modes: one is the field-of-view of the ET, the second is an automatic zoom on the eye itself (or a random part if the eye is not visible).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> To ease the setup of the ET, switch to the field-of-view mode in the camera setup mode by pressing the <span class="keypress">◀</span> or <span class="keypress">▶</span> arrow.
+    This will allow you to adjust the ET position as the infrared camera provides feedback inside the scanning room on the projection screen.</li>
 </ul>
 </li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Enter the scanning room and adjust the ET arm position and focus of the lens until the eye is fully visible.
+    The <strong>right</strong> eye should be visible at the center of the coil's square window for the eye.</p>
+<div class="admonition important">
+<p class="admonition-title">Adjusting the camera's field-of-view and focus</p>
+<ul class="task-list">
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> To adjust the camera position, slightly unscrew the fixation locks of the camera arm, move the arm in search of the correct position, and tighten the locks again on the desired position.
+    <img alt="base-eye-tracker" src="../../assets/images/base-eye-tracker.png" /></p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <strong>If the eye coverage is still inappropriate</strong>, realign the mirror frame position by sliding it along the rails attached to the coil.
+    You may ask the participant to do it while inside the bore.</p>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <strong>If the eye coverage is still inappropriate</strong>, re-adjust the participant's head positioning inside the coil.
+    You'll need to extract the bed outside of the bore for this by pressing the <strong>Home</strong> (🏠) button.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <strong>If the eye coverage is still inappropriate</strong>, revise the vertical position of the infrared mirror with respect to the standard mirror (this will require new gloves and replacing the tape to stick the infrared mirror).
+    Even a tiny adjustment can impact calibration and eye positioning.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Repeat the previous steps until the eye is properly aimed and focused.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If the image appears blurry, fine-tune the focus using the lens barrel.
+    Refer to the example image below.
+    <img alt="focus_example" src="../../assets/images/focus.png" /></li>
+</ul>
+</div>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Press the <span class="keypress">A</span> key to set the pupil and CR detection thresholds automatically.</p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Fine-tune the pupil detection threshold using the <span class="keypress">▲</span> and <span class="keypress">▼</span> arrow keys if necessary.
+    While checking the pupil/CR image and thresholding, ask the participant to look at the screen corners to verify correct detection even in extreme positions.
+    <img alt="pupil_threshold" src="../../assets/images/pupil_threshold.png" /></p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> As a last resort, you can also adjust the strength of the infrared light (emitter).
+    This is the black box on the opposite side of the lens on the ET arm.
+    Under the emitter there are two little screws.
+    Unscrew, move the emitter front/back, check the contrast of the face image, re-screw.</p>
+</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Switch the ET to <em>Eye camera</em> mode (zoomed in) and check the eye is still well covered by the view and the pupil is segmented.</li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check that two crosses appear on the eye.</p>
-<p><img alt="base-eye-tracker" src="../../assets/images/base-eye-tracker.png" /></p>
-</li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If the pupil is correctly seen, as well as the eye (indicated by the crosses following their movement), inform the participant that you are leaving the room, and that you are going to first check with them whether the speaker works well, immediately.</p>
-</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check that two crosses appear on the eye.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If the pupil is correctly seen, as well as the eye (indicated by the crosses following their movement), inform the participant that you are leaving the room, and that you are going to first check with them whether the speaker works well, immediately.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Exit the camera mode by pressing <span class="keypress">Enter</span>.</li>
 </ul>
 <h3 id="check-the-communication-with-the-participant">Check the communication with the participant<a class="headerlink" href="#check-the-communication-with-the-participant" title="Permanent link">&para;</a></h3>
