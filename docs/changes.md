@@ -7,6 +7,66 @@ All notable changes to these SOPs are documented below, starting with the most r
 	If you have identified a problem, a typo, or something missing, and you know it is not in our tracker, please report it by [creating a new issue](https://github.com/TheAxonLab/hcph-protocol/issues/new).
 
 <!-- insertion marker -->
+## [0.2.0](https://github.com/TheAxonLab/hcph-protocol/releases/tag/0.2.0) (August 29, 2023)
+
+<small>[Compare with 0.1.0](https://github.com/TheAxonLab/hcph-protocol/compare/0.1.0...0.2.0)</small>
+
+### Enhancements, new features, and additions
+
+- Change icon of quote admonitions
+ ([fbadaed](https://github.com/TheAxonLab/hcph-protocol/commit/fbadaedc37d61e2b2f137cede897fd608433142e) by [Oscar Esteban](https://github.com/oesteban)).
+- Large overhaul, including initial flowchart of the experiment
+ ([0e0d390](https://github.com/TheAxonLab/hcph-protocol/commit/0e0d390931ba13b96374a14cf8ea495f782eda85) by [Oscar Esteban](https://github.com/oesteban)).
+- Add explanation in SOPs and code to run defacing
+ ([2d8982c](https://github.com/TheAxonLab/hcph-protocol/commit/2d8982c11368678b7141c31cc575d62eada474e7) by [Céline Provins](https://github.com/celprov)
+).
+- Add codespell
+ ([61717da](https://github.com/TheAxonLab/hcph-protocol/commit/61717daacaddc4d2a5cbb60893e1ea3504aa184e) by [Oscar Esteban](https://github.com/oesteban)).
+- Add folder structure of the BIDS dataset
+ ([c3d0a2a](https://github.com/TheAxonLab/hcph-protocol/commit/c3d0a2a01a7bbe2fc953c28c709ceeba2ede6479) by [Oscar Esteban](https://github.com/oesteban)). Related issues/PRs: [#94](https://github.com/TheAxonLab/hcph-protocol/issues/94)
+- Add tape for head motion
+ ([2dbae4d](https://github.com/TheAxonLab/hcph-protocol/commit/2dbae4d7c359ef48fc058861708ce6750bfc8ce4) by [Oscar Esteban](https://github.com/oesteban)). Related issues/PRs: [#87](https://github.com/TheAxonLab/hcph-protocol/issues/87)
+- Add STP100D and MMBT-S manuals
+ ([9feb336](https://github.com/TheAxonLab/hcph-protocol/commit/9feb3366ad617219f3cbcb8a6fdbe77bbaea382e) by [Oscar Esteban](https://github.com/oesteban)).
+- Improve some admonitions
+ ([de3f034](https://github.com/TheAxonLab/hcph-protocol/commit/de3f034568d4c08684b72bd3f9457c246cb69849) by [Oscar Esteban](https://github.com/oesteban)).
+
+### Bug Fixes
+
+- Stop leaking host name
+ ([5a42d85](https://github.com/TheAxonLab/hcph-protocol/commit/5a42d8574b6a4b9157f2bbe3bb2445eaef9e6be5) by [Oscar Esteban](https://github.com/oesteban)). Related issues/PRs: [#122](https://github.com/TheAxonLab/hcph-protocol/issues/122)
+- Refactor of the preliminary section, separating an intro from it
+ ([19b4571](https://github.com/TheAxonLab/hcph-protocol/commit/19b4571589a49cabd22fa2b092bd7a9ada006c40) by [Oscar Esteban](https://github.com/oesteban)).
+- Trim trailing spaces, change admonition type
+ ([6e16e80](https://github.com/TheAxonLab/hcph-protocol/commit/6e16e80baa13299b57785d46a15599dd8569c044) by [Oscar Esteban](https://github.com/oesteban)).
+- Revert removal of indentation in script file
+ ([9be8d05](https://github.com/TheAxonLab/hcph-protocol/commit/9be8d055b8e21fc3ae56cf6d41d23ad46fd02b3d) by [Oscar Esteban](https://github.com/oesteban)).
+- Reorder some incongruent steps, move sound, light and ventilation
+ ([e1f4b4b](https://github.com/TheAxonLab/hcph-protocol/commit/e1f4b4b35d1bf9db422a10469b26fcdc8be16c7e) by [Oscar Esteban](https://github.com/oesteban)).
+- Use octicons and fontawesome
+ ([09927cc](https://github.com/TheAxonLab/hcph-protocol/commit/09927cc63e16b9cdd5a82d6c566b124e9d78d255) by [Oscar Esteban](https://github.com/oesteban)).
+- Inconsistencies in the ET's eye-coverage setting and calibration
+ ([15cebe2](https://github.com/TheAxonLab/hcph-protocol/commit/15cebe21044daa79d2ce8e04332a9af420b36cf3) by [Oscar Esteban](https://github.com/oesteban)).
+- Misplaced ET description and minor revisions
+ ([60475e7](https://github.com/TheAxonLab/hcph-protocol/commit/60475e7ad21cd4f595beb381dc9a69fc897fdb25) by [Oscar Esteban](https://github.com/oesteban)). Related issues/PRs: [#99](https://github.com/TheAxonLab/hcph-protocol/issues/99)
+- Spell check and indentation with spaces
+ ([2c2cdeb](https://github.com/TheAxonLab/hcph-protocol/commit/2c2cdeb979fffecb485def7bc48d70f677f37659) by [Oscar Esteban](https://github.com/oesteban)).
+- Add a note regarding disruption on BIDS names after session 14
+ ([1da4810](https://github.com/TheAxonLab/hcph-protocol/commit/1da4810516dc6a08e6362bef464bb1d0bd150080) by [Oscar Esteban](https://github.com/oesteban)).
+- Wrong number of sessions at index page
+ ([1adb77d](https://github.com/TheAxonLab/hcph-protocol/commit/1adb77de68e241c395f4ccb6dd425b8d655fd96e) by [Oscar Esteban](https://github.com/oesteban)).
+- Typo
+ ([abe827c](https://github.com/TheAxonLab/hcph-protocol/commit/abe827c22b9c5f57fa949a02d7c3eeb42b346f41) by [Oscar Esteban](https://github.com/oesteban)).
+- Improve the key listening
+ ([ead2438](https://github.com/TheAxonLab/hcph-protocol/commit/ead2438129b1898bc2696590ff6d21e446fa3a46) by [Oscar Esteban](https://github.com/oesteban)).
+
+### Maintenance and Continuous Integration
+
+- Update git-changelog config
+ ([29d79f0](https://github.com/TheAxonLab/hcph-protocol/commit/29d79f07de8ad9ddca3fdbef3f73f96e05633509) by [Oscar Esteban](https://github.com/oesteban)).
+- Fix file path and run black for style
+ ([164d8f1](https://github.com/TheAxonLab/hcph-protocol/commit/164d8f1d7e09528118efa5547dc1c11b0c79ef8a) by [Oscar Esteban](https://github.com/oesteban)).
+
 ## [0.1.0](https://github.com/TheAxonLab/hcph-protocol/releases/tag/0.1.0) (June 29, 2023)
 
 The first release of these SOPs.
@@ -208,4 +268,3 @@ Currently, the document is still a work in progress, with the [Data management](
  ([856e58a](https://github.com/TheAxonLab/hcph-protocol/commit/856e58a56f14861ce1bce6d9079d26b9e63ca539) by [Oscar Esteban](https://github.com/oesteban)).
 - Remove old exemplary code
  ([2e5697c](https://github.com/TheAxonLab/hcph-protocol/commit/2e5697cb7c627422db6b5ffb2a71c017f84ef216) by [Oscar Esteban](https://github.com/oesteban)).
-
