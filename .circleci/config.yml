@@ -6,13 +6,17 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Configure Conda for shell
+          command: conda init bash  # Replace 'bash' with your shell name if needed
+          shell: bash  # Replace 'bash' with your shell name if needed
+      - run:
           name: Create Conda environment
           command: conda create -n myenv python=3.8 -y
       - run:
           name: Install system dependencies
           command: |
             conda activate myenv
-            conda install -c conda-forge cairo pango -y
+            apt-get update && apt-get install -y libcairo2-dev libpango1.0-dev libgdk-pixbuf2.0-dev
       - run:
           name: Set environment variables
           command: |
@@ -36,4 +40,3 @@ workflows:
   commit:
     jobs:
       - build
-
