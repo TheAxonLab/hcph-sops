@@ -14,13 +14,15 @@ jobs:
           command: python -m venv myenv
       - run:
           name: Activate virtual environment
-          command: source myenv/bin/activate
+          command: myenv/bin/activate
       - run:
-          name: Install requirements
-          command: pip install -r requirements.txt
+          name: Upgrade pip and install requirements
+          command: |
+            myenv/bin/pip install --upgrade pip
+            myenv/bin/pip install -r requirements.txt
       - run:
           name: Build preview
-          command: mkdocs build --site-dir _SOPs_preview
+          command: myenv/bin/mkdocs build --site-dir _SOPs_preview
       - store_artifacts:
           path: _SOPs_preview
 workflows:
