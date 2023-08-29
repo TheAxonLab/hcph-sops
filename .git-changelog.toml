@@ -1,0 +1,7 @@
+bump = 'auto'
+convention = 'angular'
+in-place = true
+output = 'docs/changes.md'
+parse-refs = true
+sections = 'feat,fix,maint'
+template = 'path:./.maint/history.md.jinja'
