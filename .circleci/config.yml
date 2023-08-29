@@ -2,16 +2,21 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/python:3.11.5
+    - image: circleci/python:3.8
+
     steps:
       - checkout
       - run:
+          name: Install system dependencies
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y libcairo2 libpango-1.0-0 fonts-dejavu-core
+      - run:
           name: Install requirements
           command: |
-            python -m pip install --upgrade pip
+            python -m venv venv
+            . venv/bin/activate
             pip install -r requirements.txt
-            RUN apt-get update -y
-            RUN apt-get install -y libcairo2
       - run:
           name: Build preview
           command: |
