@@ -15,9 +15,9 @@ jobs:
           name: Build preview
           command: |
             . venv/bin/activate
-            mkdocs build --site-dir _SOPs_preview
+            mkdocs build --site-dir _site_preview
       - store_artifacts:
-          path: _SOPs_preview
+          path: _site_preview
 
 workflows:
   version: 2
