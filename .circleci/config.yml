@@ -6,27 +6,20 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Initialize conda
-          command: |
-            echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc
-            source ~/.bashrc
-      - run:
           name: Create Conda environment
-          command: |
-            conda create -n myenv python=3.8
-            conda activate myenv
+          command: conda create -n myenv python=3.8 -y
       - run:
           name: Install system dependencies
-          command: |
-            conda install -c conda-forge cairo
+          command: conda install -n myenv -c conda-forge cairo -y
       - run:
           name: Install requirements
           command: |
+            source activate myenv
             pip install -r requirements.txt
       - run:
           name: Build preview
           command: |
-            conda activate myenv
+            source activate myenv
             mkdocs build --site-dir _SOPs_preview
       - store_artifacts:
           path: _SOPs_preview
