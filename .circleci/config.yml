@@ -11,8 +11,8 @@ jobs:
       - run:
           name: Install system dependencies
           command: |
-            conda install -n myenv -c conda-forge cairo pango gdk-pixbuf2 -y
-            apt-get update && apt-get install -y libcairo2-dev libpango1.0-dev
+            conda activate myenv
+            conda install -c conda-forge cairo pango gdk-pixbuf2 -y
       - run:
           name: Set environment variables
           command: |
