@@ -10,7 +10,15 @@ jobs:
           command: conda create -n myenv python=3.8 -y
       - run:
           name: Install system dependencies
-          command: conda install -n myenv -c conda-forge cairo -y
+          command: |
+            conda install -n myenv -c conda-forge cairo -y
+            apt-get update && apt-get install -y libcairo2-dev
+      - run:
+          name: Set environment variables
+          command: |
+            echo "LD_LIBRARY_PATH=${CONDA_PREFIX}/lib:\${LD_LIBRARY_PATH}" >> $BASH_ENV
+            echo "PKG_CONFIG_PATH=${CONDA_PREFIX}/lib/pkgconfig:\${PKG_CONFIG_PATH}" >> $BASH_ENV
+            source $BASH_ENV
       - run:
           name: Install requirements
           command: |
