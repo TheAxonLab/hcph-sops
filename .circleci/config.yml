@@ -2,20 +2,21 @@ version: 2.1
 jobs:
   build:
     docker:
-    - image: circleci/python:3.8
-
+      - image: condaforge/miniforge3
     steps:
       - checkout
       - run:
+          name: Create Conda environment
+          command: |
+            conda create -n myenv python=3.8
+            conda activate myenv
+      - run:
           name: Install system dependencies
           command: |
-            sudo apt-get update
-            sudo apt-get install -y libcairo2 libpango-1.0-0 fonts-dejavu-core
+            conda install -c conda-forge cairo
       - run:
           name: Install requirements
           command: |
-            python -m venv venv
-            . venv/bin/activate
             pip install -r requirements.txt
       - run:
           name: Build preview
