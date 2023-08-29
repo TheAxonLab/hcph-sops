@@ -6,9 +6,14 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Initialize conda
+          command: |
+            echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc
+            source ~/.bashrc
+      - run:
           name: Create Conda environment
           command: |
-            conda create -n myenv python=3.10
+            conda create -n myenv python=3.8
             conda activate myenv
       - run:
           name: Install system dependencies
@@ -22,10 +27,9 @@ jobs:
           name: Build preview
           command: |
             conda activate myenv
-            mkdocs build --site-dir _site_preview
+            mkdocs build --site-dir _SOPs_preview
       - store_artifacts:
-          path: _site_preview
-
+          path: _SOPs_preview
 workflows:
   version: 2
   commit:
