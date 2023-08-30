@@ -6,7 +6,8 @@
 
     !!! danger "Cutting electricity will NOT turn off the magnetic field!"
 
-- [ ] Remove the subject from the scanner's room, applying the [manual extraction procedure described below](#manual-extraction-procedure).
+- [ ] Remove the subject from the scanner's room.
+If the bed is stuck inside the bore apply the first step of [manual extraction procedure described below](#manual-extraction-procedure) and help the participant leave the room.
 - [ ] Close the scanner's room.
 - [ ] Retrieve the MR-compatible extinguisher from its designated corner of the control room (see picture below) and put it in front of the scanning room.
 
@@ -87,6 +88,7 @@ At any moment, you may determine that the participant will require medical atten
 **After you called the resuscitation unit**:
 
 - [ ] Press on the heart button [INSERT PICTURE] on the wall, after lifting the security lid. This will guide the intensive care team to the place where they need to intervene.
+
     !!! important "In case you pressed the heart button by mistake,  turn it off by pressing the adjacent green button."
 
 - [ ] If the participant remains in the scanning room, re-enter the room and proceed with the [manual extraction protocol](#manual-extraction-procedure).
