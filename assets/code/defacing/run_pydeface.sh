@@ -1,9 +1,6 @@
 #!/bin/sh
 
 data_path="/data/datasets/hcph-pilot"
-nondefaced_path="/data/datasets/hcph-pilot-nondefaced"
-
-mkdir -p $nondefaced_path
 
 cd $data_path
 
