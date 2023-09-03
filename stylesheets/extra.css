@@ -56,9 +56,6 @@ span.flip {
   transform: scale(-1, -1);
 }
 
-/*:root {
-  --md-admonition-icon--thanks: fa-thumbs-up;
-}*/
 .md-typeset .admonition.thanks,
 .md-typeset details.thanks {
   border-color: rgb(43, 155, 70);
@@ -72,4 +69,19 @@ span.flip {
   background-color: rgb(43, 155, 70);
   -webkit-mask-image: var(--md-admonition-icon--thanks);
           mask-image: var(--md-admonition-icon--thanks);
+}
+
+.md-typeset .admonition.important,
+.md-typeset details.important {
+/*  border-color: rgb(43, 155, 70);*/
+}
+.md-typeset .important > .admonition-title,
+.md-typeset .important > summary {
+/*  background-color: rgba(43, 155, 70, 0.1);*/
+}
+.md-typeset .important > .admonition-title::before,
+.md-typeset .important > summary::before {
+/*  background-color: rgb(43, 155, 70);*/
+  -webkit-mask-image: var(--md-admonition-icon--important);
+          mask-image: var(--md-admonition-icon--important);
 }
