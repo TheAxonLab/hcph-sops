@@ -85,3 +85,6 @@ span.flip {
   -webkit-mask-image: var(--md-admonition-icon--important);
           mask-image: var(--md-admonition-icon--important);
 }
+
+.redcolor { color: red; }
+.bluecolor { color: darkblue; }
