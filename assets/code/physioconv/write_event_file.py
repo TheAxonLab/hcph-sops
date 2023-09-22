@@ -179,7 +179,7 @@ displayed to indicate breathing out""",
         json_content = EVENTS_JSON_BOILERPLATE.copy()
         json_content["StimulusPresentation"]["Code"] = (
             "https://github.com/TheAxonLab/HCPh-fMRI-tasks/blob/"
-            "97cc7879622f45129eefb9968890b41631f40851/task-pct_bold.psyexp"
+            "97cc7879622f45129eefb9968890b41631f40851/task-qct_bold.psyexp"
         )
         json_content["trial_type"] = {}
         json_content["trial_type"][

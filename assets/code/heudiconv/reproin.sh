@@ -1,7 +1,6 @@
 #!/bin/bash
-heudiconv -s "pilot" -ss "08" -f heuristic_reproin.py -b \
-          -o /data/datasets/hcph-pilot/ \
-          --files /data/datasets/hcph-pilot/sourcedata/\
+heudiconv -s "001" -ss "pilot001" -b -l . -o /data/datasets/hcph/ \
+          -f {{ secrets.data.sops_clone_path | default('<sops_clone_path>') }}/code/heudiconv/heuristic_reproin.py -b \
+          --files /data/datasets/hcph-pilot-sourcedata/\
                   sub-{{ secrets.ids.pacs_subject | default("01") }}/\
-                  ses-{{ secrets.ids.pacs_session | default("18950702") }}/ \
-          -l .
+                  ses-{{ secrets.ids.pacs_session | default("18950702") }}/
