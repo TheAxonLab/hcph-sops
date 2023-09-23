@@ -27,6 +27,8 @@ force_in_git = [
     '.bidsignore',
     'code/**',
     '*.json',
+    '*.bvec',
+    '*.bval',
     # comment out the line below to not put participants or scan info into Git
     # (might contain sensitive information)
     '*.tsv',

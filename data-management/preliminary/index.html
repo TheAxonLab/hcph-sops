@@ -20,7 +20,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.0">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.1">
     
     
       
@@ -28,10 +28,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.9f615399.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.72749a73.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.649f08f9.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.a5377069.min.css">
       
       
   
@@ -628,9 +628,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#installing-the-datalad-dataset" class="md-nav__link">
-    Installing the DataLad dataset
+  <a href="#client-side-installing-the-datalad-dataset" class="md-nav__link">
+    Client side: Installing the DataLad dataset
   </a>
+  
+    <nav class="md-nav" aria-label="Client side: Installing the DataLad dataset">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hpc-users-instructions-to-install-datalad" class="md-nav__link">
+    HPC users - instructions to install DataLad
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -760,9 +773,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#installing-the-datalad-dataset" class="md-nav__link">
-    Installing the DataLad dataset
+  <a href="#client-side-installing-the-datalad-dataset" class="md-nav__link">
+    Client side: Installing the DataLad dataset
   </a>
+  
+    <nav class="md-nav" aria-label="Client side: Installing the DataLad dataset">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hpc-users-instructions-to-install-datalad" class="md-nav__link">
+    HPC users - instructions to install DataLad
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -783,18 +809,24 @@
 
   <h1>Before data acquisition (storage preparation)</h1>
 
-<h2 id="creating-a-datalad-dataset">Creating a DataLad dataset<a class="headerlink" href="#creating-a-datalad-dataset" title="Permanent link">&para;</a></h2>
+<p>This project maintains data under version control thanks to <em>DataLad</em><sup><a href="https://doi.org/10.5281/zenodo.4495661" title="Hanke, Michael, Yaroslav O. Halchenko, Benjamin Poldrack, Kyle Meyer, Debanjum Singh Solanky, Gergana Alteva, Jason Gors, et al. “Datalad/Datalad: ## 0.14.0 (February 02, 2021).” Zenodo, February 2, 2021. doi:10.5281/zenodo.4495661">1</a></sup>.
+For instructions on how to setup <em>DataLad</em> on your <abbr title="personal computer">PC</abbr>, please refer to the <a href="https://handbook.datalad.org/en/latest/intro/installation.html">official documentation</a>.
+When employing high-performance computing (<abbr title="high-performance computing">HPC</abbr>), we provide <a href="#hpc-users-instructions-to-install-datalad">some specific guidelines below</a>.</p>
+<div class="admonition important">
+<p class="admonition-title">Please read the <a href="https://handbook.datalad.org/en/latest/index.html"><em>DataLad Handbook</em></a>, especially if you are new to this tool</p>
+</div>
+<h2 id="creating-a-datalad-dataset">Creating a <em>DataLad</em> dataset<a class="headerlink" href="#creating-a-datalad-dataset" title="Permanent link">&para;</a></h2>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Designate a host and folder where data will be centralized.
-    In the context of this study, the primary copy of data will be downloaded into <hostname>, under the path <code>/data/datasets/hcph-pilot-sourcedata</code> for the piloting acquisitions and <code>/data/datasets/hcph-sourcedata</code> for the experimental data collection.</li>
+    In the context of this study, the primary copy of data will be downloaded into \<hostname>, under the path <code>/data/datasets/hcph-pilot-sourcedata</code> for the piloting acquisitions and <code>/data/datasets/hcph-sourcedata</code> for the experimental data collection.</li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install the <code>bids</code> <em>DataLad procedure</em> provided from this repository to facilitate the correct intake of data and metadata:</p>
-<div class="language-shell highlight"><span class="filename">Linking the DataLad procedure of this repo</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">PYTHON_SITE_PACKAGES</span><span class="o">=</span><span class="k">$(</span><span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;import sysconfig; print(sysconfig.get_paths()[&quot;purelib&quot;])&#39;</span><span class="w"> </span><span class="k">)</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">PYTHON_SITE_PACKAGES</span><span class="o">=</span><span class="k">$(</span><span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;import sysconfig; print(sysconfig.get_paths()[&quot;purelib&quot;])&#39;</span><span class="w"> </span><span class="k">)</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>ln<span class="w"> </span>-s<span class="w"> </span>&lt;path&gt;/code/datalad/cfg_bids.py<span class="w"> </span><span class="si">${</span><span class="nv">PYTHON_SITE_PACKAGES</span><span class="si">}</span>/datalad/resources/procedures/
 </span></code></pre></div>
-<details class="warning">
-<summary>DataLad's documentation does not recommend this approach</summary>
-<p>For safety, you can prefer to use DataLad's recommendations and place the <code>cfg_bids.py</code> file in some of the suggested paths.</p>
+<details class="bug">
+<summary><em>DataLad</em>'s documentation does not recommend this approach</summary>
+<p>For safety, you can prefer to use <em>DataLad</em>'s recommendations and place the <code>cfg_bids.py</code> file in some of the suggested paths.</p>
 </details>
 </li>
 <li class="task-list-item">
@@ -806,16 +838,19 @@
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>cfg_text2git<span class="w"> </span><span class="o">(</span>/home/oesteban/.miniconda/lib/python3.9/site-packages/datalad/resources/procedures/cfg_text2git.py<span class="o">)</span><span class="w"> </span><span class="o">[</span>python_script<span class="o">]</span>
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>cfg_noannex<span class="w"> </span><span class="o">(</span>/home/oesteban/.miniconda/lib/python3.9/site-packages/datalad/resources/procedures/cfg_noannex.py<span class="o">)</span><span class="w"> </span><span class="o">[</span>python_script<span class="o">]</span>
 </span></code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Learn more about the <a href="https://handbook.datalad.org/en/latest/basics/101-127-yoda.html"><abbr title="YODA's Organigram on Data Analysis">YODA</abbr> principles (<em>DataLad Handbook</em>)</a></p>
+</div>
 </li>
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Create a Datalad dataset for the original dataset:</p>
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Create a <em>DataLad</em> dataset for the original dataset:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>/data/datasets/
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>datalad<span class="w"> </span>create<span class="w"> </span>-c<span class="w"> </span>bids<span class="w"> </span>hcph
 </span></code></pre></div>
 </li>
 </ul>
 <!--
-- [ ] Create a Datalad subdataset called `sourcedata`
+- [ ] Create a *DataLad* subdataset called `sourcedata`
 
     <div class="language-bash highlight"><span class="filename">bash oneliner to link sessions</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">sesid</span><span class="o">=</span><span class="m">1</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">for</span><span class="w"> </span>session<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span><span class="w"> </span>find<span class="w"> </span>/data/datasets/hcph-pilot-sourcedata/sub-01/<span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-type<span class="w"> </span>d<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;ses-*&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>
@@ -838,24 +873,126 @@
 </li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Configure a <a href="https://handbook.datalad.org/en/0.15/basics/101-139-hostingservices.html">GitHub sibling</a>, to host the Git history and the annex metadata:
-    <div class="language-shell highlight"><span class="filename">Creating a GitHub sibling to store DataLad's infrastructure and metadata</span><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>datalad<span class="w"> </span>siblings<span class="w"> </span>add<span class="w"> </span>--dataset<span class="w"> </span>.<span class="w"> </span>--name<span class="w"> </span>github<span class="w"> </span><span class="se">\</span>
+    <div class="language-shell highlight"><span class="filename">Creating a GitHub sibling to store DataLad's infrastructure and dataset's metadata</span><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>datalad<span class="w"> </span>siblings<span class="w"> </span>add<span class="w"> </span>--dataset<span class="w"> </span>.<span class="w"> </span>--name<span class="w"> </span>github<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">        </span>--pushurl<span class="w"> </span>git@github.com:&lt;organization&gt;/&lt;repo_name&gt;.git<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">        </span>--url<span class="w"> </span>https://github.com/&lt;organization&gt;/&lt;repo_name&gt;.git<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">        </span>--publish-depends<span class="w"> </span>ria-storage
 </span></code></pre></div></p>
 </li>
 </ul>
-<h2 id="installing-the-datalad-dataset">Installing the DataLad dataset<a class="headerlink" href="#installing-the-datalad-dataset" title="Permanent link">&para;</a></h2>
-<p>To fetch the dataset from the <abbr title="Remote Indexed Archives">RIA</abbr> store, you will need your <abbr title="Secure Shell or Secure Socket Shell">SSH</abbr> key be added to the authorized keys.</p>
+<h2 id="client-side-installing-the-datalad-dataset"><em>Client</em> side: Installing the <em>DataLad</em> dataset<a class="headerlink" href="#client-side-installing-the-datalad-dataset" title="Permanent link">&para;</a></h2>
+<p>Wherever you want to process the data, you'll need to <code>datalad install</code> it before you can pull down (<code>datalad get</code>) the data.
+To access the metadata (e.g., sidecar <abbr title="JavaScript Object Notation">JSON</abbr> files of the <abbr title="Brain Imaging Data Structure">BIDS</abbr> structure), you'll need to have access to the git repository that corresponds to the data (https://github.com/<organization>/<repo_name>.git)
+To fetch the dataset from the <abbr title="Remote Indexed Archives">RIA</abbr> store, you will need your <abbr title="Secure Shell or Secure Socket Shell">SSH</abbr> key be added to the authorized keys.</p>
+<details class="important">
+<summary>Getting access to the <abbr title="Remote Indexed Archives">RIA</abbr> store</summary>
+<p>These steps must be done just once before you can access the dataset's data:</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Create a secure <abbr title="Secure Shell or Secure Socket Shell">SSH</abbr> key</a> on the system(s) on which you want to install the dataset.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Send the <abbr title="Secure Shell or Secure Socket Shell">SSH</abbr> <strong>public</strong> key you just generated (e.g., <code>~/.ssh/id_ed25519.pub</code>) over email to Oscar at <strong><em>*</em>@</strong>****.</li>
+</ul>
+</details>
+<ul class="task-list">
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install and get the dataset normally:
-    <div class="language-shell highlight"><span class="filename">Installing the dataset without fetching data from annex</span><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>datalad<span class="w"> </span>install<span class="w"> </span>https://github.com/&lt;organization&gt;/&lt;repo_name&gt;.git
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install and get the dataset normally:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Installing the dataset without fetching data from annex</label><label for="__tabbed_1_2">Installing the dataset and fetch all data from annex, with 8 parallel threads</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>datalad<span class="w"> </span>install<span class="w"> </span>https://github.com/&lt;organization&gt;/&lt;repo_name&gt;.git
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>datalad<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>-J<span class="w"> </span><span class="m">8</span><span class="w"> </span>https://github.com/&lt;organization&gt;/&lt;repo_name&gt;.git
+</span></code></pre></div>
+</div>
+</div>
+</div>
+</li>
+</ul>
+<h3 id="hpc-users-instructions-to-install-datalad"><abbr title="high-performance computing">HPC</abbr> users - instructions to install <em>DataLad</em><a class="headerlink" href="#hpc-users-instructions-to-install-datalad" title="Permanent link">&para;</a></h3>
+<p>When <abbr title="high-performance computing">HPC</abbr> is planned for processing, <em>DataLad</em> will be required on that system(s).</p>
+<ul class="task-list">
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Start an interactive session on the <abbr title="high-performance computing">HPC</abbr> cluster</p>
+<details class="warning">
+<summary>Do not run the installation of <em>Conda</em> and <em>DataLad</em> in the login node</summary>
+<p><abbr title="high-performance computing">HPC</abbr> systems typically recommend using their login nodes only for tasks related to job submission, data management, and preparing jobscripts.
+Therefore, the execution of resource-intensive tasks such as <em>fMRIPrep</em> or building containers on login nodes can negatively impact the overall performance and responsiveness of the system for all users.
+Interactive sessions are a great alternative when available and <strong>should</strong> be used when creating the <em>DataLad</em> dataset.
+For example, in the case of systems operating <abbr title="Slurm Workload Manager, formerly known as Simple Linux Utility for Resource Management">SLURM</abbr>, the following command would open a new interactive session:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>srun --nodes=1 --ntasks-per-node=1 --time=01:00:00 --pty bash -i
 </span></code></pre></div></p>
-<p>or</p>
-<div class="language-shell highlight"><span class="filename">Installing the dataset and fetch all data from annex, with 8 parallel threads</span><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>datalad<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>-J<span class="w"> </span><span class="m">8</span><span class="w"> </span>https://github.com/&lt;organization&gt;/&lt;repo_name&gt;.git
+</details>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install <em>DataLad</em>.
+    Generally, the most convenient and user-sandboxed installation (i.e., without requiring elevated permissions) can be achieved by using <em>Conda</em>, but other alternatives (such as <em>lmod</em>) can be equally valid:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Install <em>DataLad</em> with <em>Conda</em></label><label for="__tabbed_2_2">Install <em>DataLad</em> in <abbr title="high-performance computing">HPC</abbr> with <em>lmod</em> enabled</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ul class="task-list">
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Get and install <em>Conda</em> if it is not already deployed in the system:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>wget<span class="w"> </span>https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>bash<span class="w"> </span>Miniconda3-latest-Linux-x86_64.sh
+</span></code></pre></div>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install <em>DataLad</em>:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>-y<span class="w"> </span><span class="s2">&quot;datalad&gt;=0.19&quot;</span><span class="w"> </span>datalad-container
+</span></code></pre></div>
+</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul class="task-list">
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check the availability and dependencies for a specific Python version (here we check 3.8.2):</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>module<span class="w"> </span>spider<span class="w"> </span>Python/3.8.2
+</span></code></pre></div>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Load Python (please note <code>ml</code> below is a shorthand for <code>module load</code>)</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>ml<span class="w"> </span>GCCcore/9.3.0<span class="w"> </span>Python/3.8.2
+</span></code></pre></div>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Update <em>pip</em>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>--user<span class="w"> </span>-U<span class="w"> </span>pip
+</span></code></pre></div>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install <em>DataLad</em>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span><span class="s2">&quot;datalad&gt;=0.19&quot;</span><span class="w"> </span>datalad-container
+</span></code></pre></div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check datalad is properly installed, for instance:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>$<span class="w"> </span>datalad<span class="w"> </span>--version
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>datalad<span class="w"> </span><span class="m">0</span>.19.2
+</span></code></pre></div>
+<details class="bug">
+<summary><em>DataLad</em> crashes (<em>Conda</em> installations)</summary>
+<p><em>DataLad</em> may fail with the following error:
+<div class="language-py highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="ne">ImportError</span><span class="p">:</span> <span class="n">cannot</span> <span class="kn">import</span> <span class="nn">name</span> <span class="s1">&#39;getargspec&#39;</span> <span class="kn">from</span> <span class="s1">&#39;inspect&#39;</span> <span class="p">(</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">users</span><span class="o">/</span><span class="n">cprovins</span><span class="o">/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">inspect</span><span class="o">.</span><span class="n">py</span><span class="p">)</span>
+</span></code></pre></div></p>
+<p>In such a scenario, create a <em>Conda</em> environment with a lower version of Python, and re-install datalad
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;datalad&quot;</span><span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.10
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>conda<span class="w"> </span>activate<span class="w"> </span>datalad
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>datalad<span class="w"> </span>datalad-container
+</span></code></pre></div></p>
+</details>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Configure your Git identity settings.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nb">cd</span><span class="w"> </span>~
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>--add<span class="w"> </span>user.name<span class="w"> </span><span class="s2">&quot;Jane Doe&quot;</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>--add<span class="w"> </span>user.email<span class="w"> </span>doe@example.com
 </span></code></pre></div>
 </li>
 </ul>
