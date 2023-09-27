@@ -144,6 +144,7 @@ protocols2fix: dict[str | re.Pattern[str], list[tuple[str, str]]] = {
         ),
         ("cmrr_mbep2d_bold_me4_sms4", "func-bold_task-qct__cmrr"),
         ("_task-qc_", "_task-qct_"),
+        ("anat-T2w__flair", "anat-FLAIR__spcir"),
         ("AAHead_Scout_.*", "anat-scout"),
     ]
     # e.g., QA:
@@ -295,6 +296,9 @@ def infotodict(seqinfo):
     t2w = create_key(
         "sub-{subject}/{session}/anat/sub-{subject}_{session}{run_entity}_T2w"
     )
+    t2_flair = create_key(
+        "sub-{subject}/{session}/anat/sub-{subject}_{session}{run_entity}_FLAIR"
+    )
     dwi = create_key(
         "sub-{subject}/{session}/dwi/sub-{subject}_{session}_acq-{acq}_dir-{dir}{run_entity}_dwi"
     )
@@ -306,11 +310,11 @@ def infotodict(seqinfo):
     )
     epi = create_key(
         "sub-{subject}/{session}/fmap/sub-{subject}_{session}"
-        "_acq-{acquisition}_dir-{dir}{part_entity}{run_entity}_epi"
+        "_acq-{acquisition}_dir-{dir}{run_entity}{part_entity}_epi"
     )
     func = create_key(
         "sub-{subject}/{session}/func/sub-{subject}_{session}"
-        "_task-{task}{acq_entity}{part_entity}{run_entity}_bold"
+        "_task-{task}{acq_entity}{dir_entity}{run_entity}{part_entity}_bold"
     )
     sbref = create_key(
         "sub-{subject}/{session}/func/sub-{subject}_{session}_task-{task}{run_entity}_sbref"
@@ -319,6 +323,7 @@ def infotodict(seqinfo):
     info = {
         t1w: [],
         t2w: [],
+        t2_flair: [],
         dwi: [],
         mag: [],
         phdiff: [],
@@ -326,8 +331,8 @@ def infotodict(seqinfo):
         func: [],
         sbref: [],
     }
-    epi_desc = []
-    bold_desc = []
+    epi_mags = []
+    bold_mags = []
 
     for s in seqinfo:
         """
@@ -370,7 +375,7 @@ def infotodict(seqinfo):
         thisitem.update({k: v for k, v in bids_regex.findall(s.protocol_name)})
         thisitem["run_entity"] = f"{thisitem.pop('run', '')}"
 
-        if "T1w" in s.protocol_name:
+        if s.protocol_name.lower().startswith("anat-t1w"):
             thiskey = t1w
             acquisition_present = thisitem.pop("acq", None)
             thisitem["acquisition"] = (
@@ -378,27 +383,31 @@ def infotodict(seqinfo):
                 if not acquisition_present
                 else acquisition_present
             )
-        elif "T2w" in s.protocol_name:
+        elif s.protocol_name.lower().startswith("anat-t2w"):
             thiskey = t2w
+        elif s.protocol_name.lower().startswith("anat-flair"):
+            thiskey = t2_flair
         elif s.protocol_name.startswith("dwi-dwi"):
             thiskey = dwi
         elif s.protocol_name.startswith("fmap-phasediff"):
             thiskey = phdiff if "P" in s.image_type else mag
         elif s.protocol_name.startswith("fmap-epi"):
             thiskey = epi
+            thisitem["part_entity"] = ""
             thisitem["acquisition"] = (
                 "b0" if s.sequence_name.endswith("ep_b0") else "bold"
             )
 
-            # Check whether phase was written out
-            thisdesc = s.series_id.split("-", 1)[-1]
-            if thisdesc in epi_desc:
+            # Check whether phase was written out:
+            # 1. A magnitude needs to exist immediately before in the dicom info
+            # 2. Magnitude and phase must have the same number of volumes
+            series_id_idx, series_id_name = s.series_id.split("-", 1)
+            prev_series_id = f"{int(series_id_idx) - 1}-{series_id_name}-{s.series_files}"
+            if prev_series_id in epi_mags:
                 thisitem["part_entity"] = "_part-phase"
-                info[thiskey][epi_desc.index(thisdesc)]["part_entity"] = "_part-mag"
-            else:
-                thisitem["part_entity"] = ""
+                info[thiskey][epi_mags.index(prev_series_id)]["part_entity"] = "_part-mag"
 
-            epi_desc.append(thisdesc)
+            epi_mags.append(f"{s.series_id}-{s.series_files}")
 
         elif s.protocol_name.startswith("func-bold"):
             # Likely an error
@@ -410,19 +419,25 @@ def infotodict(seqinfo):
 
             thiskey = func
 
+            thisitem["part_entity"] = ""
             # Some functional runs may come with acq
             func_acq = thisitem.pop("acq", None)
             thisitem["acq_entity"] = "" if not func_acq else f"_acq-{func_acq}"
 
-            # Check whether phase was written out
-            thisdesc = s.series_id.split("-", 1)[-1]
-            if thisdesc in bold_desc:
-                thisitem["part_entity"] = "_part-phase"
-                info[thiskey][bold_desc.index(thisdesc)]["part_entity"] = "_part-mag"
-            else:
-                thisitem["part_entity"] = ""
+            # Some functional runs may come with dir
+            func_dir = thisitem.pop("dir", None)
+            thisitem["dir_entity"] = "" if not func_dir else f"_dir-{func_dir}"
 
-            bold_desc.append(thisdesc)
+            # Check whether phase was written out:
+            # 1. A magnitude needs to exist immediately before in the dicom info
+            # 2. Magnitude and phase must have the same number of volumes
+            series_id_idx, series_id_name = s.series_id.split("-", 1)
+            prev_series_id = f"{int(series_id_idx) - 1}-{series_id_name}-{s.series_files}"
+            if prev_series_id in bold_mags:
+                thisitem["part_entity"] = "_part-phase"
+                info[thiskey][bold_mags.index(prev_series_id)]["part_entity"] = "_part-mag"
+
+            bold_mags.append(f"{s.series_id}-{s.series_files}")
 
         if thiskey is not None:
             info[thiskey].append(thisitem)
