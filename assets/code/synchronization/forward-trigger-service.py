@@ -21,10 +21,12 @@
 #     https://www.nipreps.org/community/licensing/
 #
 """A signal server listening to scanner trigger events (`s` key press) and psychopy events."""
+import sys
 from pathlib import Path
-import serial
+from serial import Serial
 import asyncio
 import logging
+from logging.handlers import TimedRotatingFileHandler
 import janus
 import keyboard
 import usb.core
@@ -33,20 +35,28 @@ import usb.util
 
 LISTEN = 2023
 SERIAL_PORT = "/dev/ttyACM0"
-LOG_FILE = Path.home() / "var" / "log" / "forward-trigger-service.log"
+LOG_FILE = Path("/var") / "log" / "forward-trigger-service.log"
 LOG_FILE.parent.mkdir(exist_ok=True, parents=True)
 USB_MMBTS_DEVICE_ID = (0x07C0, 0x0101)
 """Device ID of the Neurospec's MMBT-S trigger adaptor."""
 USB_TESTING_DEVICE_ID = (0x0BC2, 0x2322)
 """Device ID for testing purposes."""
 
-logging.basicConfig(
-    level=logging.DEBUG,
-    filename=LOG_FILE,
-    filemode="a",
-    format="%(asctime)s - %(levelname)s - %(message)s",
-    datefmt="%Y-%m-%d %H:%M:%S",
+handler = TimedRotatingFileHandler(
+    LOG_FILE,
+    when="D",
+    interval=1,
 )
+
+handler.setFormatter(
+    logging.Formatter(
+        "%(asctime)s.%(msecs)03d - %(levelname)s - %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
+    ),
+)
+LOGGER = logging.getLogger()
+LOGGER.setLevel(logging.DEBUG)
+LOGGER.addHandler(handler)
 
 
 async def handle_client(
@@ -79,17 +89,17 @@ async def handle_client(
             writer.close()
 
         if data > b"\xff" or data < b"\x01":
-            logging.warning(f"Received invalid signal <{data}>")
+            LOGGER.warning(f"Received invalid signal <{data}>")
             continue
 
         # Disallow receiving 00000001 on the socket, replace with 10000001
         if data == b"\x01":
             data = b"\x81"
-            logging.warning(
+            LOGGER.warning(
                 "Trigger signal received through socket -- replaced with <\\x81>"
             )
 
-        logging.info(f"Data received: <{data}>")
+        LOGGER.info(f"Data received: <{data}>")
         await async_q.put(data)
 
 
@@ -113,7 +123,7 @@ async def start_server(host: str, port: int, async_q: janus.AsyncQueue[int]) -> 
         lambda r, w: handle_client(r, w, async_q), host, port
     )
     addr = server.sockets[0].getsockname()
-    logging.info(f"Server listening on {addr}")
+    LOGGER.info(f"Server listening on {addr}")
     async with server:
         await server.serve_forever()
 
@@ -132,12 +142,12 @@ async def forward_signals(serial_port: str, async_q: janus.AsyncQueue[int]) -> N
         The async queue storing the signals.
 
     """
-    with serial.Serial(serial_port) as conn:
+    with Serial(serial_port) as conn:
         while True:
             signal = await async_q.get()
             conn.write(signal)
             async_q.task_done()
-            logging.info(f"Forwarded <{signal}>")
+            LOGGER.info(f"Forwarded <{signal}>")
 
 
 def _trigger(sync_q: janus.SyncQueue[int]) -> None:
@@ -152,7 +162,7 @@ def _trigger(sync_q: janus.SyncQueue[int]) -> None:
     """
     sync_q.put(b"\x01")
     sync_q.join()
-    logging.info("Scanner trigger received")
+    LOGGER.info("Scanner trigger received")
 
 
 def ensure_usb_device_connected(usb_vendor_id, usb_product_id):
@@ -198,8 +208,9 @@ async def main() -> None:
     Run the signal server and forward the signals to the serial port.
 
     """
-    # Check if the USB device is connected
-    ensure_usb_device_connected(*USB_MMBTS_DEVICE_ID)
+    if "--disable-mmbt-check" not in sys.argv:
+        # Check if the USB device is connected
+        ensure_usb_device_connected(*USB_MMBTS_DEVICE_ID)
 
     # Initiate a Queue that has synchronous and asynchronous endpoints.
     signal_queue: janus.Queue[int] = janus.Queue()

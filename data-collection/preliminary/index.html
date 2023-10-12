@@ -486,15 +486,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prepare-the-psychopy-experiments" class="md-nav__link">
-    Prepare the Psychopy experiments
+  <a href="#installing-our-synchronization-server" class="md-nav__link">
+    Installing our synchronization server
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#setting-up-a-synchronization-service" class="md-nav__link">
-    Setting up a synchronization service
+  <a href="#setting-up-the-synchronization-service-as-a-daemon-in-the-background" class="md-nav__link">
+    Setting up the synchronization service as a daemon in the background
   </a>
   
 </li>
@@ -502,6 +502,13 @@
           <li class="md-nav__item">
   <a href="#installing-eyelink-eye-tracker-software" class="md-nav__link">
     Installing EyeLink (eye tracker software)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prepare-the-psychopy-experiments" class="md-nav__link">
+    Prepare the Psychopy experiments
   </a>
   
 </li>
@@ -903,15 +910,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prepare-the-psychopy-experiments" class="md-nav__link">
-    Prepare the Psychopy experiments
+  <a href="#installing-our-synchronization-server" class="md-nav__link">
+    Installing our synchronization server
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#setting-up-a-synchronization-service" class="md-nav__link">
-    Setting up a synchronization service
+  <a href="#setting-up-the-synchronization-service-as-a-daemon-in-the-background" class="md-nav__link">
+    Setting up the synchronization service as a daemon in the background
   </a>
   
 </li>
@@ -919,6 +926,13 @@
           <li class="md-nav__item">
   <a href="#installing-eyelink-eye-tracker-software" class="md-nav__link">
     Installing EyeLink (eye tracker software)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prepare-the-psychopy-experiments" class="md-nav__link">
+    Prepare the Psychopy experiments
   </a>
   
 </li>
@@ -1163,25 +1177,153 @@ However, you MUST change into <em>advanced user mode</em> before saving the prot
 </span></code></pre></div>
 </details>
 <h3 id="preparing-the-stimuli-presentation-laptop">Preparing the <em>Stimuli presentation laptop</em> (███)<a class="headerlink" href="#preparing-the-stimuli-presentation-laptop" title="Permanent link">&para;</a></h3>
+<p>The stimuli presentation laptop and any other box you want to use for debugging and development will require a few additional software packages to be available.</p>
+<h4 id="installing-our-synchronization-server">Installing our synchronization server<a class="headerlink" href="#installing-our-synchronization-server" title="Permanent link">&para;</a></h4>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Locate the latest version of the synchronization service on your system.
+    It is within the <abbr title="standard operating procedures">SOPs</abbr> repository, at <code>&lt;path&gt;/code/synchronization/forward-trigger-service.py</code>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install the necessary libraries <mark>as root</mark>:
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>sudo<span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>&lt;path&gt;/code/synchronization/requirements.txt
+</span></code></pre></div></li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Test the service is properly installed:
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>sudo<span class="w"> </span>python3<span class="w"> </span>code/synchronization/forward-trigger-service.py<span class="w"> </span>--disable-mmbt-check
+</span></code></pre></div></p>
+<div class="admonition important">
+<p class="admonition-title">Use the <code>--disable-mmbt-check</code> flag only if you do not plan to connect the MMBT-S trigger box</p>
+</div>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Test operation with our test client:</p>
+<div class="admonition tip">
+<p class="admonition-title">Check the server's log file at <code>/var/log/forward-trigger-service.log</code></p>
+</div>
+<p>Open a separate terminal on a separate window
+Then, open and follow the log file:
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>less<span class="w"> </span>+F<span class="w"> </span>/var/log/forward-trigger-service.log
+</span></code></pre></div></p>
+<p>Return to the original terminal, keeping the other window visible and execute:
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>python<span class="w"> </span>code/synchronization/forward-trigger-client.py
+</span></code></pre></div></p>
+<p>The log file should now have added two lines like:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>2023-10-12 14:44:31.788 - INFO - Data received: &lt;b&#39;\x02&#39;&gt;
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>2023-10-12 14:44:31.788 - INFO - Forwarded &lt;b&#39;\x02&#39;&gt;
+</span></code></pre></div></p>
+</li>
+</ul>
+<details class="important">
+<summary>Testing the service without the MMBT-S connected</summary>
+<p>Testing the service without the MMBT-S trigger box connected requires emmulating <code>/dev/ttyACM0</code>:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Ensure <code>socat</code> and <code>screen</code> are installed (if not already):
+      <div class="language-shell highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>socat<span class="w"> </span>screen
+</span></code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Create a virtual serial port and establish a symbolic link to <code>/dev/ttyACM0</code> using the following command:
+      <div class="language-shell highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>sudo<span class="w"> </span>socat<span class="w"> </span>PTY,link<span class="o">=</span>/tmp/virtual_serial_port<span class="w"> </span>PTY,link<span class="o">=</span>/dev/ttyACM0,group-late<span class="o">=</span>dialout,mode<span class="o">=</span><span class="m">666</span>,b9600
+</span></code></pre></div></li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> With <code>screen</code>, listen to the new virtual serial port:
+      <div class="language-shell highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>screen<span class="w"> </span>/dev/ttyACM0
+</span></code></pre></div></p>
+<p>!!! tip "Alternatively, you can check the server's log file at <code>/var/log/forward-trigger-service.log</code>"</p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Press <span class="keypress">s</span> and verify that <code>^A</code> appears in the screen terminal.</p>
+</li>
+</ul>
+</details>
+<h4 id="setting-up-the-synchronization-service-as-a-daemon-in-the-background">Setting up the synchronization service as a daemon in the background<a class="headerlink" href="#setting-up-the-synchronization-service-as-a-daemon-in-the-background" title="Permanent link">&para;</a></h4>
+<div class="admonition important">
+<p class="admonition-title">It's fundamental to have a reliable means of communication with the BIOPAC digital inputs</p>
+<p>The following guidelines set up a little service on a linux box that keeps listening for key presses (mainly, the <span class="keypress">s</span> trigger from the trigger box), and RPC (remote procedure calls) from typically <em>Psychopy</em> or similar software.</p>
+<p>The service is spun up automatically when you connect the MMBT-S modem interface that communicates with the BIOPAC (that is, the <em>N-shaped pink box</em>)</p>
+</div>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> To automatically start the program when the BIOPAC is connected, create a udev rule as follows:
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/udev/rules.d/99-forward-trigger.rules
+</span></code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Add the following rule to the file:
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>ACTION==&quot;add&quot;, KERNEL==&quot;ttyACM0&quot;, SUBSYSTEM==&quot;tty&quot;, TAG+=&quot;systemd&quot;, ENV{SYSTEMD_WANTS}=&quot;forward-trigger.service&quot;
+</span></code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Save the file and exit the editor.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Run the following command to reload the udev rules:
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>sudo<span class="w"> </span>udevadm<span class="w"> </span>control<span class="w"> </span>--reload-rules
+</span></code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Create a systemd service unit file:
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/systemd/system/forward-trigger.service
+</span></code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Add the following content to the file (Adapt the path to forward-trigger.py to the location on your computer):
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>[Unit]
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>Description=Forward Trigger Service
+</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>After=network.target
+</span><span id="__span-28-4"><a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>
+</span><span id="__span-28-5"><a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>[Service]
+</span><span id="__span-28-6"><a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>ExecStart=/usr/bin/python3 /path/to/forward-trigger.py
+</span><span id="__span-28-7"><a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a>WorkingDirectory=/path/to/forward-trigger/directory
+</span><span id="__span-28-8"><a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a>StandardOutput=null
+</span><span id="__span-28-9"><a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a>
+</span><span id="__span-28-10"><a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a>[Install]
+</span><span id="__span-28-11"><a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a>WantedBy=multi-user.target
+</span></code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Save the file and exit the text editor.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Run the following command to enable the service to start at boot:
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>forward-trigger
+</span></code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Run the following command to reload the systemd daemon:
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+</span></code></pre></div></li>
+</ul>
+<h4 id="installing-eyelink-eye-tracker-software">Installing <em>EyeLink</em> (eye tracker software)<a class="headerlink" href="#installing-eyelink-eye-tracker-software" title="Permanent link">&para;</a></h4>
+<ul class="task-list">
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Log on <em>███</em> with the username <em>███</em> and password <code>*****</code>.</p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Enable Canonical's universe repository with the following command:
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>sudo<span class="w"> </span>add-apt-repository<span class="w"> </span>universe
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update
+</span></code></pre></div></p>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install and update the ca-certificates package:
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ca-certificates
+</span></code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Add the SR Research Software Repository signing key:
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>curl<span class="w"> </span>-sS<span class="w"> </span>https://apt.sr-research.com/SRResearch_key<span class="w"> </span><span class="p">|</span><span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/trusted.gpg.d/sr-research.gpg
+</span></code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Add the SR Research Software Repository as an <em>Aptitude</em> source:
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>sudo<span class="w"> </span>add-apt-repository<span class="w"> </span><span class="s1">&#39;deb [arch=amd64] https://apt.sr-research.com SRResearch main&#39;</span>
+</span></code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install the EyeLink Developers Kit:
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>eyelink-display-software
+</span></code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install the EyeLink Data Viewer:
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>eyelink-dataviewer
+</span></code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install the <em>Python</em> module:
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>pylink
+</span></code></pre></div></li>
+</ul>
 <h4 id="prepare-the-psychopy-experiments">Prepare the <em>Psychopy</em> experiments<a class="headerlink" href="#prepare-the-psychopy-experiments" title="Permanent link">&para;</a></h4>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Log on <em>███</em> with the username <em>███</em> and password <code>*****</code>.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Deactivate conda environment (if needed):
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>conda<span class="w"> </span>deactivate
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>conda<span class="w"> </span>deactivate
 </span></code></pre></div></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install our <em><abbr title="Human Connectome Phantom (this project)">HCPh</abbr>-signals</em> package (assumes these <abbr title="standard operating procedures">SOPs</abbr> are checked out at <code>&lt;path&gt;</code>:
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nb">cd</span><span class="w"> </span>&lt;path&gt;/code/signals
-</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>.
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="nb">cd</span><span class="w"> </span>&lt;path&gt;/code/signals
+</span><span id="__span-39-2"><a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>.
 </span></code></pre></div></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <a href="https://github.com/TheAxonLab/HCPh-fMRI-tasks/fork">Fork the <abbr title="Human Connectome Phantom (this project)">HCPh</abbr>-<abbr title="functional MRI">fMRI</abbr>-tasks repository</a> under your user on GitHub.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Clone the <a href="https://github.com/TheAxonLab/HCPh-fMRI-tasks"><abbr title="Human Connectome Phantom (this project)">HCPh</abbr>-<abbr title="functional MRI">fMRI</abbr>-tasks repository</a>:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>git clone git@github.com:&lt;your-gh-username&gt;/HCPh-fMRI-tasks.git
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>git clone git@github.com:&lt;your-gh-username&gt;/HCPh-fMRI-tasks.git
 </span></code></pre></div></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Set-up the original repository as upstream remote:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>git remote add upstream git@github.com:theaxonlab/HCPh-fMRI-tasks.git
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-41-1"><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>git remote add upstream git@github.com:theaxonlab/HCPh-fMRI-tasks.git
 </span></code></pre></div></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open <em>Psychopy</em> and (optionally) a experiment file corresponding to a task by typing the following command in the terminal:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>psychopy task-qct_bold.psyexp
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-42-1"><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>psychopy task-qct_bold.psyexp
 </span></code></pre></div></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> For each task, check the following:<ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <code>task-qct_bold.psyexp</code> (positive-control task, <abbr title="quality control task">QCT</abbr>) :<ul class="task-list">
@@ -1201,89 +1343,6 @@ However, you MUST change into <em>advanced user mode</em> before saving the prot
 </li>
 </ul>
 </li>
-</ul>
-<h4 id="setting-up-a-synchronization-service">Setting up a synchronization service<a class="headerlink" href="#setting-up-a-synchronization-service" title="Permanent link">&para;</a></h4>
-<div class="admonition important">
-<p class="admonition-title">It's fundamental to have a reliable means of communication with the BIOPAC digital inputs</p>
-<p>The following guidelines set up a little service on a linux box that keeps listening for key presses (mainly, the <span class="keypress">s</span> trigger from the trigger box), and RPC (remote procedure calls) from typically <em>Psychopy</em> or similar software.</p>
-<p>The service is spun up automatically when you connect the MMBT-S modem interface that communicates with the BIOPAC (that is, the <em>N-shaped pink box</em>)</p>
-</div>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Copy the <a href="https://github.com/TheAxonLab/hcph-sops/blob/mkdocs/code/synchronization/forward-trigger-service.py">latest version of the code to send triggers</a></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> To automatically start the program when the BIOPAC is connected, create a udev rule as follows:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>sudo nano /etc/udev/rules.d/99-forward-trigger.rules
-</span></code></pre></div></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Add the following rule to the file:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>ACTION==&quot;add&quot;, KERNEL==&quot;ttyACM0&quot;, SUBSYSTEM==&quot;tty&quot;, TAG+=&quot;systemd&quot;, ENV{SYSTEMD_WANTS}=&quot;forward-trigger.service&quot;
-</span></code></pre></div></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Save the file and exit the editor.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Run the following command to reload the udev rules:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>sudo udevadm control --reload-rules
-</span></code></pre></div></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Create a systemd service unit file:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>sudo nano /etc/systemd/system/forward-trigger.service
-</span></code></pre></div></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Add the following content to the file (Adapt the path to forward-trigger.py to the location on your computer):
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>[Unit]
-</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>Description=Forward Trigger Service
-</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>After=network.target
-</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>
-</span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>[Service]
-</span><span id="__span-25-6"><a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>ExecStart=/usr/bin/python3 /path/to/forward-trigger.py
-</span><span id="__span-25-7"><a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a>WorkingDirectory=/path/to/forward-trigger/directory
-</span><span id="__span-25-8"><a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a>StandardOutput=null
-</span><span id="__span-25-9"><a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a>
-</span><span id="__span-25-10"><a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a>[Install]
-</span><span id="__span-25-11"><a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a>WantedBy=multi-user.target
-</span></code></pre></div></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Save the file and exit the text editor.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Run the following command to enable the service to start at boot:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>sudo systemctl enable forward-trigger
-</span></code></pre></div></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Run the following command to reload the systemd daemon:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>sudo systemctl daemon-reload
-</span></code></pre></div></li>
-</ul>
-<details class="important">
-<summary>Testing the service without the syncbox connected</summary>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Ensure <code>socat</code> and <code>screen</code> are installed (if not already):
-      <div class="language-text highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>sudo apt-get update
-</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>sudo apt-get install socat screen
-</span></code></pre></div></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Create a virtual serial port and establish a symbolic link to <code>/dev/ttyACM0</code> using the following command:
-      <div class="language-text highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>sudo socat PTY,link=/tmp/virtual_serial_port PTY,link=/dev/ttyACM0,group-late=dialout,mode=666,b9600
-</span></code></pre></div></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> With <code>screen</code>, listen to the new virtual serial port:
-      <div class="language-text highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>screen /dev/ttyACM0
-</span></code></pre></div></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Press <span class="keypress">s</span> and verify that <code>^A</code> appears in the screen terminal.</li>
-</ul>
-</details>
-<h4 id="installing-eyelink-eye-tracker-software">Installing <em>EyeLink</em> (eye tracker software)<a class="headerlink" href="#installing-eyelink-eye-tracker-software" title="Permanent link">&para;</a></h4>
-<ul class="task-list">
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Log on <em>███</em> with the username <em>███</em> and password <code>*****</code>.</p>
-</li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Enable Canonical's universe repository with the following command:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>sudo add-apt-repository universe
-</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>sudo apt update
-</span></code></pre></div></p>
-</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install and update the ca-certificates package:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>sudo apt update
-</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>sudo apt install ca-certificates
-</span></code></pre></div></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Add the SR Research Software Repository signing key:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>sudo apt-key adv --fetch-keys https://apt.sr-research.com/SRResearch_key
-</span></code></pre></div></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install the EyeLink Developers Kit:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>sudo apt install eyelink-display-software
-</span></code></pre></div></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install the EyeLink Data Viewer:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>sudo apt install eyelink-dataviewer
-</span></code></pre></div></li>
 </ul>
 <h2 id="every-two-months">Every two months<a class="headerlink" href="#every-two-months" title="Permanent link">&para;</a></h2>
 <h3 id="calibrate-the-ga">Calibrate the <abbr title="gas analyzer">GA</abbr><a class="headerlink" href="#calibrate-the-ga" title="Permanent link">&para;</a></h3>
