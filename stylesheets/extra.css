@@ -29,6 +29,10 @@ span.consolebutton.red {
   background-color: tomato;
 }
 
+span.consolebutton.green {
+  background-color: green;
+}
+
 span.flipud {
   display: inline-block;
   -moz-transform: scale(1, -1);
