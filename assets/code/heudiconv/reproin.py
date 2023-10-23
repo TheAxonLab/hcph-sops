@@ -294,7 +294,7 @@ def infotodict(seqinfo):
         "sub-{subject}/{session}/anat/sub-{subject}_{session}_acq-{acquisition}{run_entity}_T1w"
     )
     t2w = create_key(
-        "sub-{subject}/{session}/anat/sub-{subject}_{session}{run_entity}_T2w"
+        "sub-{subject}/{session}/anat/sub-{subject}_{session}_acq-{acquisition}{run_entity}_T2w"
     )
     t2_flair = create_key(
         "sub-{subject}/{session}/anat/sub-{subject}_{session}{run_entity}_FLAIR"
@@ -385,6 +385,12 @@ def infotodict(seqinfo):
             )
         elif s.protocol_name.lower().startswith("anat-t2w"):
             thiskey = t2w
+            acquisition_present = thisitem.pop("acq", None)
+            thisitem["acquisition"] = (
+                ("original" if s.dcm_dir_name.endswith("_ND") else "undistorted")
+                if not acquisition_present
+                else "unspecified"
+            )
         elif s.protocol_name.lower().startswith("anat-flair"):
             thiskey = t2_flair
         elif s.protocol_name.startswith("dwi-dwi"):
