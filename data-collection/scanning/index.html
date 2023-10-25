@@ -1350,7 +1350,7 @@ Some of the emergency procedures are found <a href="../emergency-procedures/">he
 <h2 id="before-initiating-the-session">Before initiating the session<a class="headerlink" href="#before-initiating-the-session" title="Permanent link">&para;</a></h2>
 <details class="warning">
 <summary>Double check the protocol with the correct phase-encoding direction was selected</summary>
-<p>For conveniency, this is the session schedule (<mark>today is 2023-10-25 17:05</mark>):</p>
+<p>For conveniency, this is the session schedule (<mark>today is 2023-10-25 21:16</mark>):</p>
 <table>
 <thead>
 <tr>
@@ -1606,8 +1606,8 @@ As such, please note any observation in the issue dedicated to collecting sessio
     <div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>conda<span class="w"> </span>deactivate
 </span></code></pre></div></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Load the new virtual environment:
-    ``` shell
-    source $HOME/psychopyenv/bin/activate</li>
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">source</span><span class="w"> </span><span class="nv">$HOME</span>/psychopyenv/bin/activate
+</span></code></pre></div></li>
 </ul>
 </details>
 <h3 id="check_1">Check <em>███</em>:<a class="headerlink" href="#check_1" title="Permanent link">&para;</a></h3>
@@ -1734,9 +1734,9 @@ This is also a good moment to swallow, and to check your neck and head are in a 
 <p><strong>Once the localizer is concluded:</strong></p>
 <ul class="task-list">
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Drag and drop the image stack icon (something like 🗇, with an object on the top stack) onto the image viewer.
-    That will open the localizer on the viewer.</p>
-<p><img alt="drag_t1w.jpg" src="../../assets/images/drag_t1w.jpg" /></p>
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Click on the image stack icon (something like 🗇, with an object on the top stack) and drag the image with a <strong>1</strong> onto the image viewer.
+    That will open the <strong>interpolated</strong> localizer on the viewer.</p>
+<p><img alt="drag_t1w.jpg" src="../../assets/images/drag_localizer.jpg" /></p>
 </li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> In the issue collecting notes about the session, check the box confirming that the localizer has been acquired. </p>
@@ -1820,15 +1820,15 @@ Remember to breathe through your nose, not through your mouth, so the expired CO
 <summary>Make sure to have the correct environment loaded before invoking the task</summary>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Deactivate conda (if active):
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>conda<span class="w"> </span>deactivate
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>conda<span class="w"> </span>deactivate
 </span></code></pre></div></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Load the new virtual environment:
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">source</span><span class="w"> </span><span class="nv">$HOME</span>/psychopyenv/bin/activate
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">source</span><span class="w"> </span><span class="nv">$HOME</span>/psychopyenv/bin/activate
 </span></code></pre></div></li>
 </ul>
 </details>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">cd</span><span class="w"> </span>~/workspace/HCPh-fMRI-tasks
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>python<span class="w"> </span>task-fixation_dwi.py
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">cd</span><span class="w"> </span>~/workspace/HCPh-fMRI-tasks
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>python<span class="w"> </span>task-fixation_dwi.py
 </span></code></pre></div>
 <p>A modal dialog will ask you for the number of trial (automatically calculated, DO NOT modify) and the session number.</p>
 <div class="admonition danger">
@@ -1905,15 +1905,15 @@ Please follow it with your gaze, trying to look at it as stable as possible and 
 <summary>Make sure to have the correct environment loaded before invoking the task</summary>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Deactivate conda (if active):
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>conda<span class="w"> </span>deactivate
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>conda<span class="w"> </span>deactivate
 </span></code></pre></div></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Load the new virtual environment:
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">source</span><span class="w"> </span><span class="nv">$HOME</span>/psychopyenv/bin/activate
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">source</span><span class="w"> </span><span class="nv">$HOME</span>/psychopyenv/bin/activate
 </span></code></pre></div></li>
 </ul>
 </details>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">cd</span><span class="w"> </span>~/workspace/HCPh-fMRI-tasks
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>python<span class="w"> </span>task-qct_bold.py
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">cd</span><span class="w"> </span>~/workspace/HCPh-fMRI-tasks
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>python<span class="w"> </span>task-qct_bold.py
 </span></code></pre></div>
 <p>A modal dialog will ask you for the number of trial (automatically calculated, DO NOT modify) and the session number.</p>
 <div class="admonition danger">
@@ -1983,7 +1983,6 @@ If the red circle moves, we ask you to follow it with your eyes.</p>
 <p><strong>While the <abbr title="quality control task">QCT</abbr> is running:</strong></p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <a href="../scanning-notes/#setting-the-fov">Adjust the <abbr title="field-of-view">FoV</abbr></a> for the following sequence,</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> verify the <em>Number of measurements</em> with respect to the <a href="../intro/#task-timing">task's timing</a> (20min 6s), and</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> double check that it has the setting <em>Magnitude et phase</em> selected in the drop-down menu under <em>Contrast&gt;Reconstruction</em>.</li>
 </ul>
 <p><strong>Once the <abbr title="quality control task">QCT</abbr> has concluded:</strong></p>
@@ -2021,15 +2020,15 @@ If the red circle moves, we ask you to follow it with your eyes.</p>
 <summary>Make sure to have the correct environment loaded before invoking the task</summary>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Deactivate conda (if active):
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>conda<span class="w"> </span>deactivate
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>conda<span class="w"> </span>deactivate
 </span></code></pre></div></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Load the new virtual environment:
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">source</span><span class="w"> </span><span class="nv">$HOME</span>/psychopyenv/bin/activate
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nb">source</span><span class="w"> </span><span class="nv">$HOME</span>/psychopyenv/bin/activate
 </span></code></pre></div></li>
 </ul>
 </details>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nb">cd</span><span class="w"> </span>~/workspace/HCPh-fMRI-tasks
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>python<span class="w"> </span>task-rest_bold.py
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nb">cd</span><span class="w"> </span>~/workspace/HCPh-fMRI-tasks
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>python<span class="w"> </span>task-rest_bold.py
 </span></code></pre></div>
 <p>A modal dialog will ask you for the number of trial (automatically calculated, DO NOT modify) and the session number.</p>
 <div class="admonition danger">
@@ -2105,15 +2104,15 @@ Please do not close your eyes, and it is particularly critical that you don't mo
 <summary>Make sure to have the correct environment loaded before invoking the task</summary>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Deactivate conda (if active):
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>conda<span class="w"> </span>deactivate
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>conda<span class="w"> </span>deactivate
 </span></code></pre></div></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Load the new virtual environment:
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nb">source</span><span class="w"> </span><span class="nv">$HOME</span>/psychopyenv/bin/activate
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nb">source</span><span class="w"> </span><span class="nv">$HOME</span>/psychopyenv/bin/activate
 </span></code></pre></div></li>
 </ul>
 </details>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nb">cd</span><span class="w"> </span>~/workspace/HCPh-fMRI-tasks
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>python<span class="w"> </span>task-bht_bold.py
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nb">cd</span><span class="w"> </span>~/workspace/HCPh-fMRI-tasks
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>python<span class="w"> </span>task-bht_bold.py
 </span></code></pre></div>
 <p>A modal dialog will ask you for the number of trial (automatically calculated, DO NOT modify) and the session number.</p>
 <div class="admonition danger">
