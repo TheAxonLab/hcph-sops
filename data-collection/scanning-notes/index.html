@@ -409,11 +409,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../preliminary/" class="md-nav__link">
+      <a href="../setup/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Preliminary work
+    Before data collection starts
   </span>
   
 
@@ -433,7 +433,27 @@
         
   
   <span class="md-ellipsis">
-    Before each session
+    Before session day
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tear-up/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Session preparation
   </span>
   
 
@@ -860,15 +880,22 @@
   
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#managing-protocols" class="md-nav__link">
+    Managing protocols
+  </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#eye-tracker-calibration-process" class="md-nav__link">
-    Eye-Tracker Calibration Process
+        
+          <li class="md-nav__item">
+  <a href="#scanner-boot-up-protocol" class="md-nav__link">
+    Scanner boot-up protocol
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -899,6 +926,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#eye-tracker-calibration-process" class="md-nav__link">
+    Eye-Tracker Calibration Process
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -919,6 +953,26 @@
   
   <span class="md-ellipsis">
     Notes on software installation and tips
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../legacy-et/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Legacy procedure for the ET mirror
   </span>
   
 
@@ -995,15 +1049,22 @@
   
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#managing-protocols" class="md-nav__link">
+    Managing protocols
+  </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#eye-tracker-calibration-process" class="md-nav__link">
-    Eye-Tracker Calibration Process
+        
+          <li class="md-nav__item">
+  <a href="#scanner-boot-up-protocol" class="md-nav__link">
+    Scanner boot-up protocol
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1031,6 +1092,13 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#eye-tracker-calibration-process" class="md-nav__link">
+    Eye-Tracker Calibration Process
+  </a>
   
 </li>
       
@@ -1107,6 +1175,101 @@
 <p><img alt="repeat_scan.png" src="../../assets/images/repeat_scan.png" /></p>
 </li>
 </ul>
+<h3 id="managing-protocols">Managing protocols<a class="headerlink" href="#managing-protocols" title="Permanent link">&para;</a></h3>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> (Optional) Load an existing protocol</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Edit the protocol as needed</p>
+<div class="admonition important">
+<p class="admonition-title">Follow Reproin conventions</p>
+<p>When assigning names to the <abbr title="Magnetic Resonance">MR</abbr> sequences in the protocol, make sure to follow the <a href="https://dbic-handbook.readthedocs.io/en/latest/mri/reproin.html">Reproin conventions</a> to maximally facilitate the conversion into <abbr title="Brain Imaging Data Structure">BIDS</abbr>.</p>
+</div>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Update the <em>Number of measurements</em> in all <code>func-bold_task-*</code> sequences, according to the <a href="../intro/#task-timing">previously recorded timings</a>:</p>
+<div class="arithmatex">\[N_\text{measurements} = L_t / \text{TR}, \quad t \in \{\text{bht}, \text{qct}, \text{rest}\},\]</div>
+<p>where <span class="arithmatex">\(L_t\)</span> is the length of a particular task <span class="arithmatex">\(t\)</span> (either <abbr title="breath-holding task">BHT</abbr>, <abbr title="quality control task">QCT</abbr>, or resting state) in seconds as timed before, and
+<span class="arithmatex">\(\text{TR}\)</span> is the <strong>repetition time</strong> of the <abbr title="blood-oxygen-level dependent">BOLD</abbr> sequence, in seconds.</p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Save the protocol</p>
+<div class="admonition warning">
+<p class="admonition-title">Logging in as an advanced user is required before saving the protocol</p>
+<p>As a good practice, always work as the standard user <code>janedoe</code>.
+However, you MUST change into <em>advanced user mode</em> before saving the protocol.</p>
+<p>Simultaneously press the <span class="keypress">Tab</span> + <span class="keypress">Delete</span> + <span class="keypress"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M2 2.75C2 1.784 2.784 1 3.75 1h2.5a.75.75 0 0 1 0 1.5h-2.5a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h2.5a.75.75 0 0 1 0 1.5h-2.5A1.75 1.75 0 0 1 2 13.25Zm10.44 4.5-1.97-1.97a.749.749 0 0 1 .326-1.275.749.749 0 0 1 .734.215l3.25 3.25a.75.75 0 0 1 0 1.06l-3.25 3.25a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734l1.97-1.97H6.75a.75.75 0 0 1 0-1.5Z"/></svg></span></span> on the control-computer's keyboard:</p>
+<blockquote>
+<p>Username: <code>superjanedoe</code></p>
+<p>Password: <code>******</code></p>
+</blockquote>
+<div class="admonition danger">
+<p class="admonition-title">After three wrong password entries, access will be denied, and only a Siemens engineer will be able to unlock the <abbr title="Magnetic Resonance">MR</abbr> scanner.</p>
+</div>
+</div>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open the Dot-Cockpit window
+    <img alt="" src="../../assets/images/save_protocol1.jpg" /></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> In <code>Browse</code>, find the right folder to save the protocol in (<em>RESEARCH</em> ⤷ <em>Oscar</em>).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Right click on the folder and select <em>New</em> ⤷ <em>Program</em>. This opens an empty page in the program editor
+    <img alt="" src="../../assets/images/save_protocol2.jpg" />
+    <img alt="" src="../../assets/images/save_protocol3.jpg" /></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Select all the sequences you want to run from the sequence list and click right to copy.
+    <img alt="" src="../../assets/images/save_protocol4.jpg" /></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Drag or paste the copied sequences in the program editor.
+    <img alt="" src="../../assets/images/save_protocol5.jpg" /></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once finished, click on the floppy disk icon (<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M64 32C28.7 32 0 60.7 0 96v320c0 35.3 28.7 64 64 64h320c35.3 0 64-28.7 64-64V173.3c0-17-6.7-33.3-18.7-45.3L352 50.7c-12-12-28.3-18.7-45.3-18.7H64zm0 96c0-17.7 14.3-32 32-32h192c17.7 0 32 14.3 32 32v64c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32v-64zm160 160a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg></span>) in the upper left to save.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Give the protocol a relevant name starting with the date of acquisition in the format YYYYMMDD and click <span class="consolebutton">Save</span>.
+    <img alt="" src="../../assets/images/save_protocol6.jpg" /></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If desired, the protocol details can also be downloaded as a pdf on a peripherical <abbr title="Universal Serial Bus">USB</abbr> key.<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Right-click on the protocol and select <em>Print</em></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Save the <abbr title="Portable Document Format">PDF</abbr> in your <abbr title="Universal Serial Bus">USB</abbr> key.</li>
+</ul>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Make sure you save a different protocol for each of the four <abbr title="phase-encoding">PE</abbr> directions (i.e., <abbr title="anterior-to-posterior">AP</abbr>, <abbr title="posterior-to-anterior">PA</abbr>, <abbr title="left-to-right">LR</abbr>, <abbr title="right-to-left">RL</abbr>).</li>
+</ul>
+</li>
+</ul>
+<h3 id="scanner-boot-up-protocol">Scanner boot-up protocol<a class="headerlink" href="#scanner-boot-up-protocol" title="Permanent link">&para;</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Please wait for all systems to finalize their boot-up (about 10 minutes), even if only the satellite station (<em>██████</em>) is to be used.</p>
+</div>
+<p><img alt="on-off-button" src="../../assets/images/on-off-box.jpg" /></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Turn the key of the <strong>System ON/OFF Station Box</strong> into the <em>open lock</em> position (<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M144 144c0-44.2 35.8-80 80-80 31.9 0 59.4 18.6 72.3 45.7 7.6 16 26.7 22.8 42.6 15.2s22.8-26.7 15.2-42.6C331 33.7 281.5 0 224 0 144.5 0 80 64.5 80 144v48H64c-35.3 0-64 28.7-64 64v192c0 35.3 28.7 64 64 64h320c35.3 0 64-28.7 64-64V256c0-35.3-28.7-64-64-64H144v-48z"/></svg></span>)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Push the blue button with the sun symbol <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"/><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"/></svg></span> and the <strong>SYSTEM ON</strong> label above, which is found right above the key</li>
+</ul>
+<h2 id="scanner-interface">Scanner interface<a class="headerlink" href="#scanner-interface" title="Permanent link">&para;</a></h2>
+<p>The picture below shows you the scanner interface as you will see it when you operate the <abbr title="Magnetic Resonance">MR</abbr> machine. The arrow points to the screen and the red circles indicate the control buttons.
+<img alt="alarm_button" src="../../assets/images/alarm_button.png" /></p>
+<h3 id="scanners-settings-buttons">Scanner's settings buttons<a class="headerlink" href="#scanners-settings-buttons" title="Permanent link">&para;</a></h3>
+<p>Adjust settings by pressing the respective button and then turning the central knob (1) to adjust the setting to the desired level:</p>
+<p><img alt="ventilation_button" src="../../assets/images/ventilation_button.png" /></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Use the headphones <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M256 80C149.9 80 62.4 159.4 49.6 262c9.4-3.8 19.6-6 30.4-6 26.5 0 48 21.5 48 48v128c0 26.5-21.5 48-48 48-44.2 0-80-35.8-80-80V288C0 146.6 114.6 32 256 32s256 114.6 256 256v112c0 44.2-35.8 80-80 80-26.5 0-48-21.5-48-48V304c0-26.5 21.5-48 48-48 10.8 0 21 2.1 30.4 6C449.6 159.4 362.1 80 256 80z"/></svg></span> button (2) to adjust the volume of the earphones.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Use the speaker <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M320 64c0-12.6-7.4-24-18.9-29.2s-25-3.1-34.4 5.3L131.8 160H64c-35.3 0-64 28.7-64 64v64c0 35.3 28.7 64 64 64h67.8l134.9 119.9c9.4 8.4 22.9 10.4 34.4 5.3S320 460.6 320 448V64z"/></svg></span> button (3) to adjust the volume of the air speaker in the scanning room.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Use the light <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M272 384c9.6-31.9 29.5-59.1 49.2-86.2 5.2-7.1 10.4-14.2 15.4-21.4 19.8-28.5 31.4-63 31.4-100.3C368 78.8 289.2 0 192 0S16 78.8 16 176c0 37.3 11.6 71.9 31.4 100.3 5 7.2 10.2 14.3 15.4 21.4 19.8 27.1 39.7 54.4 49.2 86.2h160zm-80 128c44.2 0 80-35.8 80-80v-16H112v16c0 44.2 35.8 80 80 80zm-80-336c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-61.9 50.1-112 112-112 8.8 0 16 7.2 16 16s-7.2 16-16 16c-44.2 0-80 35.8-80 80z"/></svg></span> button (4) to adjust the intensity of the illumination inside the scanning room.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Use the fan <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M258.6 0c-1.7 0-3.4.1-5.1.5C168 17 115.6 102.3 130.5 189.3c2.9 17 8.4 32.9 15.9 47.4L32 224h-2.6C13.2 224 0 237.2 0 253.4c0 1.7.1 3.4.5 5.1C17 344 102.3 396.4 189.3 381.5c17-2.9 32.9-8.4 47.4-15.9L224 480v2.6c0 16.2 13.2 29.4 29.4 29.4 1.7 0 3.4-.1 5.1-.5 85.5-16.5 137.9-101.8 123-188.8-2.9-17-8.4-32.9-15.9-47.4L480 288h2.6c16.2 0 29.4-13.2 29.4-29.4 0-1.7-.1-3.4-.5-5.1-16.5-85.5-101.8-137.9-188.8-123-17 2.9-32.9 8.4-47.4 15.9L288 32v-2.6C288 13.2 274.8 0 258.6 0zM256 224a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg></span> button (5) to adjust the ventilation in the scanning room.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">The central knob (button 1) will turn off the alarm if pushed when the alarm is on</p>
+</div>
+<h3 id="standard-extraction-of-the-participant">Standard extraction of the participant<a class="headerlink" href="#standard-extraction-of-the-participant" title="Permanent link">&para;</a></h3>
+<p>There are two options to extract the participant, when the session has concluded or within the session if the participant needs to be extracted and there is no emergency (e.g., in case of technical error the scanner does not permit continuing the session and it needs to be aborted).</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><img alt="take_table_down" src="../../assets/images/take_table_down.png" /></th>
+<th style="text-align: center;"><img alt="quick_return" src="../../assets/images/quick_return.png" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" style="text-align: center;"><em>The participant can be extracted by pressing the extraction button (bottom arrow in the leftmost picture) and then genly rolling the central knob. Alternatively, you can just press the</em> Home <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40h-16c-1.1 0-2.2 0-3.3-.1-1.4.1-2.8.1-4.2.1H392c-22.1 0-40-17.9-40-40v-88c0-17.7-14.3-32-32-32h-64c-17.7 0-32 14.3-32 32v88c0 22.1-17.9 40-40 40h-55.9c-1.5 0-3-.1-4.5-.2-1.2.1-2.4.2-3.6.2h-16c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9.1-2.8v-69.6H32c-18 0-32-14-32-32.1 0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7l255.4 224.5c8 7 12 15 11 24z"/></svg></span> <em>button (rightmost picture).</em></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<hr />
 <h2 id="eye-tracker-calibration-process">Eye-Tracker Calibration Process<a class="headerlink" href="#eye-tracker-calibration-process" title="Permanent link">&para;</a></h2>
 <ul class="task-list">
 <li class="task-list-item">
@@ -1145,37 +1308,6 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Upon successful calibration, initiate validation by clicking <span class="keypress">Validation</span> on the <abbr title="eye tracker">ET</abbr> interface or pressing the <span class="keypress">V</span> key on the laptop keyboard. Follow the same instructions as in the calibration to validate positions.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If validation fails, repeat previous steps and restart calibration. Otherwise, you can leave the calibration mode and proceed with the task program by pressing the <span class="keypress">Esc</span> key on the laptop (<em>███</em>).</li>
 </ul>
-<h2 id="scanner-interface">Scanner interface<a class="headerlink" href="#scanner-interface" title="Permanent link">&para;</a></h2>
-<p>The picture below shows you the scanner interface as you will see it when you operate the <abbr title="Magnetic Resonance">MR</abbr> machine. The arrow points to the screen and the red circles indicate the control buttons.
-<img alt="alarm_button" src="../../assets/images/alarm_button.png" /></p>
-<h3 id="scanners-settings-buttons">Scanner's settings buttons<a class="headerlink" href="#scanners-settings-buttons" title="Permanent link">&para;</a></h3>
-<p>Adjust settings by pressing the respective button and then turning the central knob (1) to adjust the setting to the desired level:</p>
-<p><img alt="ventilation_button" src="../../assets/images/ventilation_button.png" /></p>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Use the headphones <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M256 80C149.9 80 62.4 159.4 49.6 262c9.4-3.8 19.6-6 30.4-6 26.5 0 48 21.5 48 48v128c0 26.5-21.5 48-48 48-44.2 0-80-35.8-80-80V288C0 146.6 114.6 32 256 32s256 114.6 256 256v112c0 44.2-35.8 80-80 80-26.5 0-48-21.5-48-48V304c0-26.5 21.5-48 48-48 10.8 0 21 2.1 30.4 6C449.6 159.4 362.1 80 256 80z"/></svg></span> button (2) to adjust the volume of the earphones.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Use the speaker <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M320 64c0-12.6-7.4-24-18.9-29.2s-25-3.1-34.4 5.3L131.8 160H64c-35.3 0-64 28.7-64 64v64c0 35.3 28.7 64 64 64h67.8l134.9 119.9c9.4 8.4 22.9 10.4 34.4 5.3S320 460.6 320 448V64z"/></svg></span> button (3) to adjust the volume of the air speaker in the scanning room.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Use the light <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M272 384c9.6-31.9 29.5-59.1 49.2-86.2 5.2-7.1 10.4-14.2 15.4-21.4 19.8-28.5 31.4-63 31.4-100.3C368 78.8 289.2 0 192 0S16 78.8 16 176c0 37.3 11.6 71.9 31.4 100.3 5 7.2 10.2 14.3 15.4 21.4 19.8 27.1 39.7 54.4 49.2 86.2h160zm-80 128c44.2 0 80-35.8 80-80v-16H112v16c0 44.2 35.8 80 80 80zm-80-336c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-61.9 50.1-112 112-112 8.8 0 16 7.2 16 16s-7.2 16-16 16c-44.2 0-80 35.8-80 80z"/></svg></span> button (4) to adjust the intensity of the illumination inside the scanning room.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Use the fan <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M258.6 0c-1.7 0-3.4.1-5.1.5C168 17 115.6 102.3 130.5 189.3c2.9 17 8.4 32.9 15.9 47.4L32 224h-2.6C13.2 224 0 237.2 0 253.4c0 1.7.1 3.4.5 5.1C17 344 102.3 396.4 189.3 381.5c17-2.9 32.9-8.4 47.4-15.9L224 480v2.6c0 16.2 13.2 29.4 29.4 29.4 1.7 0 3.4-.1 5.1-.5 85.5-16.5 137.9-101.8 123-188.8-2.9-17-8.4-32.9-15.9-47.4L480 288h2.6c16.2 0 29.4-13.2 29.4-29.4 0-1.7-.1-3.4-.5-5.1-16.5-85.5-101.8-137.9-188.8-123-17 2.9-32.9 8.4-47.4 15.9L288 32v-2.6C288 13.2 274.8 0 258.6 0zM256 224a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg></span> button (5) to adjust the ventilation in the scanning room.</li>
-</ul>
-<div class="admonition warning">
-<p class="admonition-title">The central knob (button 1) will turn off the alarm if pushed when the alarm is on</p>
-</div>
-<h3 id="standard-extraction-of-the-participant">Standard extraction of the participant<a class="headerlink" href="#standard-extraction-of-the-participant" title="Permanent link">&para;</a></h3>
-<p>There are two options to extract the participant, when the session has concluded or within the session if the participant needs to be extracted and there is no emergency (e.g., in case of technical error the scanner does not permit continuing the session and it needs to be aborted).</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;"><img alt="take_table_down" src="../../assets/images/take_table_down.png" /></th>
-<th style="text-align: center;"><img alt="quick_return" src="../../assets/images/quick_return.png" /></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td colspan="2" style="text-align: center;"><em>The participant can be extracted by pressing the extraction button (bottom arrow in the leftmost picture) and then genly rolling the central knob. Alternatively, you can just press the</em> Home <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40h-16c-1.1 0-2.2 0-3.3-.1-1.4.1-2.8.1-4.2.1H392c-22.1 0-40-17.9-40-40v-88c0-17.7-14.3-32-32-32h-64c-17.7 0-32 14.3-32 32v88c0 22.1-17.9 40-40 40h-55.9c-1.5 0-3-.1-4.5-.2-1.2.1-2.4.2-3.6.2h-16c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9.1-2.8v-69.6H32c-18 0-32-14-32-32.1 0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7l255.4 224.5c8 7 12 15 11 24z"/></svg></span> <em>button (rightmost picture).</em></td>
-<td style="text-align: center;"></td>
-</tr>
-</tbody>
-</table>
 
 
 

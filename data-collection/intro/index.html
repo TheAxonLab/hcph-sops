@@ -16,7 +16,7 @@
         <link rel="prev" href="../../recruitment-scheduling-screening/scheduling/">
       
       
-        <link rel="next" href="../preliminary/">
+        <link rel="next" href="../setup/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -439,22 +439,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#biopac-documentation-and-devices" class="md-nav__link">
-    BIOPAC documentation and devices
+  <a href="#gas-analyzer-ml206-documentation-and-basics" class="md-nav__link">
+    Gas analyzer ML206: documentation and basics
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#ad-instruments-ml206-gas-analyzer-documentation-and-basics" class="md-nav__link">
-    AD Instruments ML206 Gas analyzer: documentation and basics
+  <a href="#physiological-recording-hub-biopac-documentation-and-devices" class="md-nav__link">
+    Physiological recording hub BIOPAC: documentation and devices
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#eyelink-1000-plus-eye-tracker-documentation-and-basics" class="md-nav__link">
-    EyeLink 1000 Plus eye tracker: documentation and basics
+  <a href="#eye-tracker-eyelink-1000-plus-documentation-and-basics" class="md-nav__link">
+    Eye tracker EyeLink 1000 Plus: documentation and basics
   </a>
   
 </li>
@@ -486,11 +486,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../preliminary/" class="md-nav__link">
+      <a href="../setup/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Preliminary work
+    Before data collection starts
   </span>
   
 
@@ -510,7 +510,27 @@
         
   
   <span class="md-ellipsis">
-    Before each session
+    Before session day
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tear-up/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Session preparation
   </span>
   
 
@@ -894,6 +914,26 @@
 
               
             
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../legacy-et/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Legacy procedure for the ET mirror
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -934,22 +974,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#biopac-documentation-and-devices" class="md-nav__link">
-    BIOPAC documentation and devices
+  <a href="#gas-analyzer-ml206-documentation-and-basics" class="md-nav__link">
+    Gas analyzer ML206: documentation and basics
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#ad-instruments-ml206-gas-analyzer-documentation-and-basics" class="md-nav__link">
-    AD Instruments ML206 Gas analyzer: documentation and basics
+  <a href="#physiological-recording-hub-biopac-documentation-and-devices" class="md-nav__link">
+    Physiological recording hub BIOPAC: documentation and devices
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#eyelink-1000-plus-eye-tracker-documentation-and-basics" class="md-nav__link">
-    EyeLink 1000 Plus eye tracker: documentation and basics
+  <a href="#eye-tracker-eyelink-1000-plus-documentation-and-basics" class="md-nav__link">
+    Eye tracker EyeLink 1000 Plus: documentation and basics
   </a>
   
 </li>
@@ -1044,22 +1084,20 @@
 </table>
 </li>
 <li>
-<p><strong>Gas analyzer (<abbr title="gas analyzer">GA</abbr>)</strong>.
-    The <abbr title="gas analyzer">GA</abbr> is a device that continuously measures the amount of two gases (CO<sub>2</sub> and O<sub>2</sub>) from a sample fed at the front of the device with a connected tube (this tube comes from inside of the Scanning Room and ends in the nasal cannula the participant is wearing, as shown in the graph).</p>
+<p><strong>Physiology recording hub (BIOPAC)</strong>.
+    We use the <em>MP160</em> (BIOPAC Systems, Inc., Goleta, CA, US) to record most of physiological signals.
+    The main unit (MP160) has directly attached several additional modules for the reception and recording of several analogical signals from the Scanning Room (for the case of the <abbr title="respiration belt">RB</abbr> and the <abbr title="electrocardiogram">ECG</abbr>), and indirectly from the gas analyzer (see next item).
+    The physiology recording hub also registers digital signals from the <em>stimuli presentation laptop</em> (███) through the digital signal module (described below).</p>
 </li>
-<li>
-<p><strong>BIOPAC</strong>.
-    The BIOPAC is the main recording hub.
-    It directly receives analogical signals from the Scanning Room (for the case of the <abbr title="respiration belt">RB</abbr> and the <abbr title="electrocardiogram">ECG</abbr>).
-    Indirectly, it receives the analogical signal from the <abbr title="gas analyzer">GA</abbr>, and digital signals from the <em>Psychopy laptop</em> (███).</p>
-</li>
-<li>
-<p><strong>Eye tracker (<abbr title="eye tracker">ET</abbr>)</strong>.
-    The <abbr title="eye tracker">ET</abbr> is composed of two main elements:
-    (i) inside the scanner's bore, we place an arm that holds an infrared lens and camera sensor on one side and an infrared lamp that illuminates the right eye of the subject through a special mirror to reflect the infrared spectrum; and (ii) a <abbr title="personal computer">PC</abbr> tower that receives the camera recordings, postprocess the images and calculates the final parameters of interest (position of the eye, pupil size, etc.).
+<li><strong>Gas analyzer (<abbr title="gas analyzer">GA</abbr>)</strong>.
+    We use the <em>ML206</em> (AD Instruments Pty. Ltd., Sydney, Australia).
+    The <abbr title="gas analyzer">GA</abbr> is a device that continuously measures the amount of two gases (CO<sub>2</sub> and O<sub>2</sub>) from a sample fed at the front of the device with a connected tube (this tube comes from inside of the Scanning Room and ends in the nasal cannula the participant is wearing, as shown in the graph).</li>
+<li><strong>Eye tracker (<abbr title="eye tracker">ET</abbr>)</strong>.
+    We use the <em>EyeLink 1000 Plus</em> (SR Research Ltd., Ottawa, Canada).
+    Our particular variant «Long Range» is composed of three main elements:
+    (i) inside the scanner's bore, we place an arm that holds an infrared lens and camera sensor on one side and an infrared lamp that illuminates the right eye of the subject through (ii) a special mirror to reflect the infrared spectrum; and (iii) a <abbr title="personal computer">PC</abbr> tower that receives the camera recordings, postprocesses the images and calculates the final parameters of interest (position of the eye, pupil size, etc.).
     The <abbr title="eye tracker">ET</abbr> is also connected to the <em>Psychopy laptop</em> (███), and communicates bi-directionally with it (e.g., to record logs or receive "messages" such as triggers or task events).
-    The <abbr title="eye tracker">ET</abbr> <strong>is NOT connected to the BIOPAC</strong>, with the implication that the <abbr title="eye tracker">ET</abbr> data is not stored with the other physiological information.</p>
-</li>
+    The <abbr title="eye tracker">ET</abbr> <strong>is NOT connected to the BIOPAC</strong>, with the implication that the <abbr title="eye tracker">ET</abbr> data is not stored with the other physiological information.</li>
 <li><strong>Stimuli presentation laptop</strong>.
     The <em>Psychopy laptop</em> (███) has the <em>Psychopy</em> software install and with it, the task programs are executed.
     This experiment consists of three tasks: breath-holding task (<em><abbr title="breath-holding task">BHT</abbr></em>), resting-state <abbr title="functional MRI">fMRI</abbr> (<em>rest</em>), and a quality-control task (<em><abbr title="quality control task">QCT</abbr></em>).
@@ -1069,13 +1107,20 @@
     All the inputs to the BIOPAC are multiplexed through into an Ethernet cable that is connected to this laptop.</li>
 </ol>
 <h2 id="getting-familiar-with-the-instruments">Getting familiar with the instruments<a class="headerlink" href="#getting-familiar-with-the-instruments" title="Permanent link">&para;</a></h2>
-<p>Below is the overall setup of the instruments:</p>
-<p><img alt="Overall instrumental setup" src="../../assets/images/Biopac_full_setup.jpg" /></p>
-<div class="admonition warning">
-<p class="admonition-title">Emergency procedures</p>
-<p>It is critical you fully understand and study the <a href="../emergency-procedures/">emergency procedures to run an <abbr title="Magnetic Resonance Imaging">MRI</abbr> scan at <abbr title="Lausanne University Hospital">CHUV</abbr></a>.</p>
+<h3 id="gas-analyzer-ml206-documentation-and-basics">Gas analyzer ML206: documentation and basics<a class="headerlink" href="#gas-analyzer-ml206-documentation-and-basics" title="Permanent link">&para;</a></h3>
+<p>The front of the gas analyzer (<abbr title="gas analyzer">GA</abbr>) looks like this:</p>
+<p><img alt="gaz-analyser-front" src="../../assets/images/gaz-analyser-front.jpg" title="Gas Analyzer front" /></p>
+<p>It is critical to familiarize with the <a href="../../assets/files/GA_manual.pdf"><abbr title="gas analyzer">GA</abbr>'s manual</a> to learn about its correct utilization.</p>
+<div class="admonition danger">
+<p class="admonition-title">Make sure you understand the switching on and off procedures described in these <abbr title="standard operating procedures">SOPs</abbr></p>
 </div>
-<h3 id="biopac-documentation-and-devices">BIOPAC documentation and devices<a class="headerlink" href="#biopac-documentation-and-devices" title="Permanent link">&para;</a></h3>
+<p>Finally, make sure to watch the following video:</p>
+<video id="wistia_simple_video_119" crossorigin="anonymous" style="background: transparent; display: block; height: 100%; max-height: none; max-width: none; position: static; visibility: visible; width: 100%; object-fit: fill;" aria-label="Video" src="https://embed-ssl.wistia.com/deliveries/5e08ccab25ab45382329671a82dfe5123f6e840e/file.mp4" playsinline="" preload="metadata" type="video/mp4" x-webkit-airplay="allow" controls>
+  <source src="https://embed-ssl.wistia.com/deliveries/5e08ccab25ab45382329671a82dfe5123f6e840e/file.mp4" type="video/mp4" />
+  Your browser does not support the video. <a href="./assets/files/GA_video.mp4">Click here to download it</a>
+</video>
+
+<h3 id="physiological-recording-hub-biopac-documentation-and-devices">Physiological recording hub BIOPAC: documentation and devices<a class="headerlink" href="#physiological-recording-hub-biopac-documentation-and-devices" title="Permanent link">&para;</a></h3>
 <p>Get familiar with the BIOPAC setup and read through the <a href="https://www.biopac.com/wp-content/uploads/MP_Hardware_Guide.pdf">hardware documentation</a>.
 The system is composed by the main unit (MP160; extreme left in the picture below), to which modules are attached depending on what signals are to be recorded.</p>
 <p><img alt="Biopac_setup" src="../../assets/images/Biopac_setup.jpg" title="BIOPAC front side" /></p>
@@ -1084,33 +1129,15 @@ The system is composed by the main unit (MP160; extreme left in the picture belo
 <li>The <a href="../../assets/files/STP100D.pdf">SPT100D (solid state relay driver unit)</a> is used to input digital signals that must be recorded.</li>
 <li>The AMI100C unit can receive up to 16 analog signals.</li>
 <li>The DA100C unit records the signal coming from the respiration belt.
-    This unit requires the pressure transducer TSD160A unit to be connected.</li>
-<li>The ECG100C <abbr title="Magnetic Resonance Imaging">MRI</abbr> unit records the electrical signal coming from the heart via the <abbr title="electrocardiogram">ECG</abbr>.
-    This unit requires the MECMRI-2 unit on the ECG100C unit.</li>
+    This unit requires the pressure transducer and amplifier TSD160A unit to be connected at its front.</li>
+<li>The ECG100C unit records the electrical signal coming from the heart via three <abbr title="electrocardiogram">ECG</abbr> leads.
+    This unit requires the amplifier MECMRI-2 unit to be connected at its front.</li>
 </ul>
 <p>In addition to the main unit, we have a data modem to feed digital signals into the SPT100D.
 This modem is the <a href="../../assets/files/MMBT-S_instruction_manual_v2.2.pdf">MMBT-S Trigger Interface Box adapter (N-shaped, pink box)</a>:</p>
-<p><img alt="neurospec" src="../../assets/images/neurospec.jpg" /></p>
-<h3 id="ad-instruments-ml206-gas-analyzer-documentation-and-basics">AD Instruments ML206 Gas analyzer: documentation and basics<a class="headerlink" href="#ad-instruments-ml206-gas-analyzer-documentation-and-basics" title="Permanent link">&para;</a></h3>
-<p>The front of the gas analyzer (<abbr title="gas analyzer">GA</abbr>) looks like this:</p>
-<p><img alt="gaz-analyser-front" src="../../assets/images/gaz-analyser-front.jpg" title="Gas Analyzer front" /></p>
-<p>It is critical to familiarize with the <a href="../../assets/files/GA_manual.pdf"><abbr title="gas analyzer">GA</abbr>'s manual</a> to learn about its correct utilization.</p>
-<div class="admonition danger">
-<p class="admonition-title">Make sure you understand the switching on and off procedures described in these <abbr title="standard operating procedures">SOPs</abbr></p>
-</div>
-<p>The input to the <abbr title="gas analyzer">GA</abbr> must be connected through a DM-060-24 desiccant chamber and a MLA0110 flow valve and a MLA0343 drying tube:</p>
-<p><img alt="desiccant_chamber" src="../../assets/images/desiccant_chamber.png" /></p>
-<div class="admonition warning">
-<p class="admonition-title">The MLA0343 drying tube and the DM-060-24 desiccant chamber MUST be replaced when their inside color turns into pink.</p>
-</div>
-<p>Finally, make sure to watch the following video:</p>
-<video id="wistia_simple_video_119" crossorigin="anonymous" style="background: transparent; display: block; height: 100%; max-height: none; max-width: none; position: static; visibility: visible; width: 100%; object-fit: fill;" aria-label="Video" src="https://embed-ssl.wistia.com/deliveries/5e08ccab25ab45382329671a82dfe5123f6e840e/file.mp4" playsinline="" preload="metadata" type="video/mp4" x-webkit-airplay="allow" controls>
-  <source src="https://embed-ssl.wistia.com/deliveries/5e08ccab25ab45382329671a82dfe5123f6e840e/file.mp4" type="video/mp4" />
-  Your browser does not support the video. <a href="./assets/files/GA_video.mp4">Click here to download it</a>
-</video>
-
-<h3 id="eyelink-1000-plus-eye-tracker-documentation-and-basics">EyeLink 1000 Plus eye tracker: documentation and basics<a class="headerlink" href="#eyelink-1000-plus-eye-tracker-documentation-and-basics" title="Permanent link">&para;</a></h3>
-<p>Get familiar with the setup and read through the <a href="../../assets/files/EL1000Plus_UserManual_1.0.20_GOP.pdf">Eye Tracker Instruction Manual</a>.</p>
+<p><img alt="MMBT-S" src="../../assets/images/neurospec.jpg" /></p>
+<h3 id="eye-tracker-eyelink-1000-plus-documentation-and-basics">Eye tracker EyeLink 1000 Plus: documentation and basics<a class="headerlink" href="#eye-tracker-eyelink-1000-plus-documentation-and-basics" title="Permanent link">&para;</a></h3>
+<p>Get familiar with the setup and read through the <a href="../../assets/files/EL1000Plus_UserManual_1.0.20_GOP.pdf"><abbr title="eye tracker">ET</abbr> Instruction Manual</a>.</p>
 <details class="thanks">
 <summary>Thanks to Benedetta Franceschiello!</summary>
 <p>All the documentation about the <abbr title="eye tracker">ET</abbr> is derived from Benedetta Franceschiello's user guide.
@@ -1126,7 +1153,7 @@ This modem is the <a href="../../assets/files/MMBT-S_instruction_manual_v2.2.pdf
 </thead>
 <tbody>
 <tr>
-<td colspan="3" style="text-align: center;">The <abbr title="eye tracker">ET</abbr> is composed of three major elements: the <abbr title="eye tracker">ET</abbr> arm (left), which holds the lens and camera and an infrared lamp, the <em>Host Computer</em> (middle), and the infrared mirror (right)</td>
+<td colspan="3" style="text-align: center;"><strong>The <abbr title="eye tracker">ET</abbr> is an <em>EyeLink 1000 Plus (Long Range)</em></strong>. The <abbr title="eye tracker">ET</abbr> is composed of three major elements: the <abbr title="eye tracker">ET</abbr> arm (left), which holds the lens and camera and an infrared lamp, the <em>Host Computer</em> (middle), and the infrared mirror (right)</td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 </tr>
@@ -1142,6 +1169,14 @@ This modem is the <a href="../../assets/files/MMBT-S_instruction_manual_v2.2.pdf
 <h2 id="scanning-protocols">Scanning protocols<a class="headerlink" href="#scanning-protocols" title="Permanent link">&para;</a></h2>
 <p>The study will collect data with two different scanning protocols.
 Most of what is described in the present <abbr title="standard operating procedures">SOPs</abbr> addresses the <em>Reliability Imaging Protocol</em> that will be acquired on the ███ scanner.</p>
+<div class="admonition important">
+<p class="admonition-title">Reliability imaging protocol printouts</p>
+<p>The final printouts are here:
+<a href="../../assets/files/HCPh_AP.pdf">HCPh_AP</a>,
+<a href="../../assets/files/HCPh_PA.pdf">HCPh_PA</a>,
+<a href="../../assets/files/HCPh_LR.pdf">HCPh_LR</a>, and
+<a href="../../assets/files/HCPh_RL.pdf">HCPh_RL</a>.</p>
+</div>
 <table>
 <thead>
 <tr>
@@ -1227,7 +1262,7 @@ Most of what is described in the present <abbr title="standard operating procedu
 </tbody>
 </table>
 <div class="admonition important">
-<p class="admonition-title">Stimulation program timings</p>
+<p class="admonition-title">Stimulation program timings (reliability imaging protocol only)</p>
 <p><a name="task-timing"></a>
 The stimuli presentation laptop (███) will execute four experiments, which will allow the synchronization of all devices by sending the adequate signals at their predesignated times and also present visual stimuli with the scanner's projector.
 The lengths of the four <em>Psychopy experiments</em> should be:</p>
