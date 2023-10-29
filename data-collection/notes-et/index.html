@@ -1031,19 +1031,50 @@
 <p class="admonition-title">To ensure accurate performance and prevent minor drifts in the pupil and corneal reflection (<abbr title="corneal reflection">CR</abbr>) thresholds, perform the <abbr title="eye tracker">ET</abbr> Setup 10-15 minutes after powering the <abbr title="eye tracker">ET</abbr> on.</p>
 </div>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open the <abbr title="quality control task">QCT</abbr> experiment in <em>Psychopy</em> (<code>task-qct_bold.psyexp</code> file).<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Run the experiment by pressing the green play button.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Press enter to begin the <em>camera setup mode</em>.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> The camera setup mode contains a view of one eye, and you can switch that view between two modes: one is the field-of-view of the <abbr title="eye tracker">ET</abbr>, the second is an automatic zoom on the eye itself (or a random part if the eye is not visible).</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> To ease the setup of the <abbr title="eye tracker">ET</abbr>, switch to the field-of-view mode in the camera setup mode by pressing the <span class="keypress"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M9.4 278.6c-12.5-12.5-12.5-32.8 0-45.3l128-128c9.2-9.2 22.9-11.9 34.9-6.9s19.8 16.6 19.8 29.6v256c0 12.9-7.8 24.6-19.8 29.6s-25.7 2.2-34.9-6.9l-128-128z"/></svg></span></span> or <span class="keypress"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M246.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-9.2-9.2-22.9-11.9-34.9-6.9S63.9 115 63.9 128v256c0 12.9 7.8 24.6 19.8 29.6s25.7 2.2 34.9-6.9l128-128z"/></svg></span></span> arrow.
-    This will allow you to adjust the <abbr title="eye tracker">ET</abbr> position as the infrared camera provides feedback inside the scanning room on the projection screen.</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Initiate the fixation program on the stimuli laptop (<em>███</em>), by typing the following on a terminal:</p>
+<details class="warning">
+<summary>Make sure to have the correct environment loaded before invoking the task</summary>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Deactivate conda (if active):
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>conda<span class="w"> </span>deactivate
+</span></code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Load the new virtual environment:
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">source</span><span class="w"> </span><span class="nv">$HOME</span>/psychopyenv/bin/activate
+</span></code></pre></div></li>
 </ul>
+</details>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>~/workspace/HCPh-fMRI-tasks
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>python<span class="w"> </span>task-fixation_dwi.py
+</span></code></pre></div>
+<p>A modal dialog will ask you for the number of trial (automatically calculated, DO NOT modify) and the session number.</p>
+<div class="admonition danger">
+<p class="admonition-title">The following two steps MUST be executed in this order</p>
+<div class="language-text highlight"><pre><span></span><code>- [ ] Drag and drop the modal dialog into the scanner&#39;s projector screen.
+- [ ] Update the session number with the corresponding number.
+</code></pre></div>
+</div>
 </li>
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Enter the scanning room and adjust the <abbr title="eye tracker">ET</abbr> arm position and focus of the lens until the eye is fully visible.
-    The <strong>right</strong> eye should be visible at the center of the coil's square window for the eye.</p>
-<div class="admonition important">
-<p class="admonition-title">Adjusting the camera's field-of-view and focus</p>
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Press <span class="keypress">Enter</span> to begin the <em>Camera Setup Mode</em>.</p>
+<div class="admonition tip">
+<p class="admonition-title">The <em>Camera Setup Mode</em> contains a view of one eye, and you can switch that view between two modes</p>
+<ul>
+<li>The <em>Head Camera</em> will allow you to "find" and aim the right eye, as it has a wider field-of-view.</li>
+<li>The <em>Right Eye Camera</em> is a zoomed clip of the eye, if it is properly identified by the software (i.e., the eye is fully within the field-of-view of the camera).</li>
+</ul>
+</div>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Switch to the <em>Head Camera</em> mode by pressing the <span class="keypress"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M9.4 278.6c-12.5-12.5-12.5-32.8 0-45.3l128-128c9.2-9.2 22.9-11.9 34.9-6.9s19.8 16.6 19.8 29.6v256c0 12.9-7.8 24.6-19.8 29.6s-25.7 2.2-34.9-6.9l-128-128z"/></svg></span></span> or <span class="keypress"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M246.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-9.2-9.2-22.9-11.9-34.9-6.9S63.9 115 63.9 128v256c0 12.9 7.8 24.6 19.8 29.6s25.7 2.2 34.9-6.9l128-128z"/></svg></span></span> arrow.
+    This will allow you to adjust the <abbr title="eye tracker">ET</abbr> position as the infrared camera provides feedback inside the scanning room on the projection screen.</p>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Enter the scanning room.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Ask the participant to slide the mirror with their hands until the infrared mirror fully covers the image on the screen.</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Action the <abbr title="eye tracker">ET</abbr> arm position looking at the <em>Head Camera</em> view that should be now projecting on the screen to ensure the right eye is in the center of the field-of-view.</p>
+<div class="admonition warning">
+<p class="admonition-title">The <strong>right</strong> eye should be visible at the center of the coil's square window for the eye.</p>
 <p><img align="right" alt="base-eye-tracker" src="../../assets/images/base-eye-tracker.png" /></p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> To adjust the camera position, slightly unscrew the fixation locks of the camera arm, move the arm in search of the correct position, and tighten the locks again on the desired position.</li>
@@ -1054,29 +1085,29 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <strong>If the eye coverage is still inappropriate</strong>, revise the vertical position of the infrared mirror with respect to the standard mirror (this will require new gloves and replacing the tape to stick the infrared mirror).
     Even a tiny adjustment can impact calibration and eye positioning.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Repeat the previous steps until the eye is properly aimed and focused.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If the image appears blurry, fine-tune the focus using the lens barrel.
-    Refer to the example image below.
-    <img alt="focus_example" src="../../assets/images/focus.png" /></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> As a last resort, you can also adjust the strength of the infrared light (emitter).
+    This is the black box on the opposite side of the lens on the <abbr title="eye tracker">ET</abbr> arm.
+    Under the emitter there are two little screws.
+    Unscrew, move the emitter front/back, check the contrast of the face image, re-screw.</li>
 </ul>
 </div>
 </li>
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Press the <span class="keypress">A</span> key to set the pupil and <abbr title="corneal reflection">CR</abbr> detection thresholds automatically.</p>
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Tighten the nut that locks the arm's position.</p>
 </li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Fine-tune the pupil detection threshold using the <span class="keypress"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9S19 320.1 32 320.1h256c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z"/></svg></span></span> and <span class="keypress"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9S301 191.9 288 191.9L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"/></svg></span></span> arrow keys if necessary.
-    While checking the pupil/<abbr title="corneal reflection">CR</abbr> image and thresholding, ask the participant to look at the screen corners to verify correct detection even in extreme positions.
-    <img alt="pupil_threshold" src="../../assets/images/pupil_threshold.png" /></p>
-</li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> As a last resort, you can also adjust the strength of the infrared light (emitter).
-    This is the black box on the opposite side of the lens on the <abbr title="eye tracker">ET</abbr> arm.
-    Under the emitter there are two little screws.
-    Unscrew, move the emitter front/back, check the contrast of the face image, re-screw.</p>
-</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Switch the <abbr title="eye tracker">ET</abbr> to <em>Eye camera</em> mode (zoomed in) and check the eye is still well covered by the view and the pupil is segmented.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Focus the lens so that the image is sharp (e.g., the eyebrows and eyelashes are well defined).
+    <img alt="focus_example" src="../../assets/images/focus.png" /></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Switch the <abbr title="eye tracker">ET</abbr> to <em>Right Eye Camera</em> mode (zoomed in).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify that the eye is still well covered by the view and the pupil is segmented.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Press the <span class="keypress">A</span> key to set the pupil and <abbr title="corneal reflection">CR</abbr> detection thresholds automatically.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check that two crosses appear on the eye.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If the pupil is correctly seen, as well as the eye (indicated by the crosses following their movement), inform the participant that you are leaving the room, and that you are going to first check with them whether the speaker works well, immediately.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Fine-tune the pupil detection threshold using the <span class="keypress"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9S19 320.1 32 320.1h256c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z"/></svg></span></span> and <span class="keypress"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9S301 191.9 288 191.9L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"/></svg></span></span> arrow keys if necessary.
+    While checking the pupil/<abbr title="corneal reflection">CR</abbr> image and thresholding, ask the participant to look at the screen corners to verify correct detection even in extreme positions.
+    <img alt="pupil_threshold" src="../../assets/images/pupil_threshold.png" /></li>
+</ul>
+<p><strong>At this point, the pupil should correctly be seen and segmented</strong>, and the crosses on the <abbr title="eye tracker">ET</abbr> computer should appear in the right eye.</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Inform the participant that you are leaving the room.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Exit the camera mode by pressing <span class="keypress">Enter</span>.</li>
 </ul>
 <h2 id="calibration">Calibration<a class="headerlink" href="#calibration" title="Permanent link">&para;</a></h2>
