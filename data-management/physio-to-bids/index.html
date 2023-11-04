@@ -947,8 +947,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#converting-physio-corresponding-to-the-dwi-run-of-session-1" class="md-nav__link">
-    Converting physio corresponding to the DWI run of session 1
+  <a href="#converting-physio-corresponding-to-the-dwi-run" class="md-nav__link">
+    Converting physio corresponding to the DWI run
   </a>
   
 </li>
@@ -1024,8 +1024,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#converting-physio-corresponding-to-the-dwi-run-of-session-1" class="md-nav__link">
-    Converting physio corresponding to the DWI run of session 1
+  <a href="#converting-physio-corresponding-to-the-dwi-run" class="md-nav__link">
+    Converting physio corresponding to the DWI run
   </a>
   
 </li>
@@ -2482,7 +2482,7 @@ biopac_lookup</div>
 <td>29</td>
 <td>2023-11-03</td>
 <td>PA</td>
-<td>NaN</td>
+<td>session2023-11-03T19:12:36.acq</td>
 <td>&lt;NA&gt;</td>
 </tr>
 <tr>
@@ -2584,6 +2584,7 @@ Update the <code>session</code> variable here to change what you are converting.
 <span class="n">BIDS_PATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"/data/datasets/hcph"</span><span class="p">)</span>
 <span class="n">RECALIBRATED_SESSION</span> <span class="o">=</span> <span class="mi">23</span>
 <span class="n">FIRST_O2_SESSION</span> <span class="o">=</span> <span class="mi">11</span>
+<span class="n">MISSING_RB</span> <span class="o">=</span> <span class="p">(</span><span class="mi">29</span><span class="p">,</span> <span class="p">)</span>
 
 <span class="n">participant</span> <span class="o">=</span> <span class="s2">"001"</span>
 <span class="n">session</span> <span class="o">=</span> <span class="mi">28</span>
@@ -2603,6 +2604,7 @@ Update the <code>session</code> variable here to change what you are converting.
 BIDS_PATH = Path("/data/datasets/hcph")
 RECALIBRATED_SESSION = 23
 FIRST_O2_SESSION = 11
+MISSING_RB = (29, )
 
 participant = "001"
 session = 28
@@ -2688,6 +2690,10 @@ These JSON files may be consolidated at the top level of the BIDS structure for 
 <span class="k">if</span> <span class="n">session</span> <span class="o">&lt;</span> <span class="n">FIRST_O2_SESSION</span><span class="p">:</span>
     <span class="n">RESP_JSON</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"O2"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="n">RESP_JSON</span><span class="p">[</span><span class="s2">"Columns"</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">"O2"</span><span class="p">)</span>
+    
+<span class="k">if</span> <span class="n">session</span> <span class="ow">in</span> <span class="n">MISSING_RB</span><span class="p">:</span>
+    <span class="n">RESP_JSON</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"belt"</span><span class="p">)</span>
+    <span class="n">RESP_JSON</span><span class="p">[</span><span class="s2">"Columns"</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">"belt"</span><span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-4">CARD_JSON = {
     "Columns": ["ecg"],
@@ -2723,7 +2729,11 @@ RESP_JSON = {
 
 if session &lt; FIRST_O2_SESSION:
     RESP_JSON.pop("O2", None)
-    RESP_JSON["Columns"].remove("O2")</div>
+    RESP_JSON["Columns"].remove("O2")
+    
+if session in MISSING_RB:
+    RESP_JSON.pop("belt")
+    RESP_JSON["Columns"].remove("belt")</div>
 </div>
 </div>
 </div>
@@ -3163,7 +3173,7 @@ seq_onsets</div>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="converting-physio-corresponding-to-the-dwi-run-of-session-1">Converting physio corresponding to the DWI run of session 1<a class="anchor-link" href="#converting-physio-corresponding-to-the-dwi-run-of-session-1">¶</a></h2><p>Cardiac signal (ECG) is stored in channel 2 of our <em>AcqKnowledge</em> files (i.e., index 1 in Python, which is zero-based).</p>
+<h2 id="converting-physio-corresponding-to-the-dwi-run">Converting physio corresponding to the DWI run<a class="anchor-link" href="#converting-physio-corresponding-to-the-dwi-run">¶</a></h2><p>Cardiac signal (ECG) is stored in channel 2 of our <em>AcqKnowledge</em> files (i.e., index 1 in Python, which is zero-based).</p>
 <p>First, let's calculate in the particular ECG channel, the indexes at which we are going to clip the cardiac signal around each imaging run.</p>
 <p>For DWI, we will clip the files between <code>dwi_idx_start</code> and <code>dwi_idx_stop</code>.
 In this case, for DWI we need to take into account that the sequence sends triggers during calibration (2 x 87 slices single slice mode, plus 29 for one multi-slice volume).
@@ -3471,9 +3481,6 @@ pd.DataFrame({"ecg": dwi_ch_data}).to_csv(
 <span class="k">if</span> <span class="n">session</span> <span class="o">&lt;</span> <span class="n">RECALIBRATED_SESSION</span><span class="p">:</span>  <span class="c1"># Before session 23, calibration was a bit off</span>
     <span class="n">dwi_resp_data</span><span class="p">[</span><span class="s2">"CO2"</span><span class="p">]</span> <span class="o">=</span> <span class="n">dwi_resp_data</span><span class="p">[</span><span class="s2">"CO2"</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mf">8.0</span> <span class="o">-</span> <span class="mf">0.045</span><span class="p">)</span>  <span class="o">/</span> <span class="mf">0.8</span> <span class="o">+</span> <span class="mf">0.045</span>
     <span class="n">dwi_resp_data</span><span class="p">[</span><span class="s2">"O2"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">dwi_resp_data</span><span class="p">[</span><span class="s2">"O2"</span><span class="p">]</span> <span class="o">-</span> <span class="mf">0.1</span><span class="p">)</span> <span class="o">*</span> <span class="mf">10.946</span> <span class="o">/</span> <span class="p">(</span><span class="mf">20.946</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">10</span>
-
-<span class="k">if</span> <span class="n">session</span> <span class="o">&lt;</span> <span class="n">FIRST_O2_SESSION</span><span class="p">:</span>
-    <span class="n">dwi_resp_data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"O2"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-17">dwi_resp_data = {}
 
@@ -3497,10 +3504,7 @@ dwi_resp_data["O2"] = channels[3].data[dwi_idx_start:dwi_idx_stop]
 
 if session &lt; RECALIBRATED_SESSION:  # Before session 23, calibration was a bit off
     dwi_resp_data["CO2"] = dwi_resp_data["CO2"] * (8.0 - 0.045)  / 0.8 + 0.045
-    dwi_resp_data["O2"] = (dwi_resp_data["O2"] - 0.1) * 10.946 / (20.946 + 0.1) + 10
-
-if session &lt; FIRST_O2_SESSION:
-    dwi_resp_data.pop("O2", None)</div>
+    dwi_resp_data["O2"] = (dwi_resp_data["O2"] - 0.1) * 10.946 / (20.946 + 0.1) + 10</div>
 </div>
 </div>
 </div>
@@ -3641,6 +3645,7 @@ plt.xlim((-40, 1))</div>
 <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dwi_resp_data</span><span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
     <span class="n">dwi_resp_filepath</span><span class="p">,</span>
     <span class="n">compression</span><span class="o">=</span><span class="s2">"gzip"</span><span class="p">,</span>
+    <span class="n">columns</span><span class="o">=</span><span class="n">dwi_sidecar</span><span class="p">[</span><span class="s2">"Columns"</span><span class="p">],</span>
     <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">sep</span><span class="o">=</span><span class="s2">"</span><span class="se">\t</span><span class="s2">"</span><span class="p">,</span>
     <span class="n">na_rep</span><span class="o">=</span><span class="s2">"n/a"</span><span class="p">,</span>
@@ -3658,6 +3663,7 @@ dwi_sidecar.update({
 pd.DataFrame(dwi_resp_data).to_csv(
     dwi_resp_filepath,
     compression="gzip",
+    columns=dwi_sidecar["Columns"],
     header=False,
     sep="\t",
     na_rep="n/a",
@@ -4051,9 +4057,6 @@ pd.DataFrame({"ecg": bht_ch_data}).to_csv(
 <span class="k">if</span> <span class="n">session</span> <span class="o">&lt;</span> <span class="n">RECALIBRATED_SESSION</span><span class="p">:</span>  <span class="c1"># Before session 23, calibration was a bit off</span>
     <span class="n">bht_resp_data</span><span class="p">[</span><span class="s2">"CO2"</span><span class="p">]</span> <span class="o">=</span> <span class="n">bht_resp_data</span><span class="p">[</span><span class="s2">"CO2"</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mf">8.0</span> <span class="o">-</span> <span class="mf">0.045</span><span class="p">)</span>  <span class="o">/</span> <span class="mf">0.8</span> <span class="o">+</span> <span class="mf">0.045</span>
     <span class="n">bht_resp_data</span><span class="p">[</span><span class="s2">"O2"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">bht_resp_data</span><span class="p">[</span><span class="s2">"O2"</span><span class="p">]</span> <span class="o">-</span> <span class="mf">0.1</span><span class="p">)</span> <span class="o">*</span> <span class="mf">10.946</span> <span class="o">/</span> <span class="p">(</span><span class="mf">20.946</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">10</span>
-
-<span class="k">if</span> <span class="n">session</span> <span class="o">&lt;</span> <span class="n">FIRST_O2_SESSION</span><span class="p">:</span>
-    <span class="n">bht_resp_data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"O2"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-26">bht_resp_data = {}
 
@@ -4078,10 +4081,7 @@ bht_resp_data["O2"] = channels[3].data[bht_idx_start:bht_idx_stop]
 
 if session &lt; RECALIBRATED_SESSION:  # Before session 23, calibration was a bit off
     bht_resp_data["CO2"] = bht_resp_data["CO2"] * (8.0 - 0.045)  / 0.8 + 0.045
-    bht_resp_data["O2"] = (bht_resp_data["O2"] - 0.1) * 10.946 / (20.946 + 0.1) + 10
-
-if session &lt; FIRST_O2_SESSION:
-    bht_resp_data.pop("O2", None)</div>
+    bht_resp_data["O2"] = (bht_resp_data["O2"] - 0.1) * 10.946 / (20.946 + 0.1) + 10</div>
 </div>
 </div>
 </div>
@@ -4174,6 +4174,7 @@ plt.ylim((0, 4))</div>
 <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">bht_resp_data</span><span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
     <span class="n">bht_resp_filepath</span><span class="p">,</span>
     <span class="n">compression</span><span class="o">=</span><span class="s2">"gzip"</span><span class="p">,</span>
+    <span class="n">columns</span><span class="o">=</span><span class="n">bht_sidecar</span><span class="p">[</span><span class="s2">"Columns"</span><span class="p">],</span>
     <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">sep</span><span class="o">=</span><span class="s2">"</span><span class="se">\t</span><span class="s2">"</span><span class="p">,</span>
     <span class="n">na_rep</span><span class="o">=</span><span class="s2">"n/a"</span><span class="p">,</span>
@@ -4191,6 +4192,7 @@ bht_sidecar.update({
 pd.DataFrame(bht_resp_data).to_csv(
     bht_resp_filepath,
     compression="gzip",
+    columns=bht_sidecar["Columns"],
     header=False,
     sep="\t",
     na_rep="n/a",
@@ -4571,9 +4573,6 @@ pd.DataFrame({"ecg": rest_ch_data}).to_csv(
 <span class="k">if</span> <span class="n">session</span> <span class="o">&lt;</span> <span class="n">RECALIBRATED_SESSION</span><span class="p">:</span>  <span class="c1"># Before session 23, calibration was a bit off</span>
     <span class="n">rest_resp_data</span><span class="p">[</span><span class="s2">"CO2"</span><span class="p">]</span> <span class="o">=</span> <span class="n">rest_resp_data</span><span class="p">[</span><span class="s2">"CO2"</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mf">8.0</span> <span class="o">-</span> <span class="mf">0.045</span><span class="p">)</span>  <span class="o">/</span> <span class="mf">0.8</span> <span class="o">+</span> <span class="mf">0.045</span>
     <span class="n">rest_resp_data</span><span class="p">[</span><span class="s2">"O2"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">rest_resp_data</span><span class="p">[</span><span class="s2">"O2"</span><span class="p">]</span> <span class="o">-</span> <span class="mf">0.1</span><span class="p">)</span> <span class="o">*</span> <span class="mf">10.946</span> <span class="o">/</span> <span class="p">(</span><span class="mf">20.946</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">10</span>
-    
-<span class="k">if</span> <span class="n">session</span> <span class="o">&lt;</span> <span class="n">FIRST_O2_SESSION</span><span class="p">:</span>
-    <span class="n">rest_resp_data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"O2"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-34">rest_resp_data = {}
 
@@ -4598,10 +4597,7 @@ rest_resp_data["O2"] = channels[3].data[rest_idx_start:rest_idx_stop]
 
 if session &lt; RECALIBRATED_SESSION:  # Before session 23, calibration was a bit off
     rest_resp_data["CO2"] = rest_resp_data["CO2"] * (8.0 - 0.045)  / 0.8 + 0.045
-    rest_resp_data["O2"] = (rest_resp_data["O2"] - 0.1) * 10.946 / (20.946 + 0.1) + 10
-    
-if session &lt; FIRST_O2_SESSION:
-    rest_resp_data.pop("O2", None)</div>
+    rest_resp_data["O2"] = (rest_resp_data["O2"] - 0.1) * 10.946 / (20.946 + 0.1) + 10</div>
 </div>
 </div>
 </div>
@@ -4650,7 +4646,7 @@ plt.vlines(0, -0.4, 0.4, colors="r")</div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
 <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[35]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;matplotlib.collections.LineCollection at 0x7fea29975e80&gt;</pre>
+<pre>&lt;matplotlib.collections.LineCollection at 0x7fd74a36c310&gt;</pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
@@ -4694,6 +4690,7 @@ plt.vlines(0, -0.4, 0.4, colors="r")</div>
 <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rest_resp_data</span><span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
     <span class="n">rest_resp_filepath</span><span class="p">,</span>
     <span class="n">compression</span><span class="o">=</span><span class="s2">"gzip"</span><span class="p">,</span>
+    <span class="n">columns</span><span class="o">=</span><span class="n">rest_sidecar</span><span class="p">[</span><span class="s2">"Columns"</span><span class="p">],</span>
     <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">sep</span><span class="o">=</span><span class="s2">"</span><span class="se">\t</span><span class="s2">"</span><span class="p">,</span>
     <span class="n">na_rep</span><span class="o">=</span><span class="s2">"n/a"</span><span class="p">,</span>
@@ -4711,6 +4708,7 @@ rest_sidecar.update({
 pd.DataFrame(rest_resp_data).to_csv(
     rest_resp_filepath,
     compression="gzip",
+    columns=rest_sidecar["Columns"],
     header=False,
     sep="\t",
     na_rep="n/a",
@@ -5052,9 +5050,6 @@ pd.DataFrame({"ecg": qct_ch_data}).to_csv(
     <span class="n">qct_resp_data</span><span class="p">[</span><span class="s2">"CO2"</span><span class="p">]</span> <span class="o">=</span> <span class="n">qct_resp_data</span><span class="p">[</span><span class="s2">"CO2"</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mf">8.0</span> <span class="o">-</span> <span class="mf">0.045</span><span class="p">)</span>  <span class="o">/</span> <span class="mf">0.8</span> <span class="o">+</span> <span class="mf">0.045</span>
     <span class="n">qct_resp_data</span><span class="p">[</span><span class="s2">"O2"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">qct_resp_data</span><span class="p">[</span><span class="s2">"O2"</span><span class="p">]</span> <span class="o">-</span> <span class="mf">0.1</span><span class="p">)</span> <span class="o">*</span> <span class="mf">10.946</span> <span class="o">/</span> <span class="p">(</span><span class="mf">20.946</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">10</span>
 
-<span class="k">if</span> <span class="n">session</span> <span class="o">&lt;</span> <span class="n">FIRST_O2_SESSION</span><span class="p">:</span>
-    <span class="n">qct_resp_data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"O2"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_sec</span><span class="p">,</span> <span class="n">qct_resp_data</span><span class="p">[</span><span class="s2">"belt"</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_sec</span><span class="p">,</span> <span class="n">qct_resp_data</span><span class="p">[</span><span class="s2">"CO2"</span><span class="p">])</span>
 <span class="k">if</span> <span class="n">session</span> <span class="o">&gt;=</span> <span class="n">FIRST_O2_SESSION</span><span class="p">:</span>
@@ -5086,9 +5081,6 @@ if session &lt; RECALIBRATED_SESSION:  # Before session 23, calibration was a bi
     qct_resp_data["CO2"] = qct_resp_data["CO2"] * (8.0 - 0.045)  / 0.8 + 0.045
     qct_resp_data["O2"] = (qct_resp_data["O2"] - 0.1) * 10.946 / (20.946 + 0.1) + 10
 
-if session &lt; FIRST_O2_SESSION:
-    qct_resp_data.pop("O2", None)
-
 plt.plot(x_sec, qct_resp_data["belt"])
 plt.plot(x_sec, qct_resp_data["CO2"])
 if session &gt;= FIRST_O2_SESSION:
@@ -5105,7 +5097,7 @@ plt.vlines(0, -0.4, 0.4, colors="r")</div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
 <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[41]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;matplotlib.collections.LineCollection at 0x7fea297620d0&gt;</pre>
+<pre>&lt;matplotlib.collections.LineCollection at 0x7fd98e0b1790&gt;</pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
@@ -5149,6 +5141,7 @@ plt.vlines(0, -0.4, 0.4, colors="r")</div>
 <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">qct_resp_data</span><span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
     <span class="n">qct_resp_filepath</span><span class="p">,</span>
     <span class="n">compression</span><span class="o">=</span><span class="s2">"gzip"</span><span class="p">,</span>
+    <span class="n">columns</span><span class="o">=</span><span class="n">qct_sidecar</span><span class="p">[</span><span class="s2">"Columns"</span><span class="p">],</span>
     <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">sep</span><span class="o">=</span><span class="s2">"</span><span class="se">\t</span><span class="s2">"</span><span class="p">,</span>
     <span class="n">na_rep</span><span class="o">=</span><span class="s2">"n/a"</span><span class="p">,</span>
@@ -5166,6 +5159,7 @@ qct_sidecar.update({
 pd.DataFrame(qct_resp_data).to_csv(
     qct_resp_filepath,
     compression="gzip",
+    columns=qct_sidecar["Columns"],
     header=False,
     sep="\t",
     na_rep="n/a",
