@@ -672,6 +672,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#registering-containers" class="md-nav__link">
+    Registering containers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#hpc-users-instructions-to-install-datalad" class="md-nav__link">
     HPC users - instructions to install DataLad
   </a>
@@ -1069,6 +1076,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#registering-containers" class="md-nav__link">
+    Registering containers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#hpc-users-instructions-to-install-datalad" class="md-nav__link">
     HPC users - instructions to install DataLad
   </a>
@@ -1136,7 +1150,7 @@ When employing high-performance computing (<abbr title="high-performance computi
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Create a <em>DataLad</em> dataset for the original dataset:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>/data/datasets/
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>datalad<span class="w"> </span>create<span class="w"> </span>-c<span class="w"> </span>bids<span class="w"> </span>hcph
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>datalad<span class="w"> </span>create<span class="w"> </span>-c<span class="w"> </span>bids<span class="w"> </span>hcph-dataset
 </span></code></pre></div>
 </li>
 </ul>
@@ -1156,8 +1170,8 @@ When employing high-performance computing (<abbr title="high-performance computi
 <ul class="task-list">
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Configure a <a href="https://handbook.datalad.org/en/latest/beyond_basics/101-147-riastores.html"><abbr title="Remote Indexed Archives">RIA</abbr> store</a>, where large files will be pushed (and pulled from when installing the dataset in other computers)
-    <div class="language-shell highlight"><span class="filename">Creating a RIA sibling to store large files</span><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">cd</span><span class="w"> </span>hcph
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>datalad<span class="w"> </span>create-sibling-ria<span class="w"> </span>-s<span class="w"> </span>ria-storage<span class="w"> </span>--alias<span class="w"> </span>hcph<span class="w"> </span><span class="se">\</span>
+    <div class="language-shell highlight"><span class="filename">Creating a RIA sibling to store large files</span><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">cd</span><span class="w"> </span>hcph-dataset
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>datalad<span class="w"> </span>create-sibling-ria<span class="w"> </span>-s<span class="w"> </span>ria-storage<span class="w"> </span>--alias<span class="w"> </span>hcph-dataset<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">        </span>--new-store-ok<span class="w"> </span>--storage-sibling<span class="o">=</span>only<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">        </span><span class="s2">&quot;ria+ssh://&lt;username&gt;@&lt;hostname&gt;:&lt;path&gt;/dataset/&quot;</span>
 </span></code></pre></div></p>
@@ -1168,6 +1182,13 @@ When employing high-performance computing (<abbr title="high-performance computi
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">        </span>--pushurl<span class="w"> </span>git@github.com:&lt;organization&gt;/&lt;repo_name&gt;.git<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">        </span>--url<span class="w"> </span>https://github.com/&lt;organization&gt;/&lt;repo_name&gt;.git<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">        </span>--publish-depends<span class="w"> </span>ria-storage
+</span></code></pre></div></p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Create a sub-dataset to host the <em>MRIQC</em> derivatives.
+    Remember to set the correct version of the container (in our case 23.1.0).
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">cd</span><span class="w"> </span>/data/datasets/hcph-dataset
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>datalad<span class="w"> </span>create<span class="w"> </span>-d<span class="w"> </span>.<span class="w"> </span>derivatives/mriqc-23.1.0
 </span></code></pre></div></p>
 </li>
 </ul>
@@ -1190,11 +1211,11 @@ To fetch the dataset from the <abbr title="Remote Indexed Archives">RIA</abbr> s
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Installing the dataset without fetching data from annex</label><label for="__tabbed_1_2">Installing the dataset and fetch all data from annex, with 8 parallel threads</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>datalad<span class="w"> </span>install<span class="w"> </span>https://github.com/&lt;organization&gt;/&lt;repo_name&gt;.git
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>datalad<span class="w"> </span>install<span class="w"> </span>https://github.com/&lt;organization&gt;/&lt;repo_name&gt;.git
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>datalad<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>-J<span class="w"> </span><span class="m">8</span><span class="w"> </span>https://github.com/&lt;organization&gt;/&lt;repo_name&gt;.git
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>datalad<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>-J<span class="w"> </span><span class="m">8</span><span class="w"> </span>https://github.com/&lt;organization&gt;/&lt;repo_name&gt;.git
 </span></code></pre></div>
 </div>
 </div>
@@ -1208,13 +1229,13 @@ When a new session is added, your <em>DataLad</em> dataset will remain at the sa
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Pull new changes in the git history.
     <em>DataLad</em> will first fetch Git remotes and merge for you.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">cd</span><span class="w"> </span>hcph-dataset/<span class="w">  </span><span class="c1"># &lt;--- cd into the dataset&#39;s path</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>datalad<span class="w"> </span>update<span class="w"> </span>-r<span class="w"> </span>--how<span class="w"> </span>merge
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nb">cd</span><span class="w"> </span>hcph-dataset/<span class="w">  </span><span class="c1"># &lt;--- cd into the dataset&#39;s path</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>datalad<span class="w"> </span>update<span class="w"> </span>-r<span class="w"> </span>--how<span class="w"> </span>merge
 </span></code></pre></div>
 </li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If you need the data, now you can get the data as usual:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>find<span class="w"> </span>sub-001/ses-pilot019<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.nii.gz&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>datalad<span class="w"> </span>get<span class="w"> </span>-J<span class="w"> </span><span class="m">8</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>find<span class="w"> </span>sub-001/ses-pilot019<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.nii.gz&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>datalad<span class="w"> </span>get<span class="w"> </span>-J<span class="w"> </span><span class="m">8</span>
 </span></code></pre></div>
 </li>
 </ul>
@@ -1225,17 +1246,53 @@ When a new session is added, your <em>DataLad</em> dataset will remain at the sa
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Adding data files (e.g., <abbr title="Neuroimaging Informatics Technology Initiative">NIfTI</abbr> and compressed <abbr title="tab-separated values">TSV</abbr> files)</label><label for="__tabbed_2_2">Adding metadata files</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>find<span class="w"> </span>sub-001/ses-pilot019<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.nii&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.nii.gz&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.tsv.gz&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span>xargs<span class="w"> </span>datalad<span class="w"> </span>save<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;&quot;add(pilot019): new session data (NIfTI and compressed TSV)&quot;&#39;</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>find<span class="w"> </span>sub-001/ses-pilot019<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.nii&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.nii.gz&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.tsv.gz&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">    </span>xargs<span class="w"> </span>datalad<span class="w"> </span>save<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;&quot;add(pilot019): new session data (NIfTI and compressed TSV)&quot;&#39;</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>find<span class="w"> </span>sub-001/ses-pilot019<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.json&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.tsv&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.bvec&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.bval&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">    </span>xargs<span class="w"> </span>datalad<span class="w"> </span>save<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;&quot;add(pilot019): new session metadata (JSON, TSV, bvec/bval)&quot;&#39;</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>find<span class="w"> </span>sub-001/ses-pilot019<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.json&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.tsv&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.bvec&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.bval&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span>xargs<span class="w"> </span>datalad<span class="w"> </span>save<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;&quot;add(pilot019): new session metadata (JSON, TSV, bvec/bval)&quot;&#39;</span>
 </span></code></pre></div>
 </div>
 </div>
 </div>
+</li>
+</ul>
+<h3 id="registering-containers">Registering containers<a class="headerlink" href="#registering-containers" title="Permanent link">&para;</a></h3>
+<p>We use <em>DataLad containers-run</em> to execute software while keeping track of provenance.
+Prior to first use, containers must be added to <em>DataLad</em> as follows (example for <em>MRIQC</em>):</p>
+<ul class="task-list">
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Register the <em>MRIQC</em> container to the dataset</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Registering a <em>Singularity</em> container</label><label for="__tabbed_3_2">Registering a <em>Docker</em> container</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>datalad<span class="w"> </span>containers-add<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span>--call-fmt<span class="w"> </span><span class="s1">&#39;singularity exec -B {{${HOME}/tmp/}}:/tmp --cleanenv {img} {cmd}&#39;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span>mriqc<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span>--url<span class="w"> </span>docker://nipreps/mriqc:23.1.0
+</span></code></pre></div>
+<details class="important">
+<summary>Insert relevant arguments to the <code>singularity</code> command line with <code>--call-fmt</code></summary>
+<p>In the example above, we configure the container's call to automatically <em>bind</em> (<code>-B</code> flag to mount the filesystem) the temporary folder.
+<em>MRIQC</em> will store the working directory there by default.
+Please replace the path with the appropriate path for your settings (i.e., laptop, cluster, etc.).</p>
+</details>
+</div>
+<div class="tabbed-block">
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>datalad<span class="w"> </span>containers-add<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span>--call-fmt<span class="w"> </span><span class="s1">&#39;docker run -v {{${HOME}/tmp/}}:/tmp --cleanenv {img} {cmd}&#39;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span>mriqc<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">    </span>--url<span class="w"> </span>docker://nipreps/mriqc:23.1.0
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<details class="info">
+<summary>Pinning a particular version of <em>MRIQC</em></summary>
+<p>If a different version of <em>MRIQC</em> should be executed, replace the <em>Docker</em> image's tag (<code>23.1.0</code>) with the adequate version tag within the above command line.</p>
+</details>
 </li>
 </ul>
 <h3 id="hpc-users-instructions-to-install-datalad"><abbr title="high-performance computing">HPC</abbr> users - instructions to install <em>DataLad</em><a class="headerlink" href="#hpc-users-instructions-to-install-datalad" title="Permanent link">&para;</a></h3>
@@ -1249,26 +1306,26 @@ When a new session is added, your <em>DataLad</em> dataset will remain at the sa
 Therefore, the execution of resource-intensive tasks such as <em>fMRIPrep</em> or building containers on login nodes can negatively impact the overall performance and responsiveness of the system for all users.
 Interactive sessions are a great alternative when available and <strong>should</strong> be used when creating the <em>DataLad</em> dataset.
 For example, in the case of systems operating <abbr title="Slurm Workload Manager, formerly known as Simple Linux Utility for Resource Management">SLURM</abbr>, the following command would open a new interactive session:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>srun --nodes=1 --ntasks-per-node=1 --time=01:00:00 --pty bash -i
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>srun --nodes=1 --ntasks-per-node=1 --time=01:00:00 --pty bash -i
 </span></code></pre></div></p>
 </details>
 </li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install <em>DataLad</em>.
     Generally, the most convenient and user-sandboxed installation (i.e., without requiring elevated permissions) can be achieved by using <em>Conda</em>, but other alternatives (such as <em>lmod</em>) can be equally valid:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Install <em>DataLad</em> with <em>Conda</em></label><label for="__tabbed_3_2">Install <em>DataLad</em> in <abbr title="high-performance computing">HPC</abbr> with <em>lmod</em> enabled</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Install <em>DataLad</em> with <em>Conda</em></label><label for="__tabbed_4_2">Install <em>DataLad</em> in <abbr title="high-performance computing">HPC</abbr> with <em>lmod</em> enabled</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <ul class="task-list">
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Get and install <em>Conda</em> if it is not already deployed in the system:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>wget<span class="w"> </span>https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>bash<span class="w"> </span>Miniconda3-latest-Linux-x86_64.sh
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>wget<span class="w"> </span>https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>bash<span class="w"> </span>Miniconda3-latest-Linux-x86_64.sh
 </span></code></pre></div>
 </li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install <em>DataLad</em>:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>-y<span class="w"> </span><span class="s2">&quot;datalad&gt;=0.19&quot;</span><span class="w"> </span>datalad-container
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>-y<span class="w"> </span><span class="s2">&quot;datalad&gt;=0.19&quot;</span><span class="w"> </span>datalad-container
 </span></code></pre></div>
 </li>
 </ul>
@@ -1277,22 +1334,22 @@ For example, in the case of systems operating <abbr title="Slurm Workload Manage
 <ul class="task-list">
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check the availability and dependencies for a specific Python version (here we check 3.8.2):</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>module<span class="w"> </span>spider<span class="w"> </span>Python/3.8.2
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>module<span class="w"> </span>spider<span class="w"> </span>Python/3.8.2
 </span></code></pre></div>
 </li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Load Python (please note <code>ml</code> below is a shorthand for <code>module load</code>)</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>ml<span class="w"> </span>GCCcore/9.3.0<span class="w"> </span>Python/3.8.2
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>ml<span class="w"> </span>GCCcore/9.3.0<span class="w"> </span>Python/3.8.2
 </span></code></pre></div>
 </li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Update <em>pip</em>:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>--user<span class="w"> </span>-U<span class="w"> </span>pip
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>--user<span class="w"> </span>-U<span class="w"> </span>pip
 </span></code></pre></div>
 </li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install <em>DataLad</em>:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span><span class="s2">&quot;datalad&gt;=0.19&quot;</span><span class="w"> </span>datalad-container
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span><span class="s2">&quot;datalad&gt;=0.19&quot;</span><span class="w"> </span>datalad-container
 </span></code></pre></div>
 </li>
 </ul>
@@ -1302,26 +1359,26 @@ For example, in the case of systems operating <abbr title="Slurm Workload Manage
 </li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check datalad is properly installed, for instance:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>$<span class="w"> </span>datalad<span class="w"> </span>--version
-</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>datalad<span class="w"> </span><span class="m">0</span>.19.2
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>$<span class="w"> </span>datalad<span class="w"> </span>--version
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>datalad<span class="w"> </span><span class="m">0</span>.19.2
 </span></code></pre></div>
 <details class="bug">
 <summary><em>DataLad</em> crashes (<em>Conda</em> installations)</summary>
 <p><em>DataLad</em> may fail with the following error:
-<div class="language-py highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="ne">ImportError</span><span class="p">:</span> <span class="n">cannot</span> <span class="kn">import</span> <span class="nn">name</span> <span class="s1">&#39;getargspec&#39;</span> <span class="kn">from</span> <span class="s1">&#39;inspect&#39;</span> <span class="p">(</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">users</span><span class="o">/</span><span class="n">cprovins</span><span class="o">/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">inspect</span><span class="o">.</span><span class="n">py</span><span class="p">)</span>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="ne">ImportError</span><span class="p">:</span> <span class="n">cannot</span> <span class="kn">import</span> <span class="nn">name</span> <span class="s1">&#39;getargspec&#39;</span> <span class="kn">from</span> <span class="s1">&#39;inspect&#39;</span> <span class="p">(</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">users</span><span class="o">/</span><span class="n">cprovins</span><span class="o">/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">inspect</span><span class="o">.</span><span class="n">py</span><span class="p">)</span>
 </span></code></pre></div></p>
 <p>In such a scenario, create a <em>Conda</em> environment with a lower version of Python, and re-install datalad
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;datalad&quot;</span><span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.10
-</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>conda<span class="w"> </span>activate<span class="w"> </span>datalad
-</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>datalad<span class="w"> </span>datalad-container
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;datalad&quot;</span><span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.10
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>conda<span class="w"> </span>activate<span class="w"> </span>datalad
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>datalad<span class="w"> </span>datalad-container
 </span></code></pre></div></p>
 </details>
 </li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Configure your Git identity settings.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nb">cd</span><span class="w"> </span>~
-</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>--add<span class="w"> </span>user.name<span class="w"> </span><span class="s2">&quot;Jane Doe&quot;</span>
-</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>--add<span class="w"> </span>user.email<span class="w"> </span>doe@example.com
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="nb">cd</span><span class="w"> </span>~
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>--add<span class="w"> </span>user.name<span class="w"> </span><span class="s2">&quot;Jane Doe&quot;</span>
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>--add<span class="w"> </span>user.email<span class="w"> </span>doe@example.com
 </span></code></pre></div>
 </li>
 </ul>
