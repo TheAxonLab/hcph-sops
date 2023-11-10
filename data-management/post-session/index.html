@@ -103,7 +103,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#within-48h-after-the-first-session" class="md-skip">
+        <a href="#post-session-retrieval-and-bids" class="md-skip">
           Skip to content
         </a>
       
@@ -620,6 +620,8 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -647,6 +649,8 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
+  
+    
   
   
     <label class="md-nav__title" for="__toc">
@@ -678,8 +682,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#retrieve-physiological-recordings-from" class="md-nav__link">
-    Retrieve physiological recordings (from ████)
+  <a href="#retrieve-physiological-recordings" class="md-nav__link">
+    Retrieve physiological recordings
   </a>
   
 </li>
@@ -1073,6 +1077,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1103,8 +1109,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#retrieve-physiological-recordings-from" class="md-nav__link">
-    Retrieve physiological recordings (from ████)
+  <a href="#retrieve-physiological-recordings" class="md-nav__link">
+    Retrieve physiological recordings
   </a>
   
 </li>
@@ -1191,8 +1197,7 @@
                   
 
 
-  <h1>Post-session retrieval and BIDS</h1>
-
+<h1 id="post-session-retrieval-and-bids">Post-session retrieval and <abbr title="Brain Imaging Data Structure">BIDS</abbr><a class="headerlink" href="#post-session-retrieval-and-bids" title="Permanent link">&para;</a></h1>
 <h2 id="within-48h-after-the-first-session">Within 48h after the FIRST session<a class="headerlink" href="#within-48h-after-the-first-session" title="Permanent link">&para;</a></h2>
 <div class="admonition danger">
 <p class="admonition-title">Anatomical images must be screened for incidental findings within 48h after the first session</p>
@@ -1214,28 +1219,42 @@
 <h3 id="download-the-data-from-the-pacs-with-pacsman-only-authorized-users">Download the data from the <abbr title="picture archiving and communication system">PACS</abbr> with <em>PACSMAN</em> (only authorized users)<a class="headerlink" href="#download-the-data-from-the-pacs-with-pacsman-only-authorized-users" title="Permanent link">&para;</a></h3>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Log-in into the <em>PACSMAN</em> computer  (<em>███</em>)</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Mount a remote filesystem through sshfs:
-    <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sshfs<span class="w"> </span>&lt;hostname&gt;:/data/datasets/hcph-pilot-sourcedata<span class="w"> </span><span class="se">\</span>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Mount a remote filesystem through sshfs:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sshfs<span class="w"> </span>&lt;hostname&gt;:/data/datasets/hcph-pilot-sourcedata<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">               </span><span class="nv">$HOME</span>/data/hcph-pilot<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">      </span>&lt;args&gt;
-</span></code></pre></div></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Edit the query file <code>vim $HOME/queries/last-session.csv</code> (most likely, just update with the session's date)
+</span></code></pre></div>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Edit the query file <code>vim $HOME/queries/last-session.csv</code> (most likely, just update with the session's date)</p>
 <div class="language-text highlight"><span class="filename">mydata-onesession.csv</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>PatientID,StudyDate
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>2022_11_07*,20230503
-</span></code></pre></div></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Prepare and run PACSMAN, pointing the output to the mounted directory.
-    <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>pacsman<span class="w"> </span>--save<span class="w"> </span>-q<span class="w"> </span><span class="nv">$HOME</span>/queries/last-session.csv<span class="w"> </span><span class="se">\</span>
+</span></code></pre></div>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Prepare and run PACSMAN, pointing the output to the mounted directory.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>pacsman<span class="w"> </span>--save<span class="w"> </span>-q<span class="w"> </span><span class="nv">$HOME</span>/queries/last-session.csv<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">       </span>--out_directory<span class="w"> </span><span class="nv">$HOME</span>/data/hcph-pilot/<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">       </span>--config<span class="w"> </span>/opt/PACSMAN/files/config.json
-</span></code></pre></div></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Remove write permissions on the newly downloaded data:
-    <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>chmod<span class="w"> </span>-R<span class="w"> </span>a-w<span class="w"> </span><span class="nv">$HOME</span>/data/hcph-pilot/sub-01/ses-*
-</span></code></pre></div></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Unmount the remote filesystem:
-    <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo<span class="w"> </span>umount<span class="w"> </span><span class="nv">$HOME</span>/data/hcph-pilot
-</span></code></pre></div></li>
+</span></code></pre></div>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Remove write permissions on the newly downloaded data:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>chmod<span class="w"> </span>-R<span class="w"> </span>a-w<span class="w"> </span><span class="nv">$HOME</span>/data/hcph-pilot/sub-01/ses-*
+</span></code></pre></div>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Unmount the remote filesystem:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo<span class="w"> </span>umount<span class="w"> </span><span class="nv">$HOME</span>/data/hcph-pilot
+</span></code></pre></div>
+</li>
 </ul>
-<h3 id="retrieve-physiological-recordings-from">Retrieve physiological recordings (from ████)<a class="headerlink" href="#retrieve-physiological-recordings-from" title="Permanent link">&para;</a></h3>
+<h3 id="retrieve-physiological-recordings">Retrieve physiological recordings<a class="headerlink" href="#retrieve-physiological-recordings" title="Permanent link">&para;</a></h3>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check that the <em>AcqKnowledge</em> file(s) corresponding to the session were added to the <em>Dropbox</em> shared folder and completely uploaded from ████.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check that <em>Psychopy</em>'s logs and <abbr title="eye tracker">ET</abbr>'s <code>.EDF</code> files corresponding to the session were added to the <em>Dropbox</em> shared folder and completely uploaded from ████.</li>
+</ul>
 <h3 id="copy-original-dicom-datasets-into-the-archive-of-stockage-horus">Copy original <abbr title="Digital Imaging and Communications in Medicine">DICOM</abbr> datasets into the archive of Stockage <abbr title="HOspital Research Unified data and analytics Services">hOrus</abbr><a class="headerlink" href="#copy-original-dicom-datasets-into-the-archive-of-stockage-horus" title="Permanent link">&para;</a></h3>
 <ul class="task-list">
 <li class="task-list-item">
@@ -1255,7 +1274,7 @@ To support backward compatibility (and some extra, currently unsupported feature
 <summary>Our custom heuristic file</summary>
 <p>Our heuristic file largely derives from <a href="https://github.com/nipy/heudiconv/blob/55524168b02519bbf0a3a1c94cafb29a419728a0/heudiconv/heuristics/reproin.py"><em>ReproIn</em>'s at the time of writing</a>.
 The heuristic has a a <code class="language-python highlight"><span class="n">protocols2fix</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]</span></code> (<a href="#__codelineno-6-113">lines 113-148</a>), where replacement patterns to permit backward compatibility are written.</p>
-<div class="language-py highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">  1</a></span>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">  1</a></span>
 <span class="normal"><a href="#__codelineno-6-2">  2</a></span>
 <span class="normal"><a href="#__codelineno-6-3">  3</a></span>
 <span class="normal"><a href="#__codelineno-6-4">  4</a></span>
@@ -2620,19 +2639,21 @@ Please note the <code>protocols2fix</code> variable in our heuristic file, where
 </details>
 </li>
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Delete incorrect files generated by <em>HeuDiConv</em>:
-    <div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>find<span class="w"> </span>sub-001/<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*_part-mag_events.tsv&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*_part-phase_events.tsv&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>rm
-</span></code></pre></div></p>
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Delete incorrect files generated by <em>HeuDiConv</em>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>find<span class="w"> </span>sub-001/<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*_part-mag_events.tsv&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*_part-phase_events.tsv&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>rm
+</span></code></pre></div>
 </li>
 </ul>
 <h3 id="generate-bids-events-files">Generate <abbr title="Brain Imaging Data Structure">BIDS</abbr>' <em>events</em> files<a class="headerlink" href="#generate-bids-events-files" title="Permanent link">&para;</a></h3>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Execute the script <code>write_event_file.py</code> as shown below to generate task event files.
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Execute the script <code>write_event_file.py</code> as shown below to generate task event files.
     This script creates <abbr title="JavaScript Object Notation">JSON</abbr> and <abbr title="tab-separated values">TSV</abbr> files containing event information and generates <abbr title="portable networks graphics">PNG</abbr> plots for each task, displaying both physiological data and corresponding events.
     These plots are saved in the current directory.
-    The script must be executed with the following command, where <code>outputdir</code> is the output directory of <em>phys2bids</em>:
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>python<span class="w"> </span>write_event_file.py<span class="w"> </span>--path<span class="w"> </span>./outputdir/sub-001/ses-pilot016/func/
-</span></code></pre></div></li>
+    The script must be executed with the following command, where <code>outputdir</code> is the output directory of <em>phys2bids</em>:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>python<span class="w"> </span>write_event_file.py<span class="w"> </span>--path<span class="w"> </span>./outputdir/sub-001/ses-pilot016/func/
+</span></code></pre></div>
+</li>
 </ul>
 <details class="abstract">
 <summary>Example of a session with <em>events</em> files</summary>
@@ -2796,32 +2817,70 @@ Please note the <code>protocols2fix</code> variable in our heuristic file, where
 <p class="admonition-title">Instead of the current specifications, we are using <a href="https://bids-specification--1128.org.readthedocs.build/en/1128/modality-specific-files/eye-tracking.html">the following BEP</a></p>
 </div>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Pull the latest docker image of esavary/bidsphysio with:
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>esavary/bidsphysio
-</span></code></pre></div></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open <a href="../code/eyetracking/schedule.tsv"><code>schedule.tsv</code></a> to find the phase encoding direction and the name of the <code>.EDF</code> file corresponding to the session you want to convert.</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Pull the latest docker image of esavary/bidsphysio with:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>esavary/bidsphysio
+</span></code></pre></div>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open <a href="../../assets/code/eyetracking/schedule.tsv"><code>schedule.tsv</code></a> to find the phase encoding direction and the name of the <code>.EDF</code> file corresponding to the session you want to convert.</p>
+</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Create a new folder named <code>metadata/</code> inside the folder containing the target <code>.EDF</code> file.
-    Copy the file containing information about the <abbr title="eye tracker">ET</abbr>, named <a href="../code/eyetracking/info_ET.json"><code>info_ET.json</code></a> into the <code>metadata/</code> folder.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Execute the <abbr title="eye tracker">ET</abbr> to <abbr title="Brain Imaging Data Structure">BIDS</abbr> conversion on the <abbr title="diffusion MRI">dMRI</abbr> data.
-    Run the following command for the corresponding file in the <a href="../code/eyetracking/schedule.tsv"><code>schedule.tsv</code></a> file:
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-u<span class="w"> </span><span class="k">$(</span><span class="w"> </span>id<span class="w"> </span>-u<span class="w"> </span><span class="k">)</span>:<span class="k">$(</span><span class="w"> </span>id<span class="w"> </span>-g<span class="w"> </span><span class="k">)</span><span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">    </span>-v<span class="w"> </span>&lt;path-to-EDF-data&gt;:/data<span class="w"> </span><span class="se">\</span>
+    Copy the file containing information about the <abbr title="eye tracker">ET</abbr>, named <a href="../../assets/code/eyetracking/info_ET.json"><code>info_ET.json</code></a> into the <code>metadata/</code> folder.</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Execute the <abbr title="eye tracker">ET</abbr> to <abbr title="Brain Imaging Data Structure">BIDS</abbr> conversion on the <abbr title="diffusion MRI">dMRI</abbr> data.
+    Run the following command for the corresponding file in the <a href="../../assets/code/eyetracking/schedule.tsv"><code>schedule.tsv</code></a> file:</p>
+<div class="admonition danger">
+<p class="admonition-title">Input data path MUST be mounted in read-only mode (<code>:ro</code> suffix)</p>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1"><abbr title="diffusion MRI">dMRI</abbr> (fixation)</label><label for="__tabbed_1_2"><abbr title="functional MRI">fMRI</abbr> (<abbr title="quality control task">QCT</abbr>)</label><label for="__tabbed_1_3"><abbr title="functional MRI">fMRI</abbr> (<abbr title="breath-holding task">BHT</abbr>)</label><label for="__tabbed_1_4"><abbr title="functional MRI">fMRI</abbr> (resting-state)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-u<span class="w"> </span><span class="k">$(</span><span class="w"> </span>id<span class="w"> </span>-u<span class="w"> </span><span class="k">)</span>:<span class="k">$(</span><span class="w"> </span>id<span class="w"> </span>-g<span class="w"> </span><span class="k">)</span><span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">    </span>-v<span class="w"> </span>&lt;path-to-EDF-data&gt;:/data:ro<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span>-v<span class="w"> </span>&lt;output-path-on-host&gt;:/output<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">    </span>--entrypoint<span class="o">=</span>/opt/venv/bin/python<span class="w"> </span>bidsphysio<span class="w"> </span>/opt/venv/bin/edf2bidsphysio<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">    </span>--entrypoint<span class="o">=</span>/opt/venv/bin/python<span class="w"> </span>esavary/bidsphysio<span class="w"> </span>/opt/venv/bin/edf2bidsphysio<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">    </span>--infile<span class="w"> </span>/data/fixation_2023-10-20_18h48.03.561_5_session_1.EDF<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">    </span>--bidsprefix<span class="w"> </span>/output/session01/dwi/sub-001_ses-001_acq-highres_dir-LR<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="w">    </span>-m<span class="w"> </span>/data/metadata/info_ET.json
-</span></code></pre></div></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Run the following command for the files corresponding to the functional tasks:
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-u<span class="w"> </span><span class="k">$(</span><span class="w"> </span>id<span class="w"> </span>-u<span class="w"> </span><span class="k">)</span>:<span class="k">$(</span><span class="w"> </span>id<span class="w"> </span>-g<span class="w"> </span><span class="k">)</span><span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">    </span>-v<span class="w"> </span>&lt;path-to-EDF-data&gt;:/data<span class="w"> </span><span class="se">\</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-u<span class="w"> </span><span class="k">$(</span><span class="w"> </span>id<span class="w"> </span>-u<span class="w"> </span><span class="k">)</span>:<span class="k">$(</span><span class="w"> </span>id<span class="w"> </span>-g<span class="w"> </span><span class="k">)</span><span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">    </span>-v<span class="w"> </span>&lt;path-to-EDF-data&gt;:/data:ro<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">    </span>-v<span class="w"> </span>&lt;output-path-on-host&gt;:/output<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">    </span>--entrypoint<span class="o">=</span>/opt/venv/bin/python<span class="w"> </span>bidsphysio<span class="w"> </span>/opt/venv/bin/edf2bidsphysio<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">    </span>--entrypoint<span class="o">=</span>/opt/venv/bin/python<span class="w"> </span>esavary/bidsphysio<span class="w"> </span>/opt/venv/bin/edf2bidsphysio<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">    </span>--infile<span class="w"> </span>/data/qct_2023-10-20_19h40.38.964_2_session_1.EDF<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">    </span>--bidsprefix<span class="w"> </span>/output/session01/func/sub-001_ses-001_task-qct_dir-LR<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="w">    </span>-m<span class="w"> </span>/data/metadata/info_ET.json
-</span></code></pre></div></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Copy all <code>&lt;prefix&gt;_eyetrack.tsv.gz</code> and <code>&lt;prefix&gt;_eyetrack.json</code> generated into your copy of the <em>DataLad</em> dataset in <abbr title="Brain Imaging Data Structure">BIDS</abbr>.</li>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-u<span class="w"> </span><span class="k">$(</span><span class="w"> </span>id<span class="w"> </span>-u<span class="w"> </span><span class="k">)</span>:<span class="k">$(</span><span class="w"> </span>id<span class="w"> </span>-g<span class="w"> </span><span class="k">)</span><span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">    </span>-v<span class="w"> </span>&lt;path-to-EDF-data&gt;:/data:ro<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">    </span>-v<span class="w"> </span>&lt;output-path-on-host&gt;:/output<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">    </span>--entrypoint<span class="o">=</span>/opt/venv/bin/python<span class="w"> </span>esavary/bidsphysio<span class="w"> </span>/opt/venv/bin/edf2bidsphysio<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="w">    </span>--infile<span class="w"> </span>/data/qct_2023-10-20_19h40.38.964_2_session_1.EDF<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="w">    </span>--bidsprefix<span class="w"> </span>/output/session01/func/sub-001_ses-001_task-bht_dir-LR<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="w">    </span>-m<span class="w"> </span>/data/metadata/info_ET.json
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-u<span class="w"> </span><span class="k">$(</span><span class="w"> </span>id<span class="w"> </span>-u<span class="w"> </span><span class="k">)</span>:<span class="k">$(</span><span class="w"> </span>id<span class="w"> </span>-g<span class="w"> </span><span class="k">)</span><span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">    </span>-v<span class="w"> </span>&lt;path-to-EDF-data&gt;:/data:ro<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">    </span>-v<span class="w"> </span>&lt;output-path-on-host&gt;:/output<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">    </span>--entrypoint<span class="o">=</span>/opt/venv/bin/python<span class="w"> </span>esavary/bidsphysio<span class="w"> </span>/opt/venv/bin/edf2bidsphysio<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">    </span>--infile<span class="w"> </span>/data/qct_2023-10-20_19h40.38.964_2_session_1.EDF<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">    </span>--bidsprefix<span class="w"> </span>/output/session01/func/sub-001_ses-001_task-rest_dir-LR<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="w">    </span>-m<span class="w"> </span>/data/metadata/info_ET.json
+</span></code></pre></div>
+</div>
+</div>
+</div>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Copy all <code>&lt;prefix&gt;_eyetrack.tsv.gz</code> and <code>&lt;prefix&gt;_eyetrack.json</code> generated into your copy of the <em>DataLad</em> dataset in <abbr title="Brain Imaging Data Structure">BIDS</abbr>.</p>
+</li>
 </ul>
 <div class="admonition danger">
 <p class="admonition-title">Do not copy all output files directly</p>
@@ -2831,66 +2890,66 @@ Please do not copy these generated files into the <em>DataLad</em> dataset in <a
 <details class="abstract">
 <summary>Example of a session with eye-tracking recordings</summary>
 <p>The files corresponding to eye-tracking are highlighted below:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>ses-024
-</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>├──<span class="w"> </span>anat
-</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>├──<span class="w"> </span>dwi
-</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>├──<span class="w"> </span>fmap
-</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>├──<span class="w"> </span>func
-</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-1_part-mag_bold.json
-</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-1_part-mag_bold.nii.gz
-</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-1_part-phase_bold.json
-</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-1_part-phase_bold.nii.gz
-</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-2_part-mag_bold.json
-</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-2_part-mag_bold.nii.gz
-</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-2_part-phase_bold.json
-</span><span id="__span-17-13"><a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-2_part-phase_bold.nii.gz
-</span><span id="__span-17-14"><a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-3_part-mag_bold.json
-</span><span id="__span-17-15"><a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-3_part-mag_bold.nii.gz
-</span><span id="__span-17-16"><a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-3_part-phase_bold.json
-</span><span id="__span-17-17"><a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-3_part-phase_bold.nii.gz
-</span><span id="__span-17-18"><a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-4_part-mag_bold.json
-</span><span id="__span-17-19"><a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-4_part-mag_bold.nii.gz
-</span><span id="__span-17-20"><a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-4_part-phase_bold.json
-</span><span id="__span-17-21"><a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-4_part-phase_bold.nii.gz
-</span><span id="__span-17-22"><a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a><span class="hll">│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_eyetrack.json
-</span></span><span id="__span-17-23"><a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a><span class="hll">│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_eyetrack.tsv.gz
-</span></span><span id="__span-17-24"><a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-1_part-mag_bold.json
-</span><span id="__span-17-25"><a id="__codelineno-17-25" name="__codelineno-17-25" href="#__codelineno-17-25"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-1_part-mag_bold.nii.gz
-</span><span id="__span-17-26"><a id="__codelineno-17-26" name="__codelineno-17-26" href="#__codelineno-17-26"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-1_part-phase_bold.json
-</span><span id="__span-17-27"><a id="__codelineno-17-27" name="__codelineno-17-27" href="#__codelineno-17-27"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-1_part-phase_bold.nii.gz
-</span><span id="__span-17-28"><a id="__codelineno-17-28" name="__codelineno-17-28" href="#__codelineno-17-28"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-2_part-mag_bold.json
-</span><span id="__span-17-29"><a id="__codelineno-17-29" name="__codelineno-17-29" href="#__codelineno-17-29"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-2_part-mag_bold.nii.gz
-</span><span id="__span-17-30"><a id="__codelineno-17-30" name="__codelineno-17-30" href="#__codelineno-17-30"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-2_part-phase_bold.json
-</span><span id="__span-17-31"><a id="__codelineno-17-31" name="__codelineno-17-31" href="#__codelineno-17-31"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-2_part-phase_bold.nii.gz
-</span><span id="__span-17-32"><a id="__codelineno-17-32" name="__codelineno-17-32" href="#__codelineno-17-32"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-3_part-mag_bold.json
-</span><span id="__span-17-33"><a id="__codelineno-17-33" name="__codelineno-17-33" href="#__codelineno-17-33"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-3_part-mag_bold.nii.gz
-</span><span id="__span-17-34"><a id="__codelineno-17-34" name="__codelineno-17-34" href="#__codelineno-17-34"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-3_part-phase_bold.json
-</span><span id="__span-17-35"><a id="__codelineno-17-35" name="__codelineno-17-35" href="#__codelineno-17-35"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-3_part-phase_bold.nii.gz
-</span><span id="__span-17-36"><a id="__codelineno-17-36" name="__codelineno-17-36" href="#__codelineno-17-36"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-4_part-mag_bold.json
-</span><span id="__span-17-37"><a id="__codelineno-17-37" name="__codelineno-17-37" href="#__codelineno-17-37"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-4_part-mag_bold.nii.gz
-</span><span id="__span-17-38"><a id="__codelineno-17-38" name="__codelineno-17-38" href="#__codelineno-17-38"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-4_part-phase_bold.json
-</span><span id="__span-17-39"><a id="__codelineno-17-39" name="__codelineno-17-39" href="#__codelineno-17-39"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-4_part-phase_bold.nii.gz
-</span><span id="__span-17-40"><a id="__codelineno-17-40" name="__codelineno-17-40" href="#__codelineno-17-40"></a><span class="hll">│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_eyetrack.json
-</span></span><span id="__span-17-41"><a id="__codelineno-17-41" name="__codelineno-17-41" href="#__codelineno-17-41"></a><span class="hll">│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_eyetrack.tsv.gz
-</span></span><span id="__span-17-42"><a id="__codelineno-17-42" name="__codelineno-17-42" href="#__codelineno-17-42"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-1_part-mag_bold.json
-</span><span id="__span-17-43"><a id="__codelineno-17-43" name="__codelineno-17-43" href="#__codelineno-17-43"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-1_part-mag_bold.nii.gz
-</span><span id="__span-17-44"><a id="__codelineno-17-44" name="__codelineno-17-44" href="#__codelineno-17-44"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-1_part-phase_bold.json
-</span><span id="__span-17-45"><a id="__codelineno-17-45" name="__codelineno-17-45" href="#__codelineno-17-45"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-1_part-phase_bold.nii.gz
-</span><span id="__span-17-46"><a id="__codelineno-17-46" name="__codelineno-17-46" href="#__codelineno-17-46"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-2_part-mag_bold.json
-</span><span id="__span-17-47"><a id="__codelineno-17-47" name="__codelineno-17-47" href="#__codelineno-17-47"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-2_part-mag_bold.nii.gz
-</span><span id="__span-17-48"><a id="__codelineno-17-48" name="__codelineno-17-48" href="#__codelineno-17-48"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-2_part-phase_bold.json
-</span><span id="__span-17-49"><a id="__codelineno-17-49" name="__codelineno-17-49" href="#__codelineno-17-49"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-2_part-phase_bold.nii.gz
-</span><span id="__span-17-50"><a id="__codelineno-17-50" name="__codelineno-17-50" href="#__codelineno-17-50"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-3_part-mag_bold.json
-</span><span id="__span-17-51"><a id="__codelineno-17-51" name="__codelineno-17-51" href="#__codelineno-17-51"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-3_part-mag_bold.nii.gz
-</span><span id="__span-17-52"><a id="__codelineno-17-52" name="__codelineno-17-52" href="#__codelineno-17-52"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-3_part-phase_bold.json
-</span><span id="__span-17-53"><a id="__codelineno-17-53" name="__codelineno-17-53" href="#__codelineno-17-53"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-3_part-phase_bold.nii.gz
-</span><span id="__span-17-54"><a id="__codelineno-17-54" name="__codelineno-17-54" href="#__codelineno-17-54"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-4_part-mag_bold.json
-</span><span id="__span-17-55"><a id="__codelineno-17-55" name="__codelineno-17-55" href="#__codelineno-17-55"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-4_part-mag_bold.nii.gz
-</span><span id="__span-17-56"><a id="__codelineno-17-56" name="__codelineno-17-56" href="#__codelineno-17-56"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-4_part-phase_bold.json
-</span><span id="__span-17-57"><a id="__codelineno-17-57" name="__codelineno-17-57" href="#__codelineno-17-57"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-4_part-phase_bold.nii.gz
-</span><span id="__span-17-58"><a id="__codelineno-17-58" name="__codelineno-17-58" href="#__codelineno-17-58"></a><span class="hll">│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_eyetrack.json
-</span></span><span id="__span-17-59"><a id="__codelineno-17-59" name="__codelineno-17-59" href="#__codelineno-17-59"></a><span class="hll">│<span class="w">   </span>└──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_eyetrack.tsv.gz
-</span></span><span id="__span-17-60"><a id="__codelineno-17-60" name="__codelineno-17-60" href="#__codelineno-17-60"></a>└──<span class="w"> </span>sub-001_ses-024_scans.tsv
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>ses-024
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>├──<span class="w"> </span>anat
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>├──<span class="w"> </span>dwi
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>├──<span class="w"> </span>fmap
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>├──<span class="w"> </span>func
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-1_part-mag_bold.json
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-1_part-mag_bold.nii.gz
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-1_part-phase_bold.json
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-1_part-phase_bold.nii.gz
+</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-2_part-mag_bold.json
+</span><span id="__span-19-11"><a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-2_part-mag_bold.nii.gz
+</span><span id="__span-19-12"><a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-2_part-phase_bold.json
+</span><span id="__span-19-13"><a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-2_part-phase_bold.nii.gz
+</span><span id="__span-19-14"><a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-3_part-mag_bold.json
+</span><span id="__span-19-15"><a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-3_part-mag_bold.nii.gz
+</span><span id="__span-19-16"><a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-3_part-phase_bold.json
+</span><span id="__span-19-17"><a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-3_part-phase_bold.nii.gz
+</span><span id="__span-19-18"><a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-4_part-mag_bold.json
+</span><span id="__span-19-19"><a id="__codelineno-19-19" name="__codelineno-19-19" href="#__codelineno-19-19"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-4_part-mag_bold.nii.gz
+</span><span id="__span-19-20"><a id="__codelineno-19-20" name="__codelineno-19-20" href="#__codelineno-19-20"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-4_part-phase_bold.json
+</span><span id="__span-19-21"><a id="__codelineno-19-21" name="__codelineno-19-21" href="#__codelineno-19-21"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_echo-4_part-phase_bold.nii.gz
+</span><span id="__span-19-22"><a id="__codelineno-19-22" name="__codelineno-19-22" href="#__codelineno-19-22"></a><span class="hll">│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_eyetrack.json
+</span></span><span id="__span-19-23"><a id="__codelineno-19-23" name="__codelineno-19-23" href="#__codelineno-19-23"></a><span class="hll">│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-bht_dir-AP_eyetrack.tsv.gz
+</span></span><span id="__span-19-24"><a id="__codelineno-19-24" name="__codelineno-19-24" href="#__codelineno-19-24"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-1_part-mag_bold.json
+</span><span id="__span-19-25"><a id="__codelineno-19-25" name="__codelineno-19-25" href="#__codelineno-19-25"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-1_part-mag_bold.nii.gz
+</span><span id="__span-19-26"><a id="__codelineno-19-26" name="__codelineno-19-26" href="#__codelineno-19-26"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-1_part-phase_bold.json
+</span><span id="__span-19-27"><a id="__codelineno-19-27" name="__codelineno-19-27" href="#__codelineno-19-27"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-1_part-phase_bold.nii.gz
+</span><span id="__span-19-28"><a id="__codelineno-19-28" name="__codelineno-19-28" href="#__codelineno-19-28"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-2_part-mag_bold.json
+</span><span id="__span-19-29"><a id="__codelineno-19-29" name="__codelineno-19-29" href="#__codelineno-19-29"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-2_part-mag_bold.nii.gz
+</span><span id="__span-19-30"><a id="__codelineno-19-30" name="__codelineno-19-30" href="#__codelineno-19-30"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-2_part-phase_bold.json
+</span><span id="__span-19-31"><a id="__codelineno-19-31" name="__codelineno-19-31" href="#__codelineno-19-31"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-2_part-phase_bold.nii.gz
+</span><span id="__span-19-32"><a id="__codelineno-19-32" name="__codelineno-19-32" href="#__codelineno-19-32"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-3_part-mag_bold.json
+</span><span id="__span-19-33"><a id="__codelineno-19-33" name="__codelineno-19-33" href="#__codelineno-19-33"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-3_part-mag_bold.nii.gz
+</span><span id="__span-19-34"><a id="__codelineno-19-34" name="__codelineno-19-34" href="#__codelineno-19-34"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-3_part-phase_bold.json
+</span><span id="__span-19-35"><a id="__codelineno-19-35" name="__codelineno-19-35" href="#__codelineno-19-35"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-3_part-phase_bold.nii.gz
+</span><span id="__span-19-36"><a id="__codelineno-19-36" name="__codelineno-19-36" href="#__codelineno-19-36"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-4_part-mag_bold.json
+</span><span id="__span-19-37"><a id="__codelineno-19-37" name="__codelineno-19-37" href="#__codelineno-19-37"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-4_part-mag_bold.nii.gz
+</span><span id="__span-19-38"><a id="__codelineno-19-38" name="__codelineno-19-38" href="#__codelineno-19-38"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-4_part-phase_bold.json
+</span><span id="__span-19-39"><a id="__codelineno-19-39" name="__codelineno-19-39" href="#__codelineno-19-39"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_echo-4_part-phase_bold.nii.gz
+</span><span id="__span-19-40"><a id="__codelineno-19-40" name="__codelineno-19-40" href="#__codelineno-19-40"></a><span class="hll">│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_eyetrack.json
+</span></span><span id="__span-19-41"><a id="__codelineno-19-41" name="__codelineno-19-41" href="#__codelineno-19-41"></a><span class="hll">│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-qct_dir-AP_eyetrack.tsv.gz
+</span></span><span id="__span-19-42"><a id="__codelineno-19-42" name="__codelineno-19-42" href="#__codelineno-19-42"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-1_part-mag_bold.json
+</span><span id="__span-19-43"><a id="__codelineno-19-43" name="__codelineno-19-43" href="#__codelineno-19-43"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-1_part-mag_bold.nii.gz
+</span><span id="__span-19-44"><a id="__codelineno-19-44" name="__codelineno-19-44" href="#__codelineno-19-44"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-1_part-phase_bold.json
+</span><span id="__span-19-45"><a id="__codelineno-19-45" name="__codelineno-19-45" href="#__codelineno-19-45"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-1_part-phase_bold.nii.gz
+</span><span id="__span-19-46"><a id="__codelineno-19-46" name="__codelineno-19-46" href="#__codelineno-19-46"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-2_part-mag_bold.json
+</span><span id="__span-19-47"><a id="__codelineno-19-47" name="__codelineno-19-47" href="#__codelineno-19-47"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-2_part-mag_bold.nii.gz
+</span><span id="__span-19-48"><a id="__codelineno-19-48" name="__codelineno-19-48" href="#__codelineno-19-48"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-2_part-phase_bold.json
+</span><span id="__span-19-49"><a id="__codelineno-19-49" name="__codelineno-19-49" href="#__codelineno-19-49"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-2_part-phase_bold.nii.gz
+</span><span id="__span-19-50"><a id="__codelineno-19-50" name="__codelineno-19-50" href="#__codelineno-19-50"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-3_part-mag_bold.json
+</span><span id="__span-19-51"><a id="__codelineno-19-51" name="__codelineno-19-51" href="#__codelineno-19-51"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-3_part-mag_bold.nii.gz
+</span><span id="__span-19-52"><a id="__codelineno-19-52" name="__codelineno-19-52" href="#__codelineno-19-52"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-3_part-phase_bold.json
+</span><span id="__span-19-53"><a id="__codelineno-19-53" name="__codelineno-19-53" href="#__codelineno-19-53"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-3_part-phase_bold.nii.gz
+</span><span id="__span-19-54"><a id="__codelineno-19-54" name="__codelineno-19-54" href="#__codelineno-19-54"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-4_part-mag_bold.json
+</span><span id="__span-19-55"><a id="__codelineno-19-55" name="__codelineno-19-55" href="#__codelineno-19-55"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-4_part-mag_bold.nii.gz
+</span><span id="__span-19-56"><a id="__codelineno-19-56" name="__codelineno-19-56" href="#__codelineno-19-56"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-4_part-phase_bold.json
+</span><span id="__span-19-57"><a id="__codelineno-19-57" name="__codelineno-19-57" href="#__codelineno-19-57"></a>│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_echo-4_part-phase_bold.nii.gz
+</span><span id="__span-19-58"><a id="__codelineno-19-58" name="__codelineno-19-58" href="#__codelineno-19-58"></a><span class="hll">│<span class="w">   </span>├──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_eyetrack.json
+</span></span><span id="__span-19-59"><a id="__codelineno-19-59" name="__codelineno-19-59" href="#__codelineno-19-59"></a><span class="hll">│<span class="w">   </span>└──<span class="w"> </span>sub-001_ses-024_task-rest_dir-AP_eyetrack.tsv.gz
+</span></span><span id="__span-19-60"><a id="__codelineno-19-60" name="__codelineno-19-60" href="#__codelineno-19-60"></a>└──<span class="w"> </span>sub-001_ses-024_scans.tsv
 </span></code></pre></div>
 </details>
 <h3 id="add-new-data-to-the-datalad-dataset">Add new data to the <em>DataLad</em> dataset<a class="headerlink" href="#add-new-data-to-the-datalad-dataset" title="Permanent link">&para;</a></h3>
@@ -2898,47 +2957,47 @@ Please do not copy these generated files into the <em>DataLad</em> dataset in <a
 <ul class="task-list">
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Save the files in the dataset history using the command below.
-    Replace <code>&lt;session_id&gt;</code> below with the number of the session (e.g., <code>pilot017</code>):
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>datalad<span class="w"> </span>save<span class="w"> </span>-r<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;add: session &lt;session_id&gt;&quot;</span><span class="w"> </span>sub-001/ses-&lt;session_id&gt;
-</span></code></pre></div></p>
+    Replace <code>&lt;session_id&gt;</code> below with the number of the session (e.g., <code>pilot017</code>):</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>datalad<span class="w"> </span>save<span class="w"> </span>-r<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;add: session &lt;session_id&gt;&quot;</span><span class="w"> </span>sub-001/ses-&lt;session_id&gt;
+</span></code></pre></div>
 <div class="admonition danger">
 <p class="admonition-title">Always double-check that data are annexed and the metadata committed to git</p>
 <p>Although the <a href="../preliminary/#creating-a-datalad-dataset">creation of a procedure</a> should ensure data and metadata are added to the appropriate version control (Git or Git-Annex), it is possible that some metadata or data formats are not anticipated, or do not follow the general rules.</p>
 <p>A generally good strategy is to avoid recursion (i.e., do not use the <code>-r</code> flag), and leverage Bash's <code>find</code> and <code>xargs</code> tools.
 For example, the following command line selects metadata files that should be committed to Git within one session (<code>pilot020</code>) and saves them:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>find<span class="w"> </span>sub-001/ses-pilot020<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.tsv&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.json&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.bvec&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.bval&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>datalad<span class="w"> </span>save<span class="w"> </span>--to-git<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;&quot;add(pilot020): new session metadata&quot;&#39;</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>find<span class="w"> </span>sub-001/ses-pilot020<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.tsv&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.json&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.bvec&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.bval&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>datalad<span class="w"> </span>save<span class="w"> </span>--to-git<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;&quot;add(pilot020): new session metadata&quot;&#39;</span>
 </span></code></pre></div>
 <p>Correspondingly, we can store <abbr title="Neuroimaging Informatics Technology Initiative">NIfTI</abbr> data and physiological information:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>find<span class="w"> </span>sub-001/ses-pilot020<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.nii.gz&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*_eyetrack.tsv.gz&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*_physio.tsv.gz&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*_stim.tsv.gz&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>datalad<span class="w"> </span>save<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;&quot;add(pilot020): new session NIfTI data, eye tracking and physio&quot;&#39;</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>find<span class="w"> </span>sub-001/ses-pilot020<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.nii.gz&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*_eyetrack.tsv.gz&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*_physio.tsv.gz&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*_stim.tsv.gz&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>datalad<span class="w"> </span>save<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;&quot;add(pilot020): new session NIfTI data, eye tracking and physio&quot;&#39;</span>
 </span></code></pre></div>
 <p>Please read <a href="http://docs.datalad.org/en/stable/generated/man/datalad-save.html"><em>DataLad</em>'s <code>save</code> documentation</a></p>
 </div>
 <div class="admonition important">
 <p class="admonition-title">If you overeagerly <em>datalad-saved</em> too many files</p>
 <p>You can <a href="https://handbook.datalad.org/en/latest/basics/101-137-history.html"><em>revert</em> the <code>datalad save</code> operation</a> without deleting changes with:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>git<span class="w"> </span>reset<span class="w"> </span>--mixed<span class="w"> </span>COMMIT
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>git<span class="w"> </span>reset<span class="w"> </span>--mixed<span class="w"> </span>COMMIT
 </span></code></pre></div>
 <p>where <code>COMMIT</code> is the hash of the last commit you want to keep (all the later commits will be dropped).</p>
 <p>To check the commit hash where you can roll history back to, you may want to use:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>git<span class="w"> </span>log<span class="w"> </span>-50<span class="w"> </span>--oneline
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>git<span class="w"> </span>log<span class="w"> </span>-50<span class="w"> </span>--oneline
 </span></code></pre></div>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Saving batches of sessions</p>
 <p>It is possible to save several sessions with the following <em>Bash</em> script by enumerating them in the array defined in the first line here:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nv">SESSIONS</span><span class="o">=(</span><span class="w"> </span><span class="m">001</span><span class="w"> </span><span class="m">003</span><span class="w"> </span>pilot21<span class="w"> </span><span class="o">)</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="k">for</span><span class="w"> </span>SESSION<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="si">${</span><span class="nv">SESSIONS</span><span class="p">[@]</span><span class="si">}</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">    </span>find<span class="w"> </span>sub-001/ses-<span class="nv">$SESSION</span><span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.tsv&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.json&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.bvec&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.bval&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>datalad<span class="w"> </span>save<span class="w"> </span>--to-git<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;&quot;add(&#39;</span><span class="s2">&quot;</span><span class="nv">$SESSION</span><span class="s2">&quot;</span><span class="s1">&#39;): new session metadata&quot;&#39;</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="w">    </span>find<span class="w"> </span>sub-001/ses-<span class="nv">$SESSION</span><span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.nii.gz&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*_eyetrack.tsv.gz&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*_physio.tsv.gz&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*_stim.tsv.gz&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>datalad<span class="w"> </span>save<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;&quot;add(&#39;</span><span class="s2">&quot;</span><span class="nv">$SESSION</span><span class="s2">&quot;</span><span class="s1">&#39;): new session NIfTI data, eye tracking and physio&quot;&#39;</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="k">done</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="nv">SESSIONS</span><span class="o">=(</span><span class="w"> </span><span class="m">001</span><span class="w"> </span><span class="m">003</span><span class="w"> </span>pilot21<span class="w"> </span><span class="o">)</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="k">for</span><span class="w"> </span>SESSION<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="si">${</span><span class="nv">SESSIONS</span><span class="p">[@]</span><span class="si">}</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="w">    </span>find<span class="w"> </span>sub-001/ses-<span class="nv">$SESSION</span><span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.tsv&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.json&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.bvec&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.bval&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>datalad<span class="w"> </span>save<span class="w"> </span>--to-git<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;&quot;add(&#39;</span><span class="s2">&quot;</span><span class="nv">$SESSION</span><span class="s2">&quot;</span><span class="s1">&#39;): new session metadata&quot;&#39;</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="w">    </span>find<span class="w"> </span>sub-001/ses-<span class="nv">$SESSION</span><span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.nii.gz&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*_eyetrack.tsv.gz&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*_physio.tsv.gz&quot;</span><span class="w"> </span>-or<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*_stim.tsv.gz&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>datalad<span class="w"> </span>save<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;&quot;add(&#39;</span><span class="s2">&quot;</span><span class="nv">$SESSION</span><span class="s2">&quot;</span><span class="s1">&#39;): new session NIfTI data, eye tracking and physio&quot;&#39;</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="k">done</span>
 </span></code></pre></div>
 </div>
 </li>
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Push the new data to the remote storage (if your git containing <em>DataLad</em> and the Git annex is different from <code>origin</code>, e.g., <code>github</code>, replace the name below):
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>datalad<span class="w"> </span>push<span class="w"> </span>--to<span class="w"> </span>ria-storage
-</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>datalad<span class="w"> </span>push<span class="w"> </span>--to<span class="w"> </span>origin
-</span></code></pre></div></p>
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Push the new data to the remote storage (if your git containing <em>DataLad</em> and the Git annex is different from <code>origin</code>, e.g., <code>github</code>, replace the name below):</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>datalad<span class="w"> </span>push<span class="w"> </span>--to<span class="w"> </span>ria-storage
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>datalad<span class="w"> </span>push<span class="w"> </span>--to<span class="w"> </span>origin
+</span></code></pre></div>
 <div class="admonition danger">
 <p class="admonition-title">Always double-check that data in the annex are uploaded to the <abbr title="Remote Indexed Archives">RIA</abbr> store</p>
 </div>
