@@ -33,8 +33,8 @@ session	day	PE	AcqKnowledge	Run
 40	2023-11-10	AP	session2023-11-10T20:02:46.acq	n/a
 41	2023-11-11	AP	session2023-11-11T08:20:41.acq	n/a
 42	2023-11-11	PA	session2023-11-11T10:14:41.acq	n/a
-43	2023-11-12	AP	n/a	n/a
-44	2023-11-12	LR	n/a	n/a
-45	2023-11-13	LR	n/a	n/a
-46	2023-11-13	LR	n/a	n/a
+43	2023-11-12	AP	session2023-11-12T09:18:49.acq	n/a
+44	2023-11-12	LR	session2023-11-12T11:08:00.acq	n/a
+45	2023-11-13	LR	session2023-11-13T18:31:22.acq	n/a
+46	2023-11-13	LR	session2023-11-13T20:16:37.acq	n/a
 47	2023-11-14	RL	n/a	n/a

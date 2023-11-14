@@ -32,7 +32,7 @@ session	day	PE	dwi_ET_data	qct__ET_data	rest__ET_data	bht__ET_data
 42	2023-11-04	PA	fixation_2023-11-11_10h28.29.995_2_session_42.EDF	qct_2023-11-11_11h16.10.848_0_session_42.EDF	rest_2023-11-11_11h23.12.567_0_session_42.EDF	bht_2023-11-11_11h46.56.809_1_session_42.EDF
 43	2023-11-04	AP	fixation_2023-11-12_09h30.01.023_2_session_43.EDF	qct_2023-11-12_10h08.42.802_0_session_43.EDF	rest_2023-11-12_10h15.19.932_0_session_43.EDF	bht_2023-11-12_10h36.56.083_0_session_43.EDF
 44	2023-11-05	LR	fixation_2023-11-12_11h20.36.810_1_session_44.EDF	qct_2023-11-12_11h57.29.772_0_session_44.EDF	rest_2023-11-12_12h06.31.292_0_session_44.EDF	bht_2023-11-12_12h28.12.336_0_session_44.EDF
-45	2023-11-05	LR	n/a	n/a	n/a	n/a
-46	2023-11-06	LR	n/a	n/a	n/a	n/a
+45	2023-11-05	LR	fixation_2023-11-13_18h41.45.582_1_session_45.EDF	qct_2023-11-13_19h20.22.152_0_session_45.EDF	rest_2023-11-13_19h26.43.438_0_session_45.EDF	bht_2023-11-13_19h48.31.821_0_session_45.EDF
+46	2023-11-06	LR	fixation_2023-11-13_20h27.23.518_1_session_46.EDF	qct_2023-11-13_21h02.32.492_0_session_46.EDF	rest_2023-11-13_21h11.02.858_0_session_46.EDF	bht_2023-11-13_21h32.31.568_0_session_46.EDF
 47	2023-11-06	RL	n/a	n/a	n/a	n/a
 
