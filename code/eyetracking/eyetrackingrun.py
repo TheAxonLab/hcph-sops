@@ -23,6 +23,7 @@ class EyeTrackingRun:
         events: pd.DataFrame,
         messages: pd.DataFrame,
         message_first_trigger: str,
+        screen_resolution: Tuple[int, int],
         pe: str = "",
     ):
         self.session = session
@@ -32,7 +33,27 @@ class EyeTrackingRun:
         self.events = events
         self.messages = messages
         self.message_first_trigger = message_first_trigger
+        self.screen_resolution = screen_resolution
         self.pe = pe
+
+
+    def get_calibration_positions(self, calibration_type: Optional[str] = None) -> Optional[List[List[int]]]:
+        if calibration_type and calibration_type.lower() == 'hv9':
+            positions = [
+                [int(self.screen_resolution[0] / 2), int(self.screen_resolution[1] / 2)],
+                [int(self.screen_resolution[0] / 2), int(self.screen_resolution[1] / 2 * 0.17)],
+                [int(self.screen_resolution[0] / 2), int(self.screen_resolution[1] / 2 * 0.83)],
+                [int(self.screen_resolution[0] / 2 * 0.12), int(self.screen_resolution[1] / 2)],
+                [int(self.screen_resolution[0] / 2 * 0.88), int(self.screen_resolution[1] / 2)],
+                [int(self.screen_resolution[0] / 2 * 0.12), int(self.screen_resolution[1] / 2 * 0.17)],
+                [int(self.screen_resolution[0] / 2 * 0.88), int(self.screen_resolution[1] / 2 * 0.17)],
+                [int(self.screen_resolution[0] / 2 * 0.12), int(self.screen_resolution[1] / 2 * 0.83)],
+                [int(self.screen_resolution[0] / 2 * 0.88), int(self.screen_resolution[1] / 2 * 0.83)],
+            ]
+            return positions
+        else:
+            print("Invalid calibration type")
+            return None
 
     def add_events(self) -> pd.DataFrame:
         """
@@ -137,20 +158,7 @@ class EyeTrackingRun:
             # Check for 'HV9' in the error message and print calibration type and position
             if "HV9" in error_message:
                 calibration_type = "HV9"
-                calibration_position: List[List[Union[int, int]]] = [
-                    [400, 300],
-                    [400, 51],
-                    [400, 549],
-                    [48, 300],
-                    [752, 300],
-                    [48, 51],
-                    [752, 51],
-                    [48, 549],
-                    [752, 549],
-                ]
-
-                print("Calibration Type:", calibration_type)
-                print("Calibration Position:", calibration_position)
+                calibration_position=self.get_calibration_positions(calibration_type)
             else:
                 calibration_type = None
                 calibration_position = None
@@ -476,7 +484,6 @@ class EyeTrackingRun:
     def plot_coordinates_ts(
         self,
         eye: str = "right",
-        screen_resolution: Tuple[int, int] = (800, 600),
         notebook: bool = True,
         save: bool = False,
         path_save: str = ".",
@@ -488,11 +495,11 @@ class EyeTrackingRun:
         if eye == "right":
             self.samples.gx_right[
                 (self.samples.gx_right < 0)
-                | (self.samples.gx_right > screen_resolution[0])
+                | (self.samples.gx_right > self.screen_resolution[0])
             ] = np.nan
             self.samples.gy_right[
                 (self.samples.gy_right < 0)
-                | (self.samples.gy_right > screen_resolution[1])
+                | (self.samples.gy_right > self.screen_resolution[1])
             ] = np.nan
 
             fig, axs = plt.subplots(2, 1, figsize=(8, 6), sharex=True)
@@ -511,11 +518,11 @@ class EyeTrackingRun:
         elif eye == "left":
             self.samples.gx_left[
                 (self.samples.gx_left < 0)
-                | (self.samples.gx_left > screen_resolution[0])
+                | (self.samples.gx_left > self.screen_resolution[0])
             ] = np.nan
             self.samples.gy_left[
                 (self.samples.gy_left < 0)
-                | (self.samples.gy_left > screen_resolution[1])
+                | (self.samples.gy_left > self.screen_resolution[1])
             ] = np.nan
 
             fig, axs = plt.subplots(2, 1, figsize=(8, 6), sharex=True)
@@ -547,7 +554,6 @@ class EyeTrackingRun:
         save: bool = False,
         path_save: str = ".",
         filename: Optional[str] = None,
-        screen_resolution: Tuple[int, int] = (800, 600),
     ) -> Optional[str]:
         if filename is None:
             filename = f"sub-{self.participant:02d}_ses-{self.session:03d}_task-{self.task_name}_heatmap.pdf"
@@ -558,9 +564,9 @@ class EyeTrackingRun:
         if eye == "right":
             filtered_samples = self.samples[
                 (self.samples["gx_right"] >= 0)
-                & (self.samples["gx_right"] <= screen_resolution[0])
+                & (self.samples["gx_right"] <= self.screen_resolution[0])
                 & (self.samples["gy_right"] >= 0)
-                & (self.samples["gy_right"] <= screen_resolution[1])
+                & (self.samples["gy_right"] <= self.screen_resolution[1])
             ]
 
             sns.kdeplot(
@@ -614,7 +620,6 @@ class EyeTrackingRun:
         save: bool = False,
         path_save: str = ".",
         filename: str = "heatmap.png",
-        screen_resolution: Tuple[int, int] = (800, 600),
         bins: int = 100,
     ) -> Optional[None]:
         """
@@ -626,7 +631,6 @@ class EyeTrackingRun:
         - save (bool): If True, the plot is saved to a file.
         - path_save (str): Path to save the plot file.
         - filename (str): Name of the saved plot file.
-        - screen_resolution (Tuple[int, int]): Tuple specifying the screen resolution (width, height).
         - bins (int): Number of bins for the histogram.
 
         Returns:
@@ -644,15 +648,15 @@ class EyeTrackingRun:
         if eye == "right":
             filtered_samples = self.samples[
                 (self.samples["gx_right"] >= 0)
-                & (self.samples["gx_right"] <= screen_resolution[0])
+                & (self.samples["gx_right"] <= self.screen_resolution[0])
                 & (self.samples["gy_right"] >= 0)
-                & (self.samples["gy_right"] <= screen_resolution[1])
+                & (self.samples["gy_right"] <= self.screen_resolution[1])
             ]
 
             plt.hist2d(
                 filtered_samples["gx_right"],
                 filtered_samples["gy_right"],
-                range=[[0, screen_resolution[0]], [0, screen_resolution[1]]],
+                range=[[0, screen_resolution[0]], [0, self.screen_resolution[1]]],
                 bins=bins,
                 cmap=cmap,
             )
@@ -663,15 +667,15 @@ class EyeTrackingRun:
         elif eye == "left":
             filtered_samples = self.samples[
                 (self.samples["gx_left"] >= 0)
-                & (self.samples["gx_left"] <= screen_resolution[0])
+                & (self.samples["gx_left"] <= self.screen_resolution[0])
                 & (self.samples["gy_left"] >= 0)
-                & (self.samples["gy_left"] <= screen_resolution[1])
+                & (self.samples["gy_left"] <= self.screen_resolution[1])
             ]
 
             plt.hist2d(
                 filtered_samples["gx_left"],
                 filtered_samples["gy_left"],
-                range=[[0, screen_resolution[0]], [0, screen_resolution[1]]],
+                range=[[0, screen_resolution[0]], [0, self.screen_resolution[1]]],
                 bins=bins,
                 cmap=cmap,
             )
@@ -683,8 +687,8 @@ class EyeTrackingRun:
             print("Invalid eye argument")
 
         plt.gca().invert_yaxis()
-        plt.xlim(0, screen_resolution[0])
-        plt.ylim(0, screen_resolution[1])
+        plt.xlim(0, self.screen_resolution[0])
+        plt.ylim(0, self.screen_resolution[1])
 
         if notebook:
             plt.show()
