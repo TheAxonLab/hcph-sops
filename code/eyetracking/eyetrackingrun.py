@@ -51,6 +51,15 @@ class EyeTrackingRun:
                 [int(self.screen_resolution[0] / 2 * 0.88), int(self.screen_resolution[1] / 2 * 0.83)],
             ]
             return positions
+        elif calibration_type and calibration_type.lower() == 'hv5':
+            positions = [
+                [int(self.screen_resolution[0] / 2), int(self.screen_resolution[1] / 2)],
+                [int(self.screen_resolution[0] / 2), int(self.screen_resolution[1] / 2 * 0.17)],
+                [int(self.screen_resolution[0] / 2), int(self.screen_resolution[1] / 2 * 0.83)],
+                [int(self.screen_resolution[0] / 2 * 0.12), int(self.screen_resolution[1] / 2)],
+                [int(self.screen_resolution[0] / 2 * 0.88), int(self.screen_resolution[1] / 2)],
+            ]
+            return positions
         else:
             print("Invalid calibration type")
             return None
