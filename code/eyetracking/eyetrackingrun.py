@@ -513,16 +513,13 @@ class EyeTrackingRun:
 
             fig, axs = plt.subplots(2, 1, figsize=(8, 6), sharex=True)
 
-            axs[0].plot(
-                self.samples["time"], self.samples["gx_right"], label="gx_right"
+            axs[0].plot(self.samples["gx_right"], label="gx_right"
             )
-            axs[0].set_ylabel("gx_right")
-            axs[1].plot(
-                self.samples["time"], self.samples["gy_right"], label="gy_right"
+            axs[1].plot(self.samples["gy_right"], label="gy_right"
             )
-            axs[1].set_xlabel("timestamp [ms]")
-            axs[1].set_ylabel("pupil area [pixels]")
-            axs[0].set_xlim(self.samples["time"].iloc[0])
+            axs[1].set_xlabel("time")
+            axs[1].set_ylabel("x coordinate [pixels]")
+            axs[1].set_ylabel("y coordinate [pixels]")
 
         elif eye == "left":
             self.samples.gx_left[
@@ -612,7 +609,7 @@ class EyeTrackingRun:
         blinks = self.events[self.events["blink"] == True]
         blinks["duration"] = blinks["end"] - blinks["start"]
         plt.figure(figsize=(10, 6))
-        plt.plot(blinks["duration"])
+        plt.plot(blinks["start"],blinks["duration"])
         plt.title("Blink Durations Over Time")
         plt.xlabel("Time of Onset (ms)")
         plt.ylabel("Blinks Duration (ms)")
