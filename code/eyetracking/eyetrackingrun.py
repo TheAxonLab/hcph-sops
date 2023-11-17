@@ -15,15 +15,15 @@ import matplotlib.pyplot as plt
 
 class EyeTrackingRun:
     def __init__(
-            self,
-            session: int,
-            task_name: str,
-            participant: int,
-            samples: pd.DataFrame,
-            events: pd.DataFrame,
-            messages: pd.DataFrame,
-            message_first_trigger: str,
-            pe: str = "",
+        self,
+        session: int,
+        task_name: str,
+        participant: int,
+        samples: pd.DataFrame,
+        events: pd.DataFrame,
+        messages: pd.DataFrame,
+        message_first_trigger: str,
+        pe: str = "",
     ):
         self.session = session
         self.task_name = task_name
@@ -41,26 +41,33 @@ class EyeTrackingRun:
         Returns:
         - Updated samples DataFrame.
         """
-        self.samples['fixation'] = 0
-        self.samples['saccade'] = 0
-        self.samples['blink'] = 0
+        self.samples["fixation"] = 0
+        self.samples["saccade"] = 0
+        self.samples["blink"] = 0
 
-        for _, fixation_event in self.events[self.events['type'] == 'fixation'].iterrows():
+        for _, fixation_event in self.events[
+            self.events["type"] == "fixation"
+        ].iterrows():
             self.samples.loc[
-                (self.samples['time'] >= fixation_event['start']) & (self.samples['time'] <= fixation_event['end']),
-                'fixation'
+                (self.samples["time"] >= fixation_event["start"])
+                & (self.samples["time"] <= fixation_event["end"]),
+                "fixation",
             ] = 1
 
-        for _, saccade_event in self.events[self.events['type'] == 'saccade'].iterrows():
+        for _, saccade_event in self.events[
+            self.events["type"] == "saccade"
+        ].iterrows():
             self.samples.loc[
-                (self.samples['time'] >= saccade_event['start']) & (self.samples['time'] <= saccade_event['end']),
-                'saccade'
+                (self.samples["time"] >= saccade_event["start"])
+                & (self.samples["time"] <= saccade_event["end"]),
+                "saccade",
             ] = 1
 
-            if saccade_event['blink'] == 1:
+            if saccade_event["blink"] == 1:
                 self.samples.loc[
-                    (self.samples['time'] >= saccade_event['start']) & (self.samples['time'] <= saccade_event['end']),
-                    'blink'
+                    (self.samples["time"] >= saccade_event["start"])
+                    & (self.samples["time"] <= saccade_event["end"]),
+                    "blink",
                 ] = 1
 
         return self.samples
@@ -72,14 +79,25 @@ class EyeTrackingRun:
         Returns:
             Optional[int]: The 'trialid_time' as an integer if the message is found; None if the message is not found.
         """
-        message_row = self.messages[self.messages['trialid '].str.contains(self.message_first_trigger, case=False, regex=True)].head(1)
+        message_row = self.messages[
+            self.messages["trialid "].str.contains(
+                self.message_first_trigger, case=False, regex=True
+            )
+        ].head(1)
         if not message_row.empty:
-            return int(message_row['trialid_time'].iloc[0])
+            return int(message_row["trialid_time"].iloc[0])
         else:
             return None
 
-    def extract_calibration(self) -> Tuple[
-        int, Optional[str], Optional[float], Optional[float], Optional[List[List[Union[int, int]]]]]:
+    def extract_calibration(
+        self,
+    ) -> Tuple[
+        int,
+        Optional[str],
+        Optional[float],
+        Optional[float],
+        Optional[List[List[Union[int, int]]]],
+    ]:
         """
         Extracts calibration information from the DataFrame of messages.
 
@@ -93,7 +111,9 @@ class EyeTrackingRun:
             - Calibration position (list of lists of integers or None).
         """
         # Find rows containing 'ERROR' in the 'trialid' column
-        row_error_value = self.messages[self.messages['trialid '].str.contains('ERROR', case=False, regex=True)].head(1)
+        row_error_value = self.messages[
+            self.messages["trialid "].str.contains("ERROR", case=False, regex=True)
+        ].head(1)
 
         # Check if no error message is found
         if row_error_value.empty:
@@ -102,23 +122,32 @@ class EyeTrackingRun:
             return calibration_count, None, None, None, None
         else:
             calibration_count = 1
-            error_message = row_error_value['trialid '].iloc[0]
+            error_message = row_error_value["trialid "].iloc[0]
 
             # Extract average and max calibration errors
-            matches = re.findall(r'([-+]?\d*\.\d+|\d+)', error_message)
-            average_calibration_error, max_calibration_error = map(float, matches[1:3]) if len(matches) >= 2 else (
-            None, None)
+            matches = re.findall(r"([-+]?\d*\.\d+|\d+)", error_message)
+            average_calibration_error, max_calibration_error = (
+                map(float, matches[1:3]) if len(matches) >= 2 else (None, None)
+            )
 
             print("Calibration Count:", calibration_count)
             print("Average Calibration Error:", average_calibration_error)
             print("Maximum Calibration Error:", max_calibration_error)
 
             # Check for 'HV9' in the error message and print calibration type and position
-            if 'HV9' in error_message:
-                calibration_type = 'HV9'
-                calibration_position: List[List[Union[int, int]]] = [[400, 300], [400, 51], [400, 549], [48, 300],
-                                                                     [752, 300], [48, 51], [752, 51], [48, 549],
-                                                                     [752, 549]]
+            if "HV9" in error_message:
+                calibration_type = "HV9"
+                calibration_position: List[List[Union[int, int]]] = [
+                    [400, 300],
+                    [400, 51],
+                    [400, 549],
+                    [48, 300],
+                    [752, 300],
+                    [48, 51],
+                    [752, 51],
+                    [48, 549],
+                    [752, 549],
+                ]
 
                 print("Calibration Type:", calibration_type)
                 print("Calibration Position:", calibration_position)
@@ -126,10 +155,17 @@ class EyeTrackingRun:
                 calibration_type = None
                 calibration_position = None
 
-            return calibration_count, calibration_type, average_calibration_error, max_calibration_error, calibration_position
+            return (
+                calibration_count,
+                calibration_type,
+                average_calibration_error,
+                max_calibration_error,
+                calibration_position,
+            )
 
-
-    def extract_ET_parameters(self) -> Tuple[str, str, Optional[int], Optional[int], Optional[int], str]:
+    def extract_ET_parameters(
+        self,
+    ) -> Tuple[str, str, Optional[int], Optional[int], Optional[int], str]:
         """
         Extracts eye tracking parameters from the given samples and messages dataframes.
 
@@ -144,14 +180,22 @@ class EyeTrackingRun:
         """
         contains_right = any("right" in col for col in self.samples.columns)
         contains_left = any("left" in col for col in self.samples.columns)
-        eye_mapping = {'both': contains_right and contains_left, 'right': contains_right, 'left': contains_left}
-        recorded_eye = next((eye for eye, condition in eye_mapping.items() if condition), 'unknown')
+        eye_mapping = {
+            "both": contains_right and contains_left,
+            "right": contains_right,
+            "left": contains_left,
+        }
+        recorded_eye = next(
+            (eye for eye, condition in eye_mapping.items() if condition), "unknown"
+        )
         print("Recorded Eye:", recorded_eye)
 
         # Extract information from the start text
-        row_start = self.messages[self.messages['trialid '].str.contains('RECORD', case=False, regex=True)].head(1)
-        start_text = row_start['trialid '].iloc[0]
-        match_start = re.search(r'RECORD (\w+) (\d+) (\d+) (\w+)', start_text)
+        row_start = self.messages[
+            self.messages["trialid "].str.contains("RECORD", case=False, regex=True)
+        ].head(1)
+        start_text = row_start["trialid "].iloc[0]
+        match_start = re.search(r"RECORD (\w+) (\d+) (\d+) (\w+)", start_text)
 
         if match_start:
             eye_tracking_method, sampling_frequency, _, _ = match_start.groups()
@@ -165,10 +209,12 @@ class EyeTrackingRun:
             print("Sampling Frequency: Not available")
 
         # Extract information from the thresholds text
-        row_thresholds = self.messages[self.messages['trialid '].str.contains('THRESHOLDS', case=False, regex=True)].head(1)
-        thresholds_text = row_thresholds['trialid '].iloc[0]
-        print(thresholds_text, 'threshold')
-        match_thresholds = re.search(r'THRESHOLDS (\w+) (\d+) (\d+)', thresholds_text)
+        row_thresholds = self.messages[
+            self.messages["trialid "].str.contains("THRESHOLDS", case=False, regex=True)
+        ].head(1)
+        thresholds_text = row_thresholds["trialid "].iloc[0]
+        print(thresholds_text, "threshold")
+        match_thresholds = re.search(r"THRESHOLDS (\w+) (\d+) (\d+)", thresholds_text)
 
         if match_thresholds:
             _, pupil_threshold, CR_threshold = match_thresholds.groups()
@@ -183,18 +229,26 @@ class EyeTrackingRun:
             print("CR Threshold: Not available")
 
         # Extract information from the fitting parameter text
-        row_fit_param = self.messages[self.messages['trialid '].str.contains('ELCL_PROC', case=False, regex=True)].head(1)
-        fit_param_text = row_fit_param['trialid '].iloc[0]
+        row_fit_param = self.messages[
+            self.messages["trialid "].str.contains("ELCL_PROC", case=False, regex=True)
+        ].head(1)
+        fit_param_text = row_fit_param["trialid "].iloc[0]
 
-        if 'ELLIPSE' in fit_param_text:
-            pupil_fit_method = 'ellipse'
+        if "ELLIPSE" in fit_param_text:
+            pupil_fit_method = "ellipse"
         else:
-            pupil_fit_method = 'center-of-mass'
+            pupil_fit_method = "center-of-mass"
 
         print("Pupil Fitting Method:", pupil_fit_method)
 
-        return recorded_eye, eye_tracking_method, sampling_frequency, pupil_threshold, CR_threshold, pupil_fit_method
-
+        return (
+            recorded_eye,
+            eye_tracking_method,
+            sampling_frequency,
+            pupil_threshold,
+            CR_threshold,
+            pupil_fit_method,
+        )
 
     def extract_header(self) -> List[str]:
         """
@@ -203,14 +257,20 @@ class EyeTrackingRun:
         Returns:
         list[str]: A list of strings containing the extracted header information.
         """
-        self.messages['trialid_cleaned'] = self.messages['trialid '].str.replace(r'[\n\x00\t]', '')
+        self.messages["trialid_cleaned"] = self.messages["trialid "].str.replace(
+            r"[\n\x00\t]", ""
+        )
 
-        record_index = self.messages[self.messages['trialid_cleaned'].str.contains('RECORD', case=False, regex=True)].index
+        record_index = self.messages[
+            self.messages["trialid_cleaned"].str.contains(
+                "RECORD", case=False, regex=True
+            )
+        ].index
 
         if not record_index.empty:
-            header = self.messages.loc[:record_index[0], 'trialid_cleaned'].tolist()
+            header = self.messages.loc[: record_index[0], "trialid_cleaned"].tolist()
             return header
-        return self.messages['trialid_cleaned'].tolist()
+        return self.messages["trialid_cleaned"].tolist()
 
     def save_and_process_samples(
         self, BIDS_folder_path: str, include_events: bool = True
@@ -254,32 +314,33 @@ class EyeTrackingRun:
         self.samples = self.samples.replace({100000000: "n/a"})
 
         if self.task_name in ["rest", "bht", "qct"]:
-            output_file_name = (
-                f"sub-{self.participant:02d}_ses-{self.session:03d}_task-{self.task_name}_dir-{self.pe}_eyetrack.tsv.gz"
-            )
+            output_file_name = f"sub-{self.participant:02d}_ses-{self.session:03d}_task-{self.task_name}_dir-{self.pe}_eyetrack.tsv.gz"
             output_file_dir = os.path.join(
-                BIDS_folder_path, f"sub-{self.participant:03d}/ses-{self.session:03d}/func/"
+                BIDS_folder_path,
+                f"sub-{self.participant:03d}/ses-{self.session:03d}/func/",
             )
         elif self.task_name == "dwi":
-            output_file_name = (
-                f"sub-{self.participant:02d}_ses-{self.session:03d}_acq-highres_dir-{self.pe}_eyetrack.tsv.gz"
-            )
+            output_file_name = f"sub-{self.participant:02d}_ses-{self.session:03d}_acq-highres_dir-{self.pe}_eyetrack.tsv.gz"
             output_file_dir = os.path.join(
-                BIDS_folder_path, f"sub-{self.participant:03d}/ses-{self.session:03d}/dwi/"
+                BIDS_folder_path,
+                f"sub-{self.participant:03d}/ses-{self.session:03d}/dwi/",
             )
         else:
-            output_file_name = (
-                f"sub-{self.participant:02d}_ses-{self.session:03d}_task-{self.task_name}_eyetrack.tsv.gz"
-            )
+            output_file_name = f"sub-{self.participant:02d}_ses-{self.session:03d}_task-{self.task_name}_eyetrack.tsv.gz"
             output_file_dir = os.path.join(
-                BIDS_folder_path, f"sub-{self.participant:03d}/ses-{self.session:03d}/func/"
+                BIDS_folder_path,
+                f"sub-{self.participant:03d}/ses-{self.session:03d}/func/",
             )
 
         os.makedirs(output_file_dir, exist_ok=True)
 
         output_file_full_path = os.path.join(output_file_dir, output_file_name)
         self.samples.to_csv(
-            output_file_full_path, sep="\t", index=False, header=False, compression="gzip"
+            output_file_full_path,
+            sep="\t",
+            index=False,
+            header=False,
+            compression="gzip",
         )
 
         return self.samples.columns.tolist()
@@ -345,32 +406,31 @@ class EyeTrackingRun:
             "EDFHeader": header,
         }
 
-        final_info = {key: value for key, value in final_info.items() if value is not None}
+        final_info = {
+            key: value for key, value in final_info.items() if value is not None
+        }
 
         if not final_info:
             print("No data to write to the JSON file. Skipping.")
             return None
 
         if self.task_name in ["rest", "bht", "qct"]:
-            output_file_name = (
-                f"sub-{self.participant:02d}_ses-{self.session:03d}_task-{self.task_name}_dir-{self.pe}_eyetrack.json"
-            )
+            output_file_name = f"sub-{self.participant:02d}_ses-{self.session:03d}_task-{self.task_name}_dir-{self.pe}_eyetrack.json"
             output_file_dir = os.path.join(
-                BIDS_folder_path, f"sub-{self.participant:03d}/ses-{self.session:03d}/func/"
+                BIDS_folder_path,
+                f"sub-{self.participant:03d}/ses-{self.session:03d}/func/",
             )
         elif self.task_name == "dwi":
-            output_file_name = (
-                f"sub-{self.participant:02d}_ses-{self.session:03d}_acq-highres_dir-{self.pe}_eyetrack.json"
-            )
+            output_file_name = f"sub-{self.participant:02d}_ses-{self.session:03d}_acq-highres_dir-{self.pe}_eyetrack.json"
             output_file_dir = os.path.join(
-                BIDS_folder_path, f"sub-{self.participant:03d}/ses-{self.session:03d}/dwi/"
+                BIDS_folder_path,
+                f"sub-{self.participant:03d}/ses-{self.session:03d}/dwi/",
             )
         else:
-            output_file_name = (
-                f"sub-{self.participant:02d}_ses-{self.session:03d}_task-{self.task_name}_eyetrack.json"
-            )
+            output_file_name = f"sub-{self.participant:02d}_ses-{self.session:03d}_task-{self.task_name}_eyetrack.json"
             output_file_dir = os.path.join(
-                BIDS_folder_path, f"sub-{self.participant:03d}/ses-{self.session:03d}/func/"
+                BIDS_folder_path,
+                f"sub-{self.participant:03d}/ses-{self.session:03d}/func/",
             )
 
         os.makedirs(output_file_dir, exist_ok=True)
@@ -437,9 +497,13 @@ class EyeTrackingRun:
 
             fig, axs = plt.subplots(2, 1, figsize=(8, 6), sharex=True)
 
-            axs[0].plot(self.samples["time"], self.samples["gx_right"], label="gx_right")
+            axs[0].plot(
+                self.samples["time"], self.samples["gx_right"], label="gx_right"
+            )
             axs[0].set_ylabel("gx_right")
-            axs[1].plot(self.samples["time"], self.samples["gy_right"], label="gy_right")
+            axs[1].plot(
+                self.samples["time"], self.samples["gy_right"], label="gy_right"
+            )
             axs[1].set_xlabel("timestamp [ms]")
             axs[1].set_ylabel("pupil area [pixels]")
             axs[0].set_xlim(self.samples["time"].iloc[0])
@@ -544,14 +608,14 @@ class EyeTrackingRun:
             plt.savefig(os.path.join(path_save, output_filename))
 
     def plot_heatmap_coordinate_histo(
-            self,
-            eye: str = "right",
-            notebook: bool = True,
-            save: bool = False,
-            path_save: str = ".",
-            filename: str = "heatmap.png",
-            screen_resolution: Tuple[int, int] = (800, 600),
-            bins: int = 100,
+        self,
+        eye: str = "right",
+        notebook: bool = True,
+        save: bool = False,
+        path_save: str = ".",
+        filename: str = "heatmap.png",
+        screen_resolution: Tuple[int, int] = (800, 600),
+        bins: int = 100,
     ) -> Optional[None]:
         """
         Plots a 2D histogram for eye tracking coordinates.
@@ -573,43 +637,47 @@ class EyeTrackingRun:
         DwiSession4.plot_heatmap_coordinate_histo(eye="left", screen_resolution=(1024, 768), bins=50)
         ```
         """
-        plt.rcParams['figure.figsize'] = [10, 6]
+        plt.rcParams["figure.figsize"] = [10, 6]
         plt.figure(figsize=(10, 6))
         cmap = sns.color_palette("coolwarm", as_cmap=True)
 
         if eye == "right":
             filtered_samples = self.samples[
-                (self.samples['gx_right'] >= 0) & (self.samples['gx_right'] <= screen_resolution[0]) &
-                (self.samples['gy_right'] >= 0) & (self.samples['gy_right'] <= screen_resolution[1])
-                ]
+                (self.samples["gx_right"] >= 0)
+                & (self.samples["gx_right"] <= screen_resolution[0])
+                & (self.samples["gy_right"] >= 0)
+                & (self.samples["gy_right"] <= screen_resolution[1])
+            ]
 
             plt.hist2d(
-                filtered_samples['gx_right'],
-                filtered_samples['gy_right'],
+                filtered_samples["gx_right"],
+                filtered_samples["gy_right"],
                 range=[[0, screen_resolution[0]], [0, screen_resolution[1]]],
                 bins=bins,
                 cmap=cmap,
             )
 
-            plt.xlabel('right eye x coordinate [pixels]')
-            plt.ylabel('right eye y coordinate [pixels]')
+            plt.xlabel("right eye x coordinate [pixels]")
+            plt.ylabel("right eye y coordinate [pixels]")
 
         elif eye == "left":
             filtered_samples = self.samples[
-                (self.samples['gx_left'] >= 0) & (self.samples['gx_left'] <= screen_resolution[0]) &
-                (self.samples['gy_left'] >= 0) & (self.samples['gy_left'] <= screen_resolution[1])
-                ]
+                (self.samples["gx_left"] >= 0)
+                & (self.samples["gx_left"] <= screen_resolution[0])
+                & (self.samples["gy_left"] >= 0)
+                & (self.samples["gy_left"] <= screen_resolution[1])
+            ]
 
             plt.hist2d(
-                filtered_samples['gx_left'],
-                filtered_samples['gy_left'],
+                filtered_samples["gx_left"],
+                filtered_samples["gy_left"],
                 range=[[0, screen_resolution[0]], [0, screen_resolution[1]]],
                 bins=bins,
                 cmap=cmap,
             )
 
-            plt.xlabel('left eye x coordinate [pixels]')
-            plt.ylabel('left eye y coordinate [pixels]')
+            plt.xlabel("left eye x coordinate [pixels]")
+            plt.ylabel("left eye y coordinate [pixels]")
 
         else:
             print("Invalid eye argument")
