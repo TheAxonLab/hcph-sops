@@ -324,6 +324,22 @@ class EyeTrackingRun:
                 "pa_right": "eye1_pupil_size",
                 "px_right": "eye1_pupil_x_coordinate",
                 "py_right": "eye1_pupil_y_coordinate",
+                "hx_right": "eye1_head_x_coordinate",
+                "hy_right": "eye1_head_y_coordinate",
+                "rx": "screen_pixel_per_degree_x",
+                "ry": "screen_pixel_per_degree_y",
+                "gxvel_right": "eye1_x_velocity",
+                "gyvel_right": "eye1_x_velocity",
+                "hxvel_right": "eye1_head_x_velocity",
+                "hyvel_right": "eye1_head_y_velocity",
+                "rxvel_right": "eye1_raw_x_velocity",
+                "ryvel_right": "eye1_raw_y_velocity",
+                "fgxvel": "eye1_fast_gaze_x_velocity",
+                "fgyvel": "eye1_fast_gaze_y_velocity",
+                "fhxyvel": "eye1_fast_head_x_velocity",
+                "fhyvel": "eye1_fast_head_y_velocity",
+                "frxyvel": "eye1_fast_raw_x_velocity",
+                "fryvel": "eye1_fast_raw_y_velocity",
             }
         )
 
