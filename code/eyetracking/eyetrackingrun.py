@@ -655,6 +655,7 @@ class EyeTrackingRun:
             )
 
             plt.xlabel("right eye x coordinate [pixels]")
+            plt.xlabel("right eye y coordinate [pixels]")
 
     def plot_delta(
         self,
