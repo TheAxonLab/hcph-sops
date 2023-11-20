@@ -348,12 +348,16 @@ class EyeTrackingRun:
         if include_events:
             self.add_events()
 
-        self.samples["pa_right"][self.samples["pa_right"] < 1] = "n/a"
-        self.samples["gx_right"][
-            (self.samples["gx_right"] < 0) | (self.samples["gx_right"] > 800)
+        self.samples.loc[self.samples["pa_right"] < 1, "pa_right"] = "n/a"
+        self.samples.loc[
+            (self.samples["gx_right"] < 0)
+            | (self.samples["gx_right"] > self.screen_resolution[0]),
+            "gx_right",
         ] = "n/a"
-        self.samples["gy_right"][
-            (self.samples["gy_right"] <= 0) | (self.samples["gy_right"] > 600)
+        self.samples.loc[
+            (self.samples["gy_right"] <= 0)
+            | (self.samples["gy_right"] > self.screen_resolution[1]),
+            "gy_right",
         ] = "n/a"
 
         self.samples = self.samples.reindex(
