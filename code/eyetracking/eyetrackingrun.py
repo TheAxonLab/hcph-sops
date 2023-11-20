@@ -615,6 +615,7 @@ class EyeTrackingRun:
 
         if save:
             plt.savefig(os.path.join(path_save, filename))
+            plt.clf()
             return os.path.join(path_save, filename)
 
         return None
@@ -653,12 +654,16 @@ class EyeTrackingRun:
 
             plt.xlabel("right eye x coordinate [pixels]")
             plt.xlabel("right eye y coordinate [pixels]")
+        if notebook:
+            plt.show()
+        if save:
+            plt.savefig(os.path.join(path_save, filename))
 
     def plot_delta(
         self,
         save: Optional[bool] = False,
         path_save: Optional[str] = ".",
-        filename: Optional[str] = "blink_durations.png",
+        filename: Optional[str] = "blink_durations.pdf",
         notebook: Optional[bool] = True,
     ) -> None:
         """
@@ -692,7 +697,7 @@ class EyeTrackingRun:
         notebook: bool = True,
         save: bool = False,
         path_save: str = ".",
-        filename: str = "heatmap.png",
+        filename: str = "heatmap.pdf",
         bins: int = 100,
     ) -> Optional[None]:
         """
