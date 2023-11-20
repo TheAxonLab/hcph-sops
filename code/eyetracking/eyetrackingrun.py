@@ -36,28 +36,71 @@ class EyeTrackingRun:
         self.screen_resolution = screen_resolution
         self.pe = pe
 
-
-    def get_calibration_positions(self, calibration_type: Optional[str] = None) -> Optional[List[List[int]]]:
-        if calibration_type and calibration_type.lower() == 'hv9':
+    def get_calibration_positions(
+        self, calibration_type: Optional[str] = None
+    ) -> Optional[List[List[int]]]:
+        if calibration_type and calibration_type.lower() == "hv9":
             positions = [
-                [int(self.screen_resolution[0] / 2), int(self.screen_resolution[1] / 2)],
-                [int(self.screen_resolution[0] / 2), int(self.screen_resolution[1] / 2 * 0.17)],
-                [int(self.screen_resolution[0] / 2), int(self.screen_resolution[1] / 2 * 0.83)],
-                [int(self.screen_resolution[0] / 2 * 0.12), int(self.screen_resolution[1] / 2)],
-                [int(self.screen_resolution[0] / 2 * 0.88), int(self.screen_resolution[1] / 2)],
-                [int(self.screen_resolution[0] / 2 * 0.12), int(self.screen_resolution[1] / 2 * 0.17)],
-                [int(self.screen_resolution[0] / 2 * 0.88), int(self.screen_resolution[1] / 2 * 0.17)],
-                [int(self.screen_resolution[0] / 2 * 0.12), int(self.screen_resolution[1] / 2 * 0.83)],
-                [int(self.screen_resolution[0] / 2 * 0.88), int(self.screen_resolution[1] / 2 * 0.83)],
+                [
+                    int(self.screen_resolution[0] / 2),
+                    int(self.screen_resolution[1] / 2),
+                ],
+                [
+                    int(self.screen_resolution[0] / 2),
+                    int(self.screen_resolution[1] / 2 * 0.17),
+                ],
+                [
+                    int(self.screen_resolution[0] / 2),
+                    int(self.screen_resolution[1] / 2 * 0.83),
+                ],
+                [
+                    int(self.screen_resolution[0] / 2 * 0.12),
+                    int(self.screen_resolution[1] / 2),
+                ],
+                [
+                    int(self.screen_resolution[0] / 2 * 0.88),
+                    int(self.screen_resolution[1] / 2),
+                ],
+                [
+                    int(self.screen_resolution[0] / 2 * 0.12),
+                    int(self.screen_resolution[1] / 2 * 0.17),
+                ],
+                [
+                    int(self.screen_resolution[0] / 2 * 0.88),
+                    int(self.screen_resolution[1] / 2 * 0.17),
+                ],
+                [
+                    int(self.screen_resolution[0] / 2 * 0.12),
+                    int(self.screen_resolution[1] / 2 * 0.83),
+                ],
+                [
+                    int(self.screen_resolution[0] / 2 * 0.88),
+                    int(self.screen_resolution[1] / 2 * 0.83),
+                ],
             ]
             return positions
-        elif calibration_type and calibration_type.lower() == 'hv5':
+        elif calibration_type and calibration_type.lower() == "hv5":
             positions = [
-                [int(self.screen_resolution[0] / 2), int(self.screen_resolution[1] / 2)],
-                [int(self.screen_resolution[0] / 2), int(self.screen_resolution[1] / 2 * 0.17)],
-                [int(self.screen_resolution[0] / 2), int(self.screen_resolution[1] / 2 * 0.83)],
-                [int(self.screen_resolution[0] / 2 * 0.12), int(self.screen_resolution[1] / 2)],
-                [int(self.screen_resolution[0] / 2 * 0.88), int(self.screen_resolution[1] / 2)],
+                [
+                    int(self.screen_resolution[0] / 2),
+                    int(self.screen_resolution[1] / 2),
+                ],
+                [
+                    int(self.screen_resolution[0] / 2),
+                    int(self.screen_resolution[1] / 2 * 0.17),
+                ],
+                [
+                    int(self.screen_resolution[0] / 2),
+                    int(self.screen_resolution[1] / 2 * 0.83),
+                ],
+                [
+                    int(self.screen_resolution[0] / 2 * 0.12),
+                    int(self.screen_resolution[1] / 2),
+                ],
+                [
+                    int(self.screen_resolution[0] / 2 * 0.88),
+                    int(self.screen_resolution[1] / 2),
+                ],
             ]
             return positions
         else:
@@ -167,7 +210,7 @@ class EyeTrackingRun:
             # Check for 'HV9' in the error message and print calibration type and position
             if "HV9" in error_message:
                 calibration_type = "HV9"
-                calibration_position=self.get_calibration_positions(calibration_type)
+                calibration_position = self.get_calibration_positions(calibration_type)
             else:
                 calibration_type = None
                 calibration_position = None
@@ -368,6 +411,18 @@ class EyeTrackingRun:
         os.makedirs(output_file_dir, exist_ok=True)
 
         output_file_full_path = os.path.join(output_file_dir, output_file_name)
+
+        column_order = [
+            "eye_timestamp",
+            "eye1_x_coordinate",
+            "eye1_y_coordinate",
+        ] + [
+            col
+            for col in self.samples.columns
+            if col not in ["eye_timestamp", "eye1_x_coordinate", "eye1_y_coordinate"]
+        ]
+
+        self.samples = self.samples[column_order]
         self.samples.to_csv(
             output_file_full_path,
             sep="\t",
@@ -529,10 +584,8 @@ class EyeTrackingRun:
 
             fig, axs = plt.subplots(2, 1, figsize=(8, 6), sharex=True)
 
-            axs[0].plot(self.samples["gx_right"], label="gx_right"
-            )
-            axs[1].plot(self.samples["gy_right"], label="gy_right"
-            )
+            axs[0].plot(self.samples["gx_right"], label="gx_right")
+            axs[1].plot(self.samples["gy_right"], label="gy_right")
             axs[1].set_xlabel("time")
             axs[1].set_ylabel("x coordinate [pixels]")
             axs[1].set_ylabel("y coordinate [pixels]")
@@ -625,7 +678,7 @@ class EyeTrackingRun:
         blinks = self.events[self.events["blink"] == True]
         blinks["duration"] = blinks["end"] - blinks["start"]
         plt.figure(figsize=(10, 6))
-        plt.plot(blinks["start"],blinks["duration"])
+        plt.plot(blinks["start"], blinks["duration"])
         plt.title("Blink Durations Over Time")
         plt.xlabel("Time of Onset (ms)")
         plt.ylabel("Blinks Duration (ms)")
