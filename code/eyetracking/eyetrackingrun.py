@@ -183,12 +183,11 @@ class EyeTrackingRun:
             - Maximum calibration error (float or None),
             - Calibration position (list of lists of integers or None).
         """
-        # Find rows containing 'ERROR' in the 'trialid' column
+
         row_error_value = self.messages[
             self.messages["trialid "].str.contains("ERROR", case=False, regex=True)
         ].head(1)
 
-        # Check if no error message is found
         if row_error_value.empty:
             calibration_count = 0
             print("No calibration information found.")
@@ -197,7 +196,6 @@ class EyeTrackingRun:
             calibration_count = 1
             error_message = row_error_value["trialid "].iloc[0]
 
-            # Extract average and max calibration errors
             matches = re.findall(r"([-+]?\d*\.\d+|\d+)", error_message)
             average_calibration_error, max_calibration_error = (
                 map(float, matches[1:3]) if len(matches) >= 2 else (None, None)
@@ -207,7 +205,6 @@ class EyeTrackingRun:
             print("Average Calibration Error:", average_calibration_error)
             print("Maximum Calibration Error:", max_calibration_error)
 
-            # Check for 'HV9' in the error message and print calibration type and position
             if "HV9" in error_message:
                 calibration_type = "HV9"
                 calibration_position = self.get_calibration_positions(calibration_type)
@@ -248,9 +245,7 @@ class EyeTrackingRun:
         recorded_eye = next(
             (eye for eye, condition in eye_mapping.items() if condition), "unknown"
         )
-        print("Recorded Eye:", recorded_eye)
 
-        # Extract information from the start text
         row_start = self.messages[
             self.messages["trialid "].str.contains("RECORD", case=False, regex=True)
         ].head(1)
@@ -268,7 +263,6 @@ class EyeTrackingRun:
             print("Eye Tracking Method: unknown")
             print("Sampling Frequency: Not available")
 
-        # Extract information from the thresholds text
         row_thresholds = self.messages[
             self.messages["trialid "].str.contains("THRESHOLDS", case=False, regex=True)
         ].head(1)
@@ -288,7 +282,6 @@ class EyeTrackingRun:
             print("Pupil Threshold: Not available")
             print("CR Threshold: Not available")
 
-        # Extract information from the fitting parameter text
         row_fit_param = self.messages[
             self.messages["trialid "].str.contains("ELCL_PROC", case=False, regex=True)
         ].head(1)
@@ -394,19 +387,19 @@ class EyeTrackingRun:
         self.samples = self.samples.replace({100000000: "n/a"})
 
         if self.task_name in ["rest", "bht", "qct"]:
-            output_file_name = f"sub-{self.participant:02d}_ses-{self.session:03d}_task-{self.task_name}_dir-{self.pe}_eyetrack.tsv.gz"
+            output_file_name = f"sub-{self.participant:03d}_ses-{self.session:03d}_task-{self.task_name}_dir-{self.pe}_eyetrack.tsv.gz"
             output_file_dir = os.path.join(
                 BIDS_folder_path,
                 f"sub-{self.participant:03d}/ses-{self.session:03d}/func/",
             )
         elif self.task_name == "dwi":
-            output_file_name = f"sub-{self.participant:02d}_ses-{self.session:03d}_acq-highres_dir-{self.pe}_eyetrack.tsv.gz"
+            output_file_name = f"sub-{self.participant:03d}_ses-{self.session:03d}_acq-highres_dir-{self.pe}_eyetrack.tsv.gz"
             output_file_dir = os.path.join(
                 BIDS_folder_path,
                 f"sub-{self.participant:03d}/ses-{self.session:03d}/dwi/",
             )
         else:
-            output_file_name = f"sub-{self.participant:02d}_ses-{self.session:03d}_task-{self.task_name}_eyetrack.tsv.gz"
+            output_file_name = f"sub-{self.participant:03d}_ses-{self.session:03d}_task-{self.task_name}_eyetrack.tsv.gz"
             output_file_dir = os.path.join(
                 BIDS_folder_path,
                 f"sub-{self.participant:03d}/ses-{self.session:03d}/func/",
@@ -507,19 +500,19 @@ class EyeTrackingRun:
             return None
 
         if self.task_name in ["rest", "bht", "qct"]:
-            output_file_name = f"sub-{self.participant:02d}_ses-{self.session:03d}_task-{self.task_name}_dir-{self.pe}_eyetrack.json"
+            output_file_name = f"sub-{self.participant:03d}_ses-{self.session:03d}_task-{self.task_name}_dir-{self.pe}_eyetrack.json"
             output_file_dir = os.path.join(
                 BIDS_folder_path,
                 f"sub-{self.participant:03d}/ses-{self.session:03d}/func/",
             )
         elif self.task_name == "dwi":
-            output_file_name = f"sub-{self.participant:02d}_ses-{self.session:03d}_acq-highres_dir-{self.pe}_eyetrack.json"
+            output_file_name = f"sub-{self.participant:03d}_ses-{self.session:03d}_acq-highres_dir-{self.pe}_eyetrack.json"
             output_file_dir = os.path.join(
                 BIDS_folder_path,
                 f"sub-{self.participant:03d}/ses-{self.session:03d}/dwi/",
             )
         else:
-            output_file_name = f"sub-{self.participant:02d}_ses-{self.session:03d}_task-{self.task_name}_eyetrack.json"
+            output_file_name = f"sub-{self.participant:03d}_ses-{self.session:03d}_task-{self.task_name}_eyetrack.json"
             output_file_dir = os.path.join(
                 BIDS_folder_path,
                 f"sub-{self.participant:03d}/ses-{self.session:03d}/func/",
@@ -541,7 +534,7 @@ class EyeTrackingRun:
         filename: Optional[str] = None,
     ) -> Optional[str]:
         if filename is None:
-            filename = f"sub-{self.participant:02d}_ses-{self.session:03d}_task-{self.task_name}_pupil_ts.pdf"
+            filename = f"sub-{self.participant:03d}_ses-{self.session:03d}_task-{self.task_name}_pupil_ts.pdf"
 
         if eye == "right":
             self.samples.pa_right[self.samples.pa_right < 1] = np.nan
@@ -574,7 +567,7 @@ class EyeTrackingRun:
         filename: Optional[str] = None,
     ) -> Optional[str]:
         if filename is None:
-            filename = f"sub-{self.participant:02d}_ses-{self.session:03d}_task-{self.task_name}_coordinates_ts.pdf"
+            filename = f"sub-{self.participant:03d}_ses-{self.session:03d}_task-{self.task_name}_coordinates_ts.pdf"
 
         if eye == "right":
             self.samples.gx_right[
@@ -635,7 +628,7 @@ class EyeTrackingRun:
         filename: Optional[str] = None,
     ) -> Optional[str]:
         if filename is None:
-            filename = f"sub-{self.participant:02d}_ses-{self.session:03d}_task-{self.task_name}_heatmap.pdf"
+            filename = f"sub-{self.participant:03d}_ses-{self.session:03d}_task-{self.task_name}_heatmap.pdf"
 
         plt.rcParams["figure.figsize"] = [10, 6]
         cmap = sns.color_palette("coolwarm", as_cmap=True)
@@ -690,7 +683,7 @@ class EyeTrackingRun:
         if notebook:
             plt.show()
         if save:
-            output_filename = f"sub-{self.participant:02d}_ses-{self.session:03d}_task-{self.task_name}_{filename}"
+            output_filename = f"sub-{self.participant:03d}_ses-{self.session:03d}_task-{self.task_name}_{filename}"
             plt.savefig(os.path.join(path_save, output_filename))
 
     def plot_heatmap_coordinate_histo(
@@ -736,7 +729,7 @@ class EyeTrackingRun:
             plt.hist2d(
                 filtered_samples["gx_right"],
                 filtered_samples["gy_right"],
-                range=[[0, screen_resolution[0]], [0, self.screen_resolution[1]]],
+                range=[[0, self.screen_resolution[0]], [0, self.screen_resolution[1]]],
                 bins=bins,
                 cmap=cmap,
             )
@@ -775,6 +768,6 @@ class EyeTrackingRun:
             return None
 
         if save:
-            output_filename = f"sub-{self.participant:02d}_ses-{self.session:03d}_task-{self.task_name}_{filename}"
+            output_filename = f"sub-{self.participant:03d}_ses-{self.session:03d}_task-{self.task_name}_{filename}"
             plt.savefig(os.path.join(path_save, output_filename))
         return None
