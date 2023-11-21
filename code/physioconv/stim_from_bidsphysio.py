@@ -95,7 +95,7 @@ def main() -> None:
     )
 
     args = parser.parse_args()
-    folder_path = args.input
+    folder_path = Path(args.input)
     subfolders = ["func", "dwi"]
 
     for subfolder in subfolders:
