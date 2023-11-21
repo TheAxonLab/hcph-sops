@@ -78,7 +78,7 @@ def rawETevents_to_BIDS(event_file: str) -> None:
     Parameters:
         event_file (str): The path to the bidsphysio event file.
     """
-    stim_file_name = event_file.replace("eventlist_raw", "recording_eyetrack_stim")
+    stim_file_name = event_file.replace("eventlist_raw", "recording-eyetrack_stim")
     eventdf = rawETevents_to_pandas(event_file)
     eventdf.to_csv(stim_file_name, sep="\t", index=False)
 
