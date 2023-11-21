@@ -102,7 +102,7 @@ def main() -> None:
         subfolder_path = folder_path / subfolder
 
         if subfolder_path.exists():
-            for root, dirs, files in os.walk(subfolder_path):
+            for path in subfolder_path.glob("**/*eventlist_raw.tsv"):
                 for file in files:
                     if file.endswith("eventlist_raw.tsv"):
                         event_file = os.path.join(root, file)
