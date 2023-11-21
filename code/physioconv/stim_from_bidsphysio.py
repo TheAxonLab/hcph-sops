@@ -18,8 +18,7 @@ def rawETevents_to_pandas(event_file: str) -> pd.DataFrame:
     duration_list: List[float] = []
     trial_type_list: List[str] = []
 
-    with open(event_file, "r") as file:
-        lines = file.readlines()
+    lines = Path(event_file).read_text().splitlines()
 
     start_line: Tuple[float, str] = None
 
