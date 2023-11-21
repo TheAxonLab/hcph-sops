@@ -101,7 +101,7 @@ def main() -> None:
     for subfolder in subfolders:
         subfolder_path = folder_path / subfolder
 
-        if os.path.exists(subfolder_path):
+        if subfolder_path.exists():
             for root, dirs, files in os.walk(subfolder_path):
                 for file in files:
                     if file.endswith("eventlist_raw.tsv"):
