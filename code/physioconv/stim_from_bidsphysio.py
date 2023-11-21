@@ -99,7 +99,7 @@ def main() -> None:
     subfolders = ["func", "dwi"]
 
     for subfolder in subfolders:
-        subfolder_path = os.path.join(folder_path, subfolder)
+        subfolder_path = folder_path / subfolder
 
         if os.path.exists(subfolder_path):
             for root, dirs, files in os.walk(subfolder_path):
