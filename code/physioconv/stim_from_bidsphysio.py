@@ -103,11 +103,8 @@ def main() -> None:
 
         if subfolder_path.exists():
             for path in subfolder_path.glob("**/*eventlist_raw.tsv"):
-                for file in files:
-                    if file.endswith("eventlist_raw.tsv"):
-                        event_file = os.path.join(root, file)
-                        rawETevents_to_BIDS(event_file)
-                        print(f"Converted {event_file} to BIDS format.")
+                rawETevents_to_BIDS(path)
+                print(f"Converted {path} to BIDS format.")
 
 
 if __name__ == "__main__":
