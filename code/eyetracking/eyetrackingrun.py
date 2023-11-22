@@ -24,6 +24,8 @@ class EyeTrackingRun:
         messages: pd.DataFrame,
         message_first_trigger: str,
         screen_resolution: Tuple[int, int],
+        messages_start_fixation: str = "",
+        messages_stop_fixation: str = "",
         pe: str = "",
     ):
         self.session = session
@@ -33,6 +35,8 @@ class EyeTrackingRun:
         self.events = events
         self.messages = messages
         self.message_first_trigger = message_first_trigger
+        self.messages_start_fixation = messages_start_fixation
+        self.messages_stop_fixation = messages_stop_fixation
         self.screen_resolution = screen_resolution
         self.pe = pe
 
@@ -235,26 +239,26 @@ class EyeTrackingRun:
             - CR threshold (optional, None if not available).
             - Pupil fitting method ('ellipse' or 'center-of-mass').
         """
-        contains_right = any("right" in col for col in self.samples.columns)
-        contains_left = any("left" in col for col in self.samples.columns)
-        eye_mapping = {
-            "both": contains_right and contains_left,
-            "right": contains_right,
-            "left": contains_left,
-        }
-        recorded_eye = next(
-            (eye for eye, condition in eye_mapping.items() if condition), "unknown"
-        )
 
         row_start = self.messages[
             self.messages["trialid "].str.contains("RECORD", case=False, regex=True)
         ].head(1)
         start_text = row_start["trialid "].iloc[0]
-        match_start = re.search(r"RECORD (\w+) (\d+) (\d+) (\w+)", start_text)
+        match_start = re.search(r"RECORD (\w+) (\d+) (\d+) (\d+) (\w+)", start_text)
 
         if match_start:
-            eye_tracking_method, sampling_frequency, _, _ = match_start.groups()
+            eye_tracking_method, sampling_frequency, _, _,r_eye = match_start.groups()
             sampling_frequency = int(sampling_frequency)
+            if r_eye=='R':
+                recorded_eye="right"
+            elif r_eye=='L':
+                recorded_eye = "right"
+            elif r_eye=='RL':
+                recorded_eye = "both"
+            else:
+                recorded_eye = "unknown"
+
+            print("recorded eye:",recorded_eye)
             print("Eye Tracking Method:", eye_tracking_method)
             print("Sampling Frequency:", sampling_frequency)
         else:
