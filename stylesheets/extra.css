@@ -51,6 +51,10 @@ span.consolebutton.green {
   background-color: green;
 }
 
+span.consolebutton.brown {
+  background-color: rgb(191,121,30);
+}
+
 span.flipud {
   display: inline-block;
   -moz-transform: scale(1, -1);
