@@ -5,7 +5,6 @@ import numpy as np
 import pandas as pd
 from scipy.signal import fftconvolve
 from pyedfread import edf, edfread
-from typing import Optional
 import re
 import os
 import json
