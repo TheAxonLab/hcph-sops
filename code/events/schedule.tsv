@@ -1,4 +1,4 @@
-session	day	PE	dwi_events	qct_events	rest_events  bht_events
+session	day	PE	dwi_events	qct_events	rest_events	bht_events
 1	2023-10-20	LR	fixation_2023-10-20_18h48.03.561_5_session_1.log	qct_2023-10-20_19h40.38.964_2_session_1.log	rest_2023-10-20_19h48.22.344_0_session_1.log	bht_2023-10-20_20h10.50.517_0_session_1.log
 3	2023-10-21	LR	fixation_2023-10-21_09h26.29.983_3_session_3.log	qct_2023-10-21_10h04.32.961_0_session_3.log	rest_2023-10-21_10h11.23.092_0_session_3.log	bht_2023-10-21_10h33.23.269_0_session_3.log
 4	2023-10-21	RL	fixation_2023-10-21_11h28.03.360_2_session_4.log	qct_2023-10-21_12h14.11.346_3_session_4.log	rest_2023-10-21_12h20.30.939_0_session_4.log	bht_2023-10-21_12h43.24.654_0_session_4.log
@@ -10,7 +10,6 @@ session	day	PE	dwi_events	qct_events	rest_events  bht_events
 10	2023-10-24	RL	fixation_2023-10-24_21h26.14.900_1_session_10.log	qct_2023-10-24_22h10.40.236_0_session_10.log	rest_2023-10-24_22h18.14.132_0_session_10.log	bht_2023-10-24_22h41.05.920_0_session_10.log
 11	2023-10-25	AP	fixation_2023-10-25_20h37.34.053_7_session_11.log	qct_2023-10-25_21h12.18.840_0_session_11.log	rest_2023-10-25_21h23.26.254_0_session_11.log	bht_2023-10-25_21h47.06.131_1_session_11.log
 13	2023-10-26	PA	fixation_2023-10-26_19h27.13.413_3_session_13.log	qct_2023-10-26_20h05.24.294_0_session_13.log	rest_2023-10-26_20h13.47.119_1_session_13.log	bht_2023-10-26_20h36.26.995_1_session_13.log
-14	2023-10-26	LR	n/a	n/a	n/a	n/a
 15	2023-10-27	AP	fixation_2023-10-27_19h24.33.684_1_session_15.log	qct_2023-10-27_19h59.03.664_0_session_15.log	rest_2023-10-27_20h06.19.329_0_session_15.log	bht_2023-10-27_20h31.31.806_0_session_15.log
 16	2023-10-27	RL	fixation_2023-10-27_21h14.58.939_0_session_16.log	qct_2023-10-27_21h50.56.832_0_session_16.log	rest_2023-10-27_21h59.57.982_0_session_16.log	bht_2023-10-27_22h22.00.459_0_session_16.log
 17	2023-10-28	PA	fixation_2023-10-28_17h33.18.362_0_session_17.log	qct_2023-10-28_18h10.17.815_0_session_17.log	rest_2023-10-28_18h17.25.018_0_session_17.log	bht_2023-10-28_18h39.15.707_0_session_17.log
@@ -23,7 +22,6 @@ session	day	PE	dwi_events	qct_events	rest_events  bht_events
 24	2023-10-31	AP	fixation_2023-10-31_21h49.38.233_2_session_24.log	qct_2023-10-31_22h29.32.491_0_session_24.log	rest_2023-10-31_22h36.04.198_0_session_24.log	bht_2023-10-31_22h58.13.607_0_session_24.log
 25	2023-11-01	RL	fixation_2023-11-01_19h34.54.237_1_session_25.log	qct_2023-11-01_20h13.26.444_0_session_25.log	rest_2023-11-01_20h19.46.432_0_session_25.log	bht_2023-11-01_20h41.25.152_0_session_25.log
 26	2023-11-01	PA	fixation_2023-11-01_21h19.06.608_1_session_26.log	qct_2023-11-01_21h55.19.742_0_session_26.log	rest_2023-11-01_22h03.59.490_0_session_26.log	bht_2023-11-01_22h26.03.086_0_session_26.log
-27	2023-11-02	AP	fixation_2023-11-02_19h29.37.833_1_session_27.log	n/a	n/a	n/a
 28	2023-11-02	RL	fixation_2023-11-02_21h17.30.822_1_session_28.log	qct_2023-11-02_21h55.55.757_0_session_28.log	rest_2023-11-02_22h03.31.967_0_session_28.log	bht_2023-11-02_22h25.06.651_0_session_28.log
 37	2023-11-09	LR	fixation_2023-11-09_18h40.15.892_1_session_37.log	qct_2023-11-09_19h21.30.139_0_session_37.log	rest_2023-11-09_19h30.51.192_0_session_37.log	bht_2023-11-09_19h52.33.082_0_session_37.log
 38	2023-11-09	PA	fixation_2023-11-09_20h32.33.738_1_session_38.log	qct_2023-11-09_21h11.02.491_0_session_38.log	rest_2023-11-09_21h17.37.586_0_session_38.log	bht_2023-11-09_21h39.17.972_0_session_38.log
