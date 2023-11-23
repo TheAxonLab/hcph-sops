@@ -685,7 +685,7 @@ class EyeTrackingRun:
         blinks = self.events[self.events["blink"] == True]
         blinks["duration"] = blinks["end"] - blinks["start"]
         plt.figure(figsize=(10, 6))
-        plt.plot(blinks["start"], blinks["duration"])
+        plt.plot(blinks["start"].values, blinks["duration"].values)
         plt.title("Blink Durations Over Time")
         plt.xlabel("Time of Onset (ms)")
         plt.ylabel("Blinks Duration (ms)")
