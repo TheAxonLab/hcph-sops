@@ -542,7 +542,7 @@ class EyeTrackingRun:
 
         if eye == "right":
             self.samples.pa_right[self.samples.pa_right < 1] = np.nan
-            plt.plot(self.samples["time"], self.samples["pa_right"])
+            plt.plot(self.samples["time"].values, self.samples["pa_right"].values)
         elif eye == "left":
             self.samples.pa_left[self.samples.pa_left < 1] = np.nan
             plt.plot(self.samples["time"], self.samples["pa_left"])
