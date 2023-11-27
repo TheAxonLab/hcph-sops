@@ -13,6 +13,9 @@ import matplotlib.pyplot as plt
 
 
 class EyeTrackingRun:
+    """
+    
+    """
     def __init__(
         """
         
