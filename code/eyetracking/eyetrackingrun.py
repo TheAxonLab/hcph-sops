@@ -376,6 +376,7 @@ class EyeTrackingRun:
             index=False,
             header=False,
             compression="gzip",
+            na_rep="n/a",
         )
 
         return output_file_full_path
