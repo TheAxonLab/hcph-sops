@@ -292,17 +292,17 @@ class EyeTrackingRun:
         if include_events:
             self.add_events()
 
-        self.samples.loc[self.samples["pa_right"] < 1, "pa_right"] = "n/a"
+        self.samples.loc[self.samples["pa_right"] < 1, "pa_right"] = np.nan
         self.samples.loc[
             (self.samples["gx_right"] < 0)
             | (self.samples["gx_right"] > self.screen_resolution[0]),
             "gx_right",
-        ] = "n/a"
+        ] = np.nan
         self.samples.loc[
             (self.samples["gy_right"] <= 0)
             | (self.samples["gy_right"] > self.screen_resolution[1]),
             "gy_right",
-        ] = "n/a"
+        ] = np.nan
 
         self.samples = self.samples.reindex(
             columns=[c for c in self.samples.columns if "left" not in c]
@@ -334,8 +334,7 @@ class EyeTrackingRun:
             }
         )
 
-        self.samples = self.samples.replace({np.nan: "n/a"})
-        self.samples = self.samples.replace({100000000: "n/a"})
+        self.samples = self.samples.replace({100000000: np.nan})
 
         if self.task_name in ["rest", "bht", "qct"]:
             output_file_name = f"sub-{self.participant:03d}_ses-{self.session:03d}_task-{self.task_name}_dir-{self.pe}_eyetrack.tsv.gz"
@@ -379,7 +378,7 @@ class EyeTrackingRun:
             compression="gzip",
         )
 
-        return self.samples.columns.tolist()
+        return output_file_full_path
 
     def create_info_json(
         self, BIDS_folder_path: str, info_json_path: str
@@ -394,9 +393,8 @@ class EyeTrackingRun:
         Returns:
             Optional[str]: Path to the saved JSON file, or None if no data is available.
         """
-        with open(info_json_path, "r") as f:
-            info_ET = json.load(f)
-            timestamp_first_trigger = self.find_timestamp_message()
+        info_ET = json.loads(Path(info_json_path).read_text())
+        timestamp_first_trigger = self.find_timestamp_message()
         (
             calibration_count,
             calibration_type,
@@ -450,18 +448,10 @@ class EyeTrackingRun:
             print("No data to write to the JSON file. Skipping.")
             return None
 
-        if self.task_name in ["rest", "bht", "qct"]:
-            output_file_name = f"sub-{self.participant:03d}_ses-{self.session:03d}_task-{self.task_name}_dir-{self.pe}_eyetrack.json"
-            output_file_dir = os.path.join(
-                BIDS_folder_path,
-                f"sub-{self.participant:03d}/ses-{self.session:03d}/func/",
-            )
-        elif self.task_name == "dwi":
-            output_file_name = f"sub-{self.participant:03d}_ses-{self.session:03d}_acq-highres_dir-{self.pe}_eyetrack.json"
-            output_file_dir = os.path.join(
-                BIDS_folder_path,
-                f"sub-{self.participant:03d}/ses-{self.session:03d}/dwi/",
-            )
+        if self.task_name in ("rest", "bht", "qct"):
+            output_file_name = f"func/sub-{self.participant:03d}_ses-{self.session:03d}_task-{self.task_name}_dir-{self.pe}_eyetrack.json"
+        elif self.task_name == "fixation":
+            output_file_name = f"dwi/sub-{self.participant:03d}_ses-{self.session:03d}_acq-highres_dir-{self.pe}_eyetrack.json"
         else:
             output_file_name = f"sub-{self.participant:03d}_ses-{self.session:03d}_task-{self.task_name}_eyetrack.json"
             output_file_dir = os.path.join(
@@ -469,10 +459,10 @@ class EyeTrackingRun:
                 f"sub-{self.participant:03d}/ses-{self.session:03d}/func/",
             )
 
-        os.makedirs(output_file_dir, exist_ok=True)
-        output_json_path = os.path.join(output_file_dir, output_file_name)
-        with open(output_json_path, "w") as json_file:
-            json.dump(final_info, json_file, indent=4)
+        BIDS_folder_path = Path(BIDS_folder_path)
+        output_json_path = BIDS_folder_path / f"sub-{self.participant:03d}" / f"ses-{self.session:03d} / output_file_name
+        output_json_path.parent.mkdir(exist_ok=True, parents=True)
+        output_json_path.write_text(json.dumps(final_info, json_file, indent=2))
 
         return output_json_path
 
