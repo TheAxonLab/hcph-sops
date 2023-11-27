@@ -654,7 +654,7 @@ class EyeTrackingRun:
                 cbar=True,
                 thresh=0,
             )
-
+            plt.gca().invert_yaxis()
             plt.xlabel("right eye x coordinate [pixels]")
             plt.xlabel("right eye y coordinate [pixels]")
         if notebook:
