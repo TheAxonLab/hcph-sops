@@ -14,6 +14,9 @@ import matplotlib.pyplot as plt
 
 class EyeTrackingRun:
     def __init__(
+        """
+        
+        """
         self,
         session: int,
         task_name: str,
@@ -42,73 +45,20 @@ class EyeTrackingRun:
     def get_calibration_positions(
         self, calibration_type: Optional[str] = None
     ) -> Optional[List[List[int]]]:
-        if calibration_type and calibration_type.lower() == "hv9":
-            positions = [
-                [
-                    int(self.screen_resolution[0] / 2),
-                    int(self.screen_resolution[1] / 2),
-                ],
-                [
-                    int(self.screen_resolution[0] / 2),
-                    int(self.screen_resolution[1] / 2 * 0.17),
-                ],
-                [
-                    int(self.screen_resolution[0] / 2),
-                    int(self.screen_resolution[1] / 2 * 0.83),
-                ],
-                [
-                    int(self.screen_resolution[0] / 2 * 0.12),
-                    int(self.screen_resolution[1] / 2),
-                ],
-                [
-                    int(self.screen_resolution[0] / 2 * 0.88),
-                    int(self.screen_resolution[1] / 2),
-                ],
-                [
-                    int(self.screen_resolution[0] / 2 * 0.12),
-                    int(self.screen_resolution[1] / 2 * 0.17),
-                ],
-                [
-                    int(self.screen_resolution[0] / 2 * 0.88),
-                    int(self.screen_resolution[1] / 2 * 0.17),
-                ],
-                [
-                    int(self.screen_resolution[0] / 2 * 0.12),
-                    int(self.screen_resolution[1] / 2 * 0.83),
-                ],
-                [
-                    int(self.screen_resolution[0] / 2 * 0.88),
-                    int(self.screen_resolution[1] / 2 * 0.83),
-                ],
-            ]
-            return positions
-        elif calibration_type and calibration_type.lower() == "hv5":
-            positions = [
-                [
-                    int(self.screen_resolution[0] / 2),
-                    int(self.screen_resolution[1] / 2),
-                ],
-                [
-                    int(self.screen_resolution[0] / 2),
-                    int(self.screen_resolution[1] / 2 * 0.17),
-                ],
-                [
-                    int(self.screen_resolution[0] / 2),
-                    int(self.screen_resolution[1] / 2 * 0.83),
-                ],
-                [
-                    int(self.screen_resolution[0] / 2 * 0.12),
-                    int(self.screen_resolution[1] / 2),
-                ],
-                [
-                    int(self.screen_resolution[0] / 2 * 0.88),
-                    int(self.screen_resolution[1] / 2),
-                ],
-            ]
-            return positions
-        else:
-            print("Invalid calibration type")
-            return None
+        if not calibration_type or calibration_type.lower() not in ("hv9", "hv5"):
+            raise NotImplementedError("Unsupported or misspecified calibration type")
+
+        positions = np.array([[self.screen_resolution] * 9])
+        positions[1] *= (0.5, 0.5 / 0.17)
+        positions[2] *= (0.5, 0.5 / 0.83)
+        positions[3] *= (0.5 / 0.12, 0.5)
+        positions[4] *= (0.5 / 0.88, 0.5)
+        positions[5] *= (0.5 / 0.12, 0.5 / 0.17)
+        positions[6] *= (0.5 / 0.88, 0.5 / 0.17)
+        positions[7] *= (0.5 / 0.12, 0.5 / 0.83)
+        positions[8] *= (0.5 / 0.88, 0.5 / 0.83)
+        
+        return positions if calibration_type.lower() == "hv9" else positions[:5]
 
     def add_events(self) -> pd.DataFrame:
         """
@@ -162,8 +112,6 @@ class EyeTrackingRun:
         ].head(1)
         if not message_row.empty:
             return int(message_row["trialid_time"].iloc[0])
-        else:
-            return None
 
     def extract_calibration(
         self,
