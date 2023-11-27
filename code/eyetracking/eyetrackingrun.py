@@ -199,14 +199,7 @@ class EyeTrackingRun:
         if match_start:
             eye_tracking_method, sampling_frequency, _, _,r_eye = match_start.groups()
             sampling_frequency = int(sampling_frequency)
-            if r_eye=='R':
-                recorded_eye="right"
-            elif r_eye=='L':
-                recorded_eye = "right"
-            elif r_eye=='RL':
-                recorded_eye = "both"
-            else:
-                recorded_eye = "unknown"
+            recorded_eye = EYE_CODE_MAP[r_eye]
 
             print("recorded eye:",recorded_eye)
             print("Eye Tracking Method:", eye_tracking_method)
