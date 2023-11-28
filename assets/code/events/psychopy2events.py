@@ -150,7 +150,7 @@ def pandas2bids(input_df: pd.DataFrame) -> pd.DataFrame:
 
     for et in set(df.trial_type.values):
         # Create a subdataframe with only this trial type
-        subdf = df[df.trial_type == et]
+        subdf = df[df.trial_type == et].copy()
 
         if len(subdf) < 2:  # No need to try if not a block
             continue
@@ -184,7 +184,7 @@ def pandas2bids(input_df: pd.DataFrame) -> pd.DataFrame:
             subdf.loc[onsets, "value"] = shifted
 
         # Move back to general dataframe
-        df[df.trial_type == et] = subdf
+        df.loc[df.trial_type == et, subdf.columns] = subdf.values
 
     # Drop rows from which data was copied to the principal event row.
     df = df.drop(df[df.start_end.notna() & df.start_end.str.contains("False")].index)
