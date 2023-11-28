@@ -476,11 +476,7 @@ class EyeTrackingRun:
         elif self.task_name == "fixation":
             output_file_name = f"dwi/sub-{self.participant:03d}_ses-{self.session:03d}_acq-highres_dir-{self.pe}_eyetrack.json"
         else:
-            output_file_name = f"sub-{self.participant:03d}_ses-{self.session:03d}_task-{self.task_name}_eyetrack.json"
-            output_file_dir = os.path.join(
-                BIDS_folder_path,
-                f"sub-{self.participant:03d}/ses-{self.session:03d}/func/",
-            )
+            raise ValueError("Unknown task type")
 
         BIDS_folder_path = Path(BIDS_folder_path)
         output_json_path = (
