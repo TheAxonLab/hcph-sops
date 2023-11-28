@@ -1,4 +1,4 @@
-session	day	PE	dwi_edf	qct_edf	rest_edf	bht_edf
+session	day	PE	fixation_edf	qct_edf	rest_edf	bht_edf
 1	2023-10-20	LR	fixation_2023-10-20_18h48.03.561_5_session_1.EDF	qct_2023-10-20_19h40.38.964_2_session_1.EDF	rest_2023-10-20_19h48.22.344_0_session_1.EDF	bht_2023-10-20_20h10.50.517_0_session_1.EDF
 3	2023-10-21	LR	fixation_2023-10-21_09h26.29.983_3_session_3.EDF	qct_2023-10-21_10h04.32.961_0_session_3.EDF	rest_2023-10-21_10h11.23.092_0_session_3.EDF	bht_2023-10-21_10h33.23.269_0_session_3.EDF
 4	2023-10-21	RL	fixation_2023-10-21_11h28.03.360_2_session_4.EDF	qct_2023-10-21_12h14.11.346_3_session_4.EDF	rest_2023-10-21_12h20.30.939_0_session_4.EDF	bht_2023-10-21_12h43.24.654_0_session_4.EDF
