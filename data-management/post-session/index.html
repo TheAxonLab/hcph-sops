@@ -835,6 +835,30 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#upon-updates-and-bugfixes-of-the-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Upon updates and bugfixes of the dataset
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Upon updates and bugfixes of the dataset">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-pybidss-database-index" class="md-nav__link">
+    <span class="md-ellipsis">
+      Update PyBIDS's database index
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1327,6 +1351,30 @@
   <a href="#visual-assessment-of-unprocessed-data-with-mriqc" class="md-nav__link">
     <span class="md-ellipsis">
       Visual assessment of unprocessed data with MRIQC
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upon-updates-and-bugfixes-of-the-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Upon updates and bugfixes of the dataset
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Upon updates and bugfixes of the dataset">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-pybidss-database-index" class="md-nav__link">
+    <span class="md-ellipsis">
+      Update PyBIDS's database index
     </span>
   </a>
   
@@ -2799,18 +2847,18 @@ Please note the <code>protocols2fix</code> variable in our heuristic file, where
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Compact <abbr title="Digital Imaging and Communications in Medicine">DICOM</abbr> session folder and remove it if successful</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>tar<span class="w"> </span>vczf<span class="w"> </span>ses-18950702.tar.gz<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">         </span>/data/datasets/hcph-pilot-sourcedata/<span class="se">\</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">         </span>/data/datasets/hcph-sourcedata/<span class="se">\</span>
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">         </span>sub-01/<span class="se">\</span>
 </span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">         </span>ses-18950702<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>rm<span class="w"> </span>-rf<span class="w"> </span>/data/datasets/hcph-pilot-sourcedata/<span class="se">\</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>rm<span class="w"> </span>-rf<span class="w"> </span>/data/datasets/hcph-sourcedata/<span class="se">\</span>
 </span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">       </span>sub-01/<span class="se">\</span>
 </span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">       </span>ses-18950702
 </span></code></pre></div>
 </li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Remove write permissions on the newly downloaded data:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>chmod<span class="w"> </span>-R<span class="w"> </span>a-w<span class="w"> </span><span class="nv">$HOME</span>/data/hcph-pilot/sub-01/
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>chmod<span class="w"> </span>-R<span class="w"> </span>a-w<span class="w"> </span>/data/datasets/hcph-sourcedata/sub-01/
 </span></code></pre></div>
 </li>
 </ul>
@@ -3017,7 +3065,7 @@ Please note the <code>protocols2fix</code> variable in our heuristic file, where
 </details>
 <h3 id="convert-eye-tracking-into-bids-with-bidsphysio">Convert eye-tracking into <abbr title="Brain Imaging Data Structure">BIDS</abbr> with <em>bidsphysio</em><a class="headerlink" href="#convert-eye-tracking-into-bids-with-bidsphysio" title="Permanent link">&para;</a></h3>
 <div class="admonition warning">
-<p class="admonition-title">Instead of the current specifications, we are using <a href="https://bids-specification--1128.org.readthedocs.build/en/1128/modality-specific-files/eye-tracking.html">the following BEP</a></p>
+<p class="admonition-title">Instead of the current specifications, we are using <a href="https://bids-specification--1128.org.readthedocs.build/en/1128/modality-specific-files/eye-tracking.html">the following <abbr title="BIDS Extension Proposal">BEP</abbr></a></p>
 </div>
 <ul class="task-list">
 <li class="task-list-item">
@@ -3209,50 +3257,84 @@ For example, the following command line selects metadata files that should be co
 <h3 id="formal-qc">Formal <abbr title="quality control">QC</abbr><a class="headerlink" href="#formal-qc" title="Permanent link">&para;</a></h3>
 <ul class="task-list">
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Consult the <a href="../../data-collection/tear-up/#start-a-new-session-log-form">session logs</a> to anticipate session peculiarities (e.g the session was aborted prematurely) and potential quality issues (e.g the participan fell asleep). Those are saved in <a href="https://github.com/TheAxonLab/hcph-sops/issues">the issues of our repository</a> with the label <span class="consolebutton brown">scan</span>. Keep note of the peculiar events, associated with their session index, and keep it close to you during quality control.</p>
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Consult the <a href="../../data-collection/tear-up/#start-a-new-session-log-form">session logs</a> to anticipate session peculiarities (e.g the session was aborted prematurely) and potential quality issues (e.g the participan fell asleep).
+    Those are saved in <a href="https://github.com/TheAxonLab/hcph-sops/issues">the issues of our repository</a> with the label <span class="consolebutton brown">scan</span>.
+    Keep note of the peculiar events, associated with their session index, and keep it close to you during quality control.</p>
 </li>
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Run the <em><abbr title="Brain Imaging Data Structure">BIDS</abbr> Validator</em> to check the <em>formal</em> quality of the dataset (filenames, homogeneity of modalities and parameters across sessions, etc.)
-    <div class="language-shell highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-ti<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span>/path/to/data/:/data:ro<span class="w"> </span>bids/validator<span class="w"> </span>/data
-</span></code></pre></div></p>
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Run the <em><abbr title="Brain Imaging Data Structure">BIDS</abbr> Validator</em> to check the <em>formal</em> quality of the dataset (filenames, homogeneity of modalities and parameters across sessions, etc.)</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-ti<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span>/path/to/data/:/data:ro<span class="w"> </span>bids/validator<span class="w"> </span>/data
+</span></code></pre></div>
 </li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Only the following ERRORS are expected. Errors that are not among this list should be addressed and <abbr title="Brain Imaging Data Structure">BIDS</abbr> conversion should be re-run on the affected files:</p>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Because we are not following the current specification, the eyetracker files will generate the following error:<blockquote>
-<p>1: [ERR] Files with such naming scheme are not part of <abbr title="Brain Imaging Data Structure">BIDS</abbr> specification.</p>
-</blockquote>
+</ul>
+<details class="bug">
+<summary><abbr title="Brain Imaging Data Structure">BIDS</abbr> non-compliance: WARNINGS and ERRORS</summary>
+<p>We do not fully comply with current <abbr title="Brain Imaging Data Structure">BIDS</abbr> specifications, so some ERRORS and WARNINGS will emerge.
+If errors and warnings are not listed here, please reach out to decide on a solution.</p>
+<ol>
+<li>
+<p><strong>ERRORS</strong>: Because we follow <a href="https://bids-specification--1128.org.readthedocs.build/en/1128/modality-specific-files/eye-tracking.html"><abbr title="BIDS Extension Proposal">BEP</abbr> 020</a> and it is not official yet, <abbr title="eye tracker">ET</abbr>-related files will source ERRORS:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>[ERR] Files with such naming scheme are not part of BIDS specification.
+</span></code></pre></div>
+</li>
+<li>
+<p><strong>WARNINGS</strong>: some warnings are expected.
+    Warnings that are not among this list should be addressed and <abbr title="Brain Imaging Data Structure">BIDS</abbr> conversion should be re-run on the affected files:</p>
+<ul>
+<li>
+<p>During the piloting phase of the study, we tried out different sequence parameters and sequence type. As such, the following warning is expected:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>[WARN] Not all subjects/sessions/runs have the same scanning parameters. (code: 39 - INCONSISTENT_PARAMETERS)
+</span></code></pre></div>
+</li>
+<li>
+<p>The <code>_magnitude{1,2}.nii.gz</code> files corresponding to some pilot sessions are missing:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>[WARN] Each _phasediff.nii[.gz] file should be associated with a _magnitude1.nii[.gz] file. (code: 92 MISSING_MAGNITUDE1_FILE)
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>./sub-001/ses-pilot001/fmap/sub-001_ses-pilot001_phasediff.nii.gz
+</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>./sub-001/ses-pilot004/fmap/sub-001_ses-pilot004_phasediff.nii.gz
+</span><span id="__span-32-4"><a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>./sub-001/ses-pilot006/fmap/sub-001_ses-pilot006_phasediff.nii.gz
+</span></code></pre></div>
 </li>
 </ul>
 </li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Only the following WARNING are expected. Warnings that are not among this list should be addressed and <abbr title="Brain Imaging Data Structure">BIDS</abbr> conversion should be re-run on the affected files:</p>
-<ul class="task-list">
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> During the piloting phase of the study, we tried out different sequence parameters and sequence type. As such, the following warning is expected:</p>
-<blockquote>
-<p>2: [WARN] Not all subjects/sessions/runs have the same scanning parameters. (code: 39 - INCONSISTENT_PARAMETERS)</p>
-</blockquote>
-</li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> At first, we did not know that we need to select a field at the console to save the phase fielmap image, so the <code>_phasediff.nii.gz</code> is missing for some pilot sessions:</p>
-<blockquote>
-<p>5: [WARN] Each _phasediff.nii[.gz] file should be associated with a _magnitude1.nii[.gz] file. (code: 92
-MISSING_MAGNITUDE1_FILE)</p>
-<p>./sub-001/ses-pilot001/fmap/sub-001_ses-pilot001_phasediff.nii.gz</p>
-<p>./sub-001/ses-pilot004/fmap/sub-001_ses-pilot004_phasediff.nii.gz</p>
-<p>./sub-001/ses-pilot006/fmap/sub-001_ses-pilot006_phasediff.nii.gz</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
+</ol>
+</details>
 <h3 id="visual-assessment-of-unprocessed-data-with-mriqc">Visual assessment of unprocessed data with <em>MRIQC</em><a class="headerlink" href="#visual-assessment-of-unprocessed-data-with-mriqc" title="Permanent link">&para;</a></h3>
 <p>Checking the data quality shortly after they are acquired increases the likelihood of catching systematic artifacts early enough to avert spreading throughout the whole dataset.
 It also modulates the burden of visual inspection over time, such that we avoid overwhelming raters with outbursts of images to assess.
 Better pacing in rating throughput also contributes to reducing raters' attrition and fatigue.</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Screen all the unprocessed data and assess them as described in the <a href="../mriqc/">next section</a>.</li>
+</ul>
+<h2 id="upon-updates-and-bugfixes-of-the-dataset">Upon updates and bugfixes of the dataset<a class="headerlink" href="#upon-updates-and-bugfixes-of-the-dataset" title="Permanent link">&para;</a></h2>
+<h3 id="update-pybidss-database-index">Update <em>PyBIDS</em>'s database index<a class="headerlink" href="#update-pybidss-database-index" title="Permanent link">&para;</a></h3>
+<details class="tip">
+<summary>The <em>PyBIDS</em> index cache dramatically speeds up <em>MRIQC</em>, <em>fMRIPrep</em> and <em>dMRIPrep</em></summary>
+<p>To speed up the tear-up time of <em>NiPreps</em> tools (<em>MRIQC</em>, <em>fMRIPrep</em>, and <em>dMRIPrep</em>) and other relevant code using <em>PyBIDS</em>, we have added a database cache under the <code>/data/datasets/hcph-dataset/.bids-index/</code> folder.
+This cache can be leverage by adding the <code>--bids-database-dir /data/datasets/hcph-dataset/.bids-index/</code> to the corresponding command line.</p>
+</details>
+<ul class="task-list">
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Unlock the database file to enable update:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="nb">cd</span><span class="w"> </span>/data/datasets/hcph-dataset
+</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>datalad<span class="w"> </span>unlock<span class="w"> </span>.bids-index/layout_index.sqlite
+</span></code></pre></div>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Reset the database file:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="k">$(</span><span class="w"> </span>dirname<span class="w"> </span><span class="k">$(</span><span class="w"> </span>which<span class="w"> </span>python<span class="w"> </span><span class="k">)</span><span class="w"> </span><span class="k">)</span>/pybids<span class="w"> </span>layout<span class="w"> </span>--reset-db<span class="w"> </span>--no-validate<span class="w"> </span>.<span class="w"> </span>.bids-index/
+</span></code></pre></div>
+<p>Successful execution will finalize with a message: <code>Successfully generated database index at /data/datasets/hcph-dataset/.bids-index</code>.</p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Save the dataset again:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>datalad<span class="w"> </span>save<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;enh: updated PyBIDS&#39; database file&quot;</span><span class="w"> </span>/data/datasets/hcph-dataset/.bids-index
+</span></code></pre></div>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Push the changes back to the repos:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>datalad<span class="w"> </span>push<span class="w"> </span>--to<span class="o">=</span>github
+</span></code></pre></div>
+</li>
 </ul>
 
 
