@@ -69,7 +69,49 @@ RIGHT_EYE_COLUMNS = {
 
 class EyeTrackingRun:
     """
+    Class representing an instance of eye tracking data.
 
+    Parameters
+    ----------
+    session : int
+        Session ID.
+    task_name : str
+        Task name.
+    participant : int
+        Participant ID.
+    samples : pd.DataFrame
+        DataFrame containing eye tracking samples.
+    events : pd.DataFrame
+        DataFrame containing eye tracking events.
+    messages : pd.DataFrame
+        DataFrame containing eye tracking messages.
+    message_first_trigger : str
+        Message that signals the first trigger of the run.
+    screen_resolution : Tuple[int, int]
+        Screen resolution as a tuple of two integers.
+
+    pe : str, optional
+        Phase encoding direction (default is an empty string).
+
+    Examples
+    --------
+    This class can be instantiated as follows:
+
+    ```python
+    et_run = EyeTrackingRun(
+        session=1,
+        task_name="rest",
+        participant=001,
+        samples=samples_df,
+        events=events_df,
+        messages=messages_df,
+        message_first_trigger="start",
+        screen_resolution=(800, 600),
+        messages_start_fixation="fixation_start",
+        messages_stop_fixation="fixation_stop",
+        pe="",
+    )
+    ```
     """
 
     def __init__(
@@ -87,6 +129,36 @@ class EyeTrackingRun:
         pe: str = "",
     ):
         """
+        Initialize EyeTrackingRun instance.
+
+        Parameters
+        ----------
+        session : int
+            Session ID.
+        task_name : str
+            Task name.
+        participant : int
+            Participant ID.
+        samples : pd.DataFrame
+            DataFrame containing eye tracking samples.
+        events : pd.DataFrame
+            DataFrame containing eye tracking events.
+        messages : pd.DataFrame
+            DataFrame containing eye tracking messages.
+        message_first_trigger : str
+            Message that serves as the first trigger.
+        screen_resolution : Tuple[int, int]
+            Screen resolution as a tuple of two integers.
+        messages_start_fixation : str, optional
+            Message indicating the start of a fixation (default is an empty string).
+        messages_stop_fixation : str, optional
+            Message indicating the stop of a fixation (default is an empty string).
+        pe : str, optional
+            Phase encoding direction (default is an empty string).
+
+        Notes
+        -----
+        This method initializes the EyeTrackingRun instance with the provided parameters.
 
         """
 
@@ -106,8 +178,16 @@ class EyeTrackingRun:
         """
         Update 'fixation', 'saccade', and 'blink' columns in the samples DataFrame based on events DataFrame.
 
-        Returns:
-        - Updated samples DataFrame.
+        Returns
+        -------
+        pd.DataFrame
+            Updated samples DataFrame.
+
+        Notes
+        -----
+        This method updates the 'fixation', 'saccade', and 'blink' columns in the samples DataFrame based on
+        information from the events DataFrame.
+
         """
         self.samples["fixation"] = 0
         self.samples["saccade"] = 0
@@ -144,8 +224,15 @@ class EyeTrackingRun:
         """
         Finds the first row in the DataFrame containing the specified message string and returns the 'trialid_time' as an integer.
 
-        Returns:
-            Optional[int]: The 'trialid_time' as an integer if the message is found; None if the message is not found.
+        Returns
+        -------
+        Optional[int]
+            The 'trialid_time' as an integer if the message is found; None if the message is not found.
+
+        Notes
+        -----
+        This method searches for the first row in the DataFrame that contains the specified message string
+        (given by 'self.message_first_trigger') and returns the corresponding 'trialid_time' as an integer.
         """
         message_row = self.messages[
             self.messages["trialid "].str.contains(
@@ -167,16 +254,22 @@ class EyeTrackingRun:
         """
         Extracts calibration information from the DataFrame of messages.
 
-        Returns:
-        Tuple[int, Optional[str], Optional[float], Optional[float], Optional[List[List[Union[int, int]]]]]:
+        Returns
+        -------
+        Tuple[int, Optional[str], Optional[float], Optional[float], Optional[List[List[Union[int, int]]]]]
             A tuple containing:
             - Calibration count (int),
             - Calibration type (str or None),
             - Average calibration error (float or None),
             - Maximum calibration error (float or None),
             - Calibration position (list of lists of integers or None).
-        """
 
+        Notes
+        -----
+        This method extracts calibration information from the DataFrame of messages and returns a tuple
+        containing various calibration details, such as count, type, average error, maximum error, and position.
+        """
+        
         row_error_value = self.messages[
             self.messages["trialid "].str.contains("ERROR", case=False, regex=True)
         ].head(1)
@@ -218,14 +311,22 @@ class EyeTrackingRun:
         """
         Extracts eye tracking parameters from the given samples and messages dataframes.
 
-        Returns:
-        Tuple[str, str, Optional[int], Optional[int], Optional[int], str]: A tuple containing the extracted parameters:
+        Returns
+        -------
+        Tuple[str, str, Optional[int], Optional[int], Optional[int], str]
+            A tuple containing the extracted parameters:
             - Recorded eye ('both', 'right', 'left', or 'unknown').
             - Eye tracking method.
             - Sampling frequency (optional, None if not available).
             - Pupil threshold (optional, None if not available).
             - CR threshold (optional, None if not available).
             - Pupil fitting method ('ellipse' or 'center-of-mass').
+
+        Notes
+        -----
+        This method extracts eye tracking parameters from the given samples and messages dataframes and
+        returns a tuple with information about the recorded eye, eye tracking method, sampling frequency,
+        pupil threshold, CR threshold, and pupil fitting method.
         """
 
         row_start = self.messages[
@@ -289,8 +390,15 @@ class EyeTrackingRun:
         """
         Extracts header information from the messages DataFrame.
 
-        Returns:
-        list[str]: A list of strings containing the extracted header information.
+        Returns
+        -------
+        List[str]
+            A list of strings containing the extracted header information.
+
+        Notes
+        -----
+        This method extracts header information from the messages DataFrame and returns a list of strings
+        containing the extracted header information.
         """
         self.messages["trialid_cleaned"] = self.messages["trialid "].apply(
             lambda x: ''.join(filter(lambda char: char in string.printable and char != '\n', str(x)))
@@ -311,15 +419,26 @@ class EyeTrackingRun:
         self, BIDS_folder_path: str, include_events: bool = True
     ) -> List[str]:
         """
-        Save the processed samples DataFrame into a compressed tsv file and return column names.
+        Save the processed samples DataFrame into a compressed TSV file and return column names.
 
-        Args:
-            BIDS_folder_path (str): Root directory path of the BIDS dataset.
-            include_events (bool, optional): Include events in the processing. Default is True.
+        Parameters
+        ----------
+        BIDS_folder_path : str
+            Root directory path of the BIDS dataset.
+        include_events : bool, optional
+            Include events in the processing. Default is True.
 
-        Returns:
-            List[str]: A list of column names in the processed DataFrame.
+        Returns
+        -------
+        List[str]
+            A list of column names in the processed DataFrame.
+
+        Notes
+        -----
+        This method saves the processed samples DataFrame into a compressed TSV file
+        and returns a list of column names in the processed DataFrame.
         """
+        
         if include_events:
             self.add_events()
 
@@ -386,12 +505,26 @@ class EyeTrackingRun:
         """
         Create and save the info JSON file for eye tracking data.
 
-        Args:
-            BIDS_folder_path (str): Root directory path of the BIDS dataset.
-            info_json_path (str): Path to the info JSON file.
+        Parameters
+        ----------
+        BIDS_folder_path : str
+            Root directory path of the BIDS dataset.
+        info_json_path : str
+            Path to the info JSON file.
 
-        Returns:
-            Optional[str]: Path to the saved JSON file, or None if no data is available.
+        Returns
+        -------
+        Optional[str]
+            Path to the saved JSON file, or None if no data is available.
+
+        Examples
+        --------
+        This method can be used as follows:
+
+        ```python
+        et_run = EyeTrackingRun(...)  # Initialize with appropriate parameters
+        result = et_run.create_info_json("/path/to/BIDS", "/path/to/info.json")
+        ```
         """
         info_ET = json.loads(Path(info_json_path).read_text())
         timestamp_first_trigger = self.find_timestamp_message()
@@ -475,6 +608,32 @@ class EyeTrackingRun:
         path_save: str = ".",
         filename: Optional[str] = None,
     ) -> Optional[str]:
+        """
+        Plots the time series of pupil size.
+
+        Parameters
+        ----------
+        eye : str, optional
+            Specifies whether to plot for the "right" or "left" eye.
+        notebook : bool, optional
+            If True, the plot is shown in the Jupyter notebook.
+        save : bool, optional
+            If True, the plot is saved to a file.
+        path_save : str, optional
+            Path to save the plot file.
+        filename : str, optional
+            Name of the saved plot file.
+
+        Returns
+        -------
+        Optional[str]
+            The path to the saved plot file.
+
+        Example
+        -------
+        DwiSession4.plot_pupil_size(eye="left")
+        """
+        
         if filename is None:
             filename = f"sub-{self.participant:03d}_ses-{self.session:03d}_task-{self.task_name}_pupil_ts.pdf"
 
@@ -508,6 +667,32 @@ class EyeTrackingRun:
         path_save: str = ".",
         filename: Optional[str] = None,
     ) -> Optional[str]:
+        """
+        Plots a time series of eye tracking coordinates.
+
+        Parameters
+        ----------
+        eye : str, optional
+            Specifies whether to plot for the "right" or "left" eye.
+        notebook : bool, optional
+            If True, the plot is shown in the Jupyter notebook.
+        save : bool, optional
+            If True, the plot is saved to a file.
+        path_save : str, optional
+            Path to save the plot file.
+        filename : str, optional
+            Name of the saved plot file.
+
+        Returns
+        -------
+        Optional[str]
+            The path to the saved plot file.
+
+        Example
+        -------
+        DwiSession4.plot_coordinates_ts(eye="left")
+        """
+        
         if filename is None:
             filename = f"sub-{self.participant:03d}_ses-{self.session:03d}_task-{self.task_name}_coordinates_ts.pdf"
 
@@ -570,6 +755,32 @@ class EyeTrackingRun:
         path_save: str = ".",
         filename: Optional[str] = None,
     ) -> Optional[str]:
+        """
+        Plots a heatmap for eye tracking coordinates.
+
+        Parameters
+        ----------
+        eye : str, optional
+            Specifies whether to plot for the "right" or "left" eye.
+        notebook : bool, optional
+            If True, the plot is shown in the Jupyter notebook.
+        save : bool, optional
+            If True, the plot is saved to a file.
+        path_save : str, optional
+            Path to save the plot file.
+        filename : str, optional
+            Name of the saved plot file.
+
+        Returns
+        -------
+        Optional[str]
+            The path to the saved plot file.
+
+        Example
+        -------
+        DwiSession4.plot_heatmap_coordinate_density(eye="left", screen_resolution=(1024, 768))
+        """
+        
         if filename is None:
             filename = f"sub-{self.participant:03d}_ses-{self.session:03d}_task-{self.task_name}_heatmap.pdf"
 
@@ -611,15 +822,27 @@ class EyeTrackingRun:
         """
         Plot the distribution of blink durations.
 
-        Parameters:
-        - save: Whether to save the plot as an image (default is False).
-        - path_save: Path to the directory where the image will be saved (default is current directory).
-        - filename: Name of the saved image file (default is "blink_durations.png").
-        - notebook: If True, the plot will be displayed in a Jupyter notebook (default is True).
+        Parameters
+        ----------
+        save : bool, optional
+            Whether to save the plot as an image (default is False).
+        path_save : str, optional
+            Path to the directory where the image will be saved (default is current directory).
+        filename : str, optional
+            Name of the saved image file (default is "blink_durations.png").
+        notebook : bool, optional
+            If True, the plot will be displayed in a Jupyter notebook (default is True).
 
-        Returns:
-        - None (displays the plot or saves it).
+        Returns
+        -------
+        None
+            Displays the plot or saves it.
+
+        Notes
+        -----
+        This method plots the distribution of blink durations.
         """
+        
         blinks = self.events[self.events["blink"] == True]
         blinks["duration"] = blinks["end"] - blinks["start"]
         plt.figure(figsize=(10, 6))
@@ -645,22 +868,35 @@ class EyeTrackingRun:
         """
         Plots a 2D histogram for eye tracking coordinates.
 
-        Parameters:
-        - eye (str): Specifies whether to plot for the "right" or "left" eye.
-        - notebook (bool): If True, the plot is shown in the Jupyter notebook.
-        - save (bool): If True, the plot is saved to a file.
-        - path_save (str): Path to save the plot file.
-        - filename (str): Name of the saved plot file.
-        - bins (int): Number of bins for the histogram.
+        Parameters
+        ----------
+        eye : str, optional
+            Specifies whether to plot for the "right" or "left" eye.
+        notebook : bool, optional
+            If True, the plot is shown in the Jupyter notebook.
+        save : bool, optional
+            If True, the plot is saved to a file.
+        path_save : str, optional
+            Path to save the plot file.
+        filename : str, optional
+            Name of the saved plot file.
+        bins : int, optional
+            Number of bins for the histogram.
 
-        Returns:
-        - None if notebook is True, else the path to the saved plot file.
+        Returns
+        -------
+        None or str
+            None if notebook is True, else the path to the saved plot file.
 
-        Example:
-        ```python
+        Example
+        -------
         DwiSession4.plot_heatmap_coordinate_histo(eye="left", screen_resolution=(1024, 768), bins=50)
-        ```
+
+        Notes
+        -----
+        This method plots a 2D histogram for eye tracking coordinates.
         """
+        
         plt.rcParams["figure.figsize"] = [10, 6]
         plt.figure(figsize=(10, 6))
         cmap = sns.color_palette("coolwarm", as_cmap=True)
