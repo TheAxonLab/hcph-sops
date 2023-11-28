@@ -17,19 +17,20 @@
 #
 #     https://www.nipreps.org/community/licensing/
 #
-from pathlib import Path
-import string
-from typing import Optional, List, Tuple, Union
-import numpy as np
-import pandas as pd
-from scipy.signal import fftconvolve
-from pyedfread import edf, edfread
 import re
 import os
 import json
-import seaborn as sns
-import matplotlib.pyplot as plt
+from pathlib import Path
+import string
 from collections import defaultdict
+from typing import Optional, List, Tuple, Union
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+from pyedfread import edf, edfread
 
 
 class EyeTrackingRun:
