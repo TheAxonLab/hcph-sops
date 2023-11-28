@@ -10,16 +10,41 @@ import os
 import json
 import seaborn as sns
 import matplotlib.pyplot as plt
+from collections import defaultdict
 
 
 class EyeTrackingRun:
-    """
-    
-    """
+    """ """
+
+    EYE_CODE_MAP = defaultdict(
+        lambda: "unknown", {"R": "right", "L": "left", "RL": "both"}
+    )
+    RIGHT_EYE_COLUMNS = {
+        "time": "eye_timestamp",
+        "gx_right": "eye1_x_coordinate",
+        "gy_right": "eye1_y_coordinate",
+        "pa_right": "eye1_pupil_size",
+        "px_right": "eye1_pupil_x_coordinate",
+        "py_right": "eye1_pupil_y_coordinate",
+        "hx_right": "eye1_head_x_coordinate",
+        "hy_right": "eye1_head_y_coordinate",
+        "rx": "screen_pixel_per_degree_x",
+        "ry": "screen_pixel_per_degree_y",
+        "gxvel_right": "eye1_x_velocity",
+        "gyvel_right": "eye1_x_velocity",
+        "hxvel_right": "eye1_head_x_velocity",
+        "hyvel_right": "eye1_head_y_velocity",
+        "rxvel_right": "eye1_raw_x_velocity",
+        "ryvel_right": "eye1_raw_y_velocity",
+        "fgxvel": "eye1_fast_gaze_x_velocity",
+        "fgyvel": "eye1_fast_gaze_y_velocity",
+        "fhxyvel": "eye1_fast_head_x_velocity",
+        "fhyvel": "eye1_fast_head_y_velocity",
+        "frxyvel": "eye1_fast_raw_x_velocity",
+        "fryvel": "eye1_fast_raw_y_velocity",
+    }
+
     def __init__(
-        """
-        
-        """
         self,
         session: int,
         task_name: str,
@@ -33,6 +58,8 @@ class EyeTrackingRun:
         messages_stop_fixation: str = "",
         pe: str = "",
     ):
+        """ """
+
         self.session = session
         self.task_name = task_name
         self.participant = participant
@@ -60,7 +87,7 @@ class EyeTrackingRun:
         positions[6] *= (0.5 / 0.88, 0.5 / 0.17)
         positions[7] *= (0.5 / 0.12, 0.5 / 0.83)
         positions[8] *= (0.5 / 0.88, 0.5 / 0.83)
-        
+
         return positions if calibration_type.lower() == "hv9" else positions[:5]
 
     def add_events(self) -> pd.DataFrame:
@@ -197,11 +224,11 @@ class EyeTrackingRun:
         match_start = re.search(r"RECORD (\w+) (\d+) (\d+) (\d+) (\w+)", start_text)
 
         if match_start:
-            eye_tracking_method, sampling_frequency, _, _,r_eye = match_start.groups()
+            eye_tracking_method, sampling_frequency, _, _, r_eye = match_start.groups()
             sampling_frequency = int(sampling_frequency)
             recorded_eye = EYE_CODE_MAP[r_eye]
 
-            print("recorded eye:",recorded_eye)
+            print("recorded eye:", recorded_eye)
             print("Eye Tracking Method:", eye_tracking_method)
             print("Sampling Frequency:", sampling_frequency)
         else:
@@ -303,32 +330,7 @@ class EyeTrackingRun:
         self.samples = self.samples.reindex(
             columns=[c for c in self.samples.columns if "left" not in c]
         )
-        self.samples = self.samples.rename(
-            columns={
-                "time": "eye_timestamp",
-                "gx_right": "eye1_x_coordinate",
-                "gy_right": "eye1_y_coordinate",
-                "pa_right": "eye1_pupil_size",
-                "px_right": "eye1_pupil_x_coordinate",
-                "py_right": "eye1_pupil_y_coordinate",
-                "hx_right": "eye1_head_x_coordinate",
-                "hy_right": "eye1_head_y_coordinate",
-                "rx": "screen_pixel_per_degree_x",
-                "ry": "screen_pixel_per_degree_y",
-                "gxvel_right": "eye1_x_velocity",
-                "gyvel_right": "eye1_x_velocity",
-                "hxvel_right": "eye1_head_x_velocity",
-                "hyvel_right": "eye1_head_y_velocity",
-                "rxvel_right": "eye1_raw_x_velocity",
-                "ryvel_right": "eye1_raw_y_velocity",
-                "fgxvel": "eye1_fast_gaze_x_velocity",
-                "fgyvel": "eye1_fast_gaze_y_velocity",
-                "fhxyvel": "eye1_fast_head_x_velocity",
-                "fhyvel": "eye1_fast_head_y_velocity",
-                "frxyvel": "eye1_fast_raw_x_velocity",
-                "fryvel": "eye1_fast_raw_y_velocity",
-            }
-        )
+        self.samples = self.samples.rename(columns=RIGHT_EYE_COLUMNS)
 
         self.samples = self.samples.replace({100000000: np.nan})
 
@@ -457,7 +459,12 @@ class EyeTrackingRun:
             )
 
         BIDS_folder_path = Path(BIDS_folder_path)
-        output_json_path = BIDS_folder_path / f"sub-{self.participant:03d}" / f"ses-{self.session:03d} / output_file_name
+        output_json_path = (
+            BIDS_folder_path
+            / f"sub-{self.participant:03d}"
+            / f"ses-{self.session:03d}"
+            / output_file_name
+        )
         output_json_path.parent.mkdir(exist_ok=True, parents=True)
         output_json_path.write_text(json.dumps(final_info, json_file, indent=2))
 
