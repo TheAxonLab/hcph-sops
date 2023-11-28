@@ -1053,18 +1053,20 @@
         bids_mri[BIDS MRI]
         bids_phys[BIDS Physio]
         bids_edf[BIDS edf]
+        bids_events[BIDS Events]
     end
 
     subgraph dropbox[&lt;b&gt;Dropbox&lt;/b&gt;]
         raw_phys[Raw Physio]
         raw_edf[Raw edf]
+        raw_events[&lt;i&gt;Psychopy&lt;/i&gt; Logs]
     end
 
     subgraph datalad[&lt;b&gt;DataLad&lt;/b&gt;]
         bids_mri_datalad[BIDS MRI]
         bids_phys_datalad[BIDS Physio]
         bids_edf_datalad[BIDS edf]
-        %%bids_phys_datalad[BIDS Physio]
+        bids_events_datalad[BIDS Events]
 
         mriqc_out[Visual reports]
         preproc_fMRI[Preprocessed fMRI]
@@ -1090,15 +1092,18 @@
     physio --&gt;|Dropbox Sync| raw_phys
     et_pc --&gt;|Psychopy| psychopy_pc
     psychopy_pc --&gt; |Dropbox Sync| raw_edf
+    psychopy_pc --&gt; |Dropbox Sync| raw_events
 
     raw_mri --&gt;|&lt;i&gt;HeudiConv&lt;/i&gt; Script| bids_mri
     raw_phys ---&gt;|&lt;i&gt;physio-to-bids.ipynb&lt;/i&gt; Script| bids_phys
     raw_edf ---&gt; |&lt;i&gt;edf2bids&lt;/i&gt; Script| bids_edf
+    raw_events ---&gt; |&lt;i&gt;psychopy2events.py&lt;/i&gt; Script| bids_events
 
     bids_mri --&gt;|FIRST Session Only !| med[Clinical Screening]
     med --&gt;|"Incidental(s)"| alert[Alert Participant]
     class alert imp
 
+    local_data ---&gt;|&lt;i&gt;datalad save&lt;/i&gt;| datalad
     local_data ---&gt;|&lt;i&gt;cron&lt;/i&gt; Job| HOrUs
     HOrUs ---&gt; datalad
     bids_mri_datalad --&gt;|MRIQC| mriqc_out[Visual Reports]
@@ -1147,7 +1152,10 @@
 <li><strong><abbr title="Magnetic Resonance Imaging">MRI</abbr> data</strong>.
     Stored on the <abbr title="Lausanne University Hospital">CHUV</abbr> <abbr title="picture archiving and communication system">PACS</abbr>, the raw <abbr title="Magnetic Resonance Imaging">MRI</abbr> data should first be locally <a href="../post-session/#convert-imaging-data-to-bids-with-heudiconv">converted to <abbr title="Brain Imaging Data Structure">BIDS</abbr></a>. Then both the raw and <abbr title="Brain Imaging Data Structure">BIDS</abbr> compliant data are to be synchronized with the <a href="../preliminary/#adding-data-or-metadata"><em>Datalad</em> dataset</a>. From there, the <abbr title="Brain Imaging Data Structure">BIDS</abbr> compliant data can be <a href="../mriqc/">quality controlled</a> and <a href="../../processing/preprocessing/">pre-processed</a> using the corresponding packages (e.g. <em>MRIQC</em>, <em>fMRIPrep</em>, <em>dMRIPrep</em>) to allow computation of analysis-grade derivatives (e.g. <a href="../../processing/functional-connectivity/">functional</a> or structural connectivity).</li>
 <li><strong>Physiological data</strong>.
-    Physiological data stored in the <em>stimuli presentation laptop</em> (███) and the <em>physio-recording Laptop</em> (███) are synchronized with a cloud storage using <em>Dropbox</em>. The <em>AcqKnowledge</em> and <abbr title="eye tracker">ET</abbr> physiological data are converted to <abbr title="Brain Imaging Data Structure">BIDS</abbr> using <a href="../physio-to-bids/"><em>phys2bids</em></a> and <em>etf2bids</em> respectively. <strong>Further processing steps such as denoising should be defined soon.</strong></li>
+    Physiological data stored in the <em>stimuli presentation laptop</em> (███) and the <em>physio-recording laptop</em> (███) are synchronized with a cloud storage using <em>Dropbox</em>.
+    The physiological signals (<em>AcqKnowledge</em>) and <abbr title="eye tracker">ET</abbr>'s recordings are converted to <abbr title="Brain Imaging Data Structure">BIDS</abbr> using <a href="../physio-to-bids/"><em>phys2bids</em></a> and <em>etf2bids</em>, respectively.
+    The logs from <em>Psychopy</em> are converted into <abbr title="Brain Imaging Data Structure">BIDS</abbr>' <em>events</em> files with the <a href="../post-session/#generate-bids-events-files"><em>psychopy2events.py</em></a> script.
+    <strong>Further processing steps, such as denoising, should be defined soon.</strong></li>
 </ol>
 
 
