@@ -646,7 +646,7 @@ class EyeTrackingRun:
         else:
             print("Invalid eye argument")
 
-        plt.xlabel("timestamp [ms]")
+        plt.xlabel("timestamp")
         plt.ylabel("pupil area [pixels]")
 
         if notebook:
@@ -729,7 +729,7 @@ class EyeTrackingRun:
             axs[0].plot(self.samples["time"], self.samples["gx_left"], label="gx_left")
             axs[0].set_ylabel("gx_left")
             axs[1].plot(self.samples["time"], self.samples["gy_left"], label="gy_left")
-            axs[1].set_xlabel("timestamp [ms]")
+            axs[1].set_xlabel("timestamp")
             axs[1].set_ylabel("pupil area [pixels]")
             axs[0].set_xlim(self.samples["time"].iloc[0])
 
@@ -840,16 +840,21 @@ class EyeTrackingRun:
 
         Notes
         -----
-        This method plots the distribution of blink durations.
+        This method the blink occurences over time.
         """
         
         blinks = self.events[self.events["blink"] == True]
-        blinks["duration"] = blinks["end"] - blinks["start"]
+        blinks_start = blinks["start"].values
+        blinks_end = blinks["end"].values
+        timestamps = self.samples["time"].values
+
+        blinks_array = np.zeros_like(timestamps, dtype=int)
+        for start, end in zip(blinks_start, blinks_end):
+            blinks_array[(timestamps >= start) & (timestamps <= end)] = 1
         plt.figure(figsize=(10, 6))
-        plt.plot(blinks["start"].values, blinks["duration"].values)
-        plt.title("Blink Durations Over Time")
-        plt.xlabel("Time of Onset (ms)")
-        plt.ylabel("Blinks Duration (ms)")
+        plt.plot(blinks_array)
+        plt.xlabel("Blink occurences over time")
+
         if notebook:
             plt.show()
         if save:
