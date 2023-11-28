@@ -285,10 +285,7 @@ class EyeTrackingRun:
         ].head(1)
         fit_param_text = row_fit_param["trialid "].iloc[0]
 
-        if "ELLIPSE" in fit_param_text:
-            pupil_fit_method = "ellipse"
-        else:
-            pupil_fit_method = "center-of-mass"
+        pupil_fit_method = "ellipse" if "ELLIPSE" in fit_param_text else "center-of-mass"
 
         print("Pupil Fitting Method:", pupil_fit_method)
 
