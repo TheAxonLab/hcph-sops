@@ -33,7 +33,9 @@ from collections import defaultdict
 
 
 class EyeTrackingRun:
-    """ """
+    """
+
+    """
 
     EYE_CODE_MAP = defaultdict(
         lambda: "unknown", {"R": "right", "L": "left", "RL": "both"}
@@ -77,7 +79,9 @@ class EyeTrackingRun:
         messages_stop_fixation: str = "",
         pe: str = "",
     ):
-        """ """
+        """
+
+        """
 
         self.session = session
         self.task_name = task_name
