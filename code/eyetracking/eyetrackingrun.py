@@ -355,28 +355,21 @@ class EyeTrackingRun:
 
         self.samples = self.samples.replace({100000000: np.nan})
 
-        if self.task_name in ["rest", "bht", "qct"]:
-            output_file_name = f"sub-{self.participant:03d}_ses-{self.session:03d}_task-{self.task_name}_dir-{self.pe}_eyetrack.tsv.gz"
-            output_file_dir = os.path.join(
-                BIDS_folder_path,
-                f"sub-{self.participant:03d}/ses-{self.session:03d}/func/",
-            )
-        elif self.task_name == "dwi":
-            output_file_name = f"sub-{self.participant:03d}_ses-{self.session:03d}_acq-highres_dir-{self.pe}_eyetrack.tsv.gz"
-            output_file_dir = os.path.join(
-                BIDS_folder_path,
-                f"sub-{self.participant:03d}/ses-{self.session:03d}/dwi/",
-            )
+        if self.task_name in ("rest", "bht", "qct"):
+            output_file_name = f"func/sub-{self.participant:03d}_ses-{self.session:03d}_task-{self.task_name}_dir-{self.pe}_eyetrack.tsv.gz"
+        elif self.task_name == "fixation":
+            output_file_name = f"dwi/sub-{self.participant:03d}_ses-{self.session:03d}_acq-highres_dir-{self.pe}_eyetrack.tsv.gz"
         else:
-            output_file_name = f"sub-{self.participant:03d}_ses-{self.session:03d}_task-{self.task_name}_eyetrack.tsv.gz"
-            output_file_dir = os.path.join(
-                BIDS_folder_path,
-                f"sub-{self.participant:03d}/ses-{self.session:03d}/func/",
-            )
+            ValueError("Unknown task type")
 
-        os.makedirs(output_file_dir, exist_ok=True)
-
-        output_file_full_path = os.path.join(output_file_dir, output_file_name)
+        BIDS_folder_path = Path(BIDS_folder_path)
+        output_json_path = (
+            BIDS_folder_path
+            / f"sub-{self.participant:03d}"
+            / f"ses-{self.session:03d}"
+            / output_file_name
+        )
+        output_json_path.parent.mkdir(exist_ok=True, parents=True)
 
         column_order = [
             "eye_timestamp",
