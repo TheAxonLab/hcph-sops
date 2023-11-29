@@ -771,7 +771,7 @@ class EyeTrackingRun:
 
         Examples
         --------
-        DwiSession4.plot_heatmap_coordinate_density(eye="left", screen_resolution=(1024, 768))
+        >>> DwiSession4.plot_heatmap_coordinate_density(eye="left", screen_resolution=(1024, 768))
         """
         
         if filename is None:
@@ -854,6 +854,8 @@ class EyeTrackingRun:
             output_filename = f"sub-{self.participant:03d}_ses-{self.session:03d}_task-{self.task_name}_{filename}"
             plt.savefig(os.path.join(path_save, output_filename))
 
+        return plt.gcf()
+
     def plot_heatmap_coordinate_histo(
         self,
         eye: str = "right",
@@ -888,7 +890,7 @@ class EyeTrackingRun:
 
         Example
         -------
-        DwiSession4.plot_heatmap_coordinate_histo(eye="left", screen_resolution=(1024, 768), bins=50)
+        >>> DwiSession4.plot_heatmap_coordinate_histo(eye="left", screen_resolution=(1024, 768), bins=50)
 
         Notes
         -----
