@@ -123,7 +123,7 @@ class EyeTrackingRun:
         messages_start_fixation: str = "",
         messages_stop_fixation: str = "",
         pe: str = "",
-    ):
+    ) -> None:
         """
         Initialize EyeTrackingRun instance.
 
@@ -515,12 +515,9 @@ class EyeTrackingRun:
 
         Examples
         --------
-        This method can be used as follows:
+        >>> et_run = EyeTrackingRun(...)  # Initialize with appropriate parameters
+        >>> et_run.create_info_json("/path/to/BIDS", "/path/to/info.json")
 
-        ```python
-        et_run = EyeTrackingRun(...)  # Initialize with appropriate parameters
-        result = et_run.create_info_json("/path/to/BIDS", "/path/to/info.json")
-        ```
         """
         info_ET = json.loads(Path(info_json_path).read_text())
         timestamp_first_trigger = self.find_timestamp_message()
@@ -625,9 +622,9 @@ class EyeTrackingRun:
         Optional[str]
             The path to the saved plot file.
 
-        Example
-        -------
-        DwiSession4.plot_pupil_size(eye="left")
+        Examples
+        --------
+        >>> DwiSession4.plot_pupil_size(eye="left")
         """
         
         if filename is None:
@@ -635,7 +632,7 @@ class EyeTrackingRun:
 
         if eye == "right":
             self.samples.pa_right[self.samples.pa_right < 1] = np.nan
-            plt.plot(self.samples["time"].values, self.samples["pa_right"].values)
+            plt.plot(self.samples["time"].values - metadata["StartTime"], self.samples["pa_right"].values)
         elif eye == "left":
             self.samples.pa_left[self.samples.pa_left < 1] = np.nan
             plt.plot(self.samples["time"].values, self.samples["pa_left"].values)
