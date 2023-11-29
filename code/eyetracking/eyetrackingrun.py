@@ -95,23 +95,19 @@ class EyeTrackingRun:
 
     Examples
     --------
-    This class can be instantiated as follows:
-
-    ```python
-    et_run = EyeTrackingRun(
-        session=1,
-        task_name="rest",
-        participant=001,
-        samples=samples_df,
-        events=events_df,
-        messages=messages_df,
-        message_first_trigger="start",
-        screen_resolution=(800, 600),
-        messages_start_fixation="fixation_start",
-        messages_stop_fixation="fixation_stop",
-        pe="",
-    )
-    ```
+    >>> et_run = EyeTrackingRun(
+    ...     session=1,
+    ...     task_name="rest",
+    ...     participant=001,
+    ...     samples=samples_df,
+    ...     events=events_df,
+    ...     messages=messages_df,
+    ...     message_first_trigger="start",
+    ...     screen_resolution=(800, 600),
+    ...     messages_start_fixation="fixation_start",
+    ...     messages_stop_fixation="fixation_stop",
+    ...     pe="",
+    ... )
     """
 
     def __init__(
