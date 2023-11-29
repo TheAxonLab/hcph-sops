@@ -848,8 +848,6 @@ class EyeTrackingRun:
         plt.plot(blinks_array)
         plt.xlabel("Blink occurences over time")
 
-        if notebook:
-            plt.show()
         if save:
             output_filename = f"sub-{self.participant:03d}_ses-{self.session:03d}_task-{self.task_name}_{filename}"
             plt.savefig(os.path.join(path_save, output_filename))
