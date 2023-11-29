@@ -769,8 +769,8 @@ class EyeTrackingRun:
         Optional[str]
             The path to the saved plot file.
 
-        Example
-        -------
+        Examples
+        --------
         DwiSession4.plot_heatmap_coordinate_density(eye="left", screen_resolution=(1024, 768))
         """
         
