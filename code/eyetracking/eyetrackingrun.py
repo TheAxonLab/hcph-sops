@@ -598,7 +598,6 @@ class EyeTrackingRun:
     def plot_pupil_size(
         self,
         eye: str = "right",
-        notebook: bool = True,
         save: bool = False,
         path_save: str = ".",
         filename: Optional[str] = None,
@@ -610,8 +609,6 @@ class EyeTrackingRun:
         ----------
         eye : str, optional
             Specifies whether to plot for the "right" or "left" eye.
-        notebook : bool, optional
-            If True, the plot is shown in the Jupyter notebook.
         save : bool, optional
             If True, the plot is saved to a file.
         path_save : str, optional
@@ -647,20 +644,15 @@ class EyeTrackingRun:
         plt.xlabel("time [ms]")
         plt.ylabel("pupil area [pixels]")
 
-        if notebook:
-            plt.show()
-            return None
-
         if save:
             plt.savefig(os.path.join(path_save, filename))
             return os.path.join(path_save, filename)
 
-        return None
+        return plt.gcf()
 
     def plot_coordinates_ts(
         self,
         eye: str = "right",
-        notebook: bool = True,
         save: bool = False,
         path_save: str = ".",
         filename: Optional[str] = None,
@@ -672,8 +664,6 @@ class EyeTrackingRun:
         ----------
         eye : str, optional
             Specifies whether to plot for the "right" or "left" eye.
-        notebook : bool, optional
-            If True, the plot is shown in the Jupyter notebook.
         save : bool, optional
             If True, the plot is saved to a file.
         path_save : str, optional
@@ -738,21 +728,16 @@ class EyeTrackingRun:
         else:
             print("Invalid eye argument")
 
-        if notebook:
-            plt.show()
-            return None
 
         if save:
             plt.savefig(os.path.join(path_save, filename))
             plt.clf()
-            return os.path.join(path_save, filename)
 
-        return None
+        return plt.gcf()
 
     def plot_heatmap_coordinate_density(
         self,
         eye: str = "right",
-        notebook: bool = True,
         save: bool = False,
         path_save: str = ".",
         filename: Optional[str] = None,
@@ -764,8 +749,6 @@ class EyeTrackingRun:
         ----------
         eye : str, optional
             Specifies whether to plot for the "right" or "left" eye.
-        notebook : bool, optional
-            If True, the plot is shown in the Jupyter notebook.
         save : bool, optional
             If True, the plot is saved to a file.
         path_save : str, optional
@@ -829,17 +812,15 @@ class EyeTrackingRun:
             plt.gca().invert_yaxis()
             plt.xlabel("left eye x coordinate [pixels]")
             plt.xlabel("left eye y coordinate [pixels]")
-        if notebook:
-            plt.show()
         if save:
             plt.savefig(os.path.join(path_save, filename))
+        return plt.gcf()
 
     def plot_delta(
         self,
         save: Optional[bool] = False,
         path_save: Optional[str] = ".",
         filename: Optional[str] = "blink_durations.pdf",
-        notebook: Optional[bool] = True,
     ) -> None:
         """
         Plot the distribution of blink durations.
@@ -852,8 +833,6 @@ class EyeTrackingRun:
             Path to the directory where the image will be saved (default is current directory).
         filename : str, optional
             Name of the saved image file (default is "blink_durations.png").
-        notebook : bool, optional
-            If True, the plot will be displayed in a Jupyter notebook (default is True).
 
         Returns
         -------
@@ -899,8 +878,6 @@ class EyeTrackingRun:
         ----------
         eye : str, optional
             Specifies whether to plot for the "right" or "left" eye.
-        notebook : bool, optional
-            If True, the plot is shown in the Jupyter notebook.
         save : bool, optional
             If True, the plot is saved to a file.
         path_save : str, optional
@@ -973,11 +950,7 @@ class EyeTrackingRun:
         plt.xlim(0, self.screen_resolution[0])
         plt.ylim(0, self.screen_resolution[1])
 
-        if notebook:
-            plt.show()
-            return None
-
         if save:
             output_filename = f"sub-{self.participant:03d}_ses-{self.session:03d}_task-{self.task_name}_{filename}"
             plt.savefig(os.path.join(path_save, output_filename))
-        return None
+        return plt.gcf()
