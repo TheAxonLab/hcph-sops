@@ -449,6 +449,8 @@ class EyeTrackingRun:
             | (self.samples["gy_right"] > self.screen_resolution[1]),
             "gy_right",
         ] = np.nan
+        self.samples.loc[self.samples["time"] ==0, "time"] = np.nan
+        print(self.samples)
 
         self.samples = self.samples.reindex(
             columns=[c for c in self.samples.columns if "left" not in c]
@@ -629,17 +631,20 @@ class EyeTrackingRun:
         
         if filename is None:
             filename = f"sub-{self.participant:03d}_ses-{self.session:03d}_task-{self.task_name}_pupil_ts.pdf"
-
+        time_start=self.find_timestamp_message()
+        self.samples.time[
+            (self.samples.time <= 0)
+        ] = np.nan
         if eye == "right":
             self.samples.pa_right[self.samples.pa_right < 1] = np.nan
-            plt.plot(self.samples["time"].values - metadata["StartTime"], self.samples["pa_right"].values)
+            plt.plot(self.samples["time"].values - time_start, self.samples["pa_right"].values)
         elif eye == "left":
             self.samples.pa_left[self.samples.pa_left < 1] = np.nan
-            plt.plot(self.samples["time"].values, self.samples["pa_left"].values)
+            plt.plot(self.samples["time"].values- time_start, self.samples["pa_left"].values)
         else:
             print("Invalid eye argument")
 
-        plt.xlabel("timestamp")
+        plt.xlabel("time [ms]")
         plt.ylabel("pupil area [pixels]")
 
         if notebook:
@@ -688,7 +693,10 @@ class EyeTrackingRun:
         
         if filename is None:
             filename = f"sub-{self.participant:03d}_ses-{self.session:03d}_task-{self.task_name}_coordinates_ts.pdf"
-
+        time_start = self.find_timestamp_message()
+        self.samples.time[
+            (self.samples.time <= 0)
+        ] = np.nan
         if eye == "right":
             self.samples.gx_right[
                 (self.samples.gx_right < 0)
@@ -699,11 +707,12 @@ class EyeTrackingRun:
                 | (self.samples.gy_right > self.screen_resolution[1])
             ] = np.nan
 
-            fig, axs = plt.subplots(2, 1, figsize=(8, 6), sharex=True)
 
-            axs[0].plot(self.samples["gx_right"], label="gx_right")
-            axs[1].plot(self.samples["gy_right"], label="gy_right")
-            axs[1].set_xlabel("time")
+            fig, axs = plt.subplots(2, 1, figsize=(8, 6), sharex=True)
+            print(self.samples["time"].values[0:10] - time_start, self.samples["time"].values[-20:-1] - time_start)
+            axs[0].plot(self.samples["time"].values - time_start,self.samples["gx_right"], label="gx_right")
+            axs[1].plot(self.samples["time"].values - time_start,self.samples["gy_right"], label="gy_right")
+            axs[1].set_xlabel("time [ms]")
             axs[1].set_ylabel("x coordinate [pixels]")
             axs[1].set_ylabel("y coordinate [pixels]")
 
@@ -855,7 +864,7 @@ class EyeTrackingRun:
         -----
         This method the blink occurences over time.
         """
-        
+        time_start = self.find_timestamp_message()
         blinks = self.events[self.events["blink"] == True]
         blinks_start = blinks["start"].values
         blinks_end = blinks["end"].values
@@ -865,7 +874,7 @@ class EyeTrackingRun:
         for start, end in zip(blinks_start, blinks_end):
             blinks_array[(timestamps >= start) & (timestamps <= end)] = 1
         plt.figure(figsize=(10, 6))
-        plt.plot(blinks_array)
+        plt.plot(timestamps-time_start,blinks_array)
         plt.xlabel("Blink occurences over time")
 
         if save:
