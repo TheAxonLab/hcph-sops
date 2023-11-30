@@ -800,6 +800,26 @@ class EyeTrackingRun:
             plt.gca().invert_yaxis()
             plt.xlabel("right eye x coordinate [pixels]")
             plt.xlabel("right eye y coordinate [pixels]")
+        elif eye == "left":
+            filtered_samples = self.samples[
+                (self.samples["gx_left"] >= 0)
+                & (self.samples["gx_left"] <= self.screen_resolution[0])
+                & (self.samples["gy_left"] >= 0)
+                & (self.samples["gy_left"] <= self.screen_resolution[1])
+                ]
+
+            sns.kdeplot(
+                data=filtered_samples,
+                x="gx_left",
+                y="gy_left",
+                cmap=cmap,
+                fill=True,
+                cbar=True,
+                thresh=0,
+            )
+            plt.gca().invert_yaxis()
+            plt.xlabel("left eye x coordinate [pixels]")
+            plt.xlabel("left eye y coordinate [pixels]")
         if notebook:
             plt.show()
         if save:
