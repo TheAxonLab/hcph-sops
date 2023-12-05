@@ -96,9 +96,9 @@ class EyeTrackingRun:
     Examples
     --------
     >>> et_run = EyeTrackingRun(
-    ...     session=1,
+    ...     session="001",
     ...     task_name="rest",
-    ...     participant=001,
+    ...     participant="001",
     ...     samples=samples_df,
     ...     events=events_df,
     ...     messages=messages_df,
@@ -112,9 +112,9 @@ class EyeTrackingRun:
 
     def __init__(
         self,
-        session: int,
+        session: str,
         task_name: str,
-        participant: int,
+        participant: str,
         samples: pd.DataFrame,
         events: pd.DataFrame,
         messages: pd.DataFrame,
@@ -158,9 +158,9 @@ class EyeTrackingRun:
 
         """
 
-        self.session = session
+        self.session = int(session)
         self.task_name = task_name
-        self.participant = participant
+        self.participant = int(participant)
         self.samples = samples
         self.events = events
         self.messages = messages
@@ -450,7 +450,7 @@ class EyeTrackingRun:
             "gy_right",
         ] = np.nan
         self.samples.loc[self.samples["time"] ==0, "time"] = np.nan
-        print(self.samples)
+        
 
         self.samples = self.samples.reindex(
             columns=[c for c in self.samples.columns if "left" not in c]
