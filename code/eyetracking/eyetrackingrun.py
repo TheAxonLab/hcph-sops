@@ -24,23 +24,29 @@ from pathlib import Path
 import string
 from collections import defaultdict
 from typing import Optional, List, Tuple, Union
-
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from pyedfread import edf, edfread
-
-
 # EyeLink calibration coordinates from https://www.sr-research.com/calibration-coordinate-calculator/
 EYELINK_CALIBRATION_COORDINATES = [
-    (400, 300), (400, 51), (400, 549), (48, 300), (752, 300), (48, 51), (752, 51), (48, 549), (752, 549), (224, 176), (576, 176), (224, 424), (576, 424)
+    (400, 300),
+    (400, 51),
+    (400, 549),
+    (48, 300),
+    (752, 300),
+    (48, 51),
+    (752, 51),
+    (48, 549),
+    (752, 549),
+    (224, 176),
+    (576, 176),
+    (224, 424),
+    (576, 424),
 ]
 
-EYE_CODE_MAP = defaultdict(
-    lambda: "unknown", {"R": "right", "L": "left", "RL": "both"}
-)
+EYE_CODE_MAP = defaultdict(lambda: "unknown", {"R": "right", "L": "left", "RL": "both"})
 RIGHT_EYE_COLUMNS = {
     "time": "eye_timestamp",
     "gx_right": "eye1_x_coordinate",
@@ -265,7 +271,7 @@ class EyeTrackingRun:
         This method extracts calibration information from the DataFrame of messages and returns a tuple
         containing various calibration details, such as count, type, average error, maximum error, and position.
         """
-        
+
         row_error_value = self.messages[
             self.messages["trialid "].str.contains("ERROR", case=False, regex=True)
         ].head(1)
@@ -289,9 +295,9 @@ class EyeTrackingRun:
 
             calibration_type = None
             calibration_position = None
-            if (points := re.findall(r"HV(\d{1,2})", error_message)):
+            if points := re.findall(r"HV(\d{1,2})", error_message):
                 calibration_type = f"HV{points[0]}"
-                calibration_position = EYELINK_CALIBRATION_COORDINATES[:int(points[0])]
+                calibration_position = EYELINK_CALIBRATION_COORDINATES[: int(points[0])]
 
             return (
                 calibration_count,
@@ -369,7 +375,9 @@ class EyeTrackingRun:
         ].head(1)
         fit_param_text = row_fit_param["trialid "].iloc[0]
 
-        pupil_fit_method = "ellipse" if "ELLIPSE" in fit_param_text else "center-of-mass"
+        pupil_fit_method = (
+            "ellipse" if "ELLIPSE" in fit_param_text else "center-of-mass"
+        )
 
         print("Pupil Fitting Method:", pupil_fit_method)
 
@@ -397,7 +405,9 @@ class EyeTrackingRun:
         containing the extracted header information.
         """
         self.messages["trialid_cleaned"] = self.messages["trialid "].apply(
-            lambda x: ''.join(filter(lambda char: char in string.printable and char != '\n', str(x)))
+            lambda x: "".join(
+                filter(lambda char: char in string.printable and char != "\n", str(x))
+            )
         )
 
         record_index = self.messages[
@@ -434,7 +444,7 @@ class EyeTrackingRun:
         This method saves the processed samples DataFrame into a compressed TSV file
         and returns a list of column names in the processed DataFrame.
         """
-        
+
         if include_events:
             self.add_events()
 
@@ -449,8 +459,7 @@ class EyeTrackingRun:
             | (self.samples["gy_right"] > self.screen_resolution[1]),
             "gy_right",
         ] = np.nan
-        self.samples.loc[self.samples["time"] ==0, "time"] = np.nan
-        
+        self.samples.loc[self.samples["time"] == 0, "time"] = np.nan
 
         self.samples = self.samples.reindex(
             columns=[c for c in self.samples.columns if "left" not in c]
@@ -625,19 +634,22 @@ class EyeTrackingRun:
         --------
         >>> DwiSession4.plot_pupil_size(eye="left")
         """
-        
+
         if filename is None:
             filename = f"sub-{self.participant:03d}_ses-{self.session:03d}_task-{self.task_name}_pupil_ts.pdf"
-        time_start=self.find_timestamp_message()
-        self.samples.time[
-            (self.samples.time <= 0)
-        ] = np.nan
+        time_start = self.find_timestamp_message()
+        self.samples.time[(self.samples.time <= 0)] = np.nan
         if eye == "right":
             self.samples.pa_right[self.samples.pa_right < 1] = np.nan
-            plt.plot(self.samples["time"].values - time_start, self.samples["pa_right"].values)
+            plt.plot(
+                self.samples["time"].values - time_start,
+                self.samples["pa_right"].values,
+            )
         elif eye == "left":
             self.samples.pa_left[self.samples.pa_left < 1] = np.nan
-            plt.plot(self.samples["time"].values- time_start, self.samples["pa_left"].values)
+            plt.plot(
+                self.samples["time"].values - time_start, self.samples["pa_left"].values
+            )
         else:
             print("Invalid eye argument")
 
@@ -680,13 +692,11 @@ class EyeTrackingRun:
         -------
         DwiSession4.plot_coordinates_ts(eye="left")
         """
-        
+
         if filename is None:
             filename = f"sub-{self.participant:03d}_ses-{self.session:03d}_task-{self.task_name}_coordinates_ts.pdf"
         time_start = self.find_timestamp_message()
-        self.samples.time[
-            (self.samples.time <= 0)
-        ] = np.nan
+        self.samples.time[(self.samples.time <= 0)] = np.nan
         if eye == "right":
             self.samples.gx_right[
                 (self.samples.gx_right < 0)
@@ -697,11 +707,21 @@ class EyeTrackingRun:
                 | (self.samples.gy_right > self.screen_resolution[1])
             ] = np.nan
 
-
             fig, axs = plt.subplots(2, 1, figsize=(8, 6), sharex=True)
-            print(self.samples["time"].values[0:10] - time_start, self.samples["time"].values[-20:-1] - time_start)
-            axs[0].plot(self.samples["time"].values - time_start,self.samples["gx_right"], label="gx_right")
-            axs[1].plot(self.samples["time"].values - time_start,self.samples["gy_right"], label="gy_right")
+            print(
+                self.samples["time"].values[0:10] - time_start,
+                self.samples["time"].values[-20:-1] - time_start,
+            )
+            axs[0].plot(
+                self.samples["time"].values - time_start,
+                self.samples["gx_right"],
+                label="gx_right",
+            )
+            axs[1].plot(
+                self.samples["time"].values - time_start,
+                self.samples["gy_right"],
+                label="gy_right",
+            )
             axs[1].set_xlabel("time [ms]")
             axs[1].set_ylabel("x coordinate [pixels]")
             axs[1].set_ylabel("y coordinate [pixels]")
@@ -727,7 +747,6 @@ class EyeTrackingRun:
 
         else:
             print("Invalid eye argument")
-
 
         if save:
             plt.savefig(os.path.join(path_save, filename))
@@ -765,7 +784,7 @@ class EyeTrackingRun:
         --------
         >>> DwiSession4.plot_heatmap_coordinate_density(eye="left", screen_resolution=(1024, 768))
         """
-        
+
         if filename is None:
             filename = f"sub-{self.participant:03d}_ses-{self.session:03d}_task-{self.task_name}_heatmap.pdf"
 
@@ -798,7 +817,7 @@ class EyeTrackingRun:
                 & (self.samples["gx_left"] <= self.screen_resolution[0])
                 & (self.samples["gy_left"] >= 0)
                 & (self.samples["gy_left"] <= self.screen_resolution[1])
-                ]
+            ]
 
             sns.kdeplot(
                 data=filtered_samples,
@@ -853,7 +872,7 @@ class EyeTrackingRun:
         for start, end in zip(blinks_start, blinks_end):
             blinks_array[(timestamps >= start) & (timestamps <= end)] = 1
         plt.figure(figsize=(10, 6))
-        plt.plot(timestamps-time_start,blinks_array)
+        plt.plot(timestamps - time_start, blinks_array)
         plt.xlabel("Blink occurences over time")
 
         if save:
@@ -900,7 +919,7 @@ class EyeTrackingRun:
         -----
         This method plots a 2D histogram for eye tracking coordinates.
         """
-        
+
         plt.rcParams["figure.figsize"] = [10, 6]
         plt.figure(figsize=(10, 6))
         cmap = sns.color_palette("coolwarm", as_cmap=True)
