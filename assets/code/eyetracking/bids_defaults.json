@@ -1,5 +1,5 @@
 {
-    "Manufacturer": "SR-Research",
+    "Manufacturer": "SR Research",
     "ManufacturersModelName": "EyeLink CL-OC",
     "DeviceSerialNumber": "ZAB49",
     "SoftwareVersion": "Eyelink 1000 v4.1594",
@@ -7,9 +7,5 @@
     "EyeTrackerDistance": 1.02,
     "SampleCoordinateUnits": "pixel",
     "SampleCoordinateSystem": "gaze-on-screen",
-    "EnvironmentCoordinates": "top-left",
-    "ScreenAOIDefinition": [
-        "square",
-        [0, 0, 800, 600]
-    ]
+    "EnvironmentCoordinates": "top-left"
 }
