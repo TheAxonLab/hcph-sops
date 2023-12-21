@@ -436,27 +436,28 @@ class EyeTrackingRun:
             ) & calibration.trialid.str.contains("ERROR")
             self.metadata["CalibrationCount"] = calibrations_msg.sum()
 
-            calibration_last = calibration.index[calibrations_msg][-1]
-            try:
-                meta_calib = re.match(
-                    r"VALIDATION (?P<ctype>[\w\d]+) (?P<eyeid>[RL]+) (?P<eye>RIGHT|LEFT) "
-                    r"(?P<result>\w+) ERROR (?P<avg>-?\d+\.\d+) avg\. (?P<max>-?\d+\.\d+) max\s+"
-                    r"OFFSET (?P<offsetdeg>-?\d+\.\d+) deg\. "
-                    r"(?P<offsetxpix>-?\d+\.\d+),(?P<offsetypix>-?\d+\.\d+) pix\.",
-                    calibration.loc[calibration_last, "trialid"].strip(),
-                ).groupdict()
-
-                self.metadata["CalibrationType"] = meta_calib["ctype"]
-                self.metadata["AverageCalibrationError"] = [float(meta_calib["avg"])]
-                self.metadata["MaximalCalibrationError"] = [float(meta_calib["max"])]
-                self.metadata["CalibrationResultQuality"] = [meta_calib["result"]]
-                self.metadata["CalibrationResultOffset"] = [
-                    float(meta_calib["offsetdeg"]),
-                    (float(meta_calib["offsetxpix"]), float(meta_calib["offsetypix"])),
-                ]
-                self.metadata["CalibrationResultOffsetUnits"] = ["deg", "pixels"]
-            except AttributeError:
-                warn("Calibration data found but unsuccessfully parsed for results")
+            if self.metadata["CalibrationCount"]:
+                calibration_last = calibration.index[calibrations_msg][-1]
+                try:
+                    meta_calib = re.match(
+                        r"VALIDATION (?P<ctype>[\w\d]+) (?P<eyeid>[RL]+) (?P<eye>RIGHT|LEFT) "
+                        r"(?P<result>\w+) ERROR (?P<avg>-?\d+\.\d+) avg\. (?P<max>-?\d+\.\d+) max\s+"
+                        r"OFFSET (?P<offsetdeg>-?\d+\.\d+) deg\. "
+                        r"(?P<offsetxpix>-?\d+\.\d+),(?P<offsetypix>-?\d+\.\d+) pix\.",
+                        calibration.loc[calibration_last, "trialid"].strip(),
+                    ).groupdict()
+    
+                    self.metadata["CalibrationType"] = meta_calib["ctype"]
+                    self.metadata["AverageCalibrationError"] = [float(meta_calib["avg"])]
+                    self.metadata["MaximalCalibrationError"] = [float(meta_calib["max"])]
+                    self.metadata["CalibrationResultQuality"] = [meta_calib["result"]]
+                    self.metadata["CalibrationResultOffset"] = [
+                        float(meta_calib["offsetdeg"]),
+                        (float(meta_calib["offsetxpix"]), float(meta_calib["offsetypix"])),
+                    ]
+                    self.metadata["CalibrationResultOffsetUnits"] = ["deg", "pixels"]
+                except AttributeError:
+                    warn("Calibration data found but unsuccessfully parsed for results")
 
         # Process events: first generate empty columns
         self.recording["eye1_fixation"] = 0
