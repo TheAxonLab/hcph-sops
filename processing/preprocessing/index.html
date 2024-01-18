@@ -20,7 +20,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.3">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.4">
     
     
       
@@ -790,6 +790,39 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#visualizing-fmripreps-individual-reports" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visualizing fMRIPrep's individual reports
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Visualizing fMRIPrep's individual reports">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#anatomical-preprocessing-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Anatomical preprocessing assessment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assessment-of-fmri-preprocessing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assessment of fMRI Preprocessing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1002,6 +1035,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../data-management/eyetrack-qc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    QA/QC of eye-tracking data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../data-collection/notes-misc/" class="md-nav__link">
         
   
@@ -1090,7 +1144,7 @@
         
   
   <span class="md-ellipsis">
-    QA/QC criteria
+    QA/QC criteria (unprocessed data)
   </span>
   
 
@@ -1107,11 +1161,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../data-management/eyetrack-qc/" class="md-nav__link">
+      <a href="../qaqc-criteria-preprocessed/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    QA/QC of eye-tracking data
+    QA/QC criteria (preprocessed data)
   </span>
   
 
@@ -1161,6 +1215,39 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#visualizing-fmripreps-individual-reports" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visualizing fMRIPrep's individual reports
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Visualizing fMRIPrep's individual reports">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#anatomical-preprocessing-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Anatomical preprocessing assessment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assessment-of-fmri-preprocessing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assessment of fMRI Preprocessing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1187,7 +1274,7 @@ We avert that session-wise <em>fMRIPrep</em>'s processes run into race condition
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Submit the anatomical workflow:
     <div class="language-bash highlight"><span class="filename">Launch each session through fMRIPrep in parallel</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>code/fmriprep
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>bash<span class="w"> </span>ss-fmriprep.sh
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>bash<span class="w"> </span>ss-fmriprep-anatonly.sh
 </span></code></pre></div></p>
 <details class="abstract">
 <summary>The sbatch file to run <em>fMRIPrep</em> with <code>--anat-only</code></summary>
@@ -1278,7 +1365,7 @@ We avert that session-wise <em>fMRIPrep</em>'s processes run into race condition
 </details>
 </li>
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Submit a <em>job array</em> with one scanning session each with the <code>--bids-filter-file</code> argument selecting the corresponding sessions, and point the <code>--fs-subjects-dir</code> argument to the folder where <em>FreeSurfer</em> results were stored.
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Once the anatomical workflow ran successfully, submit a <em>job array</em> with one scanning session each with the <code>--bids-filter-file</code> argument selecting the corresponding session, and point the <code>--fs-subjects-dir</code> argument to the folder where <em>FreeSurfer</em> results were stored.
     <div class="language-bash highlight"><span class="filename">Launch each session through fMRIPrep in parallel</span><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>code/fmriprep
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>bash<span class="w"> </span>ss-fmriprep.sh
 </span></code></pre></div></p>
@@ -1380,6 +1467,63 @@ We avert that session-wise <em>fMRIPrep</em>'s processes run into race condition
 </details>
 </li>
 </ul>
+<details class="warning">
+<summary>Not all <em>fMRIPrep</em> derivatives were generated</summary>
+<p>If some derivatives are missing, it is a sign that <em>fMRIPrep</em> encountered an error.</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check the "Errors" section of the visual report.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check the <code>log/</code> folder corresponding to the <em>fMRIPrep</em> run, carefully ensuring no errors were missed out on the reports.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Search for associated keywords in the <a href="https://github.com/nipreps/fmriprep/issues">issues on <em>fMRIPrep</em>'s GitHub repository</a> if the solution remains unclear after the first assessment; it is likely someone else experienced the same problem before you and reported it.
+    The solution might be documented in the issue.
+    Don't forget to check closed issues!</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Search for the issue on <a href="https://neurostars.org/">NeuroStars</a>, if the solution remains unclear.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If the solution remains elusive, open an issue in <em>fMRIPrep</em>'s GitHub repository to report the problem.
+    Your description of the problem needs to be as complete and detailed as possible to help the maintainers identify the problem efficiently.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Re-run <em>fMRIPrep</em> on that particular subject and session after implementing a solution.</li>
+</ul>
+<div class="admonition danger">
+<p class="admonition-title">If the error remains despite all efforts, the session MAY be excluded</p>
+</div>
+</details>
+<h2 id="visualizing-fmripreps-individual-reports">Visualizing <em>fMRIPrep</em>'s individual reports<a class="headerlink" href="#visualizing-fmripreps-individual-reports" title="Permanent link">&para;</a></h2>
+<p>Following our protocols<sup><a href="https://doi.org/10.3389/fnimg.2022.1073734" title="Provins, C., … Esteban, O. (2023). Quality Control in functional MRI studies with MRIQC and fMRIPrep. Frontiers in Neuroimaging 1:1073734. doi:10.3389/fnimg.2022.1073734 (OA).">1</a></sup>, the quality of unprocessed images MUST be assessed before and after preprocessing to verify it did not go awry.</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open each <em>fMRIPrep</em> report on a current Web Browser (<em>Google Chrome</em> is preferred).</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the first section entitled <code>Summary</code> and apply the <a href="../qaqc-criteria-preprocessed/#summary">exclusion criteria</a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Running through the visual report does not have to be executed in a fixed order</p>
+<p>While we describe the run through the report as linear, often inspecting other reportlets can help make a decision about the exclusion criteria related to the reportlet at hand. 
+As such, we encourage you to jump back and forth between visualizations as much as needed.</p>
+</div>
+</li>
+</ul>
+<h3 id="anatomical-preprocessing-assessment">Anatomical preprocessing assessment<a class="headerlink" href="#anatomical-preprocessing-assessment" title="Permanent link">&para;</a></h3>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Assess the "Anatomical conformation" section and apply the <a href="../qaqc-criteria-preprocessed/#anatomical-conformation">exclusion criteria</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Assess the mosaic showing the calculated brain mask and brain tissue segmentation, and apply the <a href="../qaqc-criteria-preprocessed/#brain-mask-and-brain-tissue-segmentation-of-the-t1w">exclusion criteria</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the spatial normalization flickering mosaic, and apply the <a href="../qaqc-criteria-preprocessed/#spatial-normalization-of-the-anatomical-t1w-reference">exclusion criteria</a>. Flickering between the subject and the template space is active while hovering your mouse on the mosaic area.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Assess the surface reconstruction mosaic, and apply the <a href="../qaqc-criteria-preprocessed/#surface-reconstruction">exclusion criteria</a>.</li>
+</ul>
+<h3 id="assessment-of-fmri-preprocessing">Assessment of <abbr title="functional MRI">fMRI</abbr> Preprocessing<a class="headerlink" href="#assessment-of-fmri-preprocessing" title="Permanent link">&para;</a></h3>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Scrutinize the textual summary and apply the <a href="../qaqc-criteria-preprocessed/#textual-summary">exclusion criteria</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the T2* map mosaic, and apply the <a href="../qaqc-criteria-preprocessed/#t2-map">exclusion criteria</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check the T2* gray-matter intensity histogram, and apply the <a href="../qaqc-criteria-preprocessed/#t2-gray-matter-values">exclusion criteria</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the co-registration flickering mosaic, apply the <a href="../qaqc-criteria-preprocessed/#alignment-of-functional-and-anatomical-mri-data">exclusion criteria</a>.
+    Flickering between T1w and <abbr title="blood-oxygen-level dependent">BOLD</abbr> images is active while hovering your mouse on the mosaic area.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the next mosaic displaying regions of interest (<abbr title="regions-of-interest">ROIs</abbr>) used to estimate the nuisance regressors, and apply the <a href="../qaqc-criteria-preprocessed/#brain-mask-and-anatomicaltemporal-compcor-rois">exclusion criteria</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the carpet plot and nuisance signals panel, and apply the <a href="../qaqc-criteria-preprocessed/#bold-summary">exclusion criteria</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the confound correlation heatmap and use it to <a href="../qaqc-criteria-preprocessed/#correlations-between-nuisance-regressors">choose the regressors</a> you will include in the nuisance regression model.</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify that no errors are reported within the "Errors" section.</p>
+<p>If errors or quality issues are encountered, find the issue corresponding to that session in <a href="https://github.com/&lt;organization&gt;/&lt;repo_name&gt;/issues">the dataset's repository</a> and report a comprehensive description of the problems.
+In case of <em>fMRIPrep</em> failure, follow the procedure described above in "Not all <em>fMRIPrep</em> derivatives were generated".</p>
+</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Immediately report images deemed <em>exclude</em>, as an issue in <a href="(https://github.com/&lt;organization&gt;/&lt;repo_name&gt;/issues)">the dataset's repository</a></p>
+</div>
 
 
 
@@ -1436,10 +1580,10 @@ We avert that session-wise <em>fMRIPrep</em>'s processes run into race condition
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.expand", "navigation.top", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.expand", "navigation.top", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.c011b7c0.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      <script src="../../assets/javascripts/bundle.7389ff0e.min.js"></script>
       
         <script src="../../js/mathjax.js"></script>
       
