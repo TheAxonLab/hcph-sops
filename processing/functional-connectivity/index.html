@@ -1210,13 +1210,13 @@ An example of data structure should be as follows:
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│   │       ├── figures
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│   │       └── ses-15
 </span></code></pre></div></p>
-<p>Then, the functional connectivity matrices can be computed using the <code>compute_fc.py</code> script.
+<p>Then, the functional connectivity matrices can be computed using the <code>funconn.py</code> script.
 The simplest call of the script only needs a derivative dataset (usually from <em>fMRIPrep</em>).
 Following the above data structure, it would be called as follows:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python<span class="w"> </span>compute_fc.py<span class="w"> </span>path_to_dataset/derivatives/fmriprep-23.1.4
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python<span class="w"> </span>funconn.py<span class="w"> </span>path_to_dataset/derivatives/fmriprep-23.1.4
 </span></code></pre></div></p>
 <details class="info" open="open">
-<summary>Default call of the <code>compute_fc.py</code> script</summary>
+<summary>Default call of the <code>funconn.py</code> script</summary>
 <p>When using the default options, the pipeline will (in this order and for all functional tasks):</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Fetch the <a href="https://doi.org/10.1016/j.neuroimage.2020.117126">DiFuMo</a> atlas (64 dimensions)</li>
@@ -1230,7 +1230,7 @@ Then also flag as outlier the segments that are shorter than 5 timepoints.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Standardize the timeseries</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Compute the functional connectivity matrices as the sparse inverse covariance (see this <a href="https://nilearn.github.io/stable/auto_examples/03_connectivity/plot_inverse_covariance_connectome.html">example</a>, using <a href="https://scikit-learn.org/stable/modules/generated/sklearn.covariance.GraphicalLassoCV.html#sklearn.covariance.GraphicalLassoCV">Graphical Lasso CV</a> of <em>scikit-learn</em>)</li>
 </ul>
-<p>Most parameters of the pipeline can be specified in the options (see <code>python compute_fc.py -h</code> for more details).</p>
+<p>Most parameters of the pipeline can be specified in the options (see <code>python funconn.py -h</code> for more details).</p>
 </details>
 <p>Finally, the pipeline will save the denoised timeseries and connectivity matrices as well as various visual reports (i.e., figures).</p>
 <details class="info">
