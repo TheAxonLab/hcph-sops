@@ -579,6 +579,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#prepare-data-management-intake-and-backup-with" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prepare data management (intake and backup) with ███
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1420,6 +1429,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#prepare-data-management-intake-and-backup-with" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prepare data management (intake and backup) with ███
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1580,8 +1598,8 @@ Once the sliding of the cable is finished, leave the extremities inside the scan
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open the <em>AcqKnowledge</em> software.</li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Create a template <em>graph file</em> (<a href="../../assets/files/EXP_BASE.gtl"><code>EXP_BASE.gtl</code></a>)</p>
-<div class="admonition important">
-<p class="admonition-title">Creating the <em>AcqKnowledge</em>'s template graph file</p>
+<details class="important">
+<summary>Creating the <em>AcqKnowledge</em>'s template graph file</summary>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Creating a graph file requires the BIOPAC system powered up and connected to the <em>███</em> computer.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Add the <abbr title="respiration belt">RB</abbr> module<ul class="task-list">
@@ -1617,7 +1635,10 @@ Once the sliding of the cable is finished, leave the extremities inside the scan
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Configure whether you want to collect directly to hard disk and autosave settings</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Save the experiment, making sure you choose a "graph template file" (with extension <code>.gtl</code>)</li>
 </ul>
-</div>
+</details>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check that <em>Dropbox</em> is operative and ensure that the graph template file is configured to store data into the designated folder.</p>
 </li>
 </ul>
 <h3 id="preparing-the-stimuli-presentation-laptop">Preparing the <em>stimuli presentation laptop</em> (███)<a class="headerlink" href="#preparing-the-stimuli-presentation-laptop" title="Permanent link">&para;</a></h3>
@@ -1740,7 +1761,9 @@ Then, open and follow the log file:
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open <em>Psychopy</em> and (optionally) a experiment file corresponding to a task by typing the following command in the terminal:
     <div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>psychopy --no-splash -b task-qct_bold.psyexp
 </span></code></pre></div></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> For each task, check the following:<ul class="task-list">
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> For each task, check the following:</p>
+<ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> <code>task-qct_bold.psyexp</code> (quality-control task, <abbr title="quality control task">QCT</abbr>):<ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> time it to <a href="../intro/#task-timing">confirm the length</a>, and</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> check the task runs properly.</li>
@@ -1762,6 +1785,40 @@ Then, open and follow the log file:
 </ul>
 </li>
 </ul>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check that <em>Dropbox</em> is operative.</p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Create a softlink under the tasks repository to directly store outputs into <em>Dropbox</em>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>ln<span class="w"> </span>-s<span class="w">  </span>/data
+</span></code></pre></div>
+<details class="danger">
+<summary>For the 'reliability sample' this link was created differently.</summary>
+<p>As a result, a manual copy step was necessary to synchronize the data (see <a href="../tear-down/#synchronize-collected-physiological-data-eye-tracking-and-biopac-signals">tear-down</a>)</p>
+</details>
+</li>
+</ul>
+<h3 id="prepare-data-management-intake-and-backup-with">Prepare data management (intake and backup) with ███<a class="headerlink" href="#prepare-data-management-intake-and-backup-with" title="Permanent link">&para;</a></h3>
+<p>We employ <em>███</em> as the server to automatically upload data to the backup repository (<em>\<user>@\<host>:\<path></em>).
+For the physiological recordings (acquired on <em>███</em> for BIOPAC-registered signals, and on <em>███</em> for the eye-tracking), data is synchronized into <em>███</em> via <em>Dropbox</em>.</p>
+<ul class="task-list">
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Create a softlink pointing to the BIOPAC data:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>ln<span class="w"> </span>-s<span class="w">  </span>/data/datasets/hcph-pilot-sourcedata/recordings/BIOPAC
+</span></code></pre></div>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Create a softlink pointing to the eye-tracking data:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>ln<span class="w"> </span>-s<span class="w">  </span>/data/datasets/hcph-pilot-sourcedata/recordings/psychopy
+</span></code></pre></div>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Setup a cron job to execute automatically the synchronization:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>crontab -e
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>[ within your file editor add the following line ]
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>0 2 * * * rsync -avurP /data/datasets/hcph-pilot-sourcedata* &lt;user&gt;@&lt;host&gt;:&lt;path&gt;/sourcedata-pilot &amp;&gt; $HOME/var/log/data-curnagl.log
+</span></code></pre></div>
 </li>
 </ul>
 <hr />

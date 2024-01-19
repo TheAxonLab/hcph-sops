@@ -619,6 +619,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#synchronize-collected-physiological-data-eye-tracking-and-biopac-signals" class="md-nav__link">
+    <span class="md-ellipsis">
+      Synchronize collected physiological data (eye-tracking and BIOPAC signals)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#clearing-up-the-control-room" class="md-nav__link">
     <span class="md-ellipsis">
       Clearing up the Control Room
@@ -1324,6 +1333,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#synchronize-collected-physiological-data-eye-tracking-and-biopac-signals" class="md-nav__link">
+    <span class="md-ellipsis">
+      Synchronize collected physiological data (eye-tracking and BIOPAC signals)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#clearing-up-the-control-room" class="md-nav__link">
     <span class="md-ellipsis">
       Clearing up the Control Room
@@ -1508,6 +1526,28 @@ Stay focused during the tear-down.</p>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Take the plexiglass panel outside to the control room.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Take the <abbr title="respiration belt">RB</abbr> outside the scanning room and box it in the <abbr title="eye tracker">ET</abbr>/<abbr title="functional MRI">fMRI</abbr> box.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Exit and close the external door.</li>
+</ul>
+<h2 id="synchronize-collected-physiological-data-eye-tracking-and-biopac-signals">Synchronize collected physiological data (eye-tracking and BIOPAC signals)<a class="headerlink" href="#synchronize-collected-physiological-data-eye-tracking-and-biopac-signals" title="Permanent link">&para;</a></h2>
+<p><strong>On the <em>stimuli laptop (███)</em>:</strong></p>
+<ul class="task-list">
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Copy data from the <code>subfolder in *███* into the synchronized Dropbox folder</code>.</p>
+<details class="danger">
+<summary>This reports what we did, but the setup MUST be updated to directly write into the synchronized folder.</summary>
+<p><em>Psychopy</em> forcefully writes eye-tracking data into the <code>./data</code> folder of the experiment file.
+In our case that means <code>/data</code>, which is a softlink to <code>.
+For future data collection efforts, the softlink should change to point directly to</code>.</p>
+</details>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check that the computer is connected to the Internet and <em>Dropbox</em> initiates synchronization.</p>
+</li>
+</ul>
+<p><strong>On the <em>physiology recording laptop (███)</em>:</strong></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Disconnect the Ethernet cable from the adaptor dongle attached to <em>███</em>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Enable the Wireless connection, as it will be disabled to permit communications with the BIOPAC.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check Internet access and that <em>Dropbox</em> initiates synchronization.</li>
 </ul>
 <h2 id="clearing-up-the-control-room">Clearing up the Control Room<a class="headerlink" href="#clearing-up-the-control-room" title="Permanent link">&para;</a></h2>
 <h3 id="finalize-the-boxing-of-the-et-elements">Finalize the <em>boxing</em> of the <abbr title="eye tracker">ET</abbr> elements<a class="headerlink" href="#finalize-the-boxing-of-the-et-elements" title="Permanent link">&para;</a></h3>
