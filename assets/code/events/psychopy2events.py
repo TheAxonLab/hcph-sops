@@ -20,11 +20,17 @@
 from __future__ import annotations
 
 import argparse
-import pandas as pd
+import re
 from pathlib import Path
+
+import numpy as np
+import pandas as pd
 
 EVENT_DURATION_EPSILON = 0.2
 """Tolerance threshold for tests on event duration."""
+
+EVENTS_TSV_COLUMN_ORDER = ("onset", "duration", "trial_type", "value")
+"""The order of TSV columns in the final BIDS-compatible file."""
 
 TRIAL_TYPE = {
     "eye_movement_fixation": "cog",
@@ -44,8 +50,14 @@ TRIAL_TYPE = {
     "bh_end_3": "refractory",
     "polygon_5": "out",  # old
     "polygon_7": "out-last",  # old
+    "fixation_out": "fixation-point",  # fixation circle in RSfMRI
+    "fixation_out_2": "fixation-point",  # fixation circle in RSfMRI
+    "text": "instructions-text",  # showing instructions text with fixation point example
 }
 """A dictionary mapping the trial identifiers and their semantics in the paradigm."""
+
+PSYCHOPY_HDF5_EVENTS_DATASET = "data_collection/events/keyboard/KeyboardInputEvent"
+"""The location of the keyboard events within *Psychopy*'s HDF5 output files."""
 
 
 def psychopy2pandas(log_path: str | Path) -> pd.DataFrame:
@@ -71,8 +83,31 @@ def psychopy2pandas(log_path: str | Path) -> pd.DataFrame:
         dtype={"onset": float},
     )
 
+    start_time = None
+    if (hdf5_log := log_path.parent / log_path.name.replace(".log", ".hdf5")).exists():
+        import h5py
+
+        with h5py.File(hdf5_log, "r") as f:
+            keypress_df = pd.DataFrame(
+                np.asanyarray(f[PSYCHOPY_HDF5_EVENTS_DATASET])
+            )
+
+        start_time = keypress_df.loc[
+            keypress_df.key.str.decode("utf-8").str.strip() == "s", "time"
+        ].values[0]
+
+    # If we can't find the keypress in the HDF5 file, try the plain log
+    if start_time is None:
+        start_time = df[
+            (df.level.str.strip() == "DATA") & df.desc.str.contains("Keypress: s")
+        ].onset.values[0]
+
     # Refer all onsets to the first trigger (first DATA entry)
-    df.onset -= df[df.level.str.contains("DATA")].onset.values[0]
+    df.onset -= start_time
+
+    # Register rows when the eye-tracker went on and off
+    et_on = df.desc.str.strip() == "eyetracker.setRecordingState(True)"
+    et_off = df.desc.str.strip() == "eyetracker.setRecordingState(False)"
 
     # Extract events
     df[["trial_type", "start_end"]] = df["desc"].str.extract(
@@ -92,6 +127,9 @@ def psychopy2pandas(log_path: str | Path) -> pd.DataFrame:
     )
     df[["x", "y"]] = df[["x", "y"]].astype(float)
     df.loc[df.x.notna(), "trial_type"] = "eye_movement_fixation"
+
+    df.loc[et_on, "trial_type"] = "et-record-on"
+    df.loc[et_off, "trial_type"] = "et-record-off"
 
     # Drop duplicates (all columns exactly the same)
     df = df.drop_duplicates()
@@ -152,7 +190,7 @@ def pandas2bids(input_df: pd.DataFrame) -> pd.DataFrame:
     )
     df["value"] = df["value"].astype(str)
 
-    for et in set(df.trial_type.values):
+    for et in set(df.trial_type.values) - set(("et-record-on", "et-record-off")):
         # Create a subdataframe with only this trial type
         subdf = df[df.trial_type == et].copy()
 
@@ -171,7 +209,8 @@ def pandas2bids(input_df: pd.DataFrame) -> pd.DataFrame:
             durations = subdf[offsets].onset.values - subdf[onsets].onset.values
         else:
             # In the BHT, the stimuli do not last for the full span of the routine, and we have
-            # two "autoDraw = False" events. We need to drop the second corresponding to the routine.
+            # two "autoDraw = False" events.
+            # We need to drop the second corresponding to the routine.
             durations = subdf[offsets].onset.values[::2] - subdf[onsets].onset.values
 
         # And assign the duration to the first event row (the one containing autoDraw = True)
@@ -214,18 +253,24 @@ def pandas2bids(input_df: pd.DataFrame) -> pd.DataFrame:
         df.loc[:end_index, "value"] = "mock"
 
         # After the mock there are 5 "true" blocks.
-        len_remaining = len(df.loc[end_index + 1 :, "value"])
-        df.loc[end_index + 1 :, "value"] = [
+        len_remaining = len(df.loc[end_index + 1:, "value"])
+        df.loc[end_index + 1:, "value"] = [
             f"block{v}" for block in range(1, 7) for v in [block] * 13
         ][:len_remaining]
 
-    df = df.replace({"value": {"nan": "n/a"}})
+    # Set duration 0.0 to the eyetracker on/off events
+    df.loc[df.trial_type.str.startswith("et-record"), ("duration", "value")] = (0.0, np.nan)
+
+    df = df.replace({"value": {"nan": np.nan}})
+    df.dropna(axis=1, how="all", inplace=True)
     df = df.reset_index()
-    return df[["onset", "duration", "trial_type", "value"]]
+
+    # Drop columns where all values are nans
+    return df
 
 
 def check_durations(events):
-    """Test that the stimuli durations are close to the value they were set in the design of the tasks
+    """Check stimuli durations are close to those of the task's design.
 
     This function takes an input DataFrame with event information, runs various tests and
     raises exceptions if any test fails.
@@ -260,7 +305,8 @@ def check_durations(events):
                 duration = events.loc[index, "duration"]
                 if not abs(duration - expected_duration) < EVENT_DURATION_EPSILON:
                     raise ValueError(
-                        f"The duration {duration}s of the task '{events.loc[index, 'trial_type']}' does not match its expected duration of {expected_duration}s"
+                        f"The duration {duration}s of the task '{events.loc[index, 'trial_type']}'"
+                        f" does not match its expected duration of {expected_duration}s"
                     )
 
 
@@ -287,10 +333,12 @@ def check_repetitions(events):
                 .groupby((events["trial_type"] != "cog").cumsum())
                 .size()
             )
-            # Blocks can be consecutif so we check if the block size is a multiple of the expected number of repetitions
+            # Blocks can be consecutive so we check if the block size is a multiple of
+            # the expected number of repetitions
             if any(repetitions % expected_repetitions != 0):
                 raise ValueError(
-                    f"The stimuli '{trial_type}' was expected to repeat {expected_repetitions} times but was repeated {repetitions} times instead."
+                    f"The stimuli '{trial_type}' was expected to repeat {expected_repetitions} "
+                    f"times but was repeated {repetitions} times instead."
                 )
 
 
@@ -330,26 +378,10 @@ def check_sequence(events):
                     preceding = events.loc[prev_index, "trial_type"]
                     if preceding != expected_preceding:
                         raise ValueError(
-                            f"The events file indicates that the stimulus '{preceding}' preceded the stimulus '{events.loc[index, 'trial_type']}' but that does not correspond to the expected sequence."
+                            f"The events file indicates that the stimulus '{preceding}' "
+                            f"preceded the stimulus '{events.loc[index, 'trial_type']}' "
+                            "but that does not correspond to the expected sequence."
                         )
-
-
-def check_movie_onset(events):
-    """Test that the movie onset is 0.6.
-
-    This function takes an input DataFrame with event information, runs tests and
-    raises exceptions if any test fails.
-
-    Parameters
-    ----------
-    input_df : :obj:`pandas.DataFrame`
-        The input DataFrame containing BIDS-compatible event information.
-    """
-    movie_onset = events[events["trial_type"] == "movie"]["onset"].values
-    if movie_onset.size > 0 and not abs(movie_onset - 0.6) < 0.1:
-        raise ValueError(
-            f"The movie should start at 0.6s but a onset of {movie_onset}s is indicated."
-        )
 
 
 def main() -> None:
@@ -373,21 +405,55 @@ def main() -> None:
 
     # Input file argument
     parser.add_argument(
-        "-i", "--input", required=True, help="Path to the input PsychoPy log file"
+        "recordings", type=Path, help="Folder containing PsychoPy's logfiles."
     )
 
-    # Output file argument
+    # BIDS file for which the events file is to be generated
     parser.add_argument(
-        "-o",
-        "--output",
-        required=True,
-        help="Path to the output BIDS-compatible event file",
+        "bids_file",
+        type=Path,
+        help="Path to the functional/diffusion image (experiment) this recording corresponds to.",
     )
-
     args = parser.parse_args()
 
+    if not args.bids_file.exists():
+        raise RuntimeError(f"File <{args.bids_file}> doesn't exist.")
+
+    # Extract session number
+    if matches := re.findall(r"/ses-([\w\d]+)/", str(args.bids_file)):
+        session = matches[0]
+    else:
+        raise RuntimeError("Could not extract session name")
+
+    # Read schedule
+    events_lookup = pd.read_csv(
+        Path(__file__).parent / "schedule.tsv",
+        sep="\t",
+        na_values="n/a",
+        dtype={"session": "str"},
+    )
+
+    # Extract the row containing the filenames of this particular session
+    schedule_session = events_lookup[events_lookup.session == session]
+    if len(schedule_session.index) == 0:
+        raise RuntimeError(f"Session {session} not found in schedule")
+
+    # Extract task name
+    if "_dwi." in str(args.bids_file):
+        task = "dwi"
+    elif matches := re.findall(r"_task-([\w\d]+)_", str(args.bids_file)):
+        task = matches[0]
+    else:
+        raise RuntimeError("Could not extract task")
+
+    print(f"Generating events file corresponding to {args.bids_file}:")
+
     # Convert the PsychoPy log file to a Pandas DataFrame
-    log_path = args.input
+    log_path = (
+        args.recordings
+        / f"session-{schedule_session.day.values[0]}"
+        / schedule_session[f"{task}_events"].values[0]
+    )
     input_df = psychopy2pandas(log_path)
 
     # Convert the Pandas DataFrame to a BIDS-compatible DataFrame
@@ -397,13 +463,29 @@ def main() -> None:
     check_durations(output_df)
     check_repetitions(output_df)
     check_sequence(output_df)
-    check_movie_onset(output_df)
+
+    refname = args.bids_file.name
+
+    # Drop undesired entities (part and echo)
+    refname = re.sub(r"_part-(mag|phase)", "", refname)
+    refname = re.sub(r"_echo-\d+", "", refname)
+
+    # Interpolate the events file's name from the BIDS file it annotates
+    extension = "".join(args.bids_file.suffixes)
+    suffix = refname.replace(extension, "").rsplit("_", 1)[-1]
+    output_path = args.bids_file.parent / refname.replace(
+        f"_{suffix}{extension}", "_events.tsv"
+    )
+
+    # Order columns
+    columns = [col for col in EVENTS_TSV_COLUMN_ORDER if col in output_df.columns]
 
     # Save the BIDS-compatible DataFrame to the specified output file
-    output_path = args.output
-    output_df.to_csv(
+    output_df[columns].to_csv(
         output_path, sep="\t", index=False, float_format="%.5f", na_rep="n/a"
     )
+
+    print(f" ---> Written out {output_path}.")
 
 
 if __name__ == "__main__":
