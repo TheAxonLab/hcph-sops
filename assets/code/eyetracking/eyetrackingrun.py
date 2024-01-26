@@ -65,10 +65,12 @@ EDF2BIDS_COLUMNS = {
 }
 
 BIDS_COLUMNS_ORDER = (
-    ["timestamp"]
-    + [f"eye{num}_{c}_coordinate" for num, c in product((1, 2), ("x", "y"))]
+    [f"eye{num}_{c}_coordinate" for num, c in product((1, 2), ("x", "y"))]
     + [f"eye{num}_pupil_size" for num in (1, 2)]
     + [f"eye{num}_pupil_{c}_coordinate" for num, c in product((1, 2), ("x", "y"))]
+    + [f"eye{num}_fixation" for num in (1, 2)]
+    + [f"eye{num}_saccade" for num in (1, 2)]
+    + [f"eye{num}_blink" for num in (1, 2)]
     + [f"eye{num}_href_{c}_coordinate" for num, c in product((1, 2), ("x", "y"))]
     + [f"eye{num}_{c}_velocity" for num, c in product((1, 2), ("x", "y"))]
     + [f"eye{num}_href_{c}_velocity" for num, c in product((1, 2), ("x", "y"))]
@@ -76,6 +78,7 @@ BIDS_COLUMNS_ORDER = (
     + [f"fast_{c}_velocity" for c in ("x", "y")]
     + [f"fast_{kind}_{c}_velocity" for kind, c in product(("href", "raw"), ("x", "y"))]
     + [f"screen_ppdeg_{c}_coordinate" for c in ("x", "y")]
+    + ["timestamp"]
 )
 
 
@@ -151,17 +154,15 @@ class EyeTrackingRun:
         )
 
         # Pick the LAST of the start messages
-        self.metadata["StartTime"] = (
+        self.metadata["StartTimestamp"] = (
             int(messages[start_rows].trialid_time.values[-1])
             if start_rows.any()
             else None
         )
 
         # Pick the FIRST of the stop messages
-        self.metadata["StopTime"] = (
-            int(messages[stop_rows].trialid_time.values[0])
-            if stop_rows.any()
-            else None
+        self.metadata["StopTimestamp"] = (
+            int(messages[stop_rows].trialid_time.values[0]) if stop_rows.any() else None
         )
 
         # Drop start and stop messages from messages dataframe
@@ -198,10 +199,14 @@ class EyeTrackingRun:
         self.eye = (
             ("right", "left") if meta_record["eye"] == "both" else (meta_record["eye"],)
         )
+        num_recordings = len(self.eye)
 
-        self.metadata["SamplingFrequency"] = int(meta_record["freq"])
+        if num_recordings > 1:
+            raise NotImplementedError("This script only supports one eye")
+
+        self.metadata["SamplingFrequency"] = float(meta_record["freq"])
         self.metadata["EyeTrackingMethod"] = meta_record["mode"]
-        self.metadata["RecordedEye"] = meta_record["eye"]
+        self.metadata["RecordedEye"] = meta_record["eye"].lower()
 
         # Extract GAZE_COORDS message signaling start of recording
         gaze_msg = messages.trialid.str.startswith("GAZE_COORDS")
@@ -275,19 +280,17 @@ class EyeTrackingRun:
 
         for i_row, validate_row in enumerate(messages[validation_msg].trialid.values):
             prefix, suffix = validate_row.split("OFFSET")
-            validation_eye = (
-                f"eye{self.eye.index('right') + 1}"
-                if "RIGHT" in prefix
-                else f"eye{self.eye.index('left') + 1}"
-            )
+            # validation_eye = (
+            #     f"eye{self.eye.index('right') + 1}"
+            #     if "RIGHT" in prefix
+            #     else f"eye{self.eye.index('left') + 1}"
+            # )
             validation_coords = [
                 int(val.strip())
                 for val in prefix.rsplit("at", 1)[-1].split(",")
                 if val.strip()
             ]
-            self.metadata["ValidationPosition"].append(
-                [validation_eye, validation_coords]
-            )
+            self.metadata["ValidationPosition"].append(validation_coords)
 
             validate_values = [
                 float(val)
@@ -298,23 +301,21 @@ class EyeTrackingRun:
             ]
 
             self.metadata["ValidationErrors"].append(
-                (validation_eye, validate_values[0], tuple(validate_values[1:]))
+                (validate_values[0], tuple(validate_values[1:]))
             )
         messages = messages.loc[~validation_msg]
 
         # Extract THRESHOLDS messages prior recording and process last
         thresholds_msg = messages.trialid.str.startswith("THRESHOLDS")
         if thresholds_msg.any():
-            self.metadata["PupilThreshold"] = [None] * len(self.eye)
-            self.metadata["CornealReflectionThreshold"] = [None] * len(self.eye)
+            # self.metadata["PupilThreshold"] = [None] * len(self.eye)
+            # self.metadata["CornealReflectionThreshold"] = [None] * len(self.eye)
             thresholds_chunks = (
                 messages[thresholds_msg].trialid.iloc[-1].strip().split(" ")[1:]
             )
-            eye_index = self.eye.index(EYE_CODE_MAP[thresholds_chunks[0]])
-            self.metadata["PupilThreshold"][eye_index] = int(thresholds_chunks[-2])
-            self.metadata["CornealReflectionThreshold"][eye_index] = int(
-                thresholds_chunks[-1]
-            )
+            # eye_index = self.eye.index(EYE_CODE_MAP[thresholds_chunks[0]])
+            self.metadata["PupilThreshold"] = int(thresholds_chunks[-2])
+            self.metadata["CornealReflectionThreshold"] = int(thresholds_chunks[-1])
         messages = messages.loc[~thresholds_msg]
 
         # Consume the remainder of messages
@@ -325,7 +326,9 @@ class EyeTrackingRun:
             ]
 
         # Normalize timestamps (should be int and strictly positive)
-        self.recording = self.recording[self.recording["time"] > self.recording.loc[0, "time"]]
+        self.recording = self.recording[
+            self.recording["time"] > self.recording.loc[0, "time"]
+        ]
         self.recording = self.recording.astype({"time": int})
 
         self.recording = self.recording.rename(
@@ -346,7 +349,9 @@ class EyeTrackingRun:
         self.recording = self.recording.drop(columns=["flags", "input", "htype"])
 
         # Remove columns that are always very close to zero
-        self.recording = self.recording.loc[:, (self.recording.abs() > 1e-8).any(axis=0)]
+        self.recording = self.recording.loc[
+            :, (self.recording.abs() > 1e-8).any(axis=0)
+        ]
         # Remove columns that are always 1e8 or more
         self.recording = self.recording.loc[:, (self.recording.abs() < 1e8).any(axis=0)]
         # Replace unreasonably high values with NaNs
@@ -365,7 +370,8 @@ class EyeTrackingRun:
                 self.recording[f"pa_{eyename}"] < 1, f"pa_{eyename}"
             ] = np.nan
             self.recording = self.recording.rename(
-                columns={f"pa_{eyename}": f"eye{eyenum + 1}_pupil_size"}
+                # columns={f"pa_{eyename}": f"eye{eyenum + 1}_pupil_size"},
+                columns={f"pa_{eyename}": f"pupil_size"},
             )
 
         # Interpolate BIDS column names
@@ -376,15 +382,16 @@ class EyeTrackingRun:
                     "timestamp",
                     "screen_ppdeg_x_coordinate",
                     "screen_ppdeg_y_coordinate",
-                    "eye1_pupil_size",
-                    "eye2_pupil_size",
+                    "pupil_size",
+                    # "eye2_pupil_size",
                 )
             )
         )
         bids_columns = []
         for eyenum, eyename in enumerate(self.eye):
             for name in columns:
-                colprefix = f"eye{eyenum + 1}" if name.endswith(f"_{eyename}") else ""
+                # colprefix = f"eye{eyenum + 1}" if name.endswith(f"_{eyename}") else ""
+                colprefix = ""  # Assume one eye only
                 _newname = name.split("_")[0]
                 _newname = re.sub(r"([xy])$", r"_\1_coordinate", _newname)
                 _newname = re.sub(r"([xy])vel$", r"_\1_velocity", _newname)
@@ -396,18 +403,9 @@ class EyeTrackingRun:
         # Rename columns to be BIDS-compliant
         self.recording = self.recording.rename(columns=dict(zip(columns, bids_columns)))
 
-        # Reorder columns to render nicely (tracking first, pupil size after)
-        columns = sorted(
-            set(self.recording.columns.values).intersection(BIDS_COLUMNS_ORDER),
-            key=lambda entry: BIDS_COLUMNS_ORDER.index(entry),
-        )
-        columns += [c for c in self.recording.columns.values if c not in columns]
-        self.recording = self.recording.reindex(columns=columns)
-
         # Parse calibration metadata
         self.metadata["CalibrationCount"] = 0
         if not calibration.empty:
-            warn("Calibration of more than one eye is not implemented")
             calibration.trialid = calibration.trialid.str.replace("!CAL", "")
             calibration.trialid = calibration.trialid.str.strip()
 
@@ -423,6 +421,9 @@ class EyeTrackingRun:
             ) & calibration.trialid.str.contains("ERROR")
             self.metadata["CalibrationCount"] = int(calibrations_msg.sum())
 
+            if self.metadata["CalibrationCount"] > 1:
+                warn("Calibration of more than one eye is not implemented")
+
             if self.metadata["CalibrationCount"]:
                 calibration_last = calibration.index[calibrations_msg][-1]
                 try:
@@ -433,23 +434,26 @@ class EyeTrackingRun:
                         r"(?P<offsetxpix>-?\d+\.\d+),(?P<offsetypix>-?\d+\.\d+) pix\.",
                         calibration.loc[calibration_last, "trialid"].strip(),
                     ).groupdict()
-    
+
                     self.metadata["CalibrationType"] = meta_calib["ctype"]
-                    self.metadata["AverageCalibrationError"] = [float(meta_calib["avg"])]
-                    self.metadata["MaximalCalibrationError"] = [float(meta_calib["max"])]
-                    self.metadata["CalibrationResultQuality"] = [meta_calib["result"]]
+                    self.metadata["AverageCalibrationError"] = float(meta_calib["avg"])
+                    self.metadata["MaximalCalibrationError"] = float(meta_calib["max"])
+                    self.metadata["CalibrationResultQuality"] = meta_calib["result"]
                     self.metadata["CalibrationResultOffset"] = [
                         float(meta_calib["offsetdeg"]),
-                        (float(meta_calib["offsetxpix"]), float(meta_calib["offsetypix"])),
+                        (
+                            float(meta_calib["offsetxpix"]),
+                            float(meta_calib["offsetypix"]),
+                        ),
                     ]
                     self.metadata["CalibrationResultOffsetUnits"] = ["deg", "pixels"]
                 except AttributeError:
                     warn("Calibration data found but unsuccessfully parsed for results")
 
         # Process events: first generate empty columns
-        self.recording["eye1_fixation"] = 0
-        self.recording["eye1_saccade"] = 0
-        self.recording["eye1_blink"] = 0
+        self.recording["fixation"] = 0
+        self.recording["saccade"] = 0
+        self.recording["blink"] = 0
 
         # Add fixations
         for _, fixation_event in self.events[
@@ -458,7 +462,7 @@ class EyeTrackingRun:
             self.recording.loc[
                 (self.recording["timestamp"] >= fixation_event["start"])
                 & (self.recording["timestamp"] <= fixation_event["end"]),
-                "eye1_fixation",
+                "fixation",
             ] = 1
 
         # Add saccades, and blinks, which are a sub-event of saccades
@@ -468,15 +472,74 @@ class EyeTrackingRun:
             self.recording.loc[
                 (self.recording["timestamp"] >= saccade_event["start"])
                 & (self.recording["timestamp"] <= saccade_event["end"]),
-                "eye1_saccade",
+                "saccade",
             ] = 1
 
             if saccade_event["blink"] == 1:
                 self.recording.loc[
                     (self.recording["timestamp"] >= saccade_event["start"])
                     & (self.recording["timestamp"] <= saccade_event["end"]),
-                    "eye1_blink",
+                    "blink",
                 ] = 1
+
+        # Reorder columns to render nicely (tracking first, pupil size after)
+        # Remove the multiple eyes ordering and eye1_ prefix
+        ordering = [
+            s.replace("eye1_", "")
+            for s in BIDS_COLUMNS_ORDER
+            if not s.startswith("eye2_")
+        ]
+        columns = sorted(
+            set(self.recording.columns.values).intersection(ordering),
+            key=lambda entry: ordering.index(entry),
+        )
+        columns += [c for c in self.recording.columns.values if c not in columns]
+        self.recording = self.recording.reindex(columns=columns)
+
+        # Finalize BIDS metadata
+        self.metadata["Columns"] = self.recording.columns.tolist()
+
+        self.metadata["StartTime"] = (
+            self.metadata["StartTimestamp"] - self.recording.timestamp.values[0]
+        ) / self.metadata["SamplingFrequency"]
+
+        self.metadata["StopTime"] = (
+            self.metadata["StopTimestamp"] - self.recording.timestamp.values[0]
+        ) / self.metadata["SamplingFrequency"]
+
+        self.metadata.update(
+            json.loads((Path(__file__).parent / "bids_defaults.json").read_text())
+        )
+
+        self.metadata.update(
+            {
+                column: desc
+                for column, desc in json.loads(
+                    (Path(__file__).parent / "eyelink_columns.json").read_text()
+                ).items()
+                if column in columns
+            }
+        )
+
+        # Check whether there are repeated timestamps
+        if self.recording.timestamp.duplicated().any():
+            warn(
+                f"Found {self.recording.timestamp.duplicated().sum()} duplicated timestamps."
+            )
+
+        # Insert missing timestamps
+        start = self.recording.timestamp.values[0]
+        end = self.recording.timestamp.values[-1]
+
+        pre_len = len(self.recording)
+        new_index = pd.Index(np.arange(start, end + 1, dtype=int), name="timestamp")
+        self.recording.set_index("timestamp").reindex(new_index).reset_index()
+
+        if len(self.recording) != pre_len:
+            warn(
+                f"Inserted {len(self.recording) - pre_len} missing samples "
+                "that would be disallowed by BIDS"
+            )
 
     @classmethod
     def from_edf(
@@ -484,15 +547,12 @@ class EyeTrackingRun:
         filename: str | Path,
         message_first_trigger: str,
         message_last_trigger: str,
-        trial_marker: bytes = b""
+        trial_marker: bytes = b"",
     ) -> EyeTrackingRun:
         """Create a new run from an EDF file."""
         from pyedfread import edf
 
-        recording, events, messages = edf.pread(
-            str(filename),
-            trial_marker=b""
-        )
+        recording, events, messages = edf.pread(str(filename), trial_marker=b"")
 
         return cls(
             recording=recording,
@@ -530,11 +590,13 @@ def write_bids(
     refname = exp_run.name
     extension = "".join(exp_run.suffixes)
     suffix = refname.replace(extension, "").rsplit("_", 1)[-1]
-    refname = refname.replace(f"_{suffix}", "_eyetrack")
 
     # Remove undesired entities
     refname = re.sub(r"_part-(mag|phase)", "", refname)
-    refname = re.sub(r"_echo-[\w\d]+", "", refname)
+    refname = re.sub(r"_echo-\d+", "", refname)
+
+    # Replace suffix
+    refname = refname.replace(f"_{suffix}", "_recording-eyetrack_physio")
 
     # Write out sidecar JSON
     out_json = out_dir / refname.replace(extension, ".json")

@@ -1,0 +1,54 @@
+{
+  "x_coordinate": {
+  	"Description": "Gaze position x-coordinate of the recorded eye.",
+  	"Units": "pixel"
+  },
+  "y_coordinate": {
+  	"Description": "Gaze position y-coordinate of the recorded eye.",
+  	"Units": "pixel"
+  },
+  "pupil_size": {
+  	"Description": "Pupil area of the recorded eye as calculated by the eyetracking device.",
+  	"Units": "a.u."
+  },
+  "pupil_x_coordinate": {
+  	"Description": "Pupil center x-coordinate of the recorded eye.",
+  	"Units": "pixel"
+  },
+  "pupil_y_coordinate": {
+  	"Description": "Pupil center y-coordinate of the recorded eye.",
+  	"Units": "pixel"
+  },
+  "fixation": {
+  	"Description": "Continuous recording of fixation events calculated by the eyetracking device (one indicates the fixation is active)."
+  },
+  "saccade": {
+  	"Description": "Continuous recording of saccade events calculated by the eyetracking device (one indicates the saccade is active)."
+  },
+  "blink": {
+  	"Description": "Continuous recording of eyeblinks calculated by the eyetracking device (one indicates the eye is closed)."
+  },
+  "href_x_coordinate": {
+  	"Description": "Head reference x-coordinate of the recorded eye.",
+  	"Units": "pixel"
+  },
+  "href_y_coordinate": {
+  	"Description": "Head reference y-coordinate of the recorded eye.",
+  	"Units": "pixel"
+  },
+  "fast_x_velocity": {
+  	"Description": "Fast x-coordinate velocity (EyeLink parameter)."
+  },
+  "screen_ppdeg_x_coordinate": {
+  	"Description": "Screen pixels per degree (x-coordinate).",
+  	"Units": "pixels/degree"
+  },
+  "screen_ppdeg_y_coordinate": {
+  	"Description": "Screen pixels per degree (y-coordinate).",
+  	"Units": "pixels/degree"
+  },
+  "timestamp": {
+  	"Description": "Eye-tracker timestamp of the sampled recorded eye.",
+  	"Units": "a.u."
+  }
+}

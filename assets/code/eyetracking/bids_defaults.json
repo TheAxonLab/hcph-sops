@@ -3,7 +3,6 @@
     "ManufacturersModelName": "EyeLink CL-OC",
     "DeviceSerialNumber": "ZAB49",
     "SoftwareVersion": "Eyelink 1000 v4.1594",
-    "CalibrationUnit": "pixel",
     "EyeTrackerDistance": 1.02,
     "SampleCoordinateUnits": "pixel",
     "SampleCoordinateSystem": "gaze-on-screen",

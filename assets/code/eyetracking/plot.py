@@ -94,8 +94,8 @@ def plot_heatmap_coordinate(
         sns.kdeplot(
             data=data,
             cmap=cmap,
-            x="eye1_x_coordinate",
-            y="eye1_y_coordinate",
+            x="x_coordinate",
+            y="y_coordinate",
             fill=True,
             cbar=cbar,
             clip=clip,
@@ -104,8 +104,8 @@ def plot_heatmap_coordinate(
         )
     else:
         ax.hist2d(
-            data["eye1_x_coordinate"],
-            data["eye1_y_coordinate"],
+            data["x_coordinate"],
+            data["y_coordinate"],
             range=clip,
             bins=(screen_size[0] // 10, screen_size[1] // 10),
             cmap=cmap,
