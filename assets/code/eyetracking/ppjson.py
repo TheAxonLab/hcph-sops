@@ -14,8 +14,13 @@ class CompactJSONEncoder(json.JSONEncoder):
     MAX_WIDTH = 99
     """Maximum width of a container that might be put on a single line."""
 
-    MAX_ITEMS = 3
+    MAX_ITEMS = 5
     """Maximum number of items in container that might be put on single line."""
+
+    DISABLE_MULTILINE_ITEMS = 20
+    """
+    A threshold for the number of items above which lines will not be broken by ``MAX_ITEMS``.
+    """
 
     def __init__(self, *args, **kwargs):
         # using this class without indentation is pointless
@@ -33,8 +38,7 @@ class CompactJSONEncoder(json.JSONEncoder):
             if self.sort_keys:
                 o = dict(sorted(o.items()))
             return self._encode_object(o)
-        if isinstance(o, float):  # Use scientific notation for floats
-            return format(o, "g")
+
         return json.dumps(
             o,
             skipkeys=self.skipkeys,
@@ -48,12 +52,35 @@ class CompactJSONEncoder(json.JSONEncoder):
         )
 
     def _encode_list(self, o):
-        if self._put_on_single_line(o):
+        if self._put_on_single_line(o):  # single line
             return "[" + ", ".join(self.encode(el) for el in o) + "]"
+
+        max_width = 0 if len(o) < self.DISABLE_MULTILINE_ITEMS else self.MAX_WIDTH
+
         self.indentation_level += 1
-        output = [self.indent_str + self.encode(el) for el in o]
+        output = (
+            self._stack_list(o, max_width=max_width)
+            if self._primitives_only(o)
+            else [self.indent_str + self.encode(el) for el in o]
+        )
         self.indentation_level -= 1
         return "[\n" + ",\n".join(output) + "\n" + self.indent_str + "]"
+
+    def _stack_list(self, inlist, max_width=0):
+        lines = [[]]
+        for item in inlist:
+            last_line = lines[-1]
+
+            if last_line and len(str(last_line + [item])) - 2 > max_width:
+                lines.append([item])
+            else:
+                last_line.append(item)
+
+        output = [
+            self.indent_str + ", ".join(self.encode(el) for el in line)
+            for line in lines
+        ]
+        return output
 
     def _encode_object(self, o):
         if not o:
