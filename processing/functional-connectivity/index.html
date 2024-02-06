@@ -20,7 +20,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.6">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.7">
     
     
       
@@ -28,7 +28,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.50c56a3b.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.f2e4d321.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
@@ -811,6 +811,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#qaqc-of-denoised-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      QA/QC of denoised data
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1174,6 +1183,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../qaqc-criteria-FC/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    QA/QC criteria (functional connectivity)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../data-management/eyetrack-qc/" class="md-nav__link">
         
   
@@ -1295,6 +1325,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#qaqc-of-denoised-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      QA/QC of denoised data
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1355,7 +1394,7 @@ Then also flag as outlier the segments that are shorter than 5 timepoints.</li>
 <img alt="Timeseries_carpet" src="../../assets/images/sub-pilot_ses-15_task-rest_desc-carpetplot_bold.png" title="Denoised timeseries carpet plot" /></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Denoised timeseries as a <em>signal plot</em>:
 <img alt="Timeseries_signal" src="../../assets/images/sub-pilot_ses-15_task-rest_desc-timeseries_bold.png" title="Denoised timeseries signal plot" /></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Functional connetivity matrix as a <em>heatmap</em>:
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Functional connectivity matrix as a <em>heatmap</em>:
 <img alt="FC_matrix_heatmap" src="../../assets/images/sub-pilot_ses-15_task-rest_meas-sparseinversecovariance_desc-heatmap_bold.png" title="Functional connectivity heatmap" /></li>
 </ul>
 </details>
@@ -1376,6 +1415,22 @@ In the end, the data structure will look like this:
 </span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>│               └── ses-15
 </span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>│                   └── func
 </span></code></pre></div></p>
+<h2 id="qaqc-of-denoised-data"><abbr title="quality assessment">QA</abbr>/<abbr title="quality control">QC</abbr> of denoised data<a class="headerlink" href="#qaqc-of-denoised-data" title="Permanent link">&para;</a></h2>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Navigate to the <code>figures/</code> folder where the visual reports were saved.
+    Following the above data structure, it would be the folder:
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>path_to_dataset/derivatives/functional_connectivity/DiFuMo64-LP/sub-pilot/figures`.
+</span></code></pre></div></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open the figure <code>fc_dist.png</code>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the <abbr title="functional connectivity">FC</abbr> distributions and apply the <a href="../qaqc-criteria-FC/#fc-distributions"><abbr title="quality assessment">QA</abbr>/<abbr title="quality control">QC</abbr> criteria</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open the figure <code>QC-FC.png</code>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the <abbr title="quality control">QC</abbr>-<abbr title="functional connectivity">FC</abbr> distributions and apply the <a href="../qaqc-criteria-FC/#qc-fc-distributions"><abbr title="quality assessment">QA</abbr>/<abbr title="quality control">QC</abbr> criteria</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open the figure <code>QC-FC_euclidean.png</code>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the three plots showing <abbr title="quality control">QC</abbr>-<abbr title="functional connectivity">FC</abbr> versus euclidean distance and apply the <a href="../qaqc-criteria-FC/#qc-fc-versus-eucliden-distance"><abbr title="quality assessment">QA</abbr>/<abbr title="quality control">QC</abbr> criteria</a></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Immediately report sessions deemed <em>exclude</em>, as an issue in <a href="https://github.com/&lt;organization&gt;/&lt;repo_name&gt;/issues">the dataset's repository</a></p>
+</div>
 
 
 
@@ -1435,7 +1490,7 @@ In the end, the data structure will look like this:
     <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.expand", "navigation.top", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.e1c3ead8.min.js"></script>
+      <script src="../../assets/javascripts/bundle.caa56a14.min.js"></script>
       
         <script src="../../js/mathjax.js"></script>
       
