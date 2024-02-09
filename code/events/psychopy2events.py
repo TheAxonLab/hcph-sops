@@ -19,6 +19,7 @@
 #
 from __future__ import annotations
 
+import sys
 import argparse
 import re
 from pathlib import Path
@@ -53,6 +54,7 @@ TRIAL_TYPE = {
     "fixation_out": "fixation-point",  # fixation circle in RSfMRI
     "fixation_out_2": "fixation-point",  # fixation circle in RSfMRI
     "text": "instructions-text",  # showing instructions text with fixation point example
+    "fix_desc": "instructions-text",  # showing instructions of the qct
 }
 """A dictionary mapping the trial identifiers and their semantics in the paradigm."""
 
@@ -84,6 +86,7 @@ def psychopy2pandas(log_path: str | Path) -> pd.DataFrame:
     )
 
     start_time = None
+    manually_trigered = False
     if (hdf5_log := log_path.parent / log_path.name.replace(".log", ".hdf5")).exists():
         import h5py
 
@@ -92,15 +95,34 @@ def psychopy2pandas(log_path: str | Path) -> pd.DataFrame:
                 np.asanyarray(f[PSYCHOPY_HDF5_EVENTS_DATASET])
             )
 
-        start_time = keypress_df.loc[
-            keypress_df.key.str.decode("utf-8").str.strip() == "s", "time"
-        ].values[0]
+        key_events_s = keypress_df.key.str.decode("utf-8").str.strip() == "s"
+        _s_events = key_events_s.sum()
 
-    # If we can't find the keypress in the HDF5 file, try the plain log
+        # If we can't find the keypress in the HDF5 file, try the plain log
+        if not _s_events:
+            key_events_s = (df.level.str.strip() == "DATA") & df.desc.str.contains("Keypress: s")
+            _s_events = key_events_s.sum()
+
+        if _s_events:
+            start_time = keypress_df.loc[key_events_s, "time"].values[0]
+
+            if _s_events < 5:
+                manually_trigered = "likely"
+        else:
+            key_events_t = keypress_df.key.str.decode("utf-8").str.strip() == "t"
+            if not key_events_t.any():
+                key_events_t = (
+                    (df.level.str.strip() == "DATA")
+                    & df.desc.str.contains("Keypress: t")
+                )
+
+            if key_events_t.any():
+                start_time = keypress_df.loc[key_events_t, "time"].values[0]
+                manually_trigered = True
+
     if start_time is None:
-        start_time = df[
-            (df.level.str.strip() == "DATA") & df.desc.str.contains("Keypress: s")
-        ].onset.values[0]
+        print(f"[ERROR] Could not determine start time ({log_path})", file=sys.stderr)
+        sys.exit(1)
 
     # Refer all onsets to the first trigger (first DATA entry)
     df.onset -= start_time
@@ -109,10 +131,10 @@ def psychopy2pandas(log_path: str | Path) -> pd.DataFrame:
     et_on = df.desc.str.strip() == "eyetracker.setRecordingState(True)"
     et_off = df.desc.str.strip() == "eyetracker.setRecordingState(False)"
 
+    _patt = r"^({}):\s+autoDraw\s+=\s+(True|False)$".format("|".join(TRIAL_TYPE.keys()))
+
     # Extract events
-    df[["trial_type", "start_end"]] = df["desc"].str.extract(
-        r"({}):\s+autoDraw\s*=\s*(\w+)".format("|".join(TRIAL_TYPE.keys()))
-    )
+    df[["trial_type", "start_end"]] = df.desc.str.strip().str.extract(_patt)
 
     # Extract hand of motor block of qct
     df["hand"] = df["desc"].str.extract(r"ft_hand:\s*text\s*=\s*\'(RIGHT|LEFT)\'")
@@ -134,7 +156,7 @@ def psychopy2pandas(log_path: str | Path) -> pd.DataFrame:
     # Drop duplicates (all columns exactly the same)
     df = df.drop_duplicates()
 
-    return df
+    return df, manually_trigered
 
 
 def pandas2bids(input_df: pd.DataFrame) -> pd.DataFrame:
@@ -190,44 +212,46 @@ def pandas2bids(input_df: pd.DataFrame) -> pd.DataFrame:
     )
     df["value"] = df["value"].astype(str)
 
+    df.start_end = df.start_end.str.strip()
     for et in set(df.trial_type.values) - set(("et-record-on", "et-record-off")):
         # Create a subdataframe with only this trial type
-        subdf = df[df.trial_type == et].copy()
+        event_rows = (df.trial_type == et) & df.start_end.notna()
 
-        if len(subdf) < 2:  # No need to try if not a block
+        if event_rows.sum() < 2:  # No need to try if not a block
             continue
-
-        # Calculate durations
-        onsets = subdf.start_end.notna() & subdf.start_end.str.contains("True")
-        offsets = subdf.start_end.notna() & subdf.start_end.str.contains("False")
 
         # Psychopy stimuli generate two "autoDraw = False" events:
         # first at the end of the stimuli presentation and a second at the end of the routine.
         # When the tracked stimuli end with the psychopy routine, the two "autoDraw = False"
         # events occur at the same time and they are deduplicated by psychopy2bids.
-        if len(subdf[onsets].onset.values) == len(subdf[offsets].onset.values):
-            durations = subdf[offsets].onset.values - subdf[onsets].onset.values
-        else:
-            # In the BHT, the stimuli do not last for the full span of the routine, and we have
-            # two "autoDraw = False" events.
-            # We need to drop the second corresponding to the routine.
-            durations = subdf[offsets].onset.values[::2] - subdf[onsets].onset.values
+        # In the BHT, the stimuli do not last for the full span of the routine, and we have
+        # two "autoDraw = False" events.
+        # We need to drop the second corresponding to the routine.
+        dedup = df[event_rows].start_end.shift(1) == df[event_rows].start_end
+        if dedup.any():
+            event_rows[event_rows[event_rows].loc[dedup].index] = False
+
+        subdf = df[event_rows].reset_index(drop=True)
+        # Calculate durations
+        onsets = subdf.start_end.str.strip() == "True"
+        offsets = subdf.start_end.str.strip() == "False"
+        durations = subdf[offsets].onset.values - subdf[onsets].onset.values
 
         # And assign the duration to the first event row (the one containing autoDraw = True)
         subdf.loc[onsets, "duration"] = durations
 
         # Retrieve values from previous row for cognitive and motor blocks
         if et == "eye_movement_fixation":
-            shifted = subdf.loc[
-                subdf.start_end.isna() & subdf.x.notna(), ["x", "y"]
+            shifted = df.loc[
+                df.start_end.isna() & df.x.notna(), ["x", "y"]
             ].values
             subdf.loc[onsets, "value"] = [f"({v[0]}, {v[1]})" for v in shifted]
         elif et == "ft_hand":
-            shifted = subdf.loc[subdf.start_end.isna(), "hand"].values
+            shifted = df.loc[(df.trial_type == et) & df.start_end.isna(), "hand"].values
             subdf.loc[onsets, "value"] = shifted
 
         # Move back to general dataframe
-        df.loc[df.trial_type == et, subdf.columns] = subdf.values
+        df.loc[event_rows, subdf.columns] = subdf.values
 
     # Drop rows from which data was copied to the principal event row.
     df = df.drop(df[df.start_end.notna() & df.start_end.str.contains("False")].index)
@@ -304,9 +328,11 @@ def check_durations(events):
             for index in indices:
                 duration = events.loc[index, "duration"]
                 if not abs(duration - expected_duration) < EVENT_DURATION_EPSILON:
-                    raise ValueError(
-                        f"The duration {duration}s of the task '{events.loc[index, 'trial_type']}'"
-                        f" does not match its expected duration of {expected_duration}s"
+                    print(
+                        f"[WARNING] The duration {duration}s of the task"
+                        f"'{events.loc[index, 'trial_type']}'"
+                        f" does not match its expected duration of {expected_duration}s",
+                        file=sys.stderr,
                     )
 
 
@@ -417,13 +443,15 @@ def main() -> None:
     args = parser.parse_args()
 
     if not args.bids_file.exists():
-        raise RuntimeError(f"File <{args.bids_file}> doesn't exist.")
+        print(f"File <{args.bids_file}> doesn't exist.", file=sys.stderr)
+        sys.exit(1)
 
     # Extract session number
     if matches := re.findall(r"/ses-([\w\d]+)/", str(args.bids_file)):
         session = matches[0]
     else:
-        raise RuntimeError("Could not extract session name")
+        print(f"Could not extract session name from path {args.bids_file}", file=sys.stderr)
+        sys.exit(1)
 
     # Read schedule
     events_lookup = pd.read_csv(
@@ -436,7 +464,8 @@ def main() -> None:
     # Extract the row containing the filenames of this particular session
     schedule_session = events_lookup[events_lookup.session == session]
     if len(schedule_session.index) == 0:
-        raise RuntimeError(f"Session {session} not found in schedule")
+        print(f"Session {session} not found in schedule", file=sys.stderr)
+        sys.exit(1)
 
     # Extract task name
     if "_dwi." in str(args.bids_file):
@@ -444,7 +473,12 @@ def main() -> None:
     elif matches := re.findall(r"_task-([\w\d]+)_", str(args.bids_file)):
         task = matches[0]
     else:
-        raise RuntimeError("Could not extract task")
+        print(f"Could not extract task from path {args.bids_file}", file=sys.stderr)
+        sys.exit(1)
+
+    if schedule_session[f"{task}_events"].isna().values[0]:
+        print(f"No log file corresponding to {args.bids_file} was found.", file=sys.stderr)
+        sys.exit(1)
 
     print(f"Generating events file corresponding to {args.bids_file}:")
 
@@ -454,7 +488,7 @@ def main() -> None:
         / f"session-{schedule_session.day.values[0]}"
         / schedule_session[f"{task}_events"].values[0]
     )
-    input_df = psychopy2pandas(log_path)
+    input_df, manually_trigered = psychopy2pandas(log_path)
 
     # Convert the Pandas DataFrame to a BIDS-compatible DataFrame
     output_df = pandas2bids(input_df)
@@ -486,6 +520,18 @@ def main() -> None:
     )
 
     print(f" ---> Written out {output_path}.")
+
+    if manually_trigered:
+        from json import dumps
+
+        (output_path.parent / output_path.name.replace(".tsv", ".json")).write_text(
+            dumps({
+                "ManuallyTriggeredWarning": (
+                    manually_trigered if isinstance(manually_trigered, str)
+                    else bool(manually_trigered)
+                )
+            }, indent=2, sort_keys=True)
+        )
 
 
 if __name__ == "__main__":
