@@ -146,6 +146,10 @@ protocols2fix: dict[str | re.Pattern[str], list[tuple[str, str]]] = {
         ("_task-qc_", "_task-qct_"),
         ("anat-T2w__flair", "anat-FLAIR__spcir"),
         ("AAHead_Scout_.*", "anat-scout"),
+        ("_dir_RL", "_dir-RL"),
+        ("_dir_LR", "_dir-LR"),
+        ("_dir_AP", "_dir-AP"),
+        ("_dir_PA", "_dir-PA"),
     ]
     # e.g., QA:
     # '43b67d9139e8c7274578b7451ab21123':
