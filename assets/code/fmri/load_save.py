@@ -23,19 +23,29 @@
 """ Python module for loading and saving fMRI related data"""
 
 import os
+import re
 import os.path as op
+import pandas as pd
 from collections import defaultdict
 import logging
 from typing import Optional, Union
 
 from bids import BIDSLayout
 import numpy as np
+
+from pandas import read_csv
 from nibabel import loadsave
 from bids.layout import parse_file_entities
 from bids.layout.writing import build_path
 from nilearn.datasets import fetch_atlas_difumo
 from nilearn.interfaces.fmriprep.load_confounds import _load_single_confounds_file
 
+FC_PATTERN: list = [
+    "sub-{subject}[/ses-{session}]/func/sub-{subject}"
+    "[_ses-{session}][_task-{task}][_meas-{meas}]"
+    "_{suffix}{extension}"
+]
+FC_FILLS: dict = {"suffix": "connectivity", "extension": ".tsv"}
 
 TIMESERIES_PATTERN: list = [
     "sub-{subject}[/ses-{session}]/func/sub-{subject}"
@@ -43,6 +53,7 @@ TIMESERIES_PATTERN: list = [
     "_{suffix}{extension}"
 ]
 TIMESERIES_FILLS: dict = {"desc": "denoised", "extension": ".tsv"}
+
 CONFOUND_PATTERN: list = [
     "sub-{subject}[_ses-{session}][_task-{task}][_part-{part}][_desc-{desc}]"
     "_{suffix}{extension}"
@@ -66,7 +77,7 @@ def separate_by_similar_values(
     Returns
     -------
     dict
-        Dictionnary where each entry is a list of elements that have similar values and
+        Dictionary where each entry is a list of elements that have similar values and
         the keys are the value for each list.
     """
     if external_value is None:
@@ -120,6 +131,16 @@ def get_func_filenames_bids(
         session=ses_filter or [],
         run=run_filter or [],
     )
+
+    if not all_derivatives:
+        raise ValueError(
+            f"No functional derivatives were found under {paths_to_func_dir} with the following filters:"
+            f"\nExtension: ['nii.gz', 'gz']"
+            f"\nSuffix: bold"
+            f"\nTask: {task_filter or []}"
+            f"\nSession: {ses_filter or []}"
+            f"\nRun: {run_filter or []}"
+        )
 
     affines = []
     for file in all_derivatives:
@@ -193,7 +214,7 @@ def get_atlas_data(atlas_name: str = "DiFuMo", **kwargs) -> dict:
     Returns
     -------
     dict
-        Dictionnary with keys "maps" (filename) and "labels" (ROI labels).
+        Dictionary with keys "maps" (filename) and "labels" (ROI labels).
     """
     logging.info("Fetching the DiFuMo atlas ...")
 
@@ -204,6 +225,32 @@ def get_atlas_data(atlas_name: str = "DiFuMo", **kwargs) -> dict:
         )
 
     return fetch_atlas_difumo(legacy_format=False, **kwargs)
+
+
+def find_atlas_dimension(path: str, atlas_name: str = "DiFuMo") -> int:
+    """Fetch the atlas dimension from the path where the functional connectivity are saved.
+    Parameters
+    ----------
+    path : str
+        Path to the directory where functional connectivity are saved.
+    atlas_name : str, optional
+        Name of the atlas to fetch, by default "DiFuMo"
+
+    Returns
+    -------
+    int
+        Atlas dimension.
+    """
+
+    # Using regular expression to extract the number of dimensions
+    dimension_match = re.search(rf"{atlas_name}(\d+)", path)
+
+    if dimension_match:
+        return int(dimension_match.group(1))
+    else:
+        raise ValueError(
+            f"The output path {path} does not contain the expected pattern: {atlas_name} followed by digits."
+        )
 
 
 def find_derivative(path: str, derivatives_name: str = "derivatives") -> str:
@@ -223,19 +270,132 @@ def find_derivative(path: str, derivatives_name: str = "derivatives") -> str:
         Absolute path to the derivative folder.
     """
     splitted_path = path.split("/")
-    if derivatives_name in splitted_path:
-        while splitted_path[-1] != derivatives_name:
+    try:
+        while derivatives_name not in splitted_path[-1]:
             splitted_path.pop()
-        return "/".join(splitted_path)
-    logging.warning(
-        f'"{derivatives_name}" could not be found on path - '
-        f'creating at: {op.join(path, derivatives_name)}"'
+    except IndexError:
+        logging.warning(
+            f'"{derivatives_name}" could not be found on path - '
+            f'creating at: {op.join(path, derivatives_name)}"'
+        )
+        return op.join(path, derivatives_name)
+
+    return "/".join(splitted_path)
+
+
+def find_mriqc(path: str) -> str:
+    """Find the path to the MRIQC folder (if existing, otherwise it will be
+    created).
+
+    Parameters
+    ----------
+    path : str
+        Path to the BIDS (usually derivatives) dataset.
+
+    Returns
+    -------
+    str
+        Absolute path to the mriqc folder.
+    """
+    logging.debug("Searching for MRIQC path...")
+    derivative_path = find_derivative(path)
+
+    folders = [
+        f for f in os.listdir(derivative_path) if op.isdir(op.join(derivative_path, f))
+    ]
+
+    mriqc_path = [f for f in folders if "mriqc" in f]
+    if len(mriqc_path) >= 2:
+        logging.warning(
+            f"More than one mriqc derivative folder was found: {mriqc_path}"
+            f"The first instance {mriqc_path[0]} is used for the computation."
+            "In case you want to use another mriqc derivative folder, use the --mriqc-path flag"
+        )
+    return op.join(derivative_path, mriqc_path[0])
+
+
+def reorder_iqms(iqms_df: pd.DataFrame, fc_paths: list[str]):
+    """Reorder the IQMs according to the list of filenames
+
+    Parameters
+    ----------
+    iqms_df : pd.Dataframe
+        Dataframe containing the IQMs value for each image
+    fc_paths : list [str]
+        List of paths to the functional connectivity matrices
+
+    Returns
+    -------
+    panda.df
+        Dataframe containing the IQMs dataframe with reordered rows.
+    """
+    iqms_df[["subject", "session", "task"]] = iqms_df["bids_name"].str.extract(
+        r"sub-(\d+)_ses-(\d+)_task-(\w+)_"
     )
-    return op.join(path, derivatives_name)
+    entities_list = [parse_file_entities(filepath) for filepath in fc_paths]
+    entities_df = pd.DataFrame(entities_list)
+
+    return pd.merge(
+        entities_df, iqms_df, on=["subject", "session", "task"], how="inner"
+    )
+
+
+def load_iqms(
+    derivative_path: str,
+    fc_paths: list[str],
+    mriqc_path: str = None,
+    mod="bold",
+    iqms_name: list = ["fd_mean", "fd_num", "fd_perc"],
+) -> str:
+    """Load the IQMs and match their order with the corresponding functional matrix.
+
+    Parameters
+    ----------
+    derivative_path : str
+        Path to the BIDS dataset's derivatives.
+    fc_paths : list [str]
+        List of paths to the functional connectivity matrices
+    mriqc_path : str, optional
+        Name of the MRIQC derivative folder, by default None
+    mod : str, optional
+        Load the IQMs of that modality
+    iqms_name : list, optional
+        Name of the IQMs to find, by default ["fd_mean", "fd_num", "fd_perc"]
+
+    Returns
+    -------
+    panda.df
+        Dataframe containing the IQMs loaded from the derivatives folder.
+    """
+    # Find the MRIQC folder
+    if mriqc_path is None:
+        mriqc_path = find_mriqc(derivative_path)
+
+    # Load the IQMs from the group tsv
+    iqms_filename = op.join(mriqc_path, f"group_{mod}.tsv")
+    iqms_df = read_csv(iqms_filename, sep="\t")
+    # If multi-echo dataset and the IQMs of interest are motion-related, keep only the IQMs from the second echo
+    if "echo" in iqms_df["bids_name"][0] and all("fd" in i for i in iqms_name):
+        iqms_df = iqms_df[iqms_df["bids_name"].str.contains("echo-2")]
+        logging.info(
+            f"In the case of a multi-echo dataset, the IQMs of the second echo are considered."
+        )
+
+    # Match the order of the rows in iqms_df with the corresponding FC
+    iqms_df = reorder_iqms(iqms_df, fc_paths)
+
+    # Keep only the IQMs of interest
+    iqms_df = iqms_df[iqms_name]
+
+    return iqms_df
 
 
 def check_existing_output(
-    output: str, func_filename: list[str], return_existing: bool = False, **kwargs
+    output: str,
+    func_filename: list[str],
+    return_existing: bool = False,
+    return_output: bool = False,
+    **kwargs,
 ) -> tuple[list[str], list[str]]:
     """Check for existing output.
 
@@ -244,17 +404,22 @@ def check_existing_output(
     output : str
         Path to the output directory
     func_filename : list[str]
-        Original file to be computed in the futur
+        Input files to be processed
     return_existing : bool, optional
-        Condition to return a boolean filter with True for existing data, by default
+        Condition to return the list of input corresponding to existing outputs, by default
         False
+    return_output: bool, optional
+        Condition to return the path of existing outputs, by default False
 
     Returns
     -------
     tuple[list[str], list[str]]
-        Boolean filter with True for missing data (optionally, a second filter with
-        existing data)
+        List of missing data path (optionally, a second list of existing data path)
     """
+    if return_output == True and return_existing == False:
+        raise ValueError(
+            "Setting return_output=True in check_existing_output requires return_existing=True."
+        )
 
     missing_data_filter = [
         not op.exists(op.join(output, get_bids_savename(filename, **kwargs)))
@@ -268,10 +433,19 @@ def check_existing_output(
     )
 
     if return_existing:
-        existing_data = np.array(func_filename)[
-            [not fltr for fltr in missing_data_filter]
-        ]
-        return missing_data.tolist(), existing_data.tolist()
+        if return_output:
+            existing_output = [
+                op.join(output, get_bids_savename(filename, **kwargs))
+                for filename in func_filename
+                if op.exists(op.join(output, get_bids_savename(filename, **kwargs)))
+            ]
+            return existing_output
+        else:
+            existing_data = np.array(func_filename)[
+                [not fltr for fltr in missing_data_filter]
+            ]
+            return missing_data.tolist(), existing_data.tolist()
+
     return missing_data.tolist()
 
 

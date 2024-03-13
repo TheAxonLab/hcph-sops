@@ -58,22 +58,11 @@ from load_save import (
     get_func_filenames_bids,
     save_output,
     load_timeseries,
+    FC_FILLS,
+    FC_PATTERN,
+    TIMESERIES_FILLS,
+    TIMESERIES_PATTERN,
 )
-
-FC_PATTERN: list = [
-    "sub-{subject}[/ses-{session}]/func/sub-{subject}"
-    "[_ses-{session}][_task-{task}][_meas-{meas}]"
-    "_{suffix}{extension}"
-]
-FC_FILLS: dict = {"suffix": "relmat", "extension": ".tsv"}
-TIMESERIES_PATTERN: list = [
-    "sub-{subject}[/ses-{session}]/func/sub-{subject}"
-    "[_ses-{session}][_task-{task}][_desc-{desc}]"
-    "_{suffix}{extension}"
-]
-TIMESERIES_FILLS: dict = {"desc": "denoised", "extension": ".tsv"}
-
-DENOISING_STRATEGY: list = ["high_pass", "motion", "scrub"]
 
 NETWORK_MAPPING: str = "yeo_networks7"  # Also yeo_networks17
 
@@ -86,12 +75,6 @@ def get_arguments() -> argparse.Namespace:
 
     # Input/Output arguments and options
     parser.add_argument("data_dir", help="BIDS dataset or derivatives with data")
-    parser.add_argument(
-        "--no-save",
-        action="store_false",
-        default=True,
-        help="disable saving of the output",
-    )
     parser.add_argument(
         "-o",
         "--output",
@@ -121,7 +104,7 @@ def get_arguments() -> argparse.Namespace:
     )
     parser.add_argument(
         "--task",
-        default=[],
+        default=["rest"],
         action="store",
         nargs="+",
         help="a space delimited list of task(s)",
@@ -149,6 +132,33 @@ def get_arguments() -> argparse.Namespace:
         help="cutoff frequency of low pass filtering",
     )
     parser.add_argument(
+        "--denoising-strategy",
+        default=("high_pass", "motion", "scrub"),
+        action="store",
+        type=tuple,
+        help="type of noise components to include."
+        '- "motion":  head motion estimates. Associated parameter: `motion`'
+        '- "wm_csf" confounds derived from white matter and cerebrospinal fluid.'
+        '- "global_signal" confounds derived from the global signal.'
+        '- "compcor" confounds derived from CompCor (:footcite:t:`Behzadi2007`).'
+        '  When using this noise component, "high_pass" must also be applied.'
+        '- "scrub" regressors for :footcite:t:`Power2014` scrubbing approach.'
+        '- "high_pass" adds discrete cosines transformation'
+        "basis regressors to handle low-frequency signal drifts.",
+    )
+    parser.add_argument(
+        "--motion",
+        default="basic",
+        action="store",
+        choices=["basic", "power2", "derivatives", "full"],
+        type=str,
+        help="type of confounds extracted from head motion estimates."
+        "- “basic” translation/rotation (6 parameters)"
+        "- “power2” translation/rotation + quadratic terms (12 parameters)"
+        "- “derivatives” translation/rotation + derivatives (12 parameters)"
+        "- “full” translation/rotation + derivatives + quadratic terms + power2d derivatives (24 parameters)",
+    )
+    parser.add_argument(
         "--FD-thresh",
         default=0.4,
         action="store",
@@ -173,6 +183,7 @@ def get_arguments() -> argparse.Namespace:
         "--fc-estimator",
         default="sparse inverse covariance",
         action="store",
+        choices=["correlation", "covariance", "sparse", "sparse inverse covariance"],
         type=str,
         help="""type of connectivity to compute (can be 'correlation', 'covariance' or
         'sparse')""",
@@ -215,16 +226,16 @@ def fit_transform_patched(
     atlas_filename : str
         Path to the atlas file
     confounds : Optional[list], optional
-        List of confounds (usually from nilearn.interface.fmriprep.load_confouds),
+        List of confounds (usually from nilearn.interface.fmriprep.load_confounds),
         by default None
     sample_mask : Optional[list], optional
-        List of sample masks (usually from nilearn.interface.fmriprep.load_confouds),
+        List of sample masks (usually from nilearn.interface.fmriprep.load_confounds),
         by default None
 
     Returns
     -------
     list[np.ndarray]
-        List of extracted and denoised timerseries
+        List of extracted and denoised timeseries
     """
     masker = MultiNiftiMapsMasker(maps_img=atlas_filename, **kwargs)
 
@@ -265,9 +276,9 @@ def interpolate_and_denoise_timeseries(
     atlas_filename : str
         Path to the atlas filename
     confounds : list
-        List of confounds (usually from nilearn.interface.fmriprep.load_confouds).
+        List of confounds (usually from nilearn.interface.fmriprep.load_confounds).
     sample_mask : list
-        List of sample_masks (usually from nilearn.interface.fmriprep.load_confouds).
+        List of sample_masks (usually from nilearn.interface.fmriprep.load_confounds).
     t_r : Optional[float], optional
         Repetition time of the MRI acquisition, by default None
     low_pass : Optional[float], optional
@@ -343,6 +354,8 @@ def extract_and_denoise_timeseries(
     verbose: int = 2,
     interpolate: bool = False,
     low_pass: Optional[float] = None,
+    denoising_strategy: Optional[tuple] = (),
+    motion: Optional[str] = None,
     t_r: Optional[float] = None,
     output: Optional[str] = None,
     **kwargs,
@@ -362,6 +375,10 @@ def extract_and_denoise_timeseries(
         by default False
     low_pass : Optional[float], optional
         Low-pass filtering cutoff frequency, by default None
+    denoising_strategy = Optional[tuple], optional,
+        the type of noise regressors to include.
+    motion: Optional[str], optional,
+        type of confounds extracted from head motion estimates
     t_r : Optional[float], optional
         Repetition time of the MRI, by default None
     output : Optional[str], optional
@@ -377,7 +394,7 @@ def extract_and_denoise_timeseries(
         return [], []
 
     logging.info(f"Extracting and denoising timeseries for {len(func_filename)} files.")
-    logging.debug(f"Denoising strategy includes : {' '.join(DENOISING_STRATEGY)}")
+    logging.debug(f"Denoising strategy includes : {' '.join(denoising_strategy)}")
     logging.debug(f"Denoising parameters are: {kwargs}")
 
     # There is currently a bug in nilearn that prevents "load_confounds" from finding
@@ -387,8 +404,8 @@ def extract_and_denoise_timeseries(
         confounds, sample_mask = load_confounds(
             func_filename,
             demean=False,
-            strategy=DENOISING_STRATEGY,
-            motion="basic",
+            strategy=denoising_strategy,
+            motion=motion,
             **kwargs,
         )
     except ValueError as msg:
@@ -397,7 +414,7 @@ def extract_and_denoise_timeseries(
 
         logging.warning(
             "Nilearn could not find the confounds file (this is likely due to a"
-            " bug in nilearn.interface.fmriprep.load_confouds that should be fixed in"
+            " bug in nilearn.interface.fmriprep.load_confounds that should be fixed in"
             " release 0.13, see nilearn issue #3792)."
         )
         logging.warning("Searching manually ...")
@@ -405,8 +422,8 @@ def extract_and_denoise_timeseries(
         confounds, sample_mask = get_confounds_manually(
             func_filename,
             demean=False,
-            strategy=DENOISING_STRATEGY,
-            motion="basic",
+            strategy=denoising_strategy,
+            motion=motion,
             **kwargs,
         )
 
@@ -523,9 +540,7 @@ def main():
     args = get_arguments()
 
     input_path = args.data_dir
-    save = args.no_save
     output = args.output
-
     study_name = args.study_name
 
     ses_filter = args.ses
@@ -536,6 +551,8 @@ def main():
     # denoise_only = args.denoise_only
     atlas_dimension = args.atlas_dimension
     low_pass = args.low_pass
+    denoising_strategy = args.denoising_strategy
+    motion = args.motion
     fd_threshold = args.FD_thresh
     std_dvars_threshold = args.SDVARS_thresh
     scrub = args.n_scrub_frames
@@ -595,8 +612,6 @@ def main():
     logging.info(f"'{fc_label}' has been selected as connectivity metric")
 
     # By default, the timeseries and FC of all filenames in input will be computed
-    all_missing_ts = func_filenames.copy()
-    existing_timeseries = []
     if not overwrite:
         logging.debug("Looking for existing timeseries ...")
         all_missing_ts, all_existing_ts = check_existing_output(
@@ -616,6 +631,10 @@ def main():
             f"{len(all_missing_ts + missing_only_fc)} files are missing FC matrices."
         )
         existing_timeseries = load_timeseries(missing_only_fc, output)
+    else:
+        missing_only_fc = []
+        existing_timeseries = []
+        all_missing_ts = all_filenames.copy()
 
     separated_missing_ts = [
         [file for file in file_group if file in all_missing_ts]
@@ -633,6 +652,8 @@ def main():
             verbose=nilearn_verbose,
             t_r=t_r,
             low_pass=low_pass,
+            denoising_strategy=denoising_strategy,
+            motion=motion,
             fd_threshold=fd_threshold,
             std_dvars_threshold=std_dvars_threshold,
             scrub=scrub,
@@ -643,7 +664,7 @@ def main():
         all_confounds += conf
 
     # Saving aggregated/denoised timeseries and visual reports
-    if save and len(time_series):
+    if len(time_series):
         logging.info("Saving denoised timeseries ...")
         os.makedirs(output, exist_ok=True)
         save_output(
@@ -673,7 +694,7 @@ def main():
     )
 
     # Saving FC matrices and visual reports
-    if save and len(fc_matrices):
+    if len(fc_matrices):
         logging.info("Saving connectivity matrices ...")
         save_output(
             fc_matrices,
@@ -684,6 +705,7 @@ def main():
             **FC_FILLS,
         )
 
+        # Generate session-specific figures
         for individual_matrix, filename in zip(fc_matrices, missing_something):
             visual_report_fc(
                 individual_matrix,
