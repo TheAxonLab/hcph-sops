@@ -667,6 +667,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../data-management/qaqc-general/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    QA/QC protocol overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../data-management/mriqc/" class="md-nav__link">
         
   
@@ -779,6 +800,21 @@
       Executing fMRIPrep
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Executing fMRIPrep">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-proceed-if-some-fmriprep-derivatives-are-missing" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to proceed if some fMRIPrep derivatives are missing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1331,6 +1367,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Executing fMRIPrep">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-proceed-if-some-fmriprep-derivatives-are-missing" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to proceed if some fMRIPrep derivatives are missing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1585,8 +1636,7 @@ We avert that session-wise <em>fMRIPrep</em>'s processes run into race condition
 </details>
 </li>
 </ul>
-<details class="warning">
-<summary>Not all <em>fMRIPrep</em> derivatives were generated</summary>
+<h3 id="how-to-proceed-if-some-fmriprep-derivatives-are-missing">How to proceed if some <em>fMRIPrep</em> derivatives are missing<a class="headerlink" href="#how-to-proceed-if-some-fmriprep-derivatives-are-missing" title="Permanent link">&para;</a></h3>
 <p>If some derivatives are missing, it is a sign that <em>fMRIPrep</em> encountered an error.</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check the "Errors" section of the visual report.</li>
@@ -1602,46 +1652,47 @@ We avert that session-wise <em>fMRIPrep</em>'s processes run into race condition
 <div class="admonition danger">
 <p class="admonition-title">If the error remains despite all efforts, the session MAY be excluded</p>
 </div>
-</details>
 <h2 id="visualizing-fmripreps-individual-reports">Visualizing <em>fMRIPrep</em>'s individual reports<a class="headerlink" href="#visualizing-fmripreps-individual-reports" title="Permanent link">&para;</a></h2>
-<p>Following our protocols<sup><a href="https://doi.org/10.3389/fnimg.2022.1073734" title="Provins, C., … Esteban, O. (2023). Quality Control in functional MRI studies with MRIQC and fMRIPrep. Frontiers in Neuroimaging 1:1073734. doi:10.3389/fnimg.2022.1073734 (OA).">1</a></sup>, the quality of unprocessed images MUST be assessed before and after preprocessing to verify it did not go awry.</p>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open each <em>fMRIPrep</em> report on a current Web Browser (<em>Google Chrome</em> is preferred).</li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the first section entitled <code>Summary</code> and apply the <a href="../qaqc-criteria-preprocessed/#summary">exclusion criteria</a>.</p>
-<div class="admonition warning">
-<p class="admonition-title">Running through the visual report does not have to be executed in a fixed order</p>
-<p>While we describe the run through the report as linear, often inspecting other reportlets can help make a decision about the exclusion criteria related to the reportlet at hand. 
-As such, we encourage you to jump back and forth between visualizations as much as needed.</p>
-</div>
-</li>
-</ul>
 <h3 id="anatomical-preprocessing-assessment">Anatomical preprocessing assessment<a class="headerlink" href="#anatomical-preprocessing-assessment" title="Permanent link">&para;</a></h3>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Assess the "Anatomical conformation" section and apply the <a href="../qaqc-criteria-preprocessed/#anatomical-conformation">exclusion criteria</a>.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Assess the mosaic showing the calculated brain mask and brain tissue segmentation, and apply the <a href="../qaqc-criteria-preprocessed/#brain-mask-and-brain-tissue-segmentation-of-the-t1w">exclusion criteria</a>.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the spatial normalization flickering mosaic, and apply the <a href="../qaqc-criteria-preprocessed/#spatial-normalization-of-the-anatomical-t1w-reference">exclusion criteria</a>. Flickering between the subject and the template space is active while hovering your mouse on the mosaic area.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open the <em>fMRIPrep</em> anatomical report on a current Web Browser (<em>Google Chrome</em> is preferred).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Assess the "Summary" section and apply the <a href="../qaqc-criteria-preprocessed/#summary"><abbr title="quality assessment">QA</abbr>/<abbr title="quality control">QC</abbr> criteria</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Assess the "Anatomical conformation" section and apply the <a href="../qaqc-criteria-preprocessed/#anatomical-conformation"><abbr title="quality assessment">QA</abbr>/<abbr title="quality control">QC</abbr> criteria</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Assess the mosaic showing the calculated brain mask and brain tissue segmentation, and apply the <a href="../qaqc-criteria-preprocessed/#brain-mask-and-brain-tissue-segmentation-of-the-t1w"><abbr title="quality assessment">QA</abbr>/<abbr title="quality control">QC</abbr> criteria</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the spatial normalization flickering mosaic, and apply the <a href="../qaqc-criteria-preprocessed/#spatial-normalization-of-the-anatomical-t1w-reference"><abbr title="quality assessment">QA</abbr>/<abbr title="quality control">QC</abbr> criteria</a>.
+    Flickering between the subject and the template space is active while your mouse pointer hovers the mosaic area.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Assess the surface reconstruction mosaic, and apply the <a href="../qaqc-criteria-preprocessed/#surface-reconstruction">exclusion criteria</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the first section entitled <em>Summary</em> and apply the <a href="../qaqc-criteria-preprocessed/#summary"><abbr title="quality assessment">QA</abbr>/<abbr title="quality control">QC</abbr> criteria</a>.</li>
 </ul>
 <h3 id="assessment-of-fmri-preprocessing">Assessment of <abbr title="functional MRI">fMRI</abbr> Preprocessing<a class="headerlink" href="#assessment-of-fmri-preprocessing" title="Permanent link">&para;</a></h3>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Scrutinize the textual summary and apply the <a href="../qaqc-criteria-preprocessed/#textual-summary">exclusion criteria</a>.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the T2* map mosaic, and apply the <a href="../qaqc-criteria-preprocessed/#t2-map">exclusion criteria</a>.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check the T2* gray-matter intensity histogram, and apply the <a href="../qaqc-criteria-preprocessed/#t2-gray-matter-values">exclusion criteria</a>.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the co-registration flickering mosaic, apply the <a href="../qaqc-criteria-preprocessed/#alignment-of-functional-and-anatomical-mri-data">exclusion criteria</a>.
-    Flickering between <abbr title="T&lt;sub&gt;1&lt;/sub&gt;-weighted MRI">T1w</abbr> and <abbr title="blood-oxygen-level dependent">BOLD</abbr> images is active while hovering your mouse on the mosaic area.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the next mosaic displaying regions of interest (<abbr title="regions-of-interest">ROIs</abbr>) used to estimate the nuisance regressors, and apply the <a href="../qaqc-criteria-preprocessed/#brain-mask-and-anatomicaltemporal-compcor-rois">exclusion criteria</a>.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the carpet plot and nuisance signals panel, and apply the <a href="../qaqc-criteria-preprocessed/#bold-summary">exclusion criteria</a>.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the confound correlation heatmap and use it to <a href="../qaqc-criteria-preprocessed/#correlations-between-nuisance-regressors">choose the regressors</a> you will include in the nuisance regression model.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open each <em>fMRIPrep</em> functional report on a current Web Browser (<em>Google Chrome</em> is preferred).</li>
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify that no errors are reported within the "Errors" section.</p>
-<p>If errors or quality issues are encountered, find the issue corresponding to that session in <a href="https://github.com/&lt;organization&gt;/&lt;repo_name&gt;/issues">the dataset's repository</a> and report a comprehensive description of the problems.
-In case of <em>fMRIPrep</em> failure, follow the procedure described above in "Not all <em>fMRIPrep</em> derivatives were generated".</p>
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Go through the section of each <abbr title="functional MRI">fMRI</abbr> run and proceed as follows:</p>
+<details class="important">
+<summary>IMPORTANT — <abbr title="quality control task">QCT</abbr> and <abbr title="breath-holding task">BHT</abbr> are assessed first as proxies for the <abbr title="resting-state fMRI">RSfMRI</abbr> run's quality.</summary>
+<p>We employ the <abbr title="quality control task">QCT</abbr> (mainly) and the <abbr title="breath-holding task">BHT</abbr> as proxies for the quality of the <abbr title="resting-state fMRI">RSfMRI</abbr> run.
+Screening the reports in the prescribed order (<abbr title="quality control task">QCT</abbr> — <abbr title="breath-holding task">BHT</abbr> — <abbr title="resting-state fMRI">RSfMRI</abbr>) helps identify issues in the <abbr title="quality control task">QCT</abbr> and <abbr title="breath-holding task">BHT</abbr> that may anticipate problems in the <abbr title="resting-state fMRI">RSfMRI</abbr>.</p>
+</details>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Assess the textual summary and apply the corresponding <a href="../qaqc-criteria-preprocessed/#textual-summary"><abbr title="quality assessment">QA</abbr>/<abbr title="quality control">QC</abbr> criteria</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the T<sub>2</sub><sup>☆</sup> map mosaic, and apply the <a href="../qaqc-criteria-preprocessed/#t2-map"><abbr title="quality assessment">QA</abbr>/<abbr title="quality control">QC</abbr> criteria</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check the T<sub>2</sub><sup>☆</sup> gray-matter intensity histogram, and apply the <a href="../qaqc-criteria-preprocessed/#t2-gray-matter-values"><abbr title="quality assessment">QA</abbr>/<abbr title="quality control">QC</abbr> criteria</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the co-registration flickering mosaic, apply the <a href="../qaqc-criteria-preprocessed/#alignment-of-functional-and-anatomical-mri-data"><abbr title="quality assessment">QA</abbr>/<abbr title="quality control">QC</abbr> criteria</a>.
+    Flickering between <abbr title="T&lt;sub&gt;1&lt;/sub&gt;-weighted MRI">T1w</abbr> and <abbr title="blood-oxygen-level dependent">BOLD</abbr> images is active while hovering your mouse on the mosaic area.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the next mosaic displaying regions of interest (<abbr title="regions-of-interest">ROIs</abbr>) used to estimate the nuisance regressors, and apply the <a href="../qaqc-criteria-preprocessed/#brain-mask-and-anatomicaltemporal-compcor-rois"><abbr title="quality assessment">QA</abbr>/<abbr title="quality control">QC</abbr> criteria</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the carpet plot and nuisance signals panel,<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Apply the <a href="../qaqc-criteria-preprocessed/#bold-summary-1">exclusion criteria</a></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> If you are visualizing the carpet plot corresponding to a <abbr title="resting-state fMRI">RSfMRI</abbr> run, apply <a href="../qaqc-criteria-preprocessed/#qa-criteria-specifically-for-rsfmri">additional <abbr title="quality assessment">QA</abbr> criteria</a>.</li>
+</ul>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the confound correlation heatmap and use it to <a href="../qaqc-criteria-preprocessed/#correlations-between-nuisance-regressors">choose the regressors</a>
+    you will include in the nuisance regression model.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Proceed as <a href="./#how-to-proceed-if-some-fmriprep-derivatives-are-missing">indicated above</a> if errors are reported within the "Errors" section.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Continue with the next <abbr title="functional MRI">fMRI</abbr> run section</li>
+</ul>
 </li>
 </ul>
-<div class="admonition warning">
-<p class="admonition-title">Immediately report images deemed <em>exclude</em>, as an issue in <a href="https://github.com/&lt;organization&gt;/&lt;repo_name&gt;/issues">the dataset's repository</a></p>
-</div>
 
 
 
