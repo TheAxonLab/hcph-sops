@@ -114,3 +114,5 @@ span.flip {
 
 .redcolor { color: red; }
 .bluecolor { color: darkblue; }
+
+li.task-list-item ol { list-style-type: decimal; }

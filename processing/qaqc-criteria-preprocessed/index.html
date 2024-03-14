@@ -13,7 +13,7 @@
       
       
       
-        <link rel="prev" href="../../data-management/qaqc-criteria/">
+        <link rel="prev" href="../../data-management/qaqc-criteria-unprocessed/">
       
       
         <link rel="next" href="../qaqc-criteria-FC/">
@@ -24,7 +24,7 @@
     
     
       
-        <title>QA/QC criteria (preprocessed data) - Standard Operating Procedures of the HCPh project</title>
+        <title>QA/QC criteria for preprocessed data - Standard Operating Procedures of the HCPh project</title>
       
     
     
@@ -137,7 +137,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              QA/QC criteria (preprocessed data)
+              QA/QC criteria for preprocessed data
             
           </span>
         </div>
@@ -1073,11 +1073,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../data-management/qaqc-criteria/" class="md-nav__link">
+      <a href="../../data-management/qaqc-criteria-unprocessed/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    QA/QC criteria (unprocessed data)
+    QA/QC criteria for unprocessed data
   </span>
   
 
@@ -1105,7 +1105,7 @@
           
   
   <span class="md-ellipsis">
-    QA/QC criteria (preprocessed data)
+    QA/QC criteria for preprocessed data
   </span>
   
 
@@ -1116,7 +1116,7 @@
         
   
   <span class="md-ellipsis">
-    QA/QC criteria (preprocessed data)
+    QA/QC criteria for preprocessed data
   </span>
   
 
@@ -1293,7 +1293,7 @@
         
   
   <span class="md-ellipsis">
-    QA/QC criteria (functional connectivity)
+    QA/QC criteria for functional connectivity
   </span>
   
 
@@ -1573,12 +1573,12 @@
                   
 
 
-  <h1>QA/QC criteria (preprocessed data)</h1>
+  <h1>QA/QC criteria for preprocessed data</h1>
 
 <h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
 <h2 id="anatomical">Anatomical<a class="headerlink" href="#anatomical" title="Permanent link">&para;</a></h2>
 <h3 id="anatomical-conformation">Anatomical conformation<a class="headerlink" href="#anatomical-conformation" title="Permanent link">&para;</a></h3>
-<h3 id="brain-mask-and-brain-tissue-segmentation-of-the-t1w">Brain mask and brain tissue segmentation of the T1w<a class="headerlink" href="#brain-mask-and-brain-tissue-segmentation-of-the-t1w" title="Permanent link">&para;</a></h3>
+<h3 id="brain-mask-and-brain-tissue-segmentation-of-the-t1w">Brain mask and brain tissue segmentation of the <abbr title="T&lt;sub&gt;1&lt;/sub&gt;-weighted MRI">T1w</abbr><a class="headerlink" href="#brain-mask-and-brain-tissue-segmentation-of-the-t1w" title="Permanent link">&para;</a></h3>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for residual intensity non-uniformity (<abbr title="intensity non-uniformity">INU</abbr>).
   If the <abbr title="intensity non-uniformity">INU</abbr> is clearly visible, tweak the <abbr title="intensity non-uniformity">INU</abbr> correction and re-run <em>fMRIPrep</em>.</li>
@@ -1597,12 +1597,12 @@
 </ul>
 </li>
 </ul>
-<h3 id="spatial-normalization-of-the-anatomical-t1w-reference">Spatial normalization of the anatomical T1w reference<a class="headerlink" href="#spatial-normalization-of-the-anatomical-t1w-reference" title="Permanent link">&para;</a></h3>
+<h3 id="spatial-normalization-of-the-anatomical-t1w-reference">Spatial normalization of the anatomical <abbr title="T&lt;sub&gt;1&lt;/sub&gt;-weighted MRI">T1w</abbr> reference<a class="headerlink" href="#spatial-normalization-of-the-anatomical-t1w-reference" title="Permanent link">&para;</a></h3>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> In order of importance, the following structures should be correctly aligned: 1. ventricles, 2. subcortical regions, 3. corpus callosum, 4. cerebellum, 5. cortical <abbr title="gray matter">GM</abbr>.
     Tweak the spatial normalization and re-run <em>fMRIPrep</em> in case of a misalignment of the ventricles, subcortical regions, or the corpus callosum.
     You can, however, be more lenient with <abbr title="gray matter">GM</abbr> alignment.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for severe stretching or distortion of the T1w.
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for severe stretching or distortion of the <abbr title="T&lt;sub&gt;1&lt;/sub&gt;-weighted MRI">T1w</abbr>.
   If observed, tweak the normalization and re-run <em>fMRIPrep</em>.</li>
 </ul>
 <h3 id="surface-reconstruction">Surface reconstruction<a class="headerlink" href="#surface-reconstruction" title="Permanent link">&para;</a></h3>
@@ -1617,7 +1617,7 @@
 <div class="admonition tip">
 <p class="admonition-title">Evaluating the quality of brain surfaces</p>
 <p>As we will proceed with voxel-wise analysis, re-running <em>fMRIPrep</em> is necessary only when the reconstructed surfaces are extremely inacurate.
-That typically only happens in the presence of extreme artifacts that we should have captured previously in the step of <a href="../../data-management/qaqc-criteria/"><abbr title="quality assessment">QA</abbr>/<abbr title="quality control">QC</abbr> for unprocessed data using <em>MRIQC</em></a>.</p>
+That typically only happens in the presence of extreme artifacts that we should have captured previously in the step of <a href="../data-management/qaqc-criteria.md"><abbr title="quality assessment">QA</abbr>/<abbr title="quality control">QC</abbr> for unprocessed data using <em>MRIQC</em></a>.</p>
 </div>
 <h2 id="functional">Functional<a class="headerlink" href="#functional" title="Permanent link">&para;</a></h2>
 <h3 id="textual-summary">Textual summary<a class="headerlink" href="#textual-summary" title="Permanent link">&para;</a></h3>
@@ -1630,7 +1630,7 @@ That typically only happens in the presence of extreme artifacts that we should 
 <h3 id="t2-gray-matter-values">T2* gray-matter values<a class="headerlink" href="#t2-gray-matter-values" title="Permanent link">&para;</a></h3>
 <h3 id="alignment-of-functional-and-anatomical-mri-data">Alignment of functional and anatomical <abbr title="Magnetic Resonance Imaging">MRI</abbr> data<a class="headerlink" href="#alignment-of-functional-and-anatomical-mri-data" title="Permanent link">&para;</a></h3>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check that the <abbr title="blood-oxygen-level dependent">BOLD</abbr> and the T1w image are well aligned:<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check that the <abbr title="blood-oxygen-level dependent">BOLD</abbr> and the <abbr title="T&lt;sub&gt;1&lt;/sub&gt;-weighted MRI">T1w</abbr> image are well aligned:<ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify that the image boundaries as well as the anatomical landmarks, such as the ventricles and the corpus callosum, appear in the same place when toggling between images.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify that the white and pial surface outline (red and blue lines) correspond well to the tissues boundaries in the <abbr title="blood-oxygen-level dependent">BOLD</abbr> image.</li>
 </ul>
