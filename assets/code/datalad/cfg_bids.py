@@ -32,7 +32,14 @@ force_in_git = [
     # comment out the line below to not put participants or scan info into Git
     # (might contain sensitive information)
     '*.tsv',
+    '*.html',
 ]
+
+force_in_annex = [
+    '*.svg',
+    '*.gii',
+]
+
 # make an attempt to discover the prospective change in .gitattributes
 # to decide what needs to be done, and make this procedure idempotent
 # (for simple cases)
@@ -50,6 +57,13 @@ ds.repo.set_gitattributes([
     if '{} annex.largefiles=nothing'.format(path) not in attrs
 ])
 
+# amend gitattributes, if needed
+ds.repo.set_gitattributes([
+    (path, {'annex.largefiles': 'anything'})
+    for path in force_in_annex
+    if '{} annex.largefiles=anything'.format(path) not in attrs
+])
+
 # leave clean
 ds.save(
     path=['.gitattributes'],
@@ -57,7 +71,3 @@ ds.save(
     to_git=True,
 )
 
-# run metadata type config last, will do another another commit
-ds.run_procedure(
-    spec=['cfg_metadatatypes', 'bids', 'nifti1'],
-)
