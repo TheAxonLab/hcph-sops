@@ -3424,7 +3424,7 @@ For example, the following command line selects metadata files that should be co
 </li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Run the <em><abbr title="Brain Imaging Data Structure">BIDS</abbr> Validator</em> to check the <em>formal</em> quality of the dataset (filenames, homogeneity of modalities and parameters across sessions, etc.)</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-ti<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span>/path/to/data/:/data:ro<span class="w"> </span>bids/validator<span class="w"> </span>/data
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-ti<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span>/path/to/data//hcph/:/data:ro<span class="w"> </span>bids/validator<span class="w"> </span>/data
 </span></code></pre></div>
 </li>
 </ul>
