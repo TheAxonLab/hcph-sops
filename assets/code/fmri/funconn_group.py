@@ -18,9 +18,7 @@ from load_save import (
 )
 
 from reports import (
-    group_report_fc_dist,
-    group_report_qc_fc,
-    group_report_qc_fc_euclidean,
+    group_report,
 )
 
 
@@ -133,10 +131,12 @@ def main():
     iqms_df = load_iqms(output, existing_fc, mriqc_path=mriqc_path)
 
     # Generate group figures
-    group_report_fc_dist(fc_matrices, output)
-    qc_fc_dict = group_report_qc_fc(fc_matrices, iqms_df, output)
-    group_report_qc_fc_euclidean(qc_fc_dict, atlas_filename, output)
-
+    group_report(
+        fc_matrices,
+        iqms_df,
+        atlas_filename,
+        output,
+    )
 
 if __name__ == "__main__":
     main()

@@ -825,9 +825,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#qaqc-of-fc" class="md-nav__link">
+  <a href="#qaqc-of-functional-connectivity" class="md-nav__link">
     <span class="md-ellipsis">
-      QA/QC of FC
+      QA/QC of functional connectivity
     </span>
   </a>
   
@@ -1352,9 +1352,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#qaqc-of-fc" class="md-nav__link">
+  <a href="#qaqc-of-functional-connectivity" class="md-nav__link">
     <span class="md-ellipsis">
-      QA/QC of FC
+      QA/QC of functional connectivity
     </span>
   </a>
   
@@ -1410,9 +1410,9 @@ Then also flag as outlier the segments that are shorter than 5 timepoints.</li>
 </ul>
 <p>Most parameters of the pipeline can be specified in the options (see <code>python funconn.py -h</code> for more details).</p>
 </details>
-<p>Finally, the pipeline will save the denoised timeseries and connectivity matrices as well as various visual reports (i.e., figures).</p>
+<p>Finally, the pipeline will save the denoised timeseries and connectivity matrices as well as various figures.</p>
 <details class="info">
-<summary>Example of visual report</summary>
+<summary>Example of figures</summary>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Denoising confounds as a <em>design matrix</em>:
 <img alt="Timeseries_denoise" src="../../assets/images/sub-pilot_ses-15_task-rest_desc-designmatrix_bold.png" title="Denoising design matrix" /></li>
@@ -1441,17 +1441,25 @@ In the end, the data structure will look like this:
 </span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>│               └── ses-15
 </span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>│                   └── func
 </span></code></pre></div></p>
-<h2 id="qaqc-of-fc"><abbr title="quality assessment">QA</abbr>/<abbr title="quality control">QC</abbr> of <abbr title="functional connectivity">FC</abbr><a class="headerlink" href="#qaqc-of-fc" title="Permanent link">&para;</a></h2>
+<h2 id="qaqc-of-functional-connectivity"><abbr title="quality assessment">QA</abbr>/<abbr title="quality control">QC</abbr> of functional connectivity<a class="headerlink" href="#qaqc-of-functional-connectivity" title="Permanent link">&para;</a></h2>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Navigate to the <code>figures/</code> folder where the visual reports were saved.
-    Following the above data structure, it would be the folder:
-    <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>path_to_dataset/derivatives/functional_connectivity/DiFuMo64-LP/sub-pilot/figures`.
-</span></code></pre></div></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open the figure <code>fc_dist.png</code>.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the <abbr title="functional connectivity">FC</abbr> distributions and apply the <a href="../qaqc-criteria-FC/#fc-distributions"><abbr title="quality assessment">QA</abbr>/<abbr title="quality control">QC</abbr> criteria</a>.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open the figure <code>QC-FC.png</code>.</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Run the <code>funconn_group.py</code> script to generate the visual report.
+    Following the same data structure as above, it would be called as follows:
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>python<span class="w"> </span>funconn_group.py<span class="w"> </span>path_to_dataset/derivatives/functional_connectivity/DiFuMo64-LP
+</span></code></pre></div>
+    The visual report will be saved in the same directory that you passed as argument to the function.</p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open the visual report <code>group_report.html</code>. The group visual report provides an overview of
+    functional connectivity (<abbr title="functional connectivity">FC</abbr>) properties across the entire dataset. It includes several reportlets that 
+    summarize various aspects of <abbr title="functional connectivity">FC</abbr>, offering insights into the collective characteristics of the data. 
+    An example report can be found <a href="../../_static/SampleReport/sample_report.html">here</a>.</p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the <abbr title="functional connectivity">FC</abbr> distributions and apply the <a href="../qaqc-criteria-FC/#fc-distributions"><abbr title="quality assessment">QA</abbr>/<abbr title="quality control">QC</abbr> criteria</a>.</p>
+</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the <abbr title="quality control">QC</abbr>-<abbr title="functional connectivity">FC</abbr> distributions and apply the <a href="../qaqc-criteria-FC/#qc-fc-distributions"><abbr title="quality assessment">QA</abbr>/<abbr title="quality control">QC</abbr> criteria</a>.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open the figure <code>QC-FC_euclidean.png</code>.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the three plots showing <abbr title="quality control">QC</abbr>-<abbr title="functional connectivity">FC</abbr> versus euclidean distance and apply the <a href="../qaqc-criteria-FC/#qc-fc-versus-eucliden-distance"><abbr title="quality assessment">QA</abbr>/<abbr title="quality control">QC</abbr> criteria</a></li>
 </ul>
 <div class="admonition warning">
