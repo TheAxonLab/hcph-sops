@@ -382,6 +382,7 @@ def visual_report_fc(
     plt.savefig(op.join(output, fc_saveloc))
     plt.close()
 
+
 def group_reportlet_fc_dist(
     fc_matrices: list[np.ndarray],
     output: str,
@@ -636,15 +637,16 @@ def group_reportlet_qc_fc_euclidean(
     plt.savefig(op.join(output, savename))
     plt.close()
 
+
 def group_report(
-        good_timepoints_df: pd.DataFrame,
-        fc_matrices: list[np.ndarray],
-        iqms_df: pd.DataFrame,
-        atlas_filename: str,
-        output: str,
-    ) -> None:
+    good_timepoints_df: pd.DataFrame,
+    fc_matrices: list[np.ndarray],
+    iqms_df: pd.DataFrame,
+    atlas_filename: str,
+    output: str,
+) -> None:
     """Generate a group report."""
-    
+
     # Generate each reportlets
     group_reportlet_fc_dist(fc_matrices, output)
     qc_fc_dict = group_reportlet_qc_fc(fc_matrices, iqms_df, output)
@@ -653,12 +655,11 @@ def group_report(
     # Assemble reportlets into a single HTML report
     logging.debug("Assemble the group report into a single HTML report.")
 
-    run_uuid = '{}_{}'.format(strftime('%Y%m%d-%H%M%S'), uuid4())
+    run_uuid = "{}_{}".format(strftime("%Y%m%d-%H%M%S"), uuid4())
     robj = Report(
         output,
         run_uuid,
-        out_filename= "group_report.html",
-        bootstrap_file=op.join("data","reports-spec.yml")
+        out_filename="group_report.html",
+        bootstrap_file=op.join("data", "reports-spec.yml"),
     )
     robj.generate_report()
-
