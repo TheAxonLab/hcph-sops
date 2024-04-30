@@ -778,30 +778,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Visualizing MRIQC's group reports">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#assessing-anatomical-images" class="md-nav__link">
-    <span class="md-ellipsis">
-      Assessing anatomical images
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#assessing-functional-images_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Assessing functional images
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
     </ul>
@@ -1427,30 +1403,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Visualizing MRIQC's group reports">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#assessing-anatomical-images" class="md-nav__link">
-    <span class="md-ellipsis">
-      Assessing anatomical images
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#assessing-functional-images_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Assessing functional images
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
     </ul>
@@ -1616,7 +1568,7 @@ Before data release, the <em>MRIQC</em>-Derivatives dataset will be added as a s
 In addition, <em>MRIQC</em> is executed prior any further processing step considering our preliminary findings regarding <em>defacing</em><sup><a href="https://rr.peercommunityin.org/articles/rec?id=346" title="Provins, C., … Esteban, O. (2023). Defacing biases in manual and automated quality assessments of structural MRI with MRIQC, Stage 1 IPA (in principle acceptance) of Version 3 by Peer Community in Registered Reports.">2</a></sup>.</p>
 <h3 id="assessing-anatomical-images-t1-weighted-and-t2-weighted">Assessing anatomical images (T<sub>1</sub>-weighted and T<sub>2</sub>-weighted)<a class="headerlink" href="#assessing-anatomical-images-t1-weighted-and-t2-weighted" title="Permanent link">&para;</a></h3>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open each <em>MRIQC</em> report on a current Web Browser (<em>Google Chrome</em> is preferred).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open each <em>MRIQC</em> report on a Web Browser.</li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check that the visual report is complete when you open it.</p>
 <details class="bug">
@@ -1662,7 +1614,7 @@ If there are, follow the procedure described in <a href="#mriqc-failed">"<em>MRI
 </div>
 <ul class="task-list">
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open each <em>MRIQC</em> report on a current web browser (<em>Google Chrome</em> is preferred) in the following order:</p>
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open each <em>MRIQC</em> report on a Web Browser in the following order:</p>
 <ol>
 <li><abbr title="quality control task">QCT</abbr>,</li>
 <li><abbr title="breath-holding task">BHT</abbr>, and</li>
@@ -1675,27 +1627,25 @@ Screening the reports in the prescribed order (<abbr title="quality control task
 </details>
 </li>
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize all echo-wise visualizations of the base report following those two steps:</p>
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Screen all echo-wise visualizations of the base report following these four steps:</p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the first mosaic (standard-deviation) and apply the corresponding <a href="../qaqc-criteria-unprocessed/#functional-mri">exclusion criteria</a>    </li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Scroll down to the carpet plot and apply the corresponding <a href="../qaqc-criteria-unprocessed/#functional-mri">exclusion criteria</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the first mosaic (standard-deviation) and apply the corresponding <a href="../qaqc-criteria-unprocessed/#standard-deviation-of-signal-through-time">exclusion criteria</a></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Proceed to the background view and search for <a href="../qaqc-criteria-unprocessed/#view-of-the-background-of-the-voxel-wise-average-of-the-bold-timeseries">artifacts</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Inspect the zoomed-in view of the average <abbr title="blood-oxygen-level dependent">BOLD</abbr> mosaic and apply the same <a href="../qaqc-criteria-unprocessed/#average-signal-through-time">exclusion criteria</a>.    </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Scroll down to the carpet plot and apply the corresponding <a href="../qaqc-criteria-unprocessed/#carpetplot-and-nuisance-signals">exclusion criteria</a>.</li>
 </ul>
 </li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Inspect the background view and search for <a href="../qaqc-criteria-unprocessed/#functional-mri">artifacts</a> in the "Extended echo-wise reports" section.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Scroll down to the average <abbr title="blood-oxygen-level dependent">BOLD</abbr> mosaic and apply the corresponding <a href="../qaqc-criteria-unprocessed/#functional-mri">exclusion criteria</a>.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Inspect the zoomed-in view of the average <abbr title="blood-oxygen-level dependent">BOLD</abbr> mosaic as well and apply the same <a href="../qaqc-criteria-unprocessed/#functional-mri">exclusion criteria</a>.</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Inspect the average <abbr title="blood-oxygen-level dependent">BOLD</abbr> mosaic for each echo in the "Extended echo-wise reports" section and apply the corresponding <a href="../qaqc-criteria-unprocessed/#average-signal-through-time">exclusion criteria</a>.</p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Proceed as <a href="#mriqc-failed">earlier</a> if errors are reported within the "Errors" section.</p>
+</li>
 </ul>
 <h2 id="visualizing-mriqcs-group-reports">Visualizing <em>MRIQC</em>'s group reports<a class="headerlink" href="#visualizing-mriqcs-group-reports" title="Permanent link">&para;</a></h2>
-<h3 id="assessing-anatomical-images">Assessing anatomical images<a class="headerlink" href="#assessing-anatomical-images" title="Permanent link">&para;</a></h3>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open the <em>MRIQC</em> group report on a current Web Browser (<em>Google Chrome</em> is preferred).</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the <abbr title="Image Quality Metric">IQM</abbr> distributions and apply the <a href="../qaqc-criteria-unprocessed/#group-report">exclusion criteria</a>.</li>
-</ul>
-<h3 id="assessing-functional-images_1">Assessing functional images<a class="headerlink" href="#assessing-functional-images_1" title="Permanent link">&para;</a></h3>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open the <em>MRIQC</em> group report on a current Web Browser (<em>Google Chrome</em> is preferred).</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the <abbr title="Image Quality Metric">IQM</abbr> distributions and apply the <a href="../qaqc-criteria-unprocessed/#group-report-1">exclusion criteria</a>.</li>
-</ul>
+<p>Visualize the group report for each modality in the following order: anatomical, functional and diffusion.
+- [ ] Open the <em>MRIQC</em> group report on a Web Browser.
+- [ ] Visualize the <abbr title="Image Quality Metric">IQM</abbr> distributions and apply the <a href="../qaqc-criteria-unprocessed/#group-report">exclusion criteria</a> corresponding to the modality.</p>
 
 
 
