@@ -20,7 +20,7 @@
 #
 #     https://www.nipreps.org/community/licensing/
 #
-""" Python module for loading and saving fMRI related data"""
+"""Python module for loading and saving fMRI related data"""
 
 import os
 import re
@@ -378,7 +378,7 @@ def load_iqms(
     if "echo" in iqms_df["bids_name"][0] and all("fd" in i for i in iqms_name):
         iqms_df = iqms_df[iqms_df["bids_name"].str.contains("echo-2")]
         logging.info(
-            f"In the case of a multi-echo dataset, the IQMs of the second echo are considered."
+            "In the case of a multi-echo dataset, the IQMs of the second echo are considered."
         )
 
     # Match the order of the rows in iqms_df with the corresponding FC

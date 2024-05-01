@@ -102,7 +102,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#qa-criteria-for-fc" class="md-skip">
+        <a href="#qa-criteria-for-functional-connectivity" class="md-skip">
           Skip to content
         </a>
       
@@ -1399,7 +1399,7 @@
                   
 
 
-<h1 id="qa-criteria-for-fc"><abbr title="quality assessment">QA</abbr> criteria for <abbr title="functional connectivity">FC</abbr><a class="headerlink" href="#qa-criteria-for-fc" title="Permanent link">&para;</a></h1>
+<h1 id="qa-criteria-for-functional-connectivity"><abbr title="quality assessment">QA</abbr> criteria for functional connectivity<a class="headerlink" href="#qa-criteria-for-functional-connectivity" title="Permanent link">&para;</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Contradictory <abbr title="quality assessment">QA</abbr> counter-measures</p>
 <p>In the following two subsections, the suggested counter-measures when <abbr title="quality assessment">QA</abbr> criteria are not met propose changing the cut-off frequency of the low-pass filter in opposed directions, and therefore, <em>solutions compete</em>.
@@ -1460,7 +1460,11 @@ Therefore, rather than optimizing the value of the motion censoring threshold, w
 </ul>
 </li>
 </ul>
-<h1 id="exclusion-criteria-for-fc">Exclusion criteria for <abbr title="functional connectivity">FC</abbr><a class="headerlink" href="#exclusion-criteria-for-fc" title="Permanent link">&para;</a></h1>
+<h1 id="exclusion-criteria-based-on-functional-connectivity">Exclusion criteria based on functional connectivity<a class="headerlink" href="#exclusion-criteria-based-on-functional-connectivity" title="Permanent link">&para;</a></h1>
+<h2 id="censoring">Censoring<a class="headerlink" href="#censoring" title="Permanent link">&para;</a></h2>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Exclude the sessions for which the <abbr title="resting-state fMRI">RSfMRI</abbr> scan does not meet the <abbr title="quality control">QC</abbr> cutoff of 5 minutes of <abbr title="functional MRI">fMRI</abbr> remaining after censoring. Indeed, less than 5 minutes of <abbr title="resting-state fMRI">RSfMRI</abbr> is not enough to reliably estimate functional connectivity <sup><a href="https://doi.org/10.1152/jn.00783.2009" title="Van Dijk, K. R., Hedden, T., Venkataraman, A., Evans, K. C., Lazar, S. W., Buckner, R. L., et al. (2010). Intrinsic functional connectivity as a tool for human connectomics: theory, properties, and optimization. J. Neurophysiol. 103, 297–321. doi: 10.1152/jn.00783.2009">5</a>,<a href="https://doi.org/10.3389/fnimg.2023.1072927" title="Birn, Rasmus M. “Quality Control Procedures and Metrics for Resting-State Functional MRI.” Frontiers in Neuroimaging 2 (2023), doi:10.3389/fnimg.2023.1072927">6</a></sup>.</li>
+</ul>
 <h2 id="fc-distributions_1"><abbr title="functional connectivity">FC</abbr> distributions<a class="headerlink" href="#fc-distributions_1" title="Permanent link">&para;</a></h2>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Exclude the sessions for which the <abbr title="functional connectivity">FC</abbr> distribution appears shifted towards positive values, skewed, flat, or bimodal.

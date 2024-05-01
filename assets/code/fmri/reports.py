@@ -20,7 +20,7 @@
 #
 #     https://www.nipreps.org/community/licensing/
 #
-""" Python module for functional connectivity visual reports """
+"""Python module for functional connectivity visual reports"""
 
 import logging
 import os
@@ -31,6 +31,7 @@ import matplotlib.pyplot as plt
 import nibabel as nib
 import numpy as np
 import pandas as pd
+import plotly.offline as pyo
 import seaborn as sns
 from matplotlib.axes import Axes
 from matplotlib.cm import get_cmap
@@ -60,6 +61,7 @@ NETWORK_CMAP: str = "turbo"
 N_PERMUTATION: int = 10000
 ALPHA = 0.05
 PERCENT_MATCH_CUT_OFF = 95
+DURATION_CUT_OFF = 300
 
 
 def plot_timeseries_carpet(
@@ -383,6 +385,123 @@ def visual_report_fc(
     plt.close()
 
 
+def group_report_censoring(good_timepoints_df, output) -> None:
+    """
+    Generate a group report about censoring.
+
+    This function generates an HTML report that includes an interactive scatterplot
+    showing the fMRI duration after censoring. The scatterplot includes
+    error bars for the confidence interval and a red line indicating a duration cutoff.
+
+    Parameters:
+    -----------
+    good_timepoints_df: pd.Dataframe
+        A DataFrame containing information the fMRI duration after censoring.
+    output : str
+        Path to the output directory
+    """
+    filenames = good_timepoints_df["filename"]
+    durations = good_timepoints_df["duration"]
+
+    # Constructing the data for the plot
+    # Add jitter to x values
+    jitter = 0.2  # adjust this value to change the amount of jitter
+    x_values = [1 + np.random.uniform(-jitter, jitter) for _ in range(len(durations))]
+    data = [
+        {
+            "x": x_values,
+            "y": durations,
+            "text": filenames,
+            "mode": "markers",
+            "type": "scatter",
+            "hoverinfo": "text",
+            "marker": {"opacity": 0.5},
+        }
+    ]
+
+    # Adding a red line at 5 minutes
+    red_line = {
+        "type": "line",
+        "x0": 0,
+        "y0": DURATION_CUT_OFF,
+        "x1": 1.5,
+        "y1": DURATION_CUT_OFF,
+        "line": {"color": "red", "width": 3, "dash": "dashdot"},
+    }
+
+    # Layout settings
+    layout = {
+        "hovermode": "closest",
+        "title": "Duration of fMRI signal after censoring",
+        "yaxis": {"title": "Duration [s]"},
+        "xaxis": {"showticklabels": False, "range": [0.5, 1.5]},
+        "shapes": [red_line],
+        "width": 600,
+        "height": 600,
+        "font": {"size": 16},
+        "annotations": [
+            {
+                "x": 0.8,
+                "y": DURATION_CUT_OFF - DURATION_CUT_OFF / 55,
+                "xref": "x",
+                "yref": "y",
+                "text": f"QC cutoff of {DURATION_CUT_OFF/60} min",
+                "showarrow": False,
+                "font": {"color": "red"},
+            }
+        ],
+    }
+
+    fig = {"data": data, "layout": layout}
+
+    # Save the plot as an HTML file
+    pyo.plot(
+        fig,
+        filename=op.join(output, "reportlets", "group_desc-censoring_bold.html"),
+        auto_open=False,
+    )
+
+
+def group_report_fc_dist(
+    fc_matrices: list[np.ndarray],
+    output: str,
+) -> None:
+    """Plot and save the functional connectivity density distributions.
+
+    Parameters
+    ----------
+    fc_matrices : list[np.ndarray]
+        List of functional connectivity matrices
+    output : str
+        Path to the output directory
+    """
+
+    _, ax = plt.subplots(figsize=FC_FIGURE_SIZE)
+
+    for fc_matrix in fc_matrices:
+        sns.displot(
+            fc_matrix,
+            kind="kde",
+            fill=True,
+            linewidth=0.5,
+            legend=False,
+            palette="ch:s=.25,rot=-.25",
+        )
+
+    ax.tick_params(labelsize=LABELSIZE)
+
+    # Ensure the labels are within the figure
+    plt.tight_layout()
+
+    savename = op.join("reportlets", "group_desc-fcdist_bold.svg")
+
+    logging.debug("Saving functional connectivity distribution visual report at:")
+    logging.debug(f"\t{op.join(output, savename)}")
+
+    plt.savefig(op.join(output, savename))
+    plt.close()
+
+
 def group_reportlet_fc_dist(
     fc_matrices: list[np.ndarray],
     output: str,
@@ -648,6 +767,7 @@ def group_report(
     """Generate a group report."""
 
     # Generate each reportlets
+    group_report_censoring(good_timepoints_df, output)
     group_reportlet_fc_dist(fc_matrices, output)
     qc_fc_dict = group_reportlet_qc_fc(fc_matrices, iqms_df, output)
     group_reportlet_qc_fc_euclidean(qc_fc_dict, atlas_filename, output)

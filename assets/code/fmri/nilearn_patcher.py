@@ -62,7 +62,6 @@ import itertools
 
 from joblib import Memory, Parallel, delayed
 
-from nilearn._utils import fill_doc
 from nilearn._utils.niimg_conversions import _iter_check_niimg
 from nilearn.maskers.nifti_maps_masker import NiftiMapsMasker
 
