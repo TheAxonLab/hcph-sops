@@ -164,6 +164,7 @@ def main():
     group_report(
         good_timepoints_df,
         fc_matrices,
+        existing_fc,
         iqms_df,
         atlas_filename,
         output,

@@ -25,8 +25,10 @@
 import logging
 import os
 import os.path as op
+import re
 from typing import Optional, Union
 
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 import nibabel as nib
 import numpy as np
@@ -58,7 +60,7 @@ TS_FIGURE_SIZE: tuple = (50, 25)
 FC_FIGURE_SIZE: tuple = (70, 45)
 LABELSIZE: int = 42
 NETWORK_CMAP: str = "turbo"
-N_PERMUTATION: int = 10000
+N_PERMUTATION: int = 10
 ALPHA = 0.05
 PERCENT_MATCH_CUT_OFF = 95
 DURATION_CUT_OFF = 300
@@ -385,7 +387,7 @@ def visual_report_fc(
     plt.close()
 
 
-def group_report_censoring(good_timepoints_df, output) -> None:
+def group_reportlet_censoring(good_timepoints_df, output) -> None:
     """
     Generate a group report about censoring.
 
@@ -461,49 +463,9 @@ def group_report_censoring(good_timepoints_df, output) -> None:
         auto_open=False,
     )
 
-
-def group_report_fc_dist(
-    fc_matrices: list[np.ndarray],
-    output: str,
-) -> None:
-    """Plot and save the functional connectivity density distributions.
-
-    Parameters
-    ----------
-    fc_matrices : list[np.ndarray]
-        List of functional connectivity matrices
-    output : str
-        Path to the output directory
-    """
-
-    _, ax = plt.subplots(figsize=FC_FIGURE_SIZE)
-
-    for fc_matrix in fc_matrices:
-        sns.displot(
-            fc_matrix,
-            kind="kde",
-            fill=True,
-            linewidth=0.5,
-            legend=False,
-            palette="ch:s=.25,rot=-.25",
-        )
-
-    ax.tick_params(labelsize=LABELSIZE)
-
-    # Ensure the labels are within the figure
-    plt.tight_layout()
-
-    savename = op.join("reportlets", "group_desc-fcdist_bold.svg")
-
-    logging.debug("Saving functional connectivity distribution visual report at:")
-    logging.debug(f"\t{op.join(output, savename)}")
-
-    plt.savefig(op.join(output, savename))
-    plt.close()
-
-
 def group_reportlet_fc_dist(
     fc_matrices: list[np.ndarray],
+    fc_paths: list[str],
     output: str,
 ) -> None:
     """Plot and save the functional connectivity density distributions.
@@ -512,23 +474,41 @@ def group_reportlet_fc_dist(
     ----------
     fc_matrices : list[np.ndarray]
         List of functional connectivity matrices
+    fc_paths : list [str]
+        List of paths to the functional connectivity matrices
     output : str
         Path to the output directory
     """
 
     _, ax = plt.subplots(figsize=FC_FIGURE_SIZE)
-
-    for fc_matrix in fc_matrices:
-        sns.displot(
-            fc_matrix,
-            kind="kde",
-            fill=True,
-            linewidth=0.5,
-            legend=False,
-            palette="ch:s=.25,rot=-.25",
-        )
-
     ax.tick_params(labelsize=LABELSIZE)
+    mpl.rcParams['legend.fontsize'] = LABELSIZE
+
+    # Extract the session number from filename
+    session_nbr = [re.search(r"ses-(\d+)", file).group(1) for file in fc_paths]
+
+    # Concatenate all functional connectivity estimates into a dataframe
+    fc = [] 
+    for i, fc_matrix in enumerate(fc_matrices):
+        flattened = fc_matrix.reshape(-1)
+        session = [f"Session {session_nbr[i]}"] * len(flattened)
+        fc.extend(zip(flattened, session))
+
+    fc_df = pd.DataFrame(fc, columns=["value", "session"])
+
+    sns.kdeplot(
+        data=fc_df,
+        x="value",
+        hue="session",
+        fill=True,
+        linewidth=0.5,
+        alpha=0.5,
+        palette="ch:s=.25,rot=-.25",
+    )
+
+    plt.tick_params(labelsize=LABELSIZE)
+    plt.xlabel('Value', fontsize=LABELSIZE+4)
+    plt.ylabel('Density', fontsize=LABELSIZE+4)
 
     # Ensure the labels are within the figure
     plt.tight_layout()
@@ -760,6 +740,7 @@ def group_reportlet_qc_fc_euclidean(
 def group_report(
     good_timepoints_df: pd.DataFrame,
     fc_matrices: list[np.ndarray],
+    fc_paths: list[str],
     iqms_df: pd.DataFrame,
     atlas_filename: str,
     output: str,
@@ -767,8 +748,8 @@ def group_report(
     """Generate a group report."""
 
     # Generate each reportlets
-    group_report_censoring(good_timepoints_df, output)
-    group_reportlet_fc_dist(fc_matrices, output)
+    group_reportlet_censoring(good_timepoints_df, output)
+    group_reportlet_fc_dist(fc_matrices, fc_paths, output)
     qc_fc_dict = group_reportlet_qc_fc(fc_matrices, iqms_df, output)
     group_reportlet_qc_fc_euclidean(qc_fc_dict, atlas_filename, output)
 
