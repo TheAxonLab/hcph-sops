@@ -23,7 +23,15 @@
 import datetime
 import random
 import click
+from collections import defaultdict
 import pandas as pd
+
+
+SCANNER_NAME_MAPPINGS = {
+    "Prisma": "060",
+    "Vida07": "034",
+    "VidaFit": "030",
+}
 
 
 @click.group()
@@ -44,6 +52,7 @@ def cli() -> None:
 @click.option("-s", "--seed", type=click.IntRange(min=0), default=20231020)
 @click.option("-o", "--output", type=click.File("w"))
 @click.option("-n", "--num-sessions", type=click.IntRange(min=1), default=36)
+@click.option("-i", "--scanner-ids", type=str, multiple=True)
 @click.option(
     "--base-date", type=click.DateTime(formats=["%Y-%m-%d"]), default="2023-10-20"
 )
@@ -53,6 +62,7 @@ def generate(
     seed: int,
     output: click.utils.LazyFile,
     num_sessions: int,
+    scanner_ids: list[str],
     base_date: datetime.date,
     sessions_per_day: int,
     md_output: click.utils.LazyFile,
@@ -68,6 +78,8 @@ def generate(
         File to write the session plan in a tabular format.
     num_sessions : int
         Number of sessions to generate.
+    scanner_ids : list
+        Identifiers of the scanners (shuffles order).
     base_date : datetime.date
         Base date for session scheduling.
     sessions_per_day : int
@@ -84,21 +96,60 @@ def generate(
     """
 
     random.seed(seed)
+
+    num_devices = len(scanner_ids)
+
     sessions = list(range(1, num_sessions + 1))
-    encodings = (["LR", "RL", "PA", "AP"] * (num_sessions // 4 + 1))[:num_sessions]
-    random.shuffle(encodings)
     days = [
         base_date + datetime.timedelta(days=delta)
         for s in range(num_sessions)
         for delta in [s] * sessions_per_day
     ][:num_sessions]
-    table = pd.DataFrame(
-        {
-            "session": sessions,
-            "day": days,
-            "PE": encodings,
-        }
-    )
+
+    datadict = defaultdict(list)
+    for sid in scanner_ids:
+        encodings = (["LR", "RL", "PA", "AP"] * (num_sessions // 4 + 1))[:num_sessions]
+        random.shuffle(encodings)
+
+        if num_devices == 1:
+            datadict = {
+                "session": sessions,
+                "day": days,
+                "PE": encodings,
+            }
+        else:
+            datadict["day"] += days
+            datadict["device"] += [sid] * num_sessions
+            datadict["session"] += sessions
+            datadict["PE"] += encodings
+
+    table = pd.DataFrame(datadict)
+
+    if num_devices > 1:
+        indexes = list(range(len(table)))
+        random.shuffle(indexes)
+
+        table = table.iloc[indexes].sort_values(["day", "session"])
+
+        table["sessionwise_order"] = [2, 3, 4] * num_sessions
+        table.loc[table["device"] == "Prisma", "sessionwise_order"] = 1
+        table = table.sort_values(["day", "session", "sessionwise_order"])
+        table["sessionwise_order"] = [1, 2, 3] * num_sessions
+
+        table["bids_id"] = [
+            f"{row['session']:03d}{row['sessionwise_order']:02d}"
+            f"{SCANNER_NAME_MAPPINGS[row['device']]}"
+            for _, row in table.iterrows()
+        ]
+        table.reset_index(drop=True)
+        table.drop(labels=["sessionwise_order"], axis=1, inplace=True)
+
+    table["day"] = table["day"].apply(lambda x: x.date())
+
+    # print(table.to_markdown(index=False))
+    # print(table[table["device"] == "Prisma"].to_markdown(index=False))
+    # print(table[table["device"] == "Vida07"].to_markdown(index=False))
+    # print(table[table["device"] == "VidaFit"].to_markdown(index=False))
 
     if output:
         table.to_csv(output, index=None, sep="\t")
