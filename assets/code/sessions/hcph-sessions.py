@@ -137,7 +137,7 @@ def generate(
         table["sessionwise_order"] = [1, 2, 3] * num_sessions
 
         table["bids_id"] = [
-            f"{row['session']:03d}{row['sessionwise_order']:02d}"
+            f"2{row['session']:02d}{row['sessionwise_order']:02d}"
             f"{SCANNER_NAME_MAPPINGS[row['device']]}"
             for _, row in table.iterrows()
         ]
