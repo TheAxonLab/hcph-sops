@@ -30,14 +30,17 @@ force_in_git = [
     '*.json',
     '*.bvec',
     '*.bval',
+    '*.toml',
+    '*.log',
+    '*.txt',
+    '*.md',
+    '*.out',
+    '*.err',
     # comment out the line below to not put participants or scan info into Git
     # (might contain sensitive information)
     '*.tsv',
     '*.html',
-    '*.txt',
-    '*.md',
     '*.bib',
-    '*.toml',
     '*.yaml',
     '*.yml',
     '*.tex',
@@ -47,12 +50,11 @@ force_in_git = [
     '*.annot',
     '*.stats',
     '*.dat',
-    '*.log',
     '*.log.bak',
     '*.cmd',
     '*.touch',
     '*.done',
-    '*.local-copy",'
+    '*.local-copy',
     '*.lta',
 ]
 
@@ -62,6 +64,9 @@ force_in_annex = [
     '*.env',  # Protect the environment file from being added into Git
     '*.env.bak',  # Protect the environment file from being added into Git
     '*.h5',
+    '*.x5',
+    '*.mat',
+    'layout_index.sqlite',
 ]
 
 # make an attempt to discover the prospective change in .gitattributes
