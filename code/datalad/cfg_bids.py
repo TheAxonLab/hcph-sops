@@ -29,6 +29,12 @@ force_in_git = [
     '*.json',
     '*.bvec',
     '*.bval',
+    '*.toml',
+    '*.log',
+    '*.txt',
+    '*.md',
+    '*.out',
+    '*.err',
     # comment out the line below to not put participants or scan info into Git
     # (might contain sensitive information)
     '*.tsv',
@@ -38,6 +44,10 @@ force_in_git = [
 force_in_annex = [
     '*.svg',
     '*.gii',
+    '*.h5',
+    '*.x5',
+    '*.mat',
+    'layout_index.sqlite',
 ]
 
 # make an attempt to discover the prospective change in .gitattributes
