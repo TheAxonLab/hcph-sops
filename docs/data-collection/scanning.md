@@ -204,12 +204,14 @@ It is critical to check that physiological signals are looking good:
 !!! warning "The localizer may present very low quality if the head-coil has not been properly initiated by the scanner"
 
 - [ ] In the issue collecting notes about the session, specifically under *anat* issues select the problem and describe it in detail in the anatomical scan notes section. 
-- [ ] Enter the scanning room, extract the participant from the scanner by pressing the home (:fontawesome-solid-house:) button.
-- [ ] Tell the participant that you need to reset the head coil
-- [ ] Unplug and replug the head coil
-- [ ] Check that the coil has been properly detected in the scanner's monitor
-- [ ] Re-insert the participant in the scanner
 - [ ] Re-run the `AAhead_scout_{32,64}ch-head-coil` protocol.
+- [ ] If the quality of the second localizer looks good, you can move forward with the T1w sequence. If not, proceed as follows:
+    - [ ] Enter the scanning room, extract the participant from the scanner by pressing the home (:fontawesome-solid-house:) button.
+    - [ ] Tell the participant that you need to reset the head coil
+    - [ ] Unplug and replug the head coil
+    - [ ] Check that the coil has been properly detected in the scanner's monitor
+    - [ ] Re-insert the participant in the scanner
+    - [ ] Re-run the `AAhead_scout_{32,64}ch-head-coil` protocol.
 
 ## Acquire a high-resolution, anatomical image
 
