@@ -48,6 +48,14 @@ echo '```TSV' >> $body_file
 echo '' >> $body_file
 cat /data/datasets/hcph/sub-001/ses-${SESSION}/sub-001_ses-${SESSION}_scans.tsv >> $body_file
 echo '```' >> $body_file
+
+# Retrieve original issue number:
+gh_issue=$( gh search issues --match title --repo TheAxonLab/hcph-dataset --json number --jq .[0].number  -- is:open label:scan $SESSION )
+if [ ! -z "$gh_issue" ]; then
+  echo '' >> $body_file
+  echo "Prompted-by: TheAxonLab/hcph-dataset#${gh_issue}." >> $body_file
+fi
+
 pr_url=$( gh pr create -B "master" -r "celprov" -a "@me" -t "ADD: ${SESSION} | Session ${session_num} on ${session_device[${SESSION: -3}]} (${session_date})" -F $body_file | tail -n1 )
 
 echo "Compacting DICOMs..."
