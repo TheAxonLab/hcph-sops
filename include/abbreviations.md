@@ -19,6 +19,7 @@
 *[EPFL]: École Polytechnique Fédérale de Lausanne
 *[EPI]: echo-planar imaging
 *[ET]: eye tracker
+*[FA]: fractional anisotropy
 *[FC]: functional connectivity
 *[FD]: framewise displacement
 *[fMRI]: functional MRI
@@ -38,6 +39,7 @@
 *[IQMs]: Image Quality Metrics
 *[JSON]: JavaScript Object Notation
 *[LR]: left-to-right
+*[MD]: mean diffusivity
 *[MR]: Magnetic Resonance
 *[MRI]: Magnetic Resonance Imaging
 *[NIfTI]: Neuroimaging Informatics Technology Initiative

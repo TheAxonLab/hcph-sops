@@ -160,6 +160,39 @@ As such, verifying that the subjects were attempting to perform the instructed t
 
 ## Diffusion MRI
 
+#### Shell-wise joint distribution of SNR vs FA in every voxel
+
+#### Fractional anisotropy map
+
+- [ ] Exclude the DWI scans if the major WM tracts (corpus callosum [WHAT ELSE?]) are not clearly discernible. 
+
+#### Mean diffusivity map
+
+- [ ] Exclude the DWI scan if the ventricles and/or the CSF around the brain is not prominently identifiable. 
+
+#### Voxel-wise average and standard deviation across volumes in a single DWI shell
+
+##### Voxel-wise average
+- [ ] Check that the brain is not presented upside down.
+    This indicates an issue of the header.
+    Either the header needs to be corrected manually or exclude the session.
+- [ ] Check that the brain structure is clearly visible.
+    Exclude the session if it is not.
+
+#### Shelled images standard deviation
+- [ ] Check that the major white matter tracts, most predominently the corpus callosum, are clearly visible. Exclude the DWI scan in case it is not.
+- [ ] Check for high-standard-deviation vertical strikes in the coronal plane of the standard deviation map.
+    Exclude the session if the vertical strike continuously traverse more than half of the brain's length.
+
+#### View of the background of the voxel-wise average of a single DWI shell
+
+- [ ] Apply the same exclusion criteria as for the fMRI background view, that is check for the following ghosts:
+      - [ ] Overlapping wrap-around.
+      - [ ] Ghosts caused by external elements such as headsets or mirror frames.
+      Exclude the session if any of these ghosts overlap cortical gray matter.
+      - [ ] Nyquist aliases or aliasing ghost (typically through PE direction).
+        Exclude the session if the intensity of the ghost is similar to the intensity of the inside of the brain.
+
 ## Physiological recordings
 
 ## Eye-tracking
