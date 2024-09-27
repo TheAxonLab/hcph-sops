@@ -196,6 +196,7 @@ class EyeTrackingRun:
             finally:
                 messages = messages.loc[~mode_record]
 
+        # Tuple that informs which eye(s) were recorded
         self.eye = (
             ("right", "left") if meta_record["eye"] == "both" else (meta_record["eye"],)
         )
@@ -325,6 +326,53 @@ class EyeTrackingRun:
                 for msg_timestamp, msg in messages[["trialid_time", "trialid"]].values
             ]
 
+        # Parse calibration metadata
+        self.metadata["CalibrationCount"] = 0
+        if not calibration.empty:
+            calibration.trialid = calibration.trialid.str.replace("!CAL", "")
+            calibration.trialid = calibration.trialid.str.strip()
+
+            self.metadata["CalibrationLog"] = list(
+                zip(
+                    calibration.trialid_time.values.astype(int).tolist(),
+                    calibration.trialid.values,
+                )
+            )
+
+            calibrations_msg = calibration.trialid.str.startswith(
+                "VALIDATION"
+            ) & calibration.trialid.str.contains("ERROR")
+            self.metadata["CalibrationCount"] = int(calibrations_msg.sum())
+
+            if self.metadata["CalibrationCount"] > 1:
+                warn("Calibration of more than one eye is not implemented")
+
+            if self.metadata["CalibrationCount"]:
+                calibration_last = calibration.index[calibrations_msg][-1]
+                try:
+                    meta_calib = re.match(
+                        r"VALIDATION (?P<ctype>[\w\d]+) (?P<eyeid>[RL]+) (?P<eye>RIGHT|LEFT) "
+                        r"(?P<result>\w+) ERROR (?P<avg>-?\d+\.\d+) avg\. (?P<max>-?\d+\.\d+) max\s+"
+                        r"OFFSET (?P<offsetdeg>-?\d+\.\d+) deg\. "
+                        r"(?P<offsetxpix>-?\d+\.\d+),(?P<offsetypix>-?\d+\.\d+) pix\.",
+                        calibration.loc[calibration_last, "trialid"].strip(),
+                    ).groupdict()
+
+                    self.metadata["CalibrationType"] = meta_calib["ctype"]
+                    self.metadata["AverageCalibrationError"] = float(meta_calib["avg"])
+                    self.metadata["MaximalCalibrationError"] = float(meta_calib["max"])
+                    self.metadata["CalibrationResultQuality"] = meta_calib["result"]
+                    self.metadata["CalibrationResultOffset"] = [
+                        float(meta_calib["offsetdeg"]),
+                        (
+                            float(meta_calib["offsetxpix"]),
+                            float(meta_calib["offsetypix"]),
+                        ),
+                    ]
+                    self.metadata["CalibrationResultOffsetUnits"] = ["deg", "pixels"]
+                except AttributeError:
+                    warn("Calibration data found but unsuccessfully parsed for results")
+
         # Normalize timestamps (should be int and strictly positive)
         self.recording = self.recording[
             self.recording["time"] > self.recording.loc[0, "time"]
@@ -402,53 +450,6 @@ class EyeTrackingRun:
 
         # Rename columns to be BIDS-compliant
         self.recording = self.recording.rename(columns=dict(zip(columns, bids_columns)))
-
-        # Parse calibration metadata
-        self.metadata["CalibrationCount"] = 0
-        if not calibration.empty:
-            calibration.trialid = calibration.trialid.str.replace("!CAL", "")
-            calibration.trialid = calibration.trialid.str.strip()
-
-            self.metadata["CalibrationLog"] = list(
-                zip(
-                    calibration.trialid_time.values.astype(int).tolist(),
-                    calibration.trialid.values,
-                )
-            )
-
-            calibrations_msg = calibration.trialid.str.startswith(
-                "VALIDATION"
-            ) & calibration.trialid.str.contains("ERROR")
-            self.metadata["CalibrationCount"] = int(calibrations_msg.sum())
-
-            if self.metadata["CalibrationCount"] > 1:
-                warn("Calibration of more than one eye is not implemented")
-
-            if self.metadata["CalibrationCount"]:
-                calibration_last = calibration.index[calibrations_msg][-1]
-                try:
-                    meta_calib = re.match(
-                        r"VALIDATION (?P<ctype>[\w\d]+) (?P<eyeid>[RL]+) (?P<eye>RIGHT|LEFT) "
-                        r"(?P<result>\w+) ERROR (?P<avg>-?\d+\.\d+) avg\. (?P<max>-?\d+\.\d+) max\s+"
-                        r"OFFSET (?P<offsetdeg>-?\d+\.\d+) deg\. "
-                        r"(?P<offsetxpix>-?\d+\.\d+),(?P<offsetypix>-?\d+\.\d+) pix\.",
-                        calibration.loc[calibration_last, "trialid"].strip(),
-                    ).groupdict()
-
-                    self.metadata["CalibrationType"] = meta_calib["ctype"]
-                    self.metadata["AverageCalibrationError"] = float(meta_calib["avg"])
-                    self.metadata["MaximalCalibrationError"] = float(meta_calib["max"])
-                    self.metadata["CalibrationResultQuality"] = meta_calib["result"]
-                    self.metadata["CalibrationResultOffset"] = [
-                        float(meta_calib["offsetdeg"]),
-                        (
-                            float(meta_calib["offsetxpix"]),
-                            float(meta_calib["offsetypix"]),
-                        ),
-                    ]
-                    self.metadata["CalibrationResultOffsetUnits"] = ["deg", "pixels"]
-                except AttributeError:
-                    warn("Calibration data found but unsuccessfully parsed for results")
 
         # Process events: first generate empty columns
         self.recording["fixation"] = 0
