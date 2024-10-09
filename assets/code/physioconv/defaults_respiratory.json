@@ -1,0 +1,24 @@
+{
+  "Columns": [
+    "belt",
+    "CO2",
+    "O2"
+  ],
+  "Manufacturer": "BIOPAC Systems, Inc., Goleta, CA, US",
+  "belt": {
+    "Description": "continuous breathing measurement by negative differential pressure with a respiration belt",
+    "Model": "DA100C TSD160A transducer"
+  },
+  "CO2": {
+    "Description": "continuous breathing measurement: absolute CO2 concentration",
+    "Units": "%",
+    "Model": "ML206",
+    "Manufacturer": "AD Instruments Pty. Ltd., Sydney, Australia"
+  },
+  "O2": {
+    "Description": "continuous breathing measurement: absolute O2 concentration",
+    "Units": "%",
+    "Model": "ML206",
+    "Manufacturer": "AD Instruments Pty. Ltd., Sydney, Australia"
+  }
+}

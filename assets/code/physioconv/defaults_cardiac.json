@@ -1,0 +1,10 @@
+{
+  "Columns": [
+    "ecg"
+  ],
+  "Manufacturer": "BIOPAC Systems, Inc., Goleta, CA, US",
+  "ecg": {
+    "Description": "continuous measurements of Lead I electrocardiogram",
+    "Model": "ECG100C MRI & MECMRI-2 amplifier"
+  }
+}
