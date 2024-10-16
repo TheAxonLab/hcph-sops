@@ -27,6 +27,7 @@ nav:
       - QA/QC protocol overview: data-management/qaqc-general.md
       - QC of unprocessed data: data-management/mriqc.md
     - Processing: 
+      - Preparing environments for execution: processing/environment.md
       - Preprocessing: processing/preprocessing.md
       - Extracting functional connectivity: processing/functional-connectivity.md
     - Analysis:
