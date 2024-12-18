@@ -568,7 +568,7 @@ def group_reportlet_qc_fc(
 
     if fc_matrices.shape[1] != iqms_df.shape[0]:
         raise ValueError(
-            "The number of functional connectivity matrices and IQMs do not match."
+            f"The number of functional connectivity matrices ({fc_matrices.shape[1]}) and IQMs ({iqms_df.shape[0]}) do not match."
         )
 
     if fc_matrices.shape[1] == 1:
@@ -767,6 +767,7 @@ def group_report(
     """Generate a group report."""
 
     # Generate each reportlets
+    os.makedirs(op.join(output, "reportlets"), exist_ok=True)
     group_report_censoring(good_timepoints_df, output)
     group_reportlet_fc_dist(fc_matrices, output)
     qc_fc_dict = group_reportlet_qc_fc(fc_matrices, iqms_df, output)

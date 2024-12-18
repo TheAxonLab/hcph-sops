@@ -329,8 +329,10 @@ def reorder_iqms(iqms_df: pd.DataFrame, fc_paths: list[str]):
     panda.df
         Dataframe containing the IQMs dataframe with reordered rows.
     """
-    iqms_df[["subject", "session", "task"]] = iqms_df["bids_name"].str.extract(
-        r"sub-(\d+)_ses-(\d+)_task-(\w+)_"
+    iqms_df = iqms_df.assign(
+        subject=iqms_df["bids_name"].str.extract(r"sub-(\d+)_"),
+        session=iqms_df["bids_name"].str.extract(r"ses-(\w+)_"),
+        task=iqms_df["bids_name"].str.extract(r"task-(\w+)_")
     )
     entities_list = [parse_file_entities(filepath) for filepath in fc_paths]
     entities_df = pd.DataFrame(entities_list)
