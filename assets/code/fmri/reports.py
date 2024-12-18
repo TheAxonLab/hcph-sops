@@ -34,7 +34,6 @@ import pandas as pd
 import plotly.offline as pyo
 import seaborn as sns
 from matplotlib.axes import Axes
-from matplotlib.cm import get_cmap
 from matplotlib.lines import Line2D
 from nireports.assembler.report import Report
 from nilearn.plotting import plot_design_matrix, plot_matrix
@@ -109,7 +108,7 @@ def plot_timeseries_carpet(
         net_dict = {net: i + 1 for i, net in enumerate(networks_sorted.unique())}
         net_plot = np.array([[net_dict[net] for net in networks_sorted]])
 
-        net_cmap = get_cmap(NETWORK_CMAP, len(net_dict))
+        net_cmap = plt.get_cmap(NETWORK_CMAP, len(net_dict))
         ax_net.imshow(net_plot.T, cmap=NETWORK_CMAP, aspect="auto")
 
         legend_elements = [
@@ -207,7 +206,7 @@ def plot_timeseries_signal(
         net_dict = {net: i + 1 for i, net in enumerate(networks_sorted.unique())}
         net_plot = np.array([[net_dict[net] for net in networks_sorted]])
 
-        net_cmap = get_cmap(NETWORK_CMAP, len(net_dict))
+        net_cmap = plt.get_cmap(NETWORK_CMAP, len(net_dict))
 
         colors = [net_cmap(i - 1) for i in net_plot][0]
 

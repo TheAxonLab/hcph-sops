@@ -48,7 +48,7 @@ from nilearn._utils import stringify_path
 from nilearn.connectome import ConnectivityMeasure, vec_to_sym_matrix
 from nilearn.interfaces.fmriprep import load_confounds
 from nilearn.maskers import MultiNiftiMapsMasker
-from nilearn.signal import _handle_scrubbed_volumes, _sanitize_confounds, clean
+from nilearn.signal import _handle_scrubbed_volumes, _sanitize_confound_dtype, clean
 
 from reports import plot_interpolation, visual_report_timeserie, visual_report_fc
 from load_save import (
@@ -317,7 +317,7 @@ def interpolate_and_denoise_timeseries(
         )
 
         # This is required as we are manually doing some internal Nilearn machinery
-        conf = _sanitize_confounds(ts.shape[0], n_runs=1, confounds=conf)
+        conf = _sanitize_confound_dtype(ts.shape[0], confound=conf)
         conf = stringify_path(conf)
 
         ts_to_interpolate = ts.copy()
