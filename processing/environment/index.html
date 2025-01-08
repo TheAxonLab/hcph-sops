@@ -828,11 +828,35 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#installing-the-datalad-dataset" class="md-nav__link">
+  <a href="#getting-data" class="md-nav__link">
     <span class="md-ellipsis">
-      Installing the DataLad dataset
+      Getting data
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Getting data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installing-the-original-hcph-dataset-with-datalad" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installing the original HCPh dataset with DataLad
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-derivatives" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installing derivatives
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1430,11 +1454,35 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#installing-the-datalad-dataset" class="md-nav__link">
+  <a href="#getting-data" class="md-nav__link">
     <span class="md-ellipsis">
-      Installing the DataLad dataset
+      Getting data
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Getting data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installing-the-original-hcph-dataset-with-datalad" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installing the original HCPh dataset with DataLad
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-derivatives" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installing derivatives
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1535,11 +1583,11 @@ For example, in the case of systems operating <abbr title="Slurm Workload Manage
 <details class="bug">
 <summary><em>DataLad</em> crashes (<em>Conda</em> installations)</summary>
 <p><em>DataLad</em> may fail with the following error:
-<div class="language-py highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="ne">ImportError</span><span class="p">:</span> <span class="n">cannot</span> <span class="kn">import</span> <span class="nn">name</span> <span class="s1">&#39;getargspec&#39;</span> <span class="kn">from</span> <span class="s1">&#39;inspect&#39;</span> <span class="p">(</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">users</span><span class="o">/</span><span class="n">cprovins</span><span class="o">/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">inspect</span><span class="o">.</span><span class="n">py</span><span class="p">)</span>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="ne">ImportError</span><span class="p">:</span> <span class="n">cannot</span> <span class="kn">import</span><span class="w"> </span><span class="nn">name</span> <span class="s1">&#39;getargspec&#39;</span> <span class="kn">from</span><span class="w"> </span><span class="s1">&#39;inspect&#39;</span> <span class="p">(</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">users</span><span class="o">/</span><span class="n">cprovins</span><span class="o">/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">inspect</span><span class="o">.</span><span class="n">py</span><span class="p">)</span>
 </span></code></pre></div></p>
 <p>In such a scenario, create a <em>Conda</em> environment with a lower version of Python, and re-install datalad
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;datalad&quot;</span><span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.10
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>conda<span class="w"> </span>activate<span class="w"> </span>datalad
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;datamgt&quot;</span><span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.10
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>conda<span class="w"> </span>activate<span class="w"> </span>datamgt
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>datalad<span class="w"> </span>datalad-container
 </span></code></pre></div></p>
 </details>
@@ -1581,12 +1629,12 @@ For example, in the case of systems operating <abbr title="Slurm Workload Manage
 </ul>
 </li>
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Create a new environment called <code>datalad</code> with <em>Git annex</em> in it:
-    <div class="language-Bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>micromamba<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>datalad<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.12<span class="w"> </span>git-annex<span class="o">=</span>*<span class="o">=</span>alldep*
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Create a new environment called <code>datamgt</code> with <em>Git annex</em> in it:
+    <div class="language-Bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>micromamba<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>datamgt<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.12<span class="w"> </span>git-annex<span class="o">=</span>*<span class="o">=</span>alldep*
 </span></code></pre></div></p>
 </li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Activate the environment
-    <div class="language-Bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>micromamba<span class="w"> </span>activate<span class="w"> </span>datalad
+    <div class="language-Bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>micromamba<span class="w"> </span>activate<span class="w"> </span>datamgt
 </span></code></pre></div></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install <em>DataLad</em> and <em>DataLad-next</em>:
     <div class="language-Bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>datalad<span class="w"> </span>datalad-next
@@ -1599,7 +1647,8 @@ For example, in the case of systems operating <abbr title="Slurm Workload Manage
 </span></code></pre></div>
 </li>
 </ul>
-<h2 id="installing-the-datalad-dataset">Installing the <em>DataLad</em> dataset<a class="headerlink" href="#installing-the-datalad-dataset" title="Permanent link">&para;</a></h2>
+<h2 id="getting-data">Getting data<a class="headerlink" href="#getting-data" title="Permanent link">&para;</a></h2>
+<h3 id="installing-the-original-hcph-dataset-with-datalad">Installing the original <abbr title="Human Connectome Phantom (this project)">HCPh</abbr> dataset with <em>DataLad</em><a class="headerlink" href="#installing-the-original-hcph-dataset-with-datalad" title="Permanent link">&para;</a></h3>
 <p>Wherever you want to process the data, you'll need to <code>datalad install</code> it before you can pull down (<code>datalad get</code>) the data.
 To access the metadata (e.g., sidecar <abbr title="JavaScript Object Notation">JSON</abbr> files of the <abbr title="Brain Imaging Data Structure">BIDS</abbr> structure), you'll need to have access to the git repository that corresponds to the data (https://github.com/&lt;organization&gt;/&lt;repo_name&gt;.git)
 To fetch the dataset from the <abbr title="Remote Indexed Archives">RIA</abbr> store, you will need your <abbr title="Secure Shell or Secure Socket Shell">SSH</abbr> key be added to the authorized keys at <em>Curnagl</em>.</p>
@@ -1613,54 +1662,72 @@ To fetch the dataset from the <abbr title="Remote Indexed Archives">RIA</abbr> s
 </details>
 <ul class="task-list">
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install and get the dataset normally:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Installing the dataset without fetching data from annex</label><label for="__tabbed_2_2">Installing the dataset and fetch all data from annex, with 8 parallel threads</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>datalad<span class="w"> </span>install<span class="w"> </span>https://github.com/&lt;organization&gt;/&lt;repo_name&gt;.git
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install the dataset:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>micromamba<span class="w"> </span>run<span class="w"> </span>-n<span class="w"> </span>datamgt<span class="w"> </span>datalad<span class="w"> </span>install<span class="w"> </span>https://github.com/&lt;organization&gt;/&lt;repo_name&gt;.git
 </span></code></pre></div>
-</div>
-<div class="tabbed-block">
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>datalad<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>-J<span class="w"> </span><span class="m">8</span><span class="w"> </span>https://github.com/&lt;organization&gt;/&lt;repo_name&gt;.git
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Reconfigure the <abbr title="Remote Indexed Archives">RIA</abbr> store:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>micromamba<span class="w"> </span>run<span class="w"> </span>-n<span class="w"> </span>datamgt<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">    </span>git<span class="w"> </span>annex<span class="w"> </span>initremote<span class="w"> </span>--private<span class="w"> </span>--sameas<span class="o">=</span>ria-storage<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">    </span>curnagl-storage<span class="w"> </span><span class="nv">type</span><span class="o">=</span>external<span class="w"> </span><span class="nv">externaltype</span><span class="o">=</span>ora<span class="w"> </span><span class="nv">encryption</span><span class="o">=</span>none<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">    </span><span class="nv">url</span><span class="o">=</span><span class="s2">&quot;ria+file://&lt;path&gt;&quot;</span>
 </span></code></pre></div>
+<div class="admonition danger">
+<p class="admonition-title">REQUIRED step</p>
+<p>When on <em>Curnagl</em>, you'll need to <em>convert</em> the <code>ria-storage</code> remote
+on a local <code>ria-store</code> because you cannot ssh from <em>Curnagl</em> into itself.</p>
 </div>
-</div>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Get the dataset:</p>
+<div class="admonition danger">
+<p class="admonition-title">Data MUST be fetched from a development node.</p>
+<p>The <abbr title="Network-attached storage">NAS</abbr> is not accessible from compute nodes in <em>Curnagl</em>.</p>
+<ul class="task-list">
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Execute <code>datalad get</code> within a development node:</p>
+<div class="language-Bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>salloc<span class="w"> </span>--partition<span class="o">=</span>interactive<span class="w"> </span>--time<span class="o">=</span><span class="m">02</span>:00:00<span class="w"> </span>--cpus-per-task<span class="w"> </span><span class="m">12</span>
+</span></code></pre></div>
+<p>Success is demonstrated by an output like:</p>
+<div class="language-Text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>salloc: Granted job allocation 47734642
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>salloc: Nodes dna064 are ready for job
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>Switching to the 20240303 software stack
+</span></code></pre></div>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Fetch the data:</p>
+<div class="language-Bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nb">cd</span><span class="w"> </span><span class="nv">$WORK</span>/data
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>micromamba<span class="w"> </span>run<span class="w"> </span>-n<span class="w"> </span>datamgt<span class="w"> </span>datalad<span class="w"> </span>get<span class="w"> </span>-J<span class="si">${</span><span class="nv">SLURM_CPUS_PER_TASK</span><span class="si">}</span><span class="w"> </span>.
+</span></code></pre></div>
+</li>
+</ul>
 </div>
 </li>
 </ul>
-<div class="admonition warning">
-<p class="admonition-title">Reconfiguring the <abbr title="Remote Indexed Archives">RIA</abbr> store on <em>Curnagl</em></p>
-<p>When on <em>Curnagl</em>, you'll need to <em>convert</em> the <code>ria-storage</code> remote
-on a local <code>ria-store</code> because you cannot ssh from <em>Curnagl</em> into itself:</p>
-<div class="language-Bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>git<span class="w"> </span>annex<span class="w"> </span>initremote<span class="w"> </span>--private<span class="w"> </span>--sameas<span class="o">=</span>ria-storage<span class="w"> </span>curnagl-storage<span class="w"> </span><span class="nv">type</span><span class="o">=</span>external<span class="w"> </span><span class="nv">externaltype</span><span class="o">=</span>ora<span class="w"> </span><span class="nv">encryption</span><span class="o">=</span>none<span class="w"> </span><span class="nv">url</span><span class="o">=</span><span class="s2">&quot;ria+file://&lt;path&gt;&quot;</span>
-</span></code></pre></div>
-</div>
-<p>In addition to reconfiguring the <abbr title="Remote Indexed Archives">RIA</abbr> store, we should execute <code>datalad get</code> within a compute node:</p>
+<h3 id="installing-derivatives">Installing derivatives<a class="headerlink" href="#installing-derivatives" title="Permanent link">&para;</a></h3>
+<p>Derivatives are installed in a similar way:</p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Create a <em>sbatch</em> job prescription script called <code>datalad-get.sbatch</code>:
-    <div class="language-Bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="ch">#!/bin/bash -l</span>
-</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
-</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="c1">#SBATCH --account &lt;PI&gt;_&lt;project_id&gt;</span>
-</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>
-</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="c1">#SBATCH --chdir &lt;workdir&gt;/data/hcph-dataset</span>
-</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="c1">#SBATCH --job-name datalad_get</span>
-</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="c1">#SBATCH --partition cpu</span>
-</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="c1">#SBATCH --cpus-per-task 12</span>
-</span><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a><span class="c1">#SBATCH --mem 10G</span>
-</span><span id="__span-21-10"><a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a><span class="c1">#SBATCH --time 05:00:00</span>
-</span><span id="__span-21-11"><a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a><span class="c1">#SBATCH --export NONE</span>
-</span><span id="__span-21-12"><a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a>
-</span><span id="__span-21-13"><a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a><span class="c1">#SBATCH --mail-type ALL</span>
-</span><span id="__span-21-14"><a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a><span class="c1">#SBATCH --mail-user &lt;your-email-address&gt;</span>
-</span><span id="__span-21-15"><a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a><span class="c1">#SBATCH --output /users/%u/logs/%x-%A-%a.out</span>
-</span><span id="__span-21-16"><a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a><span class="c1">#SBATCH --error /users/%u/logs/%x-%A-%a.err</span>
-</span><span id="__span-21-17"><a id="__codelineno-21-17" name="__codelineno-21-17" href="#__codelineno-21-17"></a>
-</span><span id="__span-21-18"><a id="__codelineno-21-18" name="__codelineno-21-18" href="#__codelineno-21-18"></a>
-</span><span id="__span-21-19"><a id="__codelineno-21-19" name="__codelineno-21-19" href="#__codelineno-21-19"></a>micromamba<span class="w"> </span>run<span class="w"> </span>-n<span class="w"> </span>fmriprep<span class="w"> </span>datalad<span class="w"> </span>get<span class="w"> </span>-J<span class="si">${</span><span class="nv">SLURM_CPUS_PER_TASK</span><span class="si">}</span><span class="w"> </span>.
-</span></code></pre></div></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Submit the job:
-    <div class="language-Bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>sbatch<span class="w"> </span>datalad-get.sbatch
-</span></code></pre></div></li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install the dataset:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>micromamba<span class="w"> </span>run<span class="w"> </span>-n<span class="w"> </span>datamgt<span class="w"> </span>datalad<span class="w"> </span>install<span class="w"> </span>https://github.com/&lt;organization&gt;/&lt;repo_name&gt;.git
+</span></code></pre></div>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Reconfigure the <abbr title="Remote Indexed Archives">RIA</abbr> store:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>micromamba<span class="w"> </span>run<span class="w"> </span>-n<span class="w"> </span>datamgt<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">    </span>git<span class="w"> </span>annex<span class="w"> </span>initremote<span class="w"> </span>--private<span class="w"> </span>--sameas<span class="o">=</span>ria-storage<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">    </span>curnagl-storage<span class="w"> </span><span class="nv">type</span><span class="o">=</span>external<span class="w"> </span><span class="nv">externaltype</span><span class="o">=</span>ora<span class="w"> </span><span class="nv">encryption</span><span class="o">=</span>none<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="w">    </span><span class="nv">url</span><span class="o">=</span><span class="s2">&quot;ria+file://&lt;path&gt;&quot;</span>
+</span></code></pre></div>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Fetch the data</p>
+<div class="language-Bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>salloc<span class="w"> </span>--partition<span class="o">=</span>interactive<span class="w"> </span>--time<span class="o">=</span><span class="m">02</span>:00:00<span class="w"> </span>--cpus-per-task<span class="w"> </span><span class="m">12</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="nb">cd</span><span class="w"> </span><span class="nv">$WORK</span>/data
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>micromamba<span class="w"> </span>run<span class="w"> </span>-n<span class="w"> </span>datamgt<span class="w"> </span>datalad<span class="w"> </span>get<span class="w"> </span>-J<span class="si">${</span><span class="nv">SLURM_CPUS_PER_TASK</span><span class="si">}</span><span class="w"> </span>.
+</span></code></pre></div>
+</li>
 </ul>
 <h2 id="registering-containers">Registering containers<a class="headerlink" href="#registering-containers" title="Permanent link">&para;</a></h2>
 <p>We use <em>DataLad containers-run</em> to execute software while keeping track of provenance.
@@ -1668,13 +1735,13 @@ Prior to first use, containers must be added to <em>DataLad</em> as follows (exa
 <ul class="task-list">
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Register the <em>MRIQC</em> container to the dataset</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Registering a <em>Singularity</em> container</label><label for="__tabbed_3_2">Registering a <em>Docker</em> container</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Registering a <em>Singularity</em> container</label><label for="__tabbed_2_2">Registering a <em>Docker</em> container</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>datalad<span class="w"> </span>containers-add<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">    </span>--call-fmt<span class="w"> </span><span class="s1">&#39;singularity exec --cleanenv -B {{${HOME}/tmp/}}:/tmp {img} {cmd}&#39;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">    </span>mriqc<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="w">    </span>--url<span class="w"> </span>docker://nipreps/mriqc:23.1.0
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>datalad<span class="w"> </span>containers-add<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">    </span>--call-fmt<span class="w"> </span><span class="s1">&#39;singularity exec --cleanenv -B {{${HOME}/tmp/}}:/tmp {img} {cmd}&#39;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">    </span>mriqc<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="w">    </span>--url<span class="w"> </span>docker://nipreps/mriqc:23.1.0
 </span></code></pre></div>
 <details class="important">
 <summary>Insert relevant arguments to the <code>singularity</code> command line with <code>--call-fmt</code></summary>
@@ -1684,10 +1751,10 @@ Please replace the path with the appropriate path for your settings (i.e., lapto
 </details>
 </div>
 <div class="tabbed-block">
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>datalad<span class="w"> </span>containers-add<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">    </span>--call-fmt<span class="w"> </span><span class="s1">&#39;docker run -u $( id -u ) -it -v {{${HOME}/tmp/}}:/tmp {img} {cmd}&#39;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">    </span>mriqc<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="w">    </span>--url<span class="w"> </span>docker://nipreps/mriqc:23.1.0
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>datalad<span class="w"> </span>containers-add<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w">    </span>--call-fmt<span class="w"> </span><span class="s1">&#39;docker run -u $( id -u ) -it -v {{${HOME}/tmp/}}:/tmp {img} {cmd}&#39;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="w">    </span>mriqc<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="w">    </span>--url<span class="w"> </span>docker://nipreps/mriqc:23.1.0
 </span></code></pre></div>
 </div>
 </div>

@@ -1509,7 +1509,7 @@
 <ul class="task-list">
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open a run's <abbr title="EyeLink Data Format">EDF</abbr> file:</p>
-<div class="language-Python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">pyedfread</span> <span class="kn">import</span> <span class="n">edf</span>
+<div class="language-Python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyedfread</span><span class="w"> </span><span class="kn">import</span> <span class="n">edf</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">recording</span><span class="p">,</span> <span class="n">events</span><span class="p">,</span> <span class="n">messages</span> <span class="o">=</span> <span class="n">edf</span><span class="o">.</span><span class="n">pread</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">DATA_PATH</span> <span class="o">/</span> <span class="s2">&quot;example-run.edf&quot;</span><span class="p">),</span> <span class="n">trial_marker</span><span class="o">=</span><span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 </span></code></pre></div>
@@ -2023,7 +2023,7 @@ These <em>events</em> are specific to the recording of <abbr title="eye tracker"
 </span></code></pre></div>
 <h2 id="writing-the-data-into-the-bids-structure">Writing the data into the <abbr title="Brain Imaging Data Structure">BIDS</abbr> structure<a class="headerlink" href="#writing-the-data-into-the-bids-structure" title="Permanent link">&para;</a></h2>
 <p>Finally, data can be written out if the reference run corresponding to the <abbr title="eye tracker">ET</abbr> recording is provided:</p>
-<div class="language-Python highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">def</span> <span class="nf">write_bids</span><span class="p">(</span>
+<div class="language-Python highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">write_bids</span><span class="p">(</span>
 </span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>    <span class="n">et_run</span><span class="p">:</span> <span class="n">EyeTrackingRun</span><span class="p">,</span>
 </span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>    <span class="n">exp_run</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span>
 </span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
