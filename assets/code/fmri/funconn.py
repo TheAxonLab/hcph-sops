@@ -161,7 +161,7 @@ def get_arguments() -> argparse.Namespace:
     )
     parser.add_argument(
         "--FD-thresh",
-        default=0.4,
+        default=0.5,
         action="store",
         type=float,
         help="framewise displacement threshold (in mm)",
