@@ -22,6 +22,9 @@
 
 # !! To run this script, you need to have run docker-compose up in the qkay repository to have running containers !!
 
+import numpy as np
+import json
+
 from pymongo.mongo_client import MongoClient
 
 # Path PyMongo to allow using PyMongoArrow’s functionality directly to Collection instances of PyMongo
@@ -53,15 +56,28 @@ df = ratings.find_pandas_all({"dataset": "mriqc-23.2.0-withoutdwi"})
 modality = "bold"
 df = df[df["subject"].str.contains(modality)]
 
+# Rename column subject to input_file
+df = df.rename(columns={"subject": "input_file"})
+
 # Drop columns we don't need
 df = df.drop(columns=["_id", "md5sum"])
 
 # Replace newline characters in the 'comments' column with a space
 # so that comments do not get split into multiple lines
 df["comments"] = df["comments"].str.replace("\n", ", ")
+df["comments"] = df.comments.replace('', np.nan, regex=False)
+
+# Reformat the 'artifacts' column
+def decode_string(encoded_string):
+    """Decode a list that was encoded as a string."""
+    if encoded_string == '[]':
+        return np.nan
+    else:
+        return ', '.join(json.loads(encoded_string))
+df["artifacts"] = df["artifacts"].apply(decode_string)
 
 # Save dataframe to csv so we can load it in R
-df.to_csv(f"data/desc-ratings_{modality}.tsv", sep="\t", index=False)
+df.to_csv(f"/home/cprovins/data/hcph-derivatives-mriqc/desc-ratings_{modality}.tsv", sep="\t", index=False)
 
 # Close the connection
 client.close()
