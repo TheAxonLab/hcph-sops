@@ -1,1 +1,1 @@
-python funconn_group.py /home/cprovins/data/hcph-derivatives/functional_connectivity/DiFuMo64-LP --task qct 
+python funconn_group.py /data/derivatives/hcph-derivatives-rsmovie/functional_connectivity/DiFuMo64-LP --task rsmovie
