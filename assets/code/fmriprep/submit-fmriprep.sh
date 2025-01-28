@@ -38,7 +38,7 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-DATADIR="/oak/stanford/groups/russpold/inprocess/cprovins/hcph-pilot/"
+DATADIR={{ secrets.data.curnagl_workdir | default('<workdir>') }}/data/hcph-dataset
 SUB="sub-001"
 pushd $DATADIR/inputs/$SUB > /dev/null
 ALL_SES=(`ls -d ses-*`)
@@ -54,8 +54,6 @@ for S in "${ALL_SES[@]}"; do
         fi
 done
 
-echo "Submitting `basename $DATADIR` with ${#SES[@]} sessions"
-# remove one since we are starting at 0
-JOBS=`expr ${#SES[@]} - 1`
+#remove one since we are starting at 0
+JOBS=`expr ${\#SES[@]} - 1`
 sbatch --array=0-$JOBS ss-fmriprep.sh $DATADIR ${SES[@]}
-
