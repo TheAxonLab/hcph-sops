@@ -46,7 +46,7 @@ from load_save import get_bids_savename
 
 FIGURE_PATTERN: list = [
     "sub-{subject}/figures/sub-{subject}[_ses-{session}]"
-    "[_task-{task}][_meas-{meas}][_desc-{desc}]"
+    "[_task-{task}][_scale-{scale}][_fdthresh-{fdthresh}][_meas-{meas}][_desc-{desc}]"
     "_{suffix}{extension}",
     "sub-{subject}/figures/sub-{subject}[_ses-{session}]"
     "[_task-{task}][_desc-{desc}]_{suffix}{extension}",
@@ -297,6 +297,7 @@ def visual_report_timeserie(
     filename: str,
     output: str,
     confounds: Optional[np.ndarray] = None,
+    fdthresh: Optional[float] = None,
     **kwargs,
 ) -> None:
     """Plot and save the timeseries visual reports.
@@ -311,13 +312,19 @@ def visual_report_timeserie(
         Path to the output directory
     confounds : Optional[np.ndarray], optional
         Confounds to plot, by default None
+    fdthresh : Optional[float], optional
+        value of the FD threshold to inform filename, by default None
     """
     # Plotting denoised and aggregated timeseries
     for plot_func, plot_desc in zip(
         [plot_timeseries_carpet, plot_timeseries_signal], ["carpetplot", "timeseries"]
     ):
         ts_saveloc = get_bids_savename(
-            filename, patterns=FIGURE_PATTERN, desc=plot_desc, **FIGURE_FILLS
+            filename,
+            patterns=FIGURE_PATTERN,
+            desc=plot_desc,
+            fdthresh=fdthresh,
+            **FIGURE_FILLS,
         )
         plot_func(timeseries, **kwargs)
 
@@ -330,7 +337,11 @@ def visual_report_timeserie(
     # Plotting confounds as a design matrix
     if confounds is not None:
         conf_saveloc = get_bids_savename(
-            filename, patterns=FIGURE_PATTERN, desc="designmatrix", **FIGURE_FILLS
+            filename,
+            patterns=FIGURE_PATTERN,
+            desc="designmatrix",
+            fdthresh=fdthresh,
+            **FIGURE_FILLS,
         )
 
         _, ax = plt.subplots(figsize=TS_FIGURE_SIZE)

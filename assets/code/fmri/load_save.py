@@ -42,14 +42,14 @@ from nilearn.interfaces.fmriprep.load_confounds import _load_single_confounds_fi
 
 FC_PATTERN: list = [
     "sub-{subject}[/ses-{session}]/func/sub-{subject}"
-    "[_ses-{session}][_task-{task}][_meas-{meas}]"
+    "[_ses-{session}][_task-{task}][_scale-{scale}][_fdthresh-{fdthresh}][_meas-{meas}]"
     "_{suffix}{extension}"
 ]
 FC_FILLS: dict = {"suffix": "connectivity", "extension": ".tsv"}
 
 TIMESERIES_PATTERN: list = [
     "sub-{subject}[/ses-{session}]/func/sub-{subject}"
-    "[_ses-{session}][_task-{task}][_desc-{desc}]"
+    "[_ses-{session}][_task-{task}][_fdthresh-{fdthresh}][_desc-{desc}]"
     "_{suffix}{extension}"
 ]
 TIMESERIES_FILLS: dict = {"desc": "denoised", "extension": ".tsv"}
@@ -332,7 +332,7 @@ def reorder_iqms(iqms_df: pd.DataFrame, fc_paths: list[str]):
     iqms_df = iqms_df.assign(
         subject=iqms_df["bids_name"].str.extract(r"sub-(\d+)_"),
         session=iqms_df["bids_name"].str.extract(r"ses-(\w+)_"),
-        task=iqms_df["bids_name"].str.extract(r"task-(\w+)_")
+        task=iqms_df["bids_name"].str.extract(r"task-(\w+)_"),
     )
     entities_list = [parse_file_entities(filepath) for filepath in fc_paths]
     entities_df = pd.DataFrame(entities_list)
@@ -451,7 +451,9 @@ def check_existing_output(
     return missing_data.tolist()
 
 
-def load_timeseries(func_filename: list[str], output: str) -> list[np.ndarray]:
+def load_timeseries(
+    func_filename: list[str], output: str, **kwargs
+) -> list[np.ndarray]:
     """Load existing timeseries from .csv files.
 
     Parameters
@@ -472,7 +474,7 @@ def load_timeseries(func_filename: list[str], output: str) -> list[np.ndarray]:
     loaded_ts = []
     for filename in func_filename:
         path_to_ts = get_bids_savename(
-            filename, patterns=TIMESERIES_PATTERN, **TIMESERIES_FILLS
+            filename, patterns=TIMESERIES_PATTERN, **TIMESERIES_FILLS, **kwargs
         )
         logging.debug(f"\t{op.join(output, path_to_ts)}")
         loaded_ts.append(
