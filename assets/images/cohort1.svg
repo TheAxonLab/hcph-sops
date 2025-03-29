@@ -13,8 +13,12 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <defs
-     id="defs3481">
+  <defs id="defs3481">
+    <style type="text/css">
+    <![CDATA[
+     @import url(https://fonts.googleapis.com/css?family=Urbanist:400,800,400italic);
+    ]]>
+    </style>
     <marker
        orient="auto"
        refY="0"
@@ -260,7 +264,7 @@
        x="397.80038"
        style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:21.3333px;line-height:1.25;font-family:Whitney;-inkscape-font-specification:'Whitney Medium';text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        xml:space="preserve"><tspan
-         style="stroke-width:0.264583px"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Urbanist;-inkscape-font-specification:Urbanist;stroke-width:0.264583px"
          y="-208.91077"
          x="397.80038"
          id="tspan1404">36+12 sessions</tspan></text>
@@ -3540,7 +3544,7 @@
        x="270.05685"
        style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:21.3333px;line-height:1.25;font-family:Whitney;-inkscape-font-specification:'Whitney Medium';text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        xml:space="preserve"><tspan
-         style="stroke-width:0.264583px"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Urbanist;-inkscape-font-specification:Urbanist;stroke-width:0.264583px"
          y="25.952549"
          x="270.05685"
          id="tspan1404-6">12 sessions</tspan></text>
@@ -3679,7 +3683,7 @@
          x="676.47797"
          style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:21.3333px;line-height:1.25;font-family:Whitney;-inkscape-font-specification:'Whitney Medium';text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1"
          xml:space="preserve"><tspan
-           style="stroke-width:1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Urbanist;-inkscape-font-specification:Urbanist;stroke-width:1"
            y="-49.23999"
            x="676.47797"
            id="tspan3593">SC</tspan></text>
@@ -3690,7 +3694,7 @@
          x="741.27972"
          style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:21.3333px;line-height:1.25;font-family:Whitney;-inkscape-font-specification:'Whitney Medium';text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1"
          xml:space="preserve"><tspan
-           style="stroke-width:1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Urbanist;-inkscape-font-specification:Urbanist;stroke-width:1"
            y="-49.737671"
            x="741.27972"
            id="tspan3593-1">FC</tspan></text>
@@ -3717,38 +3721,34 @@
          x="566.36591"
          y="203.5416"
          style="stroke-width:1">`</tspan></text>
-    <g
-       id="g33375"
-       transform="translate(19.243406,463.9799)">
-      <path
-         style="fill:#808080;fill-opacity:1;stroke-width:0.10801811"
-         d="m 32.437963,-855.39196 c 7.61527,0 13.82632,-6.21105 13.82632,-13.82632 0,-7.61528 -6.21105,-13.82632 -13.82632,-13.82632 -7.61528,0 -13.82632,6.21104 -13.82632,13.82632 0.0972,7.61527 6.21104,13.82632 13.82632,13.82632 z m 0,6.91316 c -9.21395,0 -27.55542,4.61237 -27.55542,13.82632 v 6.91318 h 55.10004 v -6.91318 c 0.011,-9.21395 -18.33068,-13.82632 -27.54462,-13.82632 z"
-         id="XMLID_6_" />
-      <text
-         id="text2226"
-         y="-866.67975"
-         x="67.58181"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:21.3333px;line-height:1.25;font-family:Whitney;-inkscape-font-specification:'Whitney Medium';text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1"
-         xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Whitney;-inkscape-font-specification:'Whitney Bold';stroke-width:1"
-           y="-866.67975"
-           x="67.58181"
-           id="tspan2224">Human Phantom</tspan></text>
-      <text
-         id="text2230"
-         y="-847.44757"
-         x="67.78714"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:21.3333px;line-height:0.9;font-family:Whitney;-inkscape-font-specification:'Whitney Medium';text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1"
-         xml:space="preserve"><tspan
-           id="tspan2232"
-           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:18.6667px;line-height:0.9;font-family:Whitney;-inkscape-font-specification:'Whitney, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:1"
-           y="-847.44757"
-           x="67.78714">One subject,</tspan><tspan
-           id="tspan2246"
-           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:18.6667px;line-height:0.9;font-family:Whitney;-inkscape-font-specification:'Whitney, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:1"
-           y="-828.24762"
-           x="67.78714">72 MRI sessions</tspan></text>
-    </g>
+    <path
+       style="fill:#808080;fill-opacity:1;stroke-width:0.108018"
+       d="m 51.681369,-391.41206 c 7.61527,0 13.82632,-6.21105 13.82632,-13.82632 0,-7.61528 -6.21105,-13.82632 -13.82632,-13.82632 -7.61528,0 -13.82632,6.21104 -13.82632,13.82632 0.0972,7.61527 6.21104,13.82632 13.82632,13.82632 z m 0,6.91316 c -9.21395,0 -27.55542,4.61237 -27.55542,13.82632 v 6.91318 h 55.10004 v -6.91318 c 0.011,-9.21395 -18.33068,-13.82632 -27.54462,-13.82632 z"
+       id="XMLID_6_" />
+    <text
+       id="text2226"
+       y="-402.69986"
+       x="86.825218"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:21.3333px;line-height:1.25;font-family:Whitney;-inkscape-font-specification:'Whitney Medium';text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:21.3333px;font-family:Urbanist;-inkscape-font-specification:'Urbanist Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:1"
+         y="-402.69986"
+         x="86.825218"
+         id="tspan2224">Human Phantom</tspan></text>
+    <text
+       id="text2230"
+       y="-383.46768"
+       x="87.030548"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:21.3333px;line-height:0.9;font-family:Whitney;-inkscape-font-specification:'Whitney Medium';text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1"
+       xml:space="preserve"><tspan
+         id="tspan2232"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.6667px;line-height:0.9;font-family:Urbanist;-inkscape-font-specification:Urbanist;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:1"
+         y="-383.46768"
+         x="87.030548">One subject,</tspan><tspan
+         id="tspan2246"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.6667px;line-height:0.9;font-family:Urbanist;-inkscape-font-specification:Urbanist;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:1"
+         y="-364.2677"
+         x="87.030548">72 MRI sessions</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:15.875px;line-height:1.25;font-family:Whitney;-inkscape-font-specification:'Whitney, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#525252;fill-opacity:1;stroke:none;stroke-width:1"
@@ -3758,7 +3758,7 @@
          id="tspan2248"
          x="441.97589"
          y="-167.36276"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:15.875px;font-family:Whitney;-inkscape-font-specification:'Whitney, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#525252;fill-opacity:1;stroke-width:1">Eye tracking</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:800;font-stretch:normal;font-size:15.875px;font-family:Urbanist;-inkscape-font-specification:'Urbanist Ultra-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#525252;fill-opacity:1;stroke-width:1">Eye tracking</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:15.875px;line-height:1.25;font-family:Whitney;-inkscape-font-specification:'Whitney, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#525252;fill-opacity:1;stroke:none;stroke-width:1"
@@ -3768,7 +3768,7 @@
          id="tspan2252"
          x="441.97589"
          y="-142.36642"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:15.875px;font-family:Whitney;-inkscape-font-specification:'Whitney, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#525252;fill-opacity:1;stroke-width:1">Physiological signals</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:800;font-stretch:normal;font-size:15.875px;font-family:Urbanist;-inkscape-font-specification:'Urbanist Ultra-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#525252;fill-opacity:1;stroke-width:1">Physiological signals</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:14.1111px;line-height:1.25;font-family:Whitney;-inkscape-font-specification:'Whitney, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1"
@@ -3778,12 +3778,12 @@
          id="tspan2256"
          x="441.6778"
          y="-127.09989"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:14.1111px;font-family:Whitney;-inkscape-font-specification:'Whitney, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:1"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.1111px;font-family:Urbanist;-inkscape-font-specification:Urbanist;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:1"
          dy="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -3">ECG, respiration belt, CO<tspan
-   style="font-size:9.17222px"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.17222px;font-family:Urbanist;-inkscape-font-specification:Urbanist"
    id="tspan45803"
    dy="3">2</tspan>, O<tspan
-   style="font-size:9.17222px"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.17222px;font-family:Urbanist;-inkscape-font-specification:Urbanist"
    id="tspan48833"
    dy="3">2</tspan></tspan></text>
     <path
@@ -3804,7 +3804,7 @@
          id="tspan28170"
          x="744.88678"
          y="-37.67522"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:21.1667px;font-family:Whitney;-inkscape-font-specification:'Whitney, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;stroke-width:0.264583">Collection</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.1667px;font-family:Urbanist;-inkscape-font-specification:Urbanist;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;stroke-width:0.264583">Collection</tspan></text>
     <path
        style="opacity:0.656;fill:#f4f0f0;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 6.3000219,-110.89659 -0.165087,49.054137 370.9699151,44.10363 370.96991,-44.10363 -0.69622,-49.054167 -370.10859,44.103627 z"
@@ -3819,10 +3819,10 @@
          id="tspan28170-6"
          x="737.95642"
          y="1.9100738"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:21.1667px;line-height:0.9;font-family:Whitney;-inkscape-font-specification:'Whitney, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;stroke-width:0.264583">Management</tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.1667px;line-height:0.9;font-family:Urbanist;-inkscape-font-specification:Urbanist;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;stroke-width:0.264583">Management</tspan><tspan
          x="737.95642"
-         y="20.960073"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:21.1667px;line-height:0.9;font-family:Whitney;-inkscape-font-specification:'Whitney, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;stroke-width:0.264583"
+         y="20.960104"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.1667px;line-height:0.9;font-family:Urbanist;-inkscape-font-specification:Urbanist;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;stroke-width:0.264583"
          id="tspan28269">&amp; anonymization</tspan></text>
     <path
        style="opacity:0.656;fill:#f8ecec;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -3837,7 +3837,7 @@
        transform="rotate(-6.7407355)"><tspan
          x="730.33557"
          y="72.494514"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:21.1667px;line-height:0.9;font-family:Whitney;-inkscape-font-specification:'Whitney, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;stroke-width:0.264583"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.1667px;line-height:0.9;font-family:Urbanist;-inkscape-font-specification:Urbanist;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;stroke-width:0.264583"
          id="tspan29279">Preprocessing</tspan></text>
     <path
        style="opacity:0.656;fill:#fee6e6;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -3854,7 +3854,7 @@
        transform="rotate(-6.7407355)"><tspan
          x="724.46008"
          y="116.09834"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:21.1667px;line-height:0.9;font-family:Whitney;-inkscape-font-specification:'Whitney, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;stroke-width:0.264583"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.1667px;line-height:0.9;font-family:Urbanist;-inkscape-font-specification:Urbanist;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;stroke-width:0.264583"
          id="tspan28325">SC, FC extraction</tspan></text>
     <g
        id="g32317"
@@ -3865,7 +3865,7 @@
          x="493.84122"
          style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:21.3333px;line-height:1.25;font-family:Whitney;-inkscape-font-specification:'Whitney Medium';text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Whitney;-inkscape-font-specification:'Whitney Bold';stroke-width:1"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Urbanist;-inkscape-font-specification:'Urbanist Bold';stroke-width:1"
            y="-771.91687"
            x="493.84122"
            id="tspan2266">Research scanner</tspan></text>
@@ -3875,16 +3875,16 @@
          x="494.36411"
          style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:5.64444px;line-height:1.25;font-family:Whitney;-inkscape-font-specification:'Whitney Medium';text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:14.1111px;font-family:Whitney;-inkscape-font-specification:'Whitney, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.264583"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.1111px;font-family:Urbanist;-inkscape-font-specification:Urbanist;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.264583"
            y="-752.2619"
            x="494.36411"
            id="tspan32266"
            dy="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 6">A 3T Siemens Magnetom Prisma<tspan
-   style="font-size:9.17222px"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.17222px;font-family:Urbanist;-inkscape-font-specification:Urbanist"
    id="tspan37483"
    dy="-6">Fit</tspan> system</tspan><tspan
            id="tspan32274"
-           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:14.1111px;font-family:Whitney;-inkscape-font-specification:'Whitney, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.264583"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.1111px;font-family:Urbanist;-inkscape-font-specification:Urbanist;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.264583"
            y="-734.62305"
            x="494.36411">with multiband/multiecho capabilities</tspan></text>
     </g>
@@ -3897,7 +3897,7 @@
          id="tspan2266-2"
          x="62.286289"
          y="-299.25552"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Whitney;-inkscape-font-specification:'Whitney Bold';stroke-width:1">Clinical scanners</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:21.3333px;font-family:Urbanist;-inkscape-font-specification:'Urbanist Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:1">Clinical scanners</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:14.1111px;line-height:1.25;font-family:Whitney;-inkscape-font-specification:'Whitney, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
@@ -3907,13 +3907,13 @@
          id="tspan32276"
          x="62.907955"
          y="-277.60696"
-         style="stroke-width:0.264583">Two 3T Siemens Magnetom Vida and Vida<tspan
-   style="font-size:9.17222px"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Urbanist;-inkscape-font-specification:Urbanist;stroke-width:0.264583">Two 3T Siemens Magnetom Vida and Vida<tspan
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.17222px;font-family:Urbanist;-inkscape-font-specification:Urbanist"
    id="tspan35673"
    dy="-6">Fit</tspan></tspan><tspan
          x="62.907955"
-         y="-259.96808"
-         style="stroke-width:0.264583"
+         y="-259.89435"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Urbanist;-inkscape-font-specification:Urbanist;stroke-width:0.264583"
          id="tspan32284">systems with wide bores</tspan></text>
     <path
        style="fill:#7f00ff;fill-opacity:1;stroke-width:0.05102295"
@@ -3928,7 +3928,7 @@
          id="tspan2252-3"
          x="441.97589"
          y="-204.14542"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:15.875px;font-family:Whitney;-inkscape-font-specification:'Whitney, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#525252;fill-opacity:1;stroke-width:1">Comprehensive MRI protocol</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:800;font-stretch:normal;font-size:15.875px;font-family:Urbanist;-inkscape-font-specification:'Urbanist Ultra-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#525252;fill-opacity:1;stroke-width:1">Comprehensive MRI protocol</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:14.1111px;line-height:1.25;font-family:Whitney;-inkscape-font-specification:'Whitney, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1"
@@ -3938,11 +3938,11 @@
          id="tspan2256-2"
          x="441.14325"
          y="-187.80984"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:14.1111px;font-family:Whitney;-inkscape-font-specification:'Whitney, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:1"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.1111px;font-family:Urbanist;-inkscape-font-specification:Urbanist;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:1"
          dy="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -3">T1w, T2w, ME-BOLD, HARDI, <tspan
    style="font-style:italic"
-   id="tspan35018">B</tspan><tspan
-   style="font-style:italic;font-size:9.17222px;baseline-shift:baseline"
+   id="tspan46748">B</tspan><tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.17222px;font-family:Urbanist;-inkscape-font-specification:Urbanist;baseline-shift:baseline"
    id="tspan35016"
    dy="3">0</tspan> maps</tspan></text>
     <path
@@ -3958,7 +3958,7 @@
          id="tspan2252-3-7"
          x="159.43571"
          y="-116.08963"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:15.875px;font-family:Whitney;-inkscape-font-specification:'Whitney, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#525252;fill-opacity:1;stroke-width:1">Homogenized MRI protocol</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:800;font-stretch:normal;font-size:15.875px;font-family:Urbanist;-inkscape-font-specification:'Urbanist Ultra-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#525252;fill-opacity:1;stroke-width:1">Homogenized MRI protocol</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:14.1111px;line-height:1.25;font-family:Whitney;-inkscape-font-specification:'Whitney, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1"
@@ -3968,11 +3968,11 @@
          id="tspan2256-2-9"
          x="121.74104"
          y="-98.684959"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:14.1111px;font-family:Whitney;-inkscape-font-specification:'Whitney, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:1"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.1111px;font-family:Urbanist;-inkscape-font-specification:Urbanist;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:1"
          dy="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -3">T1w, T2w, ME-BOLD, HARDI, <tspan
-   style="font-style:italic;stroke-width:1"
-   id="tspan35018-2">B</tspan><tspan
-   style="font-style:italic;font-size:9.17222px;baseline-shift:baseline;stroke-width:1"
+   style="font-style:italic"
+   id="tspan44300">B</tspan><tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.17222px;font-family:Urbanist;-inkscape-font-specification:Urbanist;baseline-shift:baseline;stroke-width:1"
    id="tspan35016-4"
    dy="3">0</tspan> maps</tspan></text>
     <path
@@ -3982,36 +3982,36 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:14.1111px;line-height:1.25;font-family:Whitney;-inkscape-font-specification:'Whitney, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#525252;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="760.13226"
+       x="758.01917"
        y="-64.433456"
        id="text35828"><tspan
-         x="760.13226"
+         x="758.01917"
          y="-64.433456"
-         style="fill:#525252;fill-opacity:1;stroke-width:0.264583"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Urbanist;-inkscape-font-specification:Urbanist;fill:#525252;fill-opacity:1;stroke-width:0.264583"
          id="tspan35830"><tspan
-   style="line-height:0.9;fill:#525252;fill-opacity:1"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.9;font-family:Urbanist;-inkscape-font-specification:Urbanist;fill:#525252;fill-opacity:1"
    id="tspan35834">Unprocess</tspan>ed</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:14.1111px;line-height:1.25;font-family:Whitney;-inkscape-font-specification:'Whitney, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#525252;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="759.08801"
+       x="756.61871"
        y="-5.4691567"
        id="text35828-9"><tspan
-         x="759.08801"
+         x="756.61871"
          y="-5.4691567"
-         style="fill:#525252;fill-opacity:1;stroke-width:0.264583"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Urbanist;-inkscape-font-specification:Urbanist;fill:#525252;fill-opacity:1;stroke-width:0.264583"
          id="tspan35830-6"><tspan
-   style="line-height:0.9;fill:#525252;fill-opacity:1;stroke-width:0.264583"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.9;font-family:Urbanist;-inkscape-font-specification:Urbanist;fill:#525252;fill-opacity:1;stroke-width:0.264583"
    id="tspan35834-4">Preprocess</tspan>ed</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:14.1111px;line-height:1.25;font-family:Whitney;-inkscape-font-specification:'Whitney, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#525252;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="779.3233"
+       x="777.87695"
        y="49.962303"
        id="text35828-0"><tspan
-         x="779.3233"
+         x="777.87695"
          y="49.962303"
-         style="fill:#525252;fill-opacity:1;stroke-width:0.264583"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Urbanist;-inkscape-font-specification:Urbanist;fill:#525252;fill-opacity:1;stroke-width:0.264583"
          id="tspan35830-5">SC, FC</tspan></text>
     <path
        id="path36093"
@@ -4034,22 +4034,22 @@
          id="tspan36140"
          x="798.24097"
          y="-133.22"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:17.6389px;line-height:0.9;font-family:Whitney;-inkscape-font-specification:'Whitney, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#525252;fill-opacity:1;stroke-width:0.264583">Data</tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:800;font-stretch:normal;font-size:17.6389px;line-height:0.9;font-family:Urbanist;-inkscape-font-specification:'Urbanist Ultra-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#525252;fill-opacity:1;stroke-width:0.264583">Data</tspan><tspan
          x="798.24097"
-         y="-114.89009"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:17.6389px;line-height:0.9;font-family:Whitney;-inkscape-font-specification:'Whitney, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#525252;fill-opacity:1;stroke-width:0.264583"
+         y="-115.50786"
+         style="font-style:normal;font-variant:normal;font-weight:800;font-stretch:normal;font-size:17.6389px;line-height:0.9;font-family:Urbanist;-inkscape-font-specification:'Urbanist Ultra-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#525252;fill-opacity:1;stroke-width:0.264583"
          id="tspan36144">releases</tspan></text>
     <path
        style="opacity:1;vector-effect:none;fill:#808080;fill-opacity:1;stroke:#dcdcdc;stroke-width:0.565;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
        id="path36146-9"
-       d="m 758.36531,-68.208176 -5.66964,3.27337 -5.66965,3.27337 v -6.54674 -6.546739 l 5.66965,3.27337 z" />
+       d="m 758.36531,-90.664581 -5.66964,3.27337 -5.66965,3.273369 v -6.546739 -6.54674 l 5.66965,3.27337 z" />
     <path
        style="opacity:1;vector-effect:none;fill:#808080;fill-opacity:1;stroke:#dcdcdc;stroke-width:0.565;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
        id="path36146-5"
-       d="m 758.36531,-9.2438755 -5.66964,3.2733698 -5.66965,3.2733697 v -6.5467397 -6.5467393 l 5.66965,3.27337 z" />
+       d="m 758.36531,-28.898623 -5.66964,3.27337 -5.66965,3.27337 v -6.54674 -6.546739 l 5.66965,3.27337 z" />
     <path
        style="opacity:1;vector-effect:none;fill:#808080;fill-opacity:1;stroke:#dcdcdc;stroke-width:0.565;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
        id="path36146-2"
-       d="m 758.36531,45.940636 -5.66964,3.27337 -5.66965,3.273369 v -6.54674 -6.546739 l 5.66965,3.27337 z" />
+       d="m 758.36531,26.285908 -5.66964,3.27337 -5.66965,3.273369 v -6.546739 -6.54674 l 5.66965,3.27337 z" />
   </g>
 </svg>
