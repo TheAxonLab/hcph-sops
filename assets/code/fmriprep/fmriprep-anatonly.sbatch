@@ -1,3 +1,4 @@
+#!/bin/bash
 # Copyright 2024 The Axon Lab <theaxonlab@gmail.com> 
 # 
 # Licensed under the Apache License, Version 2.0 (the "License"); 
@@ -14,22 +15,22 @@
 ###########################################################################
 #
 # General SLURM settings
-#SBATCH --account {{ secrets.curnagl.account | default('<someaccount>')}} 
-#SBATCH --mail-type ALL 
-#SBATCH --mail-user <email>@unil.ch
+#SBATCH --account={{ secrets.curnagl.account | default('<someaccount>')}} 
+#SBATCH --mail-type=ALL 
+#SBATCH --mail-user=<email>@unil.ch
 #
 # Job settings
-#SBATCH --job-name fmriprep
-#SBATCH --partition cpu
-#SBATCH --cpus-per-task 10
-#SBATCH --mem 10G 
-#SBATCH --time 24:00:00 
-#SBATCH --export NONE
-#SBATCH --chdir /scratch/oesteban
+#SBATCH --job-name=fmriprep
+#SBATCH --partition=cpu
+#SBATCH --cpus-per-task=10
+#SBATCH --mem=10G 
+#SBATCH --time=24:00:00 
+#SBATCH --export=NONE
+#SBATCH --chdir=/scratch/oesteban
 #
 # Logging
-#SBATCH --output /users/%u/logs/%x-%A-%a.out
-#SBATCH --error /users/%u/logs/%x-%A-%a.err
+#SBATCH --output=/users/%u/logs/%x-%A-%a.out
+#SBATCH --error=/users/%u/logs/%x-%A-%a.err
 
 ml singularityce gcc
 

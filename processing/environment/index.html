@@ -1728,7 +1728,7 @@ For example, in the case of systems operating <abbr title="Slurm Workload Manage
 </li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Create a new environment called <code>datamgt</code> with <em>Git annex</em> in it:
-    <div class="language-Bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>micromamba<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>datamgt<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.12<span class="w"> </span>git-annex<span class="o">=</span>*<span class="o">=</span>alldep*
+    <div class="language-Bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>micromamba<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>datamgt<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.12<span class="w"> </span>git-annex<span class="o">=</span>*<span class="o">=</span>alldep*
 </span></code></pre></div></p>
 </li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Activate the environment
