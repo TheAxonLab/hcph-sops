@@ -248,8 +248,16 @@ def find_atlas_dimension(path: str, atlas_name: str = "DiFuMo") -> int:
     if dimension_match:
         return int(dimension_match.group(1))
     else:
+        # We now store the value of the atlas dimension in a BIDS entity
+        # Traverse the directory to find files matching the pattern
+        for root, _, files in os.walk(path):
+            for file in files:
+                if re.match(rf".*_scale-(\d+).*_connectivity\.tsv", file):
+                    dimension_match = re.search(r"_scale-(\d+)", file)
+                    if dimension_match:
+                        return int(dimension_match.group(1))
         raise ValueError(
-            f"The output path {path} does not contain the expected pattern: {atlas_name} followed by digits."
+            f"The output path {path} does not contain any of the expected patterns: {atlas_name} followed by digits or the scale BIDS entity."
         )
 
 
