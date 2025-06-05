@@ -64,9 +64,9 @@ def get_arguments() -> argparse.Namespace:
     )
     parser.add_argument(
         "--fc-estimator",
-        default="sparse inverse covariance",
+        default="sparseinversecovariance",
         action="store",
-        choices=["correlation", "covariance", "sparse", "sparse inverse covariance"],
+        choices=["correlation", "covariance", "sparse", "sparseinversecovariance"],
         type=str,
         help="""type of connectivity to compute (can be 'correlation', 'covariance' or
         'sparse')""",

@@ -182,12 +182,12 @@ def get_arguments() -> argparse.Namespace:
     )
     parser.add_argument(
         "--fc-estimator",
-        default="sparse inverse covariance",
+        default="sparseinversecovariance",
         action="store",
-        choices=["correlation", "covariance", "sparse", "sparse inverse covariance"],
+        choices=["correlation", "covariance", "sparse", "sparseinversecovariance"],
         type=str,
-        help="""type of connectivity to compute (can be 'correlation', 'covariance' or
-        'sparse')""",
+        help="""type of connectivity to compute (can be 'correlation', 'covariance',
+        'sparse' or 'sparseinversecovariance')""",
     )
     parser.add_argument(
         "--no-censor",
@@ -465,7 +465,7 @@ def extract_and_denoise_timeseries(
 
 
 def get_fc_strategy(
-    strategy: str = "sparse inverse covariance",
+    strategy: str = "sparseinversecovariance",
 ) -> tuple[Union[GraphicalLassoCV, LedoitWolf], str, str]:
     """Get the strategy to compute functional connectivity.
 
@@ -473,7 +473,7 @@ def get_fc_strategy(
     ----------
     strategy : str, optional
         Name of the strategy, could be "correlation", "covariance" or "sparse",
-        by default "sparse inverse covariance"
+        by default "sparseinversecovariance"
 
     Returns
     -------
@@ -489,7 +489,7 @@ def get_fc_strategy(
         connectivity_kind = "correlation"
         connectivity_label = "correlation"
         estimator = LedoitWolf(store_precision=False)
-    elif strategy not in ["sparse", "sparse inverse covariance"]:
+    elif strategy not in ["sparse", "sparseinversecovariance"]:
         connectivity_kind = "covariance"
         connectivity_label = "covariance"
 

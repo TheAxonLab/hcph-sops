@@ -110,7 +110,7 @@ def test_find_atlas_dimension(path, expected_dim):
 
 @pytest.mark.parametrize("return_existing", [False, True])
 @pytest.mark.parametrize("return_output", [False, True])
-@pytest.mark.parametrize("fc_label", ["sparse inverse covariance", "correlation"])
+@pytest.mark.parametrize("fc_label", ["sparseinversecovariance", "correlation"])
 def test_check_existing_output(return_existing, return_output, fc_label, tmp_path):
     func_filename = ["sub-1/func/sub-1_bold.nii", "sub-2/func/sub-2_bold.nii"]
     existing_filenames = [
