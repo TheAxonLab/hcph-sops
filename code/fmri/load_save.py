@@ -49,7 +49,7 @@ FC_FILLS: dict = {"suffix": "connectivity", "extension": ".tsv"}
 
 TIMESERIES_PATTERN: list = [
     "sub-{subject}[/ses-{session}]/func/sub-{subject}"
-    "[_ses-{session}][_task-{task}][_fdthresh-{fdthresh}][_desc-{desc}]"
+    "[_ses-{session}][_task-{task}][_scale-{scale}][_fdthresh-{fdthresh}][_desc-{desc}]"
     "_{suffix}{extension}"
 ]
 TIMESERIES_FILLS: dict = {"desc": "denoised", "extension": ".tsv"}

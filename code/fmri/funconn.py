@@ -612,6 +612,7 @@ def main():
             all_filenames,
             return_existing=True,
             patterns=TIMESERIES_PATTERN,
+            scale=atlas_dimension,
             fdthresh=fd_threshold_str,
             **TIMESERIES_FILLS,
         )
@@ -676,6 +677,7 @@ def main():
             sorted_missing_ts,
             output,
             patterns=TIMESERIES_PATTERN,
+            scale=atlas_dimension,
             fdthresh=fd_threshold_str,
             **TIMESERIES_FILLS,
         )
