@@ -632,7 +632,7 @@ def main():
             f"{len(all_missing_ts + missing_only_fc)} files are missing FC matrices."
         )
         existing_timeseries = load_timeseries(
-            missing_only_fc, output, fdthresh=fd_threshold_str
+            missing_only_fc, output, scale=atlas_dimension, fdthresh=fd_threshold_str
         )
     else:
         missing_only_fc = []
