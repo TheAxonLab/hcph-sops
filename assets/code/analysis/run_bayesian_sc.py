@@ -83,7 +83,10 @@ SC_matrices, noise = simulate_sc_density_bias(
 )
 num_sessions = SC_matrices.shape[0]
 atlas_dim = SC_matrices.shape[1]
-SC_matrices_flat = SC_matrices.reshape(num_sessions, -1)
+# Keep only the upper triangle 
+triu_indices = np.triu_indices(atlas_dim, k=0)
+SC_matrices_triu = SC_matrices[:, triu_indices[0], triu_indices[1]]
+SC_matrices_flat = SC_matrices_triu.reshape(num_sessions, -1)
 SC_matrices_flat = np.nan_to_num(SC_matrices_flat, nan=0)
 
 # Run in parallel
