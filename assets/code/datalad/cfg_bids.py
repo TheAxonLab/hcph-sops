@@ -37,14 +37,31 @@ force_in_git = [
     '*.txt',
     '*.md',
     '*.bib',
+    '*.toml',
     '*.yaml',
     '*.yml',
     '*.tex',
+    # FreeSurfer outputs
+    '*.csv',
+    '*.label',
+    '*.annot',
+    '*.stats',
+    '*.dat',
+    '*.log',
+    '*.log.bak',
+    '*.cmd',
+    '*.touch',
+    '*.done',
+    '*.local-copy",'
+    '*.lta',
 ]
 
 force_in_annex = [
     '*.svg',
     '*.gii',
+    '*.env',  # Protect the environment file from being added into Git
+    '*.env.bak',  # Protect the environment file from being added into Git
+    '*.h5',
 ]
 
 # make an attempt to discover the prospective change in .gitattributes
