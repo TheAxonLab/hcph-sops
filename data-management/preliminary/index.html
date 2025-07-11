@@ -750,6 +750,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#nesting-derivatives-datasets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nesting derivatives datasets
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1526,6 +1535,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#nesting-derivatives-datasets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nesting derivatives datasets
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1738,6 +1756,48 @@ In this case, the steps are demonstrated for the outputs of <em>sMRIPrep</em>.</
 </li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check that <code>master</code> is the default branch in the repository settings (in this case: <a href="https://github.com/&lt;organization&gt;/&lt;repo_name&gt;/settings">https://github.com/<organization>/<repo_name>/settings</a>)</p>
+</li>
+</ul>
+<h2 id="nesting-derivatives-datasets">Nesting derivatives datasets<a class="headerlink" href="#nesting-derivatives-datasets" title="Permanent link">&para;</a></h2>
+<p>With the structure of derivatives we have defined above, we will then nest datalad datasets to obtain consistent global derivatives.
+For example, let's nest the <em>FreeSurfer</em> derivatives into the <code>sourcedata/freesurfer</code> folder of the <em>fMRIPrep</em> derivatives of the piloting sessions with the reliability protocol.</p>
+<ul class="task-list">
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Change directory into the <em>superdataset</em> folder, ensure it's updated, and create a new branch (for caution)
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">TOP_REPO</span><span class="o">=</span>fmriprep-reliability-pilot
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DERIVS_REPO</span><span class="o">=</span>freesurfer-reliability-pilot
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="nb">cd</span><span class="w"> </span>hcph-<span class="si">${</span><span class="nv">TOP_REPO</span><span class="si">}</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>datalad<span class="w"> </span>update<span class="w"> </span>--how<span class="w"> </span>ff-only
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>add/freesurfer-subdataset<span class="w"> </span>master
+</span></code></pre></div></p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Install the subdataset (in this case into <code>sourcedata/freesurfer</code>)
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>datalad<span class="w"> </span>install<span class="w"> </span>-d<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">                </span>-s<span class="w"> </span>https://github.com/&lt;organization&gt;/&lt;repo_name&gt;.git<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">                </span>sourcedata/freesurfer
+</span></code></pre></div></p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Push the changes to the super-dataset:
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>datalad<span class="w"> </span>push<span class="w"> </span>--to<span class="o">=</span>github
+</span></code></pre></div></p>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visit the <em>superdataset</em>'s <em>GitHub</em> repository:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Create a pull-request (<abbr title="pull-request">PR</abbr>)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Review the <abbr title="pull-request">PR</abbr></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Merge the <abbr title="pull-request">PR</abbr></li>
+</ul>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Back to the host for data management, update the dataset:
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="nb">cd</span><span class="w"> </span>hcph-<span class="si">${</span><span class="nv">TOP_REPO</span><span class="si">}</span><span class="w">  </span><span class="c1"># if necessary</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>git<span class="w"> </span>checkout<span class="w"> </span>master
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>datalad<span class="w"> </span>update<span class="w"> </span>--how<span class="w"> </span>ff-only
+</span></code></pre></div></p>
 </li>
 </ul>
 
