@@ -26,6 +26,7 @@ force_in_git = [
     '.bids-validator-config.json',
     '.bidsignore',
     'code/**',
+    'logs/**',
     '*.json',
     '*.bvec',
     '*.bval',
@@ -33,6 +34,12 @@ force_in_git = [
     # (might contain sensitive information)
     '*.tsv',
     '*.html',
+    '*.txt',
+    '*.md',
+    '*.bib',
+    '*.yaml',
+    '*.yml',
+    '*.tex',
 ]
 
 force_in_annex = [
