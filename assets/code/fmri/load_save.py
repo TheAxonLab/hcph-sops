@@ -24,21 +24,22 @@
 
 import os
 import re
+import logging
 import os.path as op
 import pandas as pd
-from collections import defaultdict
-import logging
-from typing import Optional, Union
-
-from bids import BIDSLayout
+import nibabel as nib
 import numpy as np
 
+from collections import defaultdict
+from typing import Optional, Union
+from bids import BIDSLayout
 from pandas import read_csv
 from nibabel import loadsave
 from bids.layout import parse_file_entities
 from bids.layout.writing import build_path
 from nilearn.datasets import fetch_atlas_difumo
 from nilearn.interfaces.fmriprep.load_confounds import _load_single_confounds_file
+
 
 FC_PATTERN: list = [
     "sub-{subject}[/ses-{session}]/func/sub-{subject}"
@@ -49,7 +50,7 @@ FC_FILLS: dict = {"suffix": "connectivity", "extension": ".tsv"}
 
 TIMESERIES_PATTERN: list = [
     "sub-{subject}[/ses-{session}]/func/sub-{subject}"
-    "[_ses-{session}][_task-{task}][_fdthresh-{fdthresh}][_desc-{desc}]"
+    "[_ses-{session}][_task-{task}][_scale-{scale}][_fdthresh-{fdthresh}][_desc-{desc}]"
     "_{suffix}{extension}"
 ]
 TIMESERIES_FILLS: dict = {"desc": "denoised", "extension": ".tsv"}
@@ -203,7 +204,7 @@ def get_bids_savename(filename: str, patterns: list, **kwargs) -> str:
     return str(bids_savename)
 
 
-def get_atlas_data(atlas_name: str = "DiFuMo", **kwargs) -> dict:
+def get_atlas_data(atlas_name: str = "DiFuMo", remove_csf_comp = True, **kwargs) -> dict:
     """Fetch the specifies atlas filename and data.
 
     Parameters
@@ -224,7 +225,33 @@ def get_atlas_data(atlas_name: str = "DiFuMo", **kwargs) -> dict:
             "certain you want to deviate from those optimized modes? "
         )
 
-    return fetch_atlas_difumo(legacy_format=False, **kwargs)
+    atlas = fetch_atlas_difumo(legacy_format=False, **kwargs)
+
+    if remove_csf_comp:
+        logging.info(
+            "Removing CSF-specific components from the atlas. "
+        )
+        # Remove components that are specific to CSF, ventricles and sinuses from the atlas
+        csf_indices = [i for i, label in enumerate(atlas["labels"]["difumo_names"]) if "Cerebrospinal fluid" in label]
+        csf_typo_indices = [i for i, label in enumerate(atlas["labels"]["difumo_names"]) if "Cererbrospinal fluid" in label]
+        ventricles_indices = [i for i, label in enumerate(atlas["labels"]["difumo_names"]) if "ventricle" in label]
+        sinus_indices = [i for i, label in enumerate(atlas["labels"]["difumo_names"]) if "sinus" in label]
+        exclude_indices = csf_indices + csf_typo_indices + ventricles_indices + sinus_indices
+        # Load the atlas NIfTI file
+        atlas_img = nib.load(atlas["maps"])
+        
+        if exclude_indices:
+            all_indices = np.arange(atlas_img.shape[-1])
+            keep_indices = np.setdiff1d(all_indices, exclude_indices)
+            # Create a new NIfTI image with the excluded components removed
+            atlas_img = nib.Nifti1Image(atlas_img.get_fdata()[..., keep_indices], atlas_img.affine, atlas_img.header)
+            atlas_name = atlas["maps"].replace("maps", "maps_no_csf")
+            nib.save(atlas_img, atlas_name)
+            atlas["maps"] = atlas_name
+            # Remove excluded labels
+            atlas["labels"] = atlas["labels"].drop(exclude_indices) 
+
+    return atlas
 
 
 def find_atlas_dimension(path: str, atlas_name: str = "DiFuMo") -> int:

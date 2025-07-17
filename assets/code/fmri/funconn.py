@@ -592,10 +592,10 @@ def main():
         "\t" + "\n\t".join([op.basename(filename) for filename in all_filenames])
     )
 
-    atlas_data = get_atlas_data(dimension=atlas_dimension)
+    atlas_data = get_atlas_data(remove_csf_comp=True, dimension=atlas_dimension)
     atlas_filename = getattr(atlas_data, "maps")
-    atlas_labels = getattr(atlas_data, "labels").loc[:, "difumo_names"]
-    atlas_network = getattr(atlas_data, "labels").loc[:, NETWORK_MAPPING]
+    atlas_labels = getattr(atlas_data, "labels").loc[:, "difumo_names"].reset_index(drop=True)
+    atlas_network = getattr(atlas_data, "labels").loc[:, NETWORK_MAPPING].reset_index(drop=True)
 
     if output is None:
         output = op.join(find_derivative(input_path), "functional_connectivity")
@@ -612,6 +612,7 @@ def main():
             all_filenames,
             return_existing=True,
             patterns=TIMESERIES_PATTERN,
+            scale=atlas_dimension,
             fdthresh=fd_threshold_str,
             **TIMESERIES_FILLS,
         )
@@ -631,7 +632,7 @@ def main():
             f"{len(all_missing_ts + missing_only_fc)} files are missing FC matrices."
         )
         existing_timeseries = load_timeseries(
-            missing_only_fc, output, fdthresh=fd_threshold_str
+            missing_only_fc, output, scale=atlas_dimension, fdthresh=fd_threshold_str
         )
     else:
         missing_only_fc = []
@@ -676,6 +677,7 @@ def main():
             sorted_missing_ts,
             output,
             patterns=TIMESERIES_PATTERN,
+            scale=atlas_dimension,
             fdthresh=fd_threshold_str,
             **TIMESERIES_FILLS,
         )
