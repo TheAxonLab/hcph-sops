@@ -1564,7 +1564,7 @@ Following the above data structure, it would be called as follows:
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Fetch the <a href="https://doi.org/10.1016/j.neuroimage.2020.117126">DiFuMo</a> atlas (64 dimensions)</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Extract the region-wise averaged timeseries</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Find high motion volumes that have framewise displacement higher than 0.4 mm or higher than 5 standardized DVAR.
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Find high motion volumes that have framewise displacement higher than 0.5 mm or higher than 5 standardized DVAR.
 Then also flag as outlier the segments that are shorter than 5 timepoints.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Interpolate high motion volumes with cubic spline interpolation</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Apply a low-pass butterworth filter (cutoff frequency of 0.15 Hz)</li>
@@ -1605,7 +1605,8 @@ In the end, the data structure will look like this:
 </span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>│               ├── figures
 </span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>│               └── ses-15
 </span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>│                   └── func
-</span></code></pre></div></p>
+</span></code></pre></div>
+Note that an alternative output directory can be specified using the <code>--output</code> flag.</p>
 <h2 id="qaqc-of-functional-connectivity"><abbr title="quality assessment">QA</abbr>/<abbr title="quality control">QC</abbr> of functional connectivity<a class="headerlink" href="#qaqc-of-functional-connectivity" title="Permanent link">&para;</a></h2>
 <ul class="task-list">
 <li class="task-list-item">
