@@ -61,7 +61,7 @@ def get_confounds_scanstsv(dataset_path):
 
 
 def get_iqms(
-    iqms_path, iqm_of_interest=["fd_mean"]
+    iqms_path, iqms_of_interest=["fd_mean"]
 ):
     """
     Extract imaging quality metrics (IQMs) from a specified TSV file.
@@ -73,7 +73,7 @@ def get_iqms(
     iqms_path : str, optional
         Path to the TSV file containing the IQMs. Default is
         "/data/derivatives/hcph-mriqc/group_dwi.tsv".
-    iqm_of_interest : list of str, optional
+    iqms_of_interest : list of str, optional
         List of column names corresponding to the IQMs to retain in the output.
         Default is ["fd_mean"].
     Returns:
@@ -97,7 +97,7 @@ def get_iqms(
         print("Warning: Only the IQMs corresponding to the second echo are retained in the IQMs DataFrame.")
         
     # Keep only the IQMs of interest
-    iqms_df = iqms_df[["subject", "session", "modality", "task"] + iqm_of_interest]
+    iqms_df = iqms_df[["subject", "session", "modality", "task"] + iqms_of_interest]
 
     return iqms_df
 
@@ -174,7 +174,7 @@ def get_confounds(
     ## If iqms_path is provided, read the IQMs and merge them with the confounds
     if iqms_path:
         iqms_df = get_iqms(iqms_path, iqms_of_interest)
-        
+
         # Rename bold to func to match the modality in confounds_df
         iqms_df["modality"] = iqms_df["modality"].replace("bold", "func")
 

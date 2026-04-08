@@ -25,7 +25,8 @@
       "sub-{subject}[/ses-{session}]/{datatype<figures>}/sub-{subject}[_ses-{session}]_task-{task}[_acq-{acquisition}][_ce-{ceagent}][_rec-{reconstruction}][_dir-{direction}][_run-{run}][_echo-{echo}][_part-{part}][_space-{space}][_cohort-{cohort}][_desc-{desc}][_scale-{scale}][_fdthresh-{fd_threshold}][_meas-{measure}][_exp-{experiment}][_conf-{confound}][_viz-{visualization}]_{suffix<bold>}{extension<.html|.svg>|.svg}",
       "sub-{subject}/{datatype<figures>}/sub-{subject}[_ses-{session}][_acq-{acquisition}][_ce-{ceagent}][_rec-{reconstruction}][_run-{run}][_space-{space}][_cohort-{cohort}][_desc-{desc}]_{suffix<T1w|T2w|T1rho|T1map|T2map|T2star|FLAIR|FLASH|PDmap|PD|PDT2|inplaneT[12]|angio|dseg|mask|dwi|epiref|T2starw|MTw|TSE>}{extension<.html|.svg>|.svg}",
       "sub-{subject}/{datatype<figures>}/sub-{subject}[_ses-{session}][_acq-{acquisition}][_ce-{ceagent}][_rec-{reconstruction}][_run-{run}][_space-{space}][_cohort-{cohort}][_fmapid-{fmapid}][_desc-{desc}]_{suffix<fieldmap>}{extension<.html|.svg>|.svg}",
-      "sub-{subject}/{datatype<figures>}/sub-{subject}[_ses-{session}]_task-{task}[_acq-{acquisition}][_ce-{ceagent}][_rec-{reconstruction}][_dir-{direction}][_run-{run}][_echo-{echo}][_part-{part}][_space-{space}][_cohort-{cohort}][_desc-{desc}][_scale-{scale}][_fdthresh-{fd_threshold}][_meas-{measure}][_exp-{experiment}][_conf-{confound}][_viz-{visualization}]_{suffix<bold>}{extension<.html|.svg|.png|.json>|.svg}"
+      "sub-{subject}/{datatype<figures>}/sub-{subject}[_ses-{session}][_task-{task}][_acq-{acquisition}][_ce-{ceagent}][_rec-{reconstruction}][_dir-{direction}][_run-{run}][_echo-{echo}][_part-{part}][_space-{space}][_cohort-{cohort}][_desc-{desc}][_scale-{scale}][_fdthresh-{fd_threshold}][_meas-{measure}][_exp-{experiment}][_conf-{confound}][_viz-{visualization}]_{suffix<bold>}{extension<.html|.svg|.png|.json>|.svg}",
+      "sub-{subject}/{datatype<tables>}/sub-{subject}[_ses-{session}][_task-{task}][_acq-{acquisition}][_ce-{ceagent}][_rec-{reconstruction}][_dir-{direction}][_run-{run}][_echo-{echo}][_part-{part}][_space-{space}][_cohort-{cohort}][_desc-{desc}][_scale-{scale}][_fdthresh-{fd_threshold}][_meas-{measure}][_exp-{experiment}]_{suffix<bold>}{extension<.tsv|.json>|.tsv}"
     ],
     "entities": [
       {
@@ -114,7 +115,7 @@
       },
       {
         "name": "datatype",
-        "pattern": "[/\\\\]+(func|anat|fmap|dwi|meg|eeg|figures)[/\\\\]+"
+        "pattern": "[/\\\\]+(func|anat|fmap|dwi|meg|eeg|figures|tables)[/\\\\]+"
       },
       {
         "name": "extension",
