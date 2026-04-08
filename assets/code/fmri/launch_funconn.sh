@@ -1,1 +1,1 @@
-python funconn.py /data/derivatives/hcph-derivatives-rsmovie/hcph-fmriprep/ --task rsmovie --atlas-dimension 128 --fc-estimator correlation
+python funconn.py /data/derivatives/fmriprep-reliabilitypilot --task pilotrest --atlas-dimension 64 --fc-estimator sparseinversecovariance --ses pilot015

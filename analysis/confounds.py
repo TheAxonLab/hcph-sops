@@ -53,7 +53,7 @@ def get_confounds_scanstsv(dataset_path):
     )
     confounds_df = confounds_df.assign(
         day_of_week=confounds_df["datetime"].dt.day_name(),
-        time_of_day=confounds_df["datetime"].dt.round("H").dt.time,
+        time_of_day=confounds_df["datetime"].dt.round("h").dt.time,
     )
     confounds_df.drop(columns=["datetime"], inplace=True)
 
