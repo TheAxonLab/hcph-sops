@@ -1,6 +1,6 @@
 import pandas as pd
 from pathlib import Path
-
+import logging
 
 def get_confounds_scanstsv(dataset_path):
     """
@@ -49,7 +49,7 @@ def get_confounds_scanstsv(dataset_path):
 
     # From the acq_time column, extract the day of week and time of day
     confounds_df = confounds_df.assign(
-        datetime=pd.to_datetime(confounds_df["acq_time"])
+        datetime=pd.to_datetime(confounds_df["acq_time"], format="mixed")
     )
     confounds_df = confounds_df.assign(
         day_of_week=confounds_df["datetime"].dt.day_name(),
@@ -89,130 +89,57 @@ def get_iqms(
         session=iqms_df["bids_name"].str.extract(r"ses-(\w+)_"),
         modality=iqms_df["bids_name"].str.split("_").str[-1],
         task=iqms_df["bids_name"].str.extract(r"task-(\w+)_"),
+        echo=iqms_df["bids_name"].str.extract(r"echo-(\d+)_"),
     )
+    # Keep only second echo
+    if not iqms_df["echo"].isna().all():
+        iqms_df = iqms_df[iqms_df["echo"] == "2"]
+        print("Warning: Only the IQMs corresponding to the second echo are retained in the IQMs DataFrame.")
+        
     # Keep only the IQMs of interest
     iqms_df = iqms_df[["subject", "session", "modality", "task"] + iqm_of_interest]
 
     return iqms_df
 
 
-def get_confounds_mood_issues(token_path="/home/cprovins/token_axonlab.txt"):
+def get_confounds_mood_issues(confound_path, confounds_of_interest):
     """
-    Extract confound data related to mood issues from a GitHub repository.
-
-    This function retrieves issue data from a specified GitHub repository, processes
-    the issue titles and bodies to extract relevant confound information, and compiles
-    the data into a pandas DataFrame. The extracted confounds include caffeine intake
-    (in the last 2 hours and 24 hours) and MR room temperature.
+    Extract confound data from the table where we previously parsed the answers to the mood and confound questionnaire.
 
     Parameters:
     -----------
-    token_path : str, optional
-        Path to the file containing the GitHub personal access token.
-        Default is "/home/cprovins/token_axonlab.txt".
+    confound_path : str
+        Path to the table storing the confounds.
+    confound_of_interest : list of str
+        List of confound columns to retain in the output DataFrame.
+        See https://github.com/TheAxonLab/hcph-dataset/blob/master/phenotype/mood_env_quest.tsv for the possible values.
 
     Returns:
     --------
     pd.DataFrame
-        A pandas DataFrame containing the extracted confound data with the following columns:
-        - `issue_title`: Title of the GitHub issue.
-        - `subject`: The subject identifier extracted from the issue title.
-        - `session`: The session identifier extracted from the issue title.
-        - `caffeine_intake_2h`: Number of cups of caffeine consumed in the last 2 hours (int or None).
-        - `caffeine_intake_24h`: Number of cups of caffeine consumed in the last 24 hours (int or None).
-        - `room_temp_before`: MR room temperature in degrees Celsius (float or None).
+        A pandas DataFrame containing the confounds of interest.
 
-    Notes:
-    ------
-    - A GitHub personal access token with theAxonLab as the resource owner is required
-      to authenticate API requests.
-    - Only confounds from the reliability sessions are retrieved, as the issues for
-      generalizability sessions differ significantly in structure.
+    Note:
+    --------
+    - Please download the confound table locally before running this function, either by cloning the hcph-dataset repository or downloading the TSV file directly.
+    - The confound table is available at: https://github.com/TheAxonLab/hcph-dataset/blob/master/phenotype/mood_env_quest.tsv
     """
+    # Load tsv file containing confound data
+    confounds_df = pd.read_csv(confound_path, sep="\t", dtype={"participant_id": str, "session_number": str})
 
-    import requests
-    import re
-
-    ## Merge confounds retrieved from the manual issue logs
-    # GitHub repository details
-    repo_owner = "TheAxonLab"  # Replace with your GitHub username or org name
-    repo_name = "hcph-mood-quest"
-    # Read token from token.txt
-    with open(token_path, "r") as file:
-        token = file.read().strip()
-
-    # GitHub API headers
-    headers = {
-        "Authorization": f"token {token}",
-        "Accept": "application/vnd.github.v3+json",
-    }
-
-    # Regular expression to match issue titles with the optional [BEFORE] tag and confounds of interest
-    issue_title_pattern = r"\[MOOD\](?:\[BEFORE\])? sub-001_ses-0\d{2}"
-    caffeine_2h_pattern = r"### Caffeine intake in the last 2h \(# cups\)\s+(\d+)"
-    caffeine_24h_pattern = r"### Caffeine intake in the last 24h \(# cups\)\s+(\d+)"
-    room_temp_pattern = r"### MR room temperature \(°C\)\s+([\d.]+)"
-
-    data = []
-    page = 1
-    while True:
-        url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/issues"
-        params = {"state": "all", "per_page": 100, "page": page}
-        response = requests.get(url, headers=headers, params=params)
-
-        if response.status_code == 404:
-            raise ValueError(
-                f"GitHub API returned 404: Resource not found at {url}. "
-                "This could be due to insufficient permissions. Please check your token's access rights."
-            )
-
-        issues = response.json()
-
-        # Stop if no more issues
-        if not issues:
-            break
-
-        for issue in issues:
-            title = issue["title"]
-            if re.search(issue_title_pattern, title):
-                # Get the issue body
-                issue_body = issue["body"]
-
-                # Extract caffeine intake and room temperature before scan
-                caffeine_2h = re.search(caffeine_2h_pattern, issue_body)
-                caffeine_24h = re.search(caffeine_24h_pattern, issue_body)
-                room_temp = re.search(room_temp_pattern, issue_body)
-
-                data.append(
-                    {
-                        "issue_title": title,
-                        "caffeine_intake_2h": int(caffeine_2h.group(1))
-                        if caffeine_2h
-                        else None,
-                        "caffeine_intake_24h": int(caffeine_24h.group(1))
-                        if caffeine_24h
-                        else None,
-                        "room_temp_before": float(room_temp.group(1))
-                        if room_temp
-                        else None,
-                    }
-                )
-
-        page += 1
-
-    confounds_df = pd.DataFrame(data)
-    confounds_df = confounds_df.assign(
-        subject=confounds_df["issue_title"].str.extract(r"sub-(\d+)_"),
-        session=confounds_df["issue_title"].str.extract(r"ses-([a-zA-Z0-9]+)(?:_|$)"),
-    )
+    # Keep only the confounds of interest
+    column_to_keep = ["participant_id", "session_number"] + confounds_of_interest
+    confounds_df = confounds_df[column_to_keep]
 
     return confounds_df
 
 
 def get_confounds(
     dataset_path,
-    iqms_path,
-    iqm_of_interest=["fd_mean"],
+    confound_path,
+    confounds_of_interest,
+    iqms_path=None,
+    iqms_of_interest=["fd_mean"],
 ):
     """
     Extract and merge confounds from various sources for a given dataset.
@@ -225,10 +152,14 @@ def get_confounds(
     -----------
     dataset_path : str
         The path to the dataset directory.
+    confound_path : str
+        Path to the table storing the confounds.
+    confounds_of_interest : list of str
+        List of confound columns to retain in the output DataFrame.
     iqms_path : str
         The path to the file containing IQMs. If provided, the IQMs will be merged
         with the confounds DataFrame.
-    iqm_of_interest : list of str, optional
+    iqms_of_interest : list of str, optional
         A list of IQMs to extract from the IQMs file. Default is ["fd_mean"].
 
     Returns:
@@ -242,7 +173,10 @@ def get_confounds(
 
     ## If iqms_path is provided, read the IQMs and merge them with the confounds
     if iqms_path:
-        iqms_df = get_iqms(iqms_path, iqm_of_interest)
+        iqms_df = get_iqms(iqms_path, iqms_of_interest)
+        
+        # Rename bold to func to match the modality in confounds_df
+        iqms_df["modality"] = iqms_df["modality"].replace("bold", "func")
 
         # Merge the fd_mean values into the confounds DataFrame
         confounds_df = pd.merge(
@@ -252,10 +186,17 @@ def get_confounds(
             how="left",
         )
 
-    coffee_temp_df = get_confounds_mood_issues()
+    coffee_temp_df = get_confounds_mood_issues(confound_path, confounds_of_interest)
+    # Rename columns to match the naming in other dataframe
+    coffee_temp_df.rename(
+        columns={
+            "participant_id": "subject",
+            "session_number": "session",
+        },
+        inplace=True,
+    )
     # Merge the fd_mean values into the confounds DataFrame
     confounds_df = pd.merge(
         confounds_df, coffee_temp_df, on=["subject", "session"], how="left"
     )
-    confounds_df.drop(columns=["issue_title"], inplace=True)
     return confounds_df
