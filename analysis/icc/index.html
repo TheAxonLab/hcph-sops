@@ -13,6 +13,10 @@
       
       
       
+        <link rel="prev" href="../../processing/functional-connectivity/">
+      
+      
+        <link rel="next" href="../fmri-variability/">
       
       
         
@@ -1023,20 +1027,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
         
           
           <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
@@ -1057,7 +1061,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1067,6 +1071,409 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Between-scanner, within-scanner and between-paradigm variability of FC matrices
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Between-scanner, within-scanner and between-paradigm variability of FC matrices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#load-the-fc-matrices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Load the FC matrices
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#intra-class-correlation-coefficient-icc-to-quantify-between-scanner-variability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intra-class correlation coefficient (ICC) to quantify between-scanner variability
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#icc-to-quantify-within-scanner-variability-when-using-standard-resting-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ICC to quantify within-scanner variability when using standard resting-state
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ICC to quantify within-scanner variability when using standard resting-state">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-all-12-sessions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using all 12 sessions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bootstrap-all-possible-pairs-of-repetitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bootstrap all possible pairs of repetitions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#icc-to-quantify-within-scanner-variability-when-using-naturalistic-movie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ICC to quantify within-scanner variability when using naturalistic movie
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ICC to quantify within-scanner variability when using naturalistic movie">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-all-36-sessions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using all 36 sessions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bootstrap-to-permute-through-all-possible-pairs-of-repetitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bootstrap to permute through all possible pairs of repetitions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#icc-to-quantify-variability-across-paradigms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ICC to quantify variability across paradigms
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#save-the-icc-estimates-in-a-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Save the ICC estimates in a table
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualize-the-icc-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Visualize the ICC results
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Visualize the ICC results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compare-icc-across-variability-type-and-across-connectivity-measure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compare ICC across variability type and across connectivity measure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sleep-influence-on-reliability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sleep influence on reliability
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sleep influence on reliability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#did-our-participant-exhibit-a-consistent-pattern-of-sleeping-more-in-a-specific-scanner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Did our participant exhibit a consistent pattern of sleeping more in a specific scanner?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is-there-a-scanner-that-is-systematically-less-reliable-than-the-other-two" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Is there a scanner that is systematically less reliable than the other two?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#did-our-participant-consistently-moved-more-in-one-scanner-compared-to-the-others" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Did our participant consistently moved more in one scanner compared to the others?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is-motion-or-icc-consistently-increasing-over-the-repetition-of-the-naturalistic-movie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Is motion or ICC consistently increasing over the repetition of the naturalistic movie?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confound-influence-on-icc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Confound influence on ICC
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compute-edge-specific-icc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compute edge-specific ICC
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Compute edge-specific ICC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#between-scanner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Between-scanner
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intra-scanner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intra-scanner
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#between-paradigm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Between-paradigm
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fmri-variability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Does replaying the same movie clip reduce the variability of resting-state fMRI?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bayesian_modeling_sc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bayesian Modeling to characterize the reliability of SC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1111,34 +1518,6 @@
     
   
     Calibrating regressor to flag HCPh T1w images for exclusion
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../fmri-variability/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Does replaying the same movie clip reduce the variability of resting-state fMRI?
   
 
     
