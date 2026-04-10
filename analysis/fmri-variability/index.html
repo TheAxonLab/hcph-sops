@@ -2916,7 +2916,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [63]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-1">
@@ -2942,7 +2942,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.multitest</span><span class="w"> </span><span class="kn">import</span> <span class="n">fdrcorrection</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">confounds</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_confounds</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">load_save</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_atlas_data</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">load_save</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_atlas_data</span><span class="p">,</span> <span class="n">load_matrices</span>
 
 <span class="c1">#Define filtering parameters</span>
 <span class="n">metric</span> <span class="o">=</span> <span class="s2">"correlation"</span>
@@ -2971,7 +2971,7 @@ from bids.layout import BIDSLayout, BIDSLayoutIndexer, add_config_paths
 from scipy import stats
 from statsmodels.stats.multitest import fdrcorrection
 from confounds import get_confounds
-from load_save import get_atlas_data
+from load_save import get_atlas_data, load_matrices
 
 #Define filtering parameters
 metric = "correlation"
@@ -2997,7 +2997,7 @@ iqms_path = Path("/data/derivatives/hcph-mriqc/group_bold.tsv")</div>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [64]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-2">
@@ -3070,7 +3070,7 @@ def save_caption(caption, save_layout, entities):
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [65]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-3">
@@ -3083,8 +3083,24 @@ def save_caption(caption, save_layout, entities):
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Initialize the BIDS layout, we use a custom indexer because we are using entities that are not yet officially recognized by BIDS </span>
-<span class="n">config_path</span> <span class="o">=</span> <span class="n">code_path</span> <span class="o">/</span> <span class="s2">"code/bids/indexer.json"</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Set up entities_base for the matrix loading</span>
+<span class="n">entities_base</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'subject'</span><span class="p">:</span> <span class="s1">'001'</span><span class="p">,</span>
+    <span class="s1">'task'</span><span class="p">:</span> <span class="s1">'rsmovie'</span><span class="p">,</span>
+    <span class="s1">'measure'</span><span class="p">:</span> <span class="n">metric</span><span class="p">,</span>
+    <span class="s1">'scale'</span><span class="p">:</span> <span class="n">atlas_dimension</span><span class="p">,</span>
+    <span class="s1">'fd_threshold'</span><span class="p">:</span> <span class="n">fdthresh_str</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1"># Load the FC matrices and associated information using the helper function</span>
+<span class="n">matrices_dict</span> <span class="o">=</span> <span class="n">load_matrices</span><span class="p">(</span><span class="n">fc_path</span><span class="p">,</span> <span class="n">entities_base</span><span class="p">,</span> <span class="n">code_path</span><span class="p">)</span>
+<span class="n">fc_concat</span> <span class="o">=</span> <span class="n">matrices_dict</span><span class="p">[</span><span class="s2">"conn_concat"</span><span class="p">]</span>
+<span class="n">region_labels</span> <span class="o">=</span> <span class="n">matrices_dict</span><span class="p">[</span><span class="s2">"region_labels"</span><span class="p">]</span>
+<span class="n">fc_size</span> <span class="o">=</span> <span class="n">matrices_dict</span><span class="p">[</span><span class="s2">"conn_size"</span><span class="p">]</span>
+<span class="n">ses_index</span> <span class="o">=</span> <span class="n">matrices_dict</span><span class="p">[</span><span class="s2">"ses_index"</span><span class="p">]</span>
+
+<span class="c1"># The BIDS save layout still needs to be initialized for saving figures/captions</span>
+<span class="n">config_path</span> <span class="o">=</span> <span class="n">code_path</span> <span class="o">/</span> <span class="s2">"code/data_loader/indexer.json"</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="n">add_config_paths</span><span class="p">(</span><span class="n">hcph</span><span class="o">=</span><span class="n">config_path</span><span class="p">)</span>
 <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
@@ -3097,58 +3113,40 @@ def save_caption(caption, save_layout, entities):
     <span class="n">index_metadata</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">validate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span>       
-<span class="n">layout</span> <span class="o">=</span> <span class="n">BIDSLayout</span><span class="p">(</span><span class="n">fc_path</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="s2">"hcph"</span><span class="p">,</span> <span class="n">indexer</span><span class="o">=</span><span class="n">_indexer</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">save_layout</span> <span class="o">=</span> <span class="n">BIDSLayout</span><span class="p">(</span><span class="n">suppl_path</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="s2">"hcph"</span><span class="p">,</span> <span class="n">indexer</span><span class="o">=</span><span class="n">_indexer</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="c1"># Get all the files matching the pattern</span>
-<span class="n">entities_base</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'subject'</span><span class="p">:</span> <span class="s1">'001'</span><span class="p">,</span>
-    <span class="s1">'task'</span><span class="p">:</span> <span class="s1">'rsmovie'</span><span class="p">,</span>
-    <span class="s1">'measure'</span><span class="p">:</span> <span class="n">metric</span><span class="p">,</span>
-    <span class="s1">'scale'</span><span class="p">:</span> <span class="n">atlas_dimension</span><span class="p">,</span>
-    <span class="s1">'fd_threshold'</span><span class="p">:</span> <span class="n">fdthresh_str</span><span class="p">,</span>
-<span class="p">}</span>
-<span class="n">files</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="o">**</span><span class="n">entities_base</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s1">'connectivity'</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="s1">'.tsv'</span><span class="p">,</span> <span class="n">return_type</span><span class="o">=</span><span class="s1">'file'</span><span class="p">)</span>
-<span class="n">ses_index</span> <span class="o">=</span> <span class="p">[</span><span class="n">tsv</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'ses-'</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">tsv</span> <span class="ow">in</span> <span class="n">files</span><span class="p">]</span>
-<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">)</span> <span class="o">==</span> <span class="mi">36</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Expected 36 FC matrices, got </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
-
-<span class="c1"># Load the data from each file and concatenate</span>
-<span class="c1"># Keep only upper-triangle since the FC matrix is symmetric (does the diagonal of our FC contain only ones ? if yes can discard the diagonal, if not have to keep it </span>
-<span class="n">fc_matrices</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
-    <span class="n">fc_matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">'</span><span class="se">\t</span><span class="s1">'</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">metric</span> <span class="o">==</span> <span class="s2">"sparseinversecovariance"</span><span class="p">:</span>
-        <span class="c1"># Negate the precision matrix to get partial correlation matrix</span>
-        <span class="n">fc_matrix</span> <span class="o">=</span> <span class="o">-</span><span class="n">fc_matrix</span>
-    
-    <span class="n">fc_matrices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fc_matrix</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">triu_indices_from</span><span class="p">(</span><span class="n">fc_matrix</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">)])</span>
-
-<span class="c1"># Store the matrix size for reconstruction later</span>
-<span class="n">fc_size</span> <span class="o">=</span> <span class="n">fc_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="c1"># Concatenate all the upper triangle values</span>
-<span class="n">fc_concat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">fc_matrices</span><span class="p">)</span>
-
-<span class="c1"># Load region names</span>
-<span class="n">atlas_data</span> <span class="o">=</span> <span class="n">get_atlas_data</span><span class="p">(</span><span class="n">dimension</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">atlas_dimension</span><span class="p">))</span>
-<span class="n">atlas_labels</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">atlas_data</span><span class="p">,</span> <span class="s2">"labels"</span><span class="p">)</span>
-<span class="n">region_labels</span> <span class="o">=</span> <span class="n">atlas_labels</span><span class="p">[</span><span class="s2">"difumo_names"</span><span class="p">]</span>
-<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">region_labels</span><span class="p">)</span> <span class="o">==</span> <span class="n">fc_size</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Expected </span><span class="si">{</span><span class="n">fc_size</span><span class="si">}</span><span class="s2"> region labels, got </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">region_labels</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
-
-<span class="c1">#Plot an example FC matrix</span>
+<span class="c1"># Plot an example FC matrix (the last one loaded)</span>
+<span class="n">fc_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">fc_size</span><span class="p">,</span> <span class="n">fc_size</span><span class="p">))</span>
+<span class="c1"># reconstruct from upper triangle if needed (optional, for visualization)</span>
+<span class="n">fc_matrix</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">triu_indices</span><span class="p">(</span><span class="n">fc_size</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">)]</span> <span class="o">=</span> <span class="n">fc_concat</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="n">fc_matrix</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">triu</span><span class="p">(</span><span class="n">fc_matrix</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">fc_matrix</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">'viridis'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Example FC matrix"</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Brain Regions'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Brain Regions'</span><span class="p">)</span>
-<span class="c1">#plt.yticks(ticks=np.arange(len(region_labels))+0.5, labels=region_labels)</span>
 
-<span class="c1"># Generate a random matrix of size 2080x36</span>
-<span class="c1">#fc_concat = np.random.rand(2080, 36)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Number of brain regions (matrix size): </span><span class="si">{</span><span class="n">fc_size</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Shape of concatenated upper triangle FC matrices (number of region pairs, number of sessions): </span><span class="si">{</span><span class="n">fc_concat</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-3"># Initialize the BIDS layout, we use a custom indexer because we are using entities that are not yet officially recognized by BIDS 
-config_path = code_path / "code/bids/indexer.json"
+<div class="clipboard-copy-txt" id="cell-3"># Set up entities_base for the matrix loading
+entities_base = {
+    'subject': '001',
+    'task': 'rsmovie',
+    'measure': metric,
+    'scale': atlas_dimension,
+    'fd_threshold': fdthresh_str,
+}
+
+# Load the FC matrices and associated information using the helper function
+matrices_dict = load_matrices(fc_path, entities_base, code_path)
+fc_concat = matrices_dict["conn_concat"]
+region_labels = matrices_dict["region_labels"]
+fc_size = matrices_dict["conn_size"]
+ses_index = matrices_dict["ses_index"]
+
+# The BIDS save layout still needs to be initialized for saving figures/captions
+config_path = code_path / "code/data_loader/indexer.json"
 try:
     add_config_paths(hcph=config_path)
 except ValueError as e:
@@ -3161,53 +3159,19 @@ _indexer = BIDSLayoutIndexer(
     index_metadata=False,
     validate=False,
 )       
-layout = BIDSLayout(fc_path, config="hcph", indexer=_indexer, validate=False)
 save_layout = BIDSLayout(suppl_path, config="hcph", indexer=_indexer, validate=False)
 
-# Get all the files matching the pattern
-entities_base = {
-    'subject': '001',
-    'task': 'rsmovie',
-    'measure': metric,
-    'scale': atlas_dimension,
-    'fd_threshold': fdthresh_str,
-}
-files = layout.get(**entities_base, suffix='connectivity', extension='.tsv', return_type='file')
-ses_index = [tsv.split('ses-')[1].split('/')[0] for tsv in files]
-assert len(files) == 36, f"Expected 36 FC matrices, got {len(files)}"
-
-# Load the data from each file and concatenate
-# Keep only upper-triangle since the FC matrix is symmetric (does the diagonal of our FC contain only ones ? if yes can discard the diagonal, if not have to keep it 
-fc_matrices = []
-for file in files:
-    fc_matrix = pd.read_csv(file, sep='\t', header=None)
-    if metric == "sparseinversecovariance":
-        # Negate the precision matrix to get partial correlation matrix
-        fc_matrix = -fc_matrix
-    
-    fc_matrices.append(fc_matrix.values[np.triu_indices_from(fc_matrix, k=0)])
-
-# Store the matrix size for reconstruction later
-fc_size = fc_matrix.shape[0]
-# Concatenate all the upper triangle values
-fc_concat = np.vstack(fc_matrices)
-
-# Load region names
-atlas_data = get_atlas_data(dimension=int(atlas_dimension))
-atlas_labels = getattr(atlas_data, "labels")
-region_labels = atlas_labels["difumo_names"]
-assert len(region_labels) == fc_size, f"Expected {fc_size} region labels, got {len(region_labels)}"
-
-#Plot an example FC matrix
+# Plot an example FC matrix (the last one loaded)
+fc_matrix = np.zeros((fc_size, fc_size))
+# reconstruct from upper triangle if needed (optional, for visualization)
+fc_matrix[np.triu_indices(fc_size, k=0)] = fc_concat[-1].flatten()
+fc_matrix += np.triu(fc_matrix, k=1).T
 plt.figure(figsize=(8,6))
 sns.heatmap(fc_matrix, cmap='viridis')
 plt.title(f"Example FC matrix")
 plt.xlabel('Brain Regions')
 plt.ylabel('Brain Regions')
-#plt.yticks(ticks=np.arange(len(region_labels))+0.5, labels=region_labels)
 
-# Generate a random matrix of size 2080x36
-#fc_concat = np.random.rand(2080, 36)
 print(f"Number of brain regions (matrix size): {fc_size}")
 print(f"Shape of concatenated upper triangle FC matrices (number of region pairs, number of sessions): {fc_concat.shape}")</div>
 </div>
@@ -3221,8 +3185,8 @@ print(f"Shape of concatenated upper triangle FC matrices (number of region pairs
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Configuration 'hcph' already exists, skipping add_config_paths.
-[get_dataset_dir] Dataset found in /home/cprovins/nilearn_data/difumo_atlases
+<pre>[get_dataset_dir] Dataset found in /home/cprovins/nilearn_data/difumo_atlases
+Configuration 'hcph' already exists, skipping add_config_paths.
 Number of brain regions (matrix size): 119
 Shape of concatenated upper triangle FC matrices (number of region pairs, number of sessions): (36, 7140)
 </pre>

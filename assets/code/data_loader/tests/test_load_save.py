@@ -3,7 +3,7 @@ import os
 import random
 import pandas as pd
 import os.path as op
-import fmri.load_save as fl
+import data_loader.load_save as load_save
 
 from itertools import chain
 
@@ -19,7 +19,7 @@ from itertools import chain
     ],
 )
 def test_find_derivative(path, expected_path):
-    der_path = fl.find_derivative(path)
+    der_path = load_save.find_derivative(path)
     assert der_path == expected_path
 
 
@@ -44,7 +44,7 @@ def test_find_mriqc(
     monkeypatch.setattr(os, "listdir", mock_listdir)
     monkeypatch.setattr(op, "isdir", mock_isdir)
     print(op.join(derivative_path, addition))
-    mriqc_path = fl.find_mriqc(op.join(derivative_path, addition))
+    mriqc_path = load_save.find_mriqc(op.join(derivative_path, addition))
     assert mriqc_path == op.join(derivative_path, mriqc_name)
 
 
@@ -71,7 +71,7 @@ def test_reorder_iqms():
         "/data/sub-3_ses-1_task-rest_connectivity.tsv",
     ]
 
-    iqms_df = fl.reorder_iqms(iqms_df, fc_paths)
+    iqms_df = load_save.reorder_iqms(iqms_df, fc_paths)
 
     # Verify that sub-1 and ses-2 are not included in iqms_df
     assert "4" not in iqms_df["subject"].values
@@ -101,11 +101,11 @@ def test_reorder_iqms():
 )
 def test_find_atlas_dimension(path, expected_dim):
     if expected_dim is not None:
-        atlas_dim = fl.find_atlas_dimension(path)
+        atlas_dim = load_save.find_atlas_dimension(path)
         assert atlas_dim == expected_dim
     else:
         with pytest.raises(ValueError):
-            fl.find_atlas_dimension(path)
+            load_save.find_atlas_dimension(path)
 
 
 @pytest.mark.parametrize("return_existing", [False, True])
@@ -128,14 +128,14 @@ def test_check_existing_output(return_existing, return_output, fc_label, tmp_pat
 
     if return_existing:
         if return_output:
-            existing_file = fl.check_existing_output(
+            existing_file = load_save.check_existing_output(
                 tmp_path,
                 func_filename,
                 return_existing=return_existing,
                 return_output=return_output,
                 patterns=FAKE_PATTERN,
                 meas=fc_label,
-                **fl.FC_FILLS,
+                **load_save.FC_FILLS,
             )
             assert existing_file == [
                 str(
@@ -144,37 +144,37 @@ def test_check_existing_output(return_existing, return_output, fc_label, tmp_pat
                 )
             ]
         else:
-            missing_file, existing_file = fl.check_existing_output(
+            missing_file, existing_file = load_save.check_existing_output(
                 tmp_path,
                 func_filename,
                 return_existing=return_existing,
                 patterns=FAKE_PATTERN,
                 meas=fc_label,
-                **fl.FC_FILLS,
+                **load_save.FC_FILLS,
             )
             assert missing_file == ["sub-1/func/sub-1_bold.nii"]
             assert existing_file == ["sub-2/func/sub-2_bold.nii"]
     else:
-        missing_file = fl.check_existing_output(
+        missing_file = load_save.check_existing_output(
             tmp_path,
             func_filename,
             return_existing=return_existing,
             patterns=FAKE_PATTERN,
             meas=fc_label,
-            **fl.FC_FILLS,
+            **load_save.FC_FILLS,
         )
         assert missing_file == ["sub-1/func/sub-1_bold.nii"]
 
     if return_output == True and return_existing == False:
         with pytest.raises(ValueError):
-            fl.check_existing_output(
+            load_save.check_existing_output(
                 tmp_path,
                 func_filename,
                 return_existing=return_existing,
                 return_output=return_output,
                 patterns=FAKE_PATTERN,
                 meas=fc_label,
-                **fl.FC_FILLS,
+                **load_save.FC_FILLS,
             )
 
     # Clear temporary directory

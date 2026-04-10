@@ -1,0 +1,649 @@
+# emacs: -*- mode: python; py-indent-offset: 4; indent-tabs-mode: nil -*-
+# vi: set ft=python sts=4 ts=4 sw=4 et:
+#
+# Copyright 2023 The Axon Lab <theaxonlab@gmail.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# We support and encourage derived works from this project, please read
+# about our expectations at
+#
+#     https://www.nipreps.org/community/licensing/
+#
+"""Python module for loading and saving fMRI related data"""
+
+import os
+import re
+import logging
+import os.path as op
+import pandas as pd
+import nibabel as nib
+import numpy as np
+
+from collections import defaultdict
+from typing import Optional, Union
+from pandas import read_csv
+from nibabel import loadsave
+from bids.layout import BIDSLayout, BIDSLayoutIndexer, add_config_paths, parse_file_entities
+from bids.layout.writing import build_path
+from nilearn.datasets import fetch_atlas_difumo
+from nilearn.interfaces.fmriprep.load_confounds import _load_single_confounds_file
+
+
+FC_PATTERN: list = [
+    "sub-{subject}[/ses-{session}]/func/sub-{subject}"
+    "[_ses-{session}][_task-{task}][_scale-{scale}][_fdthresh-{fdthresh}][_meas-{meas}]"
+    "_{suffix}{extension}"
+]
+FC_FILLS: dict = {"suffix": "connectivity", "extension": ".tsv"}
+
+TIMESERIES_PATTERN: list = [
+    "sub-{subject}[/ses-{session}]/func/sub-{subject}"
+    "[_ses-{session}][_task-{task}][_scale-{scale}][_fdthresh-{fdthresh}][_desc-{desc}]"
+    "_{suffix}{extension}"
+]
+TIMESERIES_FILLS: dict = {"desc": "denoised", "extension": ".tsv"}
+
+CONFOUND_PATTERN: list = [
+    "sub-{subject}[_ses-{session}][_task-{task}][_part-{part}][_desc-{desc}]"
+    "_{suffix}{extension}"
+]
+CONFOUND_FILLS: dict = {"desc": "confounds", "suffix": "timeseries", "extension": "tsv"}
+
+
+def separate_by_similar_values(
+    input_list: list, external_value: Optional[Union[list, np.ndarray]] = None
+) -> dict:
+    """This returns elements of `input_list` with similar values (optionally set by
+    `external_value`) separated into sub-lists.
+
+    Parameters
+    ----------
+    input_list : list
+        List to be separated.
+    external_value : Optional[list], optional
+        Values corresponding to the elements of `input_list`, by default None
+
+    Returns
+    -------
+    dict
+        Dictionary where each entry is a list of elements that have similar values and
+        the keys are the value for each list.
+    """
+    if external_value is None:
+        external_value = input_list
+
+    data_by_value = defaultdict(list)
+
+    for val, data in zip(external_value, input_list):
+        data_by_value[val].append(data)
+    return data_by_value
+
+
+def get_func_filenames_bids(
+    paths_to_func_dir: str,
+    task_filter: Optional[list] = None,
+    ses_filter: Optional[list] = None,
+    run_filter: Optional[list] = None,
+) -> tuple[list[list[str]], list[float]]:
+    """Return the BIDS functional imaging files matching the specified task and session
+    filters as well as the first (if multiple) unique repetition time (TR).
+
+    Parameters
+    ----------
+    paths_to_func_dir : str
+        Path to the BIDS (usually derivatives) directory
+    task_filter : list, optional
+        List of task name(s) to consider, by default `None`
+    ses_filter : list, optional
+        List of session name(s) to consider, by default `None`
+    run_filter : list, optional
+        List of run(s) to consider, by default `None`
+
+    Returns
+    -------
+    tuple[list[list[str]], list[float]]
+        Returns two lists with: a list of sorted filenames and a list of TRs.
+    """
+    logging.debug("Using BIDS to find functional files...")
+
+    layout = BIDSLayout(
+        paths_to_func_dir,
+        validate=False,
+    )
+
+    all_derivatives = layout.get(
+        scope="all",
+        return_type="file",
+        extension=["nii.gz", "gz"],
+        suffix="bold",
+        task=task_filter or [],
+        session=ses_filter or [],
+        run=run_filter or [],
+    )
+
+    if not all_derivatives:
+        raise ValueError(
+            f"No functional derivatives were found under {paths_to_func_dir} with the following filters:"
+            f"\nExtension: ['nii.gz', 'gz']"
+            f"\nSuffix: bold"
+            f"\nTask: {task_filter or []}"
+            f"\nSession: {ses_filter or []}"
+            f"\nRun: {run_filter or []}"
+        )
+
+    affines = []
+    for file in all_derivatives:
+        affines.append(loadsave.load(file).affine)
+
+    similar_fov_dict = separate_by_similar_values(
+        all_derivatives, np.array(affines)[:, 0, 0]
+    )
+    if len(similar_fov_dict) > 1:
+        logging.warning(
+            f"{len(similar_fov_dict)} different FoV found ! "
+            "Files with similar FoV will be computed together. "
+            "Computation time may increase."
+        )
+
+    separated_files = []
+    separated_trs = []
+    for file_group in similar_fov_dict.values():
+        t_rs = []
+        for file in file_group:
+            t_rs.append(layout.get_metadata(file)["RepetitionTime"])
+
+        similar_tr_dict = separate_by_similar_values(file_group, t_rs)
+        separated_files += list(similar_tr_dict.values())
+        separated_trs += list(similar_tr_dict.keys())
+
+        if len(similar_tr_dict) > 1:
+            logging.warning(
+                "Multiple TR values found ! "
+                "Files with similar TR will be computed together. "
+                "Computation time may increase."
+            )
+
+    return separated_files, separated_trs
+
+
+def get_bids_savename(filename: str, patterns: list, **kwargs) -> str:
+    """Return the BIDS filename following the specified patterns and modifying the
+    entities from the keywords arguments.
+
+    Parameters
+    ----------
+    filename : str
+        Name of the original BIDS file
+    patterns : list, optional
+        Patterns for the output file, by default FC_PATTERN
+
+    Returns
+    -------
+    str
+        BIDS output filename.
+    """
+    entity = parse_file_entities(filename)
+
+    for key, value in kwargs.items():
+        entity[key] = value
+
+    bids_savename = build_path(entity, patterns)
+
+    return str(bids_savename)
+
+
+def get_atlas_data(atlas_name: str = "DiFuMo", remove_csf_comp = True, **kwargs) -> dict:
+    """Fetch the specifies atlas filename and data.
+
+    Parameters
+    ----------
+    atlas_name : str, optional
+        Name of the atlas to fetch, by default "DiFuMo"
+
+    Returns
+    -------
+    dict
+        Dictionary with keys "maps" (filename) and "labels" (ROI labels).
+    """
+    logging.info("Fetching the DiFuMo atlas ...")
+
+    if kwargs["dimension"] not in [64, 128, 512]:
+        logging.warning(
+            "Dimension for DiFuMo atlas is different from 64, 128 or 512 ! Are you"
+            "certain you want to deviate from those optimized modes? "
+        )
+
+    atlas = fetch_atlas_difumo(legacy_format=False, **kwargs)
+
+    if remove_csf_comp:
+        logging.info(
+            "Removing CSF-specific components from the atlas. "
+        )
+        # Remove components that are specific to CSF, ventricles and sinuses from the atlas
+        csf_indices = [i for i, label in enumerate(atlas["labels"]["difumo_names"]) if "Cerebrospinal fluid" in label]
+        csf_typo_indices = [i for i, label in enumerate(atlas["labels"]["difumo_names"]) if "Cererbrospinal fluid" in label]
+        ventricles_indices = [i for i, label in enumerate(atlas["labels"]["difumo_names"]) if "ventricle" in label]
+        sinus_indices = [i for i, label in enumerate(atlas["labels"]["difumo_names"]) if "sinus" in label]
+        exclude_indices = csf_indices + csf_typo_indices + ventricles_indices + sinus_indices
+        # Load the atlas NIfTI file
+        atlas_img = nib.load(atlas["maps"])
+        
+        if exclude_indices:
+            all_indices = np.arange(atlas_img.shape[-1])
+            keep_indices = np.setdiff1d(all_indices, exclude_indices)
+            # Create a new NIfTI image with the excluded components removed
+            atlas_img = nib.Nifti1Image(atlas_img.get_fdata()[..., keep_indices], atlas_img.affine, atlas_img.header)
+            atlas_name = atlas["maps"].replace("maps", "maps_no_csf")
+            nib.save(atlas_img, atlas_name)
+            atlas["maps"] = atlas_name
+            # Remove excluded labels
+            atlas["labels"] = atlas["labels"].drop(exclude_indices) 
+
+    return atlas
+
+
+def find_atlas_dimension(path: str, atlas_name: str = "DiFuMo") -> int:
+    """Fetch the atlas dimension from the path where the functional connectivity are saved.
+    Parameters
+    ----------
+    path : str
+        Path to the directory where functional connectivity are saved.
+    atlas_name : str, optional
+        Name of the atlas to fetch, by default "DiFuMo"
+
+    Returns
+    -------
+    int
+        Atlas dimension.
+    """
+
+    # Using regular expression to extract the number of dimensions
+    dimension_match = re.search(rf"{atlas_name}(\d+)", path)
+
+    if dimension_match:
+        return int(dimension_match.group(1))
+    else:
+        # We now store the value of the atlas dimension in a BIDS entity
+        # Traverse the directory to find files matching the pattern
+        for root, _, files in os.walk(path):
+            for file in files:
+                if re.match(rf".*_scale-(\d+).*_connectivity\.tsv", file):
+                    dimension_match = re.search(r"_scale-(\d+)", file)
+                    if dimension_match:
+                        return int(dimension_match.group(1))
+        raise ValueError(
+            f"The output path {path} does not contain any of the expected patterns: {atlas_name} followed by digits or the scale BIDS entity."
+        )
+
+
+def find_derivative(path: str, derivatives_name: str = "derivatives") -> str:
+    """Find the corresponding BIDS derivative folder (if existing, otherwise it will be
+    created).
+
+    Parameters
+    ----------
+    path : str
+        Path to the BIDS (usually derivatives) dataset.
+    derivatives_name : str, optional
+        Name of the derivatives folder, by default "derivatives"
+
+    Returns
+    -------
+    str
+        Absolute path to the derivative folder.
+    """
+    splitted_path = path.split("/")
+    try:
+        while derivatives_name not in splitted_path[-1]:
+            splitted_path.pop()
+    except IndexError:
+        logging.warning(
+            f'"{derivatives_name}" could not be found on path - '
+            f'creating at: {op.join(path, derivatives_name)}"'
+        )
+        return op.join(path, derivatives_name)
+
+    return "/".join(splitted_path)
+
+
+def find_mriqc(path: str) -> str:
+    """Find the path to the MRIQC folder (if existing, otherwise it will be
+    created).
+
+    Parameters
+    ----------
+    path : str
+        Path to the BIDS (usually derivatives) dataset.
+
+    Returns
+    -------
+    str
+        Absolute path to the mriqc folder.
+    """
+    logging.debug("Searching for MRIQC path...")
+    derivative_path = find_derivative(path)
+
+    folders = [
+        f for f in os.listdir(derivative_path) if op.isdir(op.join(derivative_path, f))
+    ]
+
+    mriqc_path = [f for f in folders if "mriqc" in f]
+    if len(mriqc_path) >= 2:
+        logging.warning(
+            f"More than one mriqc derivative folder was found: {mriqc_path}"
+            f"The first instance {mriqc_path[0]} is used for the computation."
+            "In case you want to use another mriqc derivative folder, use the --mriqc-path flag"
+        )
+    return op.join(derivative_path, mriqc_path[0])
+
+
+def reorder_iqms(iqms_df: pd.DataFrame, fc_paths: list[str]):
+    """Reorder the IQMs according to the list of filenames
+
+    Parameters
+    ----------
+    iqms_df : pd.Dataframe
+        Dataframe containing the IQMs value for each image
+    fc_paths : list [str]
+        List of paths to the functional connectivity matrices
+
+    Returns
+    -------
+    panda.df
+        Dataframe containing the IQMs dataframe with reordered rows.
+    """
+    iqms_df = iqms_df.assign(
+        subject=iqms_df["bids_name"].str.extract(r"sub-(\d+)_"),
+        session=iqms_df["bids_name"].str.extract(r"ses-(\w+)_"),
+        task=iqms_df["bids_name"].str.extract(r"task-(\w+)_"),
+    )
+    entities_list = [parse_file_entities(filepath) for filepath in fc_paths]
+    entities_df = pd.DataFrame(entities_list)
+
+    return pd.merge(
+        entities_df, iqms_df, on=["subject", "session", "task"], how="inner"
+    )
+
+
+def load_iqms(
+    derivative_path: str,
+    fc_paths: list[str],
+    mriqc_path: str = None,
+    mod="bold",
+    iqms_name: list = ["fd_mean", "fd_num", "fd_perc"],
+) -> str:
+    """Load the IQMs and match their order with the corresponding functional matrix.
+
+    Parameters
+    ----------
+    derivative_path : str
+        Path to the BIDS dataset's derivatives.
+    fc_paths : list [str]
+        List of paths to the functional connectivity matrices
+    mriqc_path : str, optional
+        Name of the MRIQC derivative folder, by default None
+    mod : str, optional
+        Load the IQMs of that modality
+    iqms_name : list, optional
+        Name of the IQMs to find, by default ["fd_mean", "fd_num", "fd_perc"]
+
+    Returns
+    -------
+    panda.df
+        Dataframe containing the IQMs loaded from the derivatives folder.
+    """
+    # Find the MRIQC folder
+    if mriqc_path is None:
+        mriqc_path = find_mriqc(derivative_path)
+
+    # Load the IQMs from the group tsv
+    iqms_filename = op.join(mriqc_path, f"group_{mod}.tsv")
+    iqms_df = read_csv(iqms_filename, sep="\t")
+    # If multi-echo dataset and the IQMs of interest are motion-related, keep only the IQMs from the second echo
+    if "echo" in iqms_df["bids_name"][0] and all("fd" in i for i in iqms_name):
+        iqms_df = iqms_df[iqms_df["bids_name"].str.contains("echo-2")]
+        logging.info(
+            "In the case of a multi-echo dataset, the IQMs of the second echo are considered."
+        )
+
+    # Match the order of the rows in iqms_df with the corresponding FC
+    iqms_df = reorder_iqms(iqms_df, fc_paths)
+
+    # Keep only the IQMs of interest
+    iqms_df = iqms_df[iqms_name]
+
+    return iqms_df
+
+
+def check_existing_output(
+    output: str,
+    func_filename: list[str],
+    return_existing: bool = False,
+    return_output: bool = False,
+    **kwargs,
+) -> tuple[list[str], list[str]]:
+    """Check for existing output.
+
+    Parameters
+    ----------
+    output : str
+        Path to the output directory
+    func_filename : list[str]
+        Input files to be processed
+    return_existing : bool, optional
+        Condition to return the list of input corresponding to existing outputs, by default
+        False
+    return_output: bool, optional
+        Condition to return the path of existing outputs, by default False
+
+    Returns
+    -------
+    tuple[list[str], list[str]]
+        List of missing data path (optionally, a second list of existing data path)
+    """
+    if return_output == True and return_existing == False:
+        raise ValueError(
+            "Setting return_output=True in check_existing_output requires return_existing=True."
+        )
+
+    missing_data_filter = [
+        not op.exists(op.join(output, get_bids_savename(filename, **kwargs)))
+        for filename in func_filename
+    ]
+
+    missing_data = np.array(func_filename)[missing_data_filter]
+    logging.debug(
+        f"\t{sum(missing_data_filter)} missing data found for files:"
+        "\n\t" + "\n\t".join(missing_data)
+    )
+
+    if return_existing:
+        if return_output:
+            existing_output = [
+                op.join(output, get_bids_savename(filename, **kwargs))
+                for filename in func_filename
+                if op.exists(op.join(output, get_bids_savename(filename, **kwargs)))
+            ]
+            return existing_output
+        else:
+            existing_data = np.array(func_filename)[
+                [not fltr for fltr in missing_data_filter]
+            ]
+            return missing_data.tolist(), existing_data.tolist()
+
+    return missing_data.tolist()
+
+
+def load_timeseries(
+    func_filename: list[str], output: str, **kwargs
+) -> list[np.ndarray]:
+    """Load existing timeseries from .csv files.
+
+    Parameters
+    ----------
+    func_filename : list[str]
+        List of timeseries filenames.
+    output : str
+        Path to the output folder.
+
+    Returns
+    -------
+    list[np.ndarray]
+        List of loaded timeseries.
+    """
+    if len(func_filename):
+        logging.info(f"Loading existing timeseries for {len(func_filename)} files ...")
+
+    loaded_ts = []
+    for filename in func_filename:
+        path_to_ts = get_bids_savename(
+            filename, patterns=TIMESERIES_PATTERN, **TIMESERIES_FILLS, **kwargs
+        )
+        logging.debug(f"\t{op.join(output, path_to_ts)}")
+        loaded_ts.append(
+            np.genfromtxt(op.join(output, path_to_ts), float, delimiter="\t")
+        )
+
+    return loaded_ts
+
+
+def get_confounds_manually(func_filename: list[str], **kwargs) -> tuple[list, list]:
+    """Manually load the fMRIPrep confounds.
+
+    Parameters
+    ----------
+    func_filename : list[str]
+        List of BIDS functional filenames
+
+    Returns
+    -------
+    tuple[list, list]
+        Two lists, one with the loaded confounds (for each input file) and one with the
+        corresponding sample mask.
+    """
+    confounds, sample_mask = [], []
+
+    for filename in func_filename:
+        dir_name = op.dirname(filename)
+        confounds_file = op.join(
+            dir_name,
+            get_bids_savename(filename, patterns=CONFOUND_PATTERN, **CONFOUND_FILLS),
+        )
+
+        # confounds_json_file = load_confounds._get_json(confounds_file)
+        confounds_json_file = confounds_file.replace("tsv", "json")
+        individual_sm, individual_conf = _load_single_confounds_file(
+            confounds_file=confounds_file,
+            confounds_json_file=confounds_json_file,
+            **kwargs,
+        )
+        confounds.append(individual_conf)
+        sample_mask.append(individual_sm)
+
+    return confounds, sample_mask
+
+
+def save_output(
+    data_list: list[np.ndarray],
+    original_filenames: list[str],
+    output: str,
+    **kwargs,
+) -> None:
+    """Save the output files.
+
+    Parameters
+    ----------
+    data_list : list[np.ndarray]
+        List of data arrays (usually timeseries or matrices)
+    original_filenames : list[str]
+        List of original filenames
+    output : Optional[str], optional
+        Path to the output directory, by default None
+    """
+    for data, filename in zip(data_list, original_filenames):
+        path_to_save = get_bids_savename(filename, **kwargs)
+        saveloc = op.join(output, path_to_save)
+        logging.debug(f"Saving data of type {type(data)} to: {saveloc}")
+        os.makedirs(op.dirname(saveloc), exist_ok=True)
+        np.savetxt(saveloc, data, delimiter="\t")
+
+def load_matrices(
+    matrices_path,
+    entities_base,
+    code_path
+):
+    """
+    Load and concatenate the connectivity matrices (functional or structural) from BIDS dataset.
+
+    Parameters
+    ----------
+    matrices_path : Path or str
+        Path to the directory where the connectivity matrices are stored.
+    entities_base : dict
+        Dictionary of BIDS entities to filter the files (e.g. {'subject': ..., 'task': ..., 'measure': ..., 'scale': ..., 'fd_threshold': ...}).
+    code_path : Path or str
+        Path to the directory containing code resources (e.g., indexer.json config). 
+
+    Returns
+    -------
+    dict with keys:
+        - 'conn_concat': np.ndarray, shape=(n_pairs, n_sessions)
+        - 'region_labels': list
+        - 'conn_size': int
+        - 'ses_index': list
+    """
+    # Extract BIDS filter parameters from entities_base
+    metric = entities_base.get("measure")  # key is 'measure' here
+    atlas_dimension = entities_base.get("scale")  # key is 'scale'
+
+    config_path = code_path / "code/data_loader/indexer.json"
+    try:
+        add_config_paths(hcph=config_path)
+    except ValueError as e:
+        if "Configuration 'hcph' already exists" in str(e):
+            print("Configuration 'hcph' already exists, skipping add_config_paths.")
+        else:
+            raise e
+    _indexer = BIDSLayoutIndexer(
+        config_filename=config_path,
+        index_metadata=False,
+        validate=False,
+    )
+    layout = BIDSLayout(matrices_path, config="hcph", indexer=_indexer, validate=False)
+
+    files = layout.get(**entities_base, suffix='connectivity', extension='.tsv', return_type='file')
+    ses_index = [tsv.split('ses-')[1].split('/')[0] for tsv in files]
+
+    conn_matrices = []
+    for file in files:
+        conn_matrix = pd.read_csv(file, sep='\t', header=None)
+        if metric == "sparseinversecovariance":
+            conn_matrix = -conn_matrix
+        conn_matrices.append(conn_matrix.values[np.triu_indices_from(conn_matrix, k=0)])
+
+    conn_size = conn_matrix.shape[0]
+    conn_concat = np.vstack(conn_matrices)
+
+    # Load region labels
+    atlas_data = get_atlas_data(dimension=int(atlas_dimension))
+    atlas_labels = getattr(atlas_data, "labels")
+    region_labels = atlas_labels["difumo_names"]
+    assert len(region_labels) == conn_size, f"Expected {conn_size} region labels, got {len(region_labels)}"
+
+    return {
+        "conn_concat": conn_concat,
+        "region_labels": region_labels,
+        "conn_size": conn_size,
+        "ses_index": ses_index,
+    }

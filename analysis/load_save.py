@@ -32,10 +32,9 @@ import numpy as np
 
 from collections import defaultdict
 from typing import Optional, Union
-from bids import BIDSLayout
 from pandas import read_csv
 from nibabel import loadsave
-from bids.layout import parse_file_entities
+from bids.layout import BIDSLayout, BIDSLayoutIndexer, add_config_paths, parse_file_entities
 from bids.layout.writing import build_path
 from nilearn.datasets import fetch_atlas_difumo
 from nilearn.interfaces.fmriprep.load_confounds import _load_single_confounds_file
@@ -578,3 +577,73 @@ def save_output(
         logging.debug(f"Saving data of type {type(data)} to: {saveloc}")
         os.makedirs(op.dirname(saveloc), exist_ok=True)
         np.savetxt(saveloc, data, delimiter="\t")
+
+def load_matrices(
+    matrices_path,
+    entities_base,
+    code_path
+):
+    """
+    Load and concatenate the connectivity matrices (functional or structural) from BIDS dataset.
+
+    Parameters
+    ----------
+    matrices_path : Path or str
+        Path to the directory where the connectivity matrices are stored.
+    entities_base : dict
+        Dictionary of BIDS entities to filter the files (e.g. {'subject': ..., 'task': ..., 'measure': ..., 'scale': ..., 'fd_threshold': ...}).
+    code_path : Path or str
+        Path to the directory containing code resources (e.g., indexer.json config). 
+
+    Returns
+    -------
+    dict with keys:
+        - 'conn_concat': np.ndarray, shape=(n_pairs, n_sessions)
+        - 'region_labels': list
+        - 'conn_size': int
+        - 'ses_index': list
+    """
+    # Extract BIDS filter parameters from entities_base
+    metric = entities_base.get("measure")  # key is 'measure' here
+    atlas_dimension = entities_base.get("scale")  # key is 'scale'
+
+    config_path = code_path / "code/data_loader/indexer.json"
+    try:
+        add_config_paths(hcph=config_path)
+    except ValueError as e:
+        if "Configuration 'hcph' already exists" in str(e):
+            print("Configuration 'hcph' already exists, skipping add_config_paths.")
+        else:
+            raise e
+    _indexer = BIDSLayoutIndexer(
+        config_filename=config_path,
+        index_metadata=False,
+        validate=False,
+    )
+    layout = BIDSLayout(matrices_path, config="hcph", indexer=_indexer, validate=False)
+
+    files = layout.get(**entities_base, suffix='connectivity', extension='.tsv', return_type='file')
+    ses_index = [tsv.split('ses-')[1].split('/')[0] for tsv in files]
+
+    conn_matrices = []
+    for file in files:
+        conn_matrix = pd.read_csv(file, sep='\t', header=None)
+        if metric == "sparseinversecovariance":
+            conn_matrix = -conn_matrix
+        conn_matrices.append(conn_matrix.values[np.triu_indices_from(conn_matrix, k=0)])
+
+    conn_size = conn_matrix.shape[0]
+    conn_concat = np.vstack(conn_matrices)
+
+    # Load region labels
+    atlas_data = get_atlas_data(dimension=int(atlas_dimension))
+    atlas_labels = getattr(atlas_data, "labels")
+    region_labels = atlas_labels["difumo_names"]
+    assert len(region_labels) == conn_size, f"Expected {conn_size} region labels, got {len(region_labels)}"
+
+    return {
+        "conn_concat": conn_concat,
+        "region_labels": region_labels,
+        "conn_size": conn_size,
+        "ses_index": ses_index,
+    }
