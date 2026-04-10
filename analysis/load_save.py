@@ -25,6 +25,7 @@
 import os
 import re
 import logging
+import json
 import os.path as op
 import pandas as pd
 import nibabel as nib
@@ -577,6 +578,42 @@ def save_output(
         logging.debug(f"Saving data of type {type(data)} to: {saveloc}")
         os.makedirs(op.dirname(saveloc), exist_ok=True)
         np.savetxt(saveloc, data, delimiter="\t")
+
+## Helper functions to save figures and associated captions
+def init_save_layout(code_path, suppl_path):
+    # The BIDS save layout still needs to be initialized for saving figures/captions
+    config_path = code_path / "code/data_loader/indexer.json"
+    try:
+        add_config_paths(hcph=config_path)
+    except ValueError as e:
+        if "Configuration 'hcph' already exists" in str(e):
+            print("Configuration 'hcph' already exists, skipping add_config_paths.")
+        else:
+            raise e
+    _indexer = BIDSLayoutIndexer(
+        config_filename=config_path,
+        index_metadata=False,
+        validate=False,
+    )       
+    return BIDSLayout(suppl_path, config="hcph", indexer=_indexer, validate=False)
+    
+def save_caption(caption, save_layout, entities):
+    """
+    Save the figure caption to a JSON file.
+    
+    Parameters:
+    - caption: The caption text to save.
+    - save_layout: A BIDSLayout object for saving the caption.
+    - entities: A dictionary containing BIDS entities for the filename.
+    """
+    # Update the entities to use .json extension
+    entities['extension'] = '.json'
+    json_save_path = save_layout.build_path(entities, validate=False)
+
+    # Save the caption to a JSON file
+    caption_data = {"caption": caption}
+    with open(json_save_path, 'w') as json_file:
+        json.dump(caption_data, json_file)
 
 def load_matrices(
     matrices_path,
