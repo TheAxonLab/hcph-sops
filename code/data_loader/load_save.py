@@ -635,10 +635,14 @@ def load_matrices(
     Returns
     -------
     dict with keys:
-        - 'conn_concat': np.ndarray, shape=(n_pairs, n_sessions)
-        - 'region_labels': list
-        - 'conn_size': int
-        - 'ses_index': list
+        - 'conn_concat': np.ndarray, shape=(n_pairs, n_sessions), concatenated and flattened upper triangle of connectivity matrices
+        - 'conn_matrix': np.ndarray, shape=(n_regions, n_regions), an example of a connectivity matrix
+        - 'files': list, list of file paths to the individual connectivity matrix .tsv files loaded from the BIDS dataset
+        - 'atlas_labels': pd.DataFrame, dataframe indicating region labels and corresponding network according to Yeo et al. 2011 atlas
+        - 'region_labels': list, list of region names extracted from atlas_labels
+        - 'conn_size': int, number of brain regions
+        - 'ses_index': list, list of session identifiers matched to the files
+   
     """
     # Extract BIDS filter parameters from entities_base
     metric = entities_base.get("measure")  # key is 'measure' here
@@ -680,6 +684,9 @@ def load_matrices(
 
     return {
         "conn_concat": conn_concat,
+        "conn_matrix": conn_matrix,
+        "files": files,
+        "atlas_labels": atlas_labels,
         "region_labels": region_labels,
         "conn_size": conn_size,
         "ses_index": ses_index,
