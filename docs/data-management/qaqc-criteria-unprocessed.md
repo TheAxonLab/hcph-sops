@@ -2,6 +2,10 @@
 
 The following lists the pre-defined exclusion criteria for analyses of whole-brain structural and functional connectomes.
 
+!!! info "These criteria adapt published QC protocols"
+
+    The visual-assessment criteria below are derived from the *MRIQC* protocol<sup>[2]</sup> (preprint<sup>[3]</sup>) and the functional-MRI quality-control review of Provins et al.<sup>[4]</sup>, several of which were co-authored within the lab.
+
 ## Anatomical MRI
 
 ??? info "The exclusion criteria are tailored to how the anatomical images will be used."
@@ -14,44 +18,43 @@ The following lists the pre-defined exclusion criteria for analyses of whole-bra
 
 ### View of the background of the anatomical image
 
-- [ ] Check for signal *ripples* around the head typically caused by head motion.
-    Exclude this T1w only if identifying these ripples leads to revising the decision on the brain mosaic.
-- [ ] Check for signal interference leaked from the eyeballs across the PE direction.
-    Exclude this T1w only if identifying these leakages leads to revising the decision on the brain mosaic.
-- [ ] Check for ghosts outside the brain, and evaluate whether they may overlap with brain tissue:
+This view is lenient: a finding here only matters if it changes the decision made on the [zoomed-in brain mosaic](#zoomed-in-mosaic-view-of-the-brain).
+
+- [ ] Check for signal *ripples* around the head (head motion).
+- [ ] Check for signal interference leaked from the eyeballs along the PE direction.
+- [ ] Check for ghosts outside the brain, evaluating whether they overlap brain tissue:
     - [ ] Overlapping wrap-around.
-    - [ ] Nyquist aliases (typically through PE direction).
-    - [ ] Ghosts caused by external elements such as headsets or mirror frames.
-    Exclude this T1w only if identifying these ghosts leads to revising the decision on the brain mosaic.
+    - [ ] Nyquist aliases (typically along the PE direction).
+    - [ ] Ghosts from external elements such as headsets or mirror frames.
+- [ ] Check for excessive or "structured" background noise, particularly in or around the brain (reconstruction errors or EM interference).
 
 ### Zoomed-in mosaic view of the brain
 
-- [ ] Check that the brain is not presented upside down.
-    This indicates a mistake in the header.
-    Either the header needs to be corrected manually or exclude the session.
-- [ ] Check for signal *ripples* around the frontal/prefrontal cortex typically caused by head motion.
-    Exclude this particular T1w if ripples are clear and globally localized.
-    These T1w images could degrade the quality of surface reconstruction.
-- [ ] Check for signal interference leaked from the eyeballs across the PE direction overlapping with brain tissue.
-    Exclude this particular T1w if the leaked signal substantially overlaps cortical brain areas.
-    These T1w images could degrade the quality of surface reconstruction.
+- [ ] Check the orientation: an upside-down or axis-flipped/swapped brain indicates a wrong NIfTI orientation header (the `qform`/`sform` affine). Correct the header or exclude the session.
+- [ ] Check for *ripples* around the frontal/prefrontal cortex (head motion or Gibbs ringing).
+    Exclude this T1w if they are clear and globally localized (they degrade surface reconstruction).
+- [ ] Check for eyeball signal leaked along the PE direction onto brain tissue.
+    Exclude this T1w if it substantially overlaps cortical areas (degrades surface reconstruction).
 - [ ] Check for ghosts within the brain:
       - [ ] Overlapping wrap-around.
-      - [ ] Nyquist aliases (typically through PE direction).
-      - [ ] Ghosts caused by external elements such as headsets or mirror frames.
-    Exclude this particular T1w if any of these ghosts overlap cortical gray matter.
-- [ ] Check for other artifacts such as [fat shifts](https://mriquestions.com/chemical-shift-artifact.html) or RF spoiling within the brain.
-   Exclude this particular T1w if any of these artifacts overlap cortical gray matter.
-- [ ] Check for [zipper artifacts](https://mriquestions.com/zipper-artifact.html) and other EM interferences.
-    Exclude this particular T1w if any of these artifacts overlap cortical gray matter.
+      - [ ] Nyquist aliases (typically along the PE direction).
+      - [ ] Ghosts from external elements such as headsets or mirror frames.
+    Exclude this T1w if any overlap cortical gray matter.
+- [ ] Check for [fat shifts](https://mriquestions.com/chemical-shift-artifact.html) or RF spoiling within the brain.
+    Exclude this T1w if they overlap cortical gray matter.
+- [ ] Check for [zipper artifacts](https://mriquestions.com/zipper-artifact.html) and other EM interference.
+    Exclude this T1w if they overlap cortical gray matter.
+- [ ] Check for distorted regions or extreme deviations from typical anatomy (possible incidental finding or susceptibility distortion).
+- [ ] Check for intensity non-uniformity: a slow, smooth intensity drift across the brain that does not reflect gray-matter/white-matter anatomy.
 - [ ] Check for excessive B<sub>1</sub> field inhomogeneity.
-    Exclude only if it is evident that a coil failure happened.
-- [ ] Check for inhomogeneous [*salt-and-pepper* noise patterns](https://en.wikipedia.org/wiki/Salt-and-pepper_noise).
-    Generally, do not exclude this T1w image unless the noise pattern destroys cortical gray matter areas.
-- [ ] Check for global [*salt-and-pepper* noise](https://en.wikipedia.org/wiki/Salt-and-pepper_noise) distribution.
-    Generally, do not exclude this T1w image except evident imaging global failure.
-- [ ] Check for low SNR characterized by a grainy picture.
-    Generally, do not exclude this T1w image unless the noise pattern destroys cortical gray matter areas.
+    Exclude only if a coil failure is evident.
+- [ ] Check for blurriness (local noise if confined to one region, global if throughout the image).
+- [ ] Check for inhomogeneous [*salt-and-pepper* noise](https://en.wikipedia.org/wiki/Salt-and-pepper_noise) patterns.
+    Do not exclude unless the pattern destroys cortical gray-matter areas.
+- [ ] Check for global [*salt-and-pepper* noise](https://en.wikipedia.org/wiki/Salt-and-pepper_noise).
+    Do not exclude except on evident global imaging failure.
+- [ ] Check for low SNR (grainy picture).
+    Do not exclude unless the noise destroys cortical gray-matter areas.
 
 ### Group report
 
@@ -100,24 +103,23 @@ As such, verifying that the subjects were attempting to perform the instructed t
       - [ ] Ghosts caused by external elements such as headsets or mirror frames.
       Exclude the session if any of these ghosts overlap cortical gray matter.
 - [ ] Check for high-standard-deviation vertical strikes in the sagittal plane of the standard deviation map.
-    Exclude the session if the vertical strike continuously traverse more than half of the brain's length.
+    Exclude the session if the vertical strike continuously traverses more than half of the brain's length.
+- [ ] Check for symmetric brightness along the edges of the skull (head motion).
 
 #### Carpetplot and nuisance signals
 
-- [ ] Check for periodic modulations of the signal, which is a sign that your signal is aliased by a regular and slow 
-    motion, like respiration.
-    Exclude the session if the modulation is visible throughout the majority of the scan.
-- [ ] Check for coil failures.
-    They appear as abrupt changes in overall signal intensity not paired with motion peaks.
+- [ ] Check for periodic modulations of the signal (aliasing by regular, slow motion such as respiration).
+    Exclude the session if visible throughout the majority of the scan.
+- [ ] Check for coil failures (abrupt changes in overall signal intensity not paired with motion peaks).
     Exclude the session if any coil failure is observed.
-- [ ] Check for strong polarized structure in the crown.
-    Exclude the session if the polarized structure is prolonged throughout the majority of the scan and if the blocks 
-    are particularly pronounced.
-- [ ] Check for prolonged dark deflections accompanied by peaks in the FD trace as a sign for motion outbursts.
-    Exclude the session in case the prolonged dark deflections cover more than half of the scan duration.
-- [ ] Check for hyperintensity in single slices.
+- [ ] Check for strongly polarized structure in the crown.
+    Exclude the session if it is prolonged throughout the majority of the scan and the blocks are particularly pronounced.
+- [ ] Check for prolonged dark deflections paired with peaks in the FD trace (motion outbursts).
+    Exclude the session if they cover more than half of the scan duration.
+- [ ] Check the FD and DVARS traces.
+    Exclude the session on an average FD above the predefined threshold (MRIQC default 0.2 mm) or consistently high DVARS with large peaks (motion).
+- [ ] Check for hyperintensity in single slices (biases correlation estimates).
     Exclude the session if any single-slice hyperintensities are observed.
-    Correlation analysis are likely to be biased by such peaks.
 
 #### View of the background of the voxel-wise average of the BOLD timeseries
 
@@ -127,24 +129,24 @@ As such, verifying that the subjects were attempting to perform the instructed t
       Exclude the session if any of these ghosts overlap cortical gray matter.
       - [ ] Nyquist aliases or aliasing ghost (typically through PE direction).
         Exclude the session if the intensity of the ghost is similar to the intensity of the inside of the brain.
+- [ ] Check for excessive or "structured" background noise, particularly in or around the brain (reconstruction errors or EM interference).
 
 #### Average signal through time
 
-- [ ] Check that the brain is not presented upside down.
-    This indicates an issue of the header.
-    Either the header needs to be corrected manually or exclude the session.
+- [ ] Check the orientation: an upside-down or axis-flipped/swapped brain indicates a wrong NIfTI orientation header (the `qform`/`sform` affine). Correct the header or exclude the session.
 - [ ] Check that the brain structure is clearly visible.
     Exclude the session if it is not.
-- [ ] Check for signal *ripples* around the frontal/prefrontal cortex typically caused by head motion.
-    Exclude the session if ripples are clear and globally localized.
+- [ ] Check for signal *ripples* around the frontal/prefrontal cortex (head motion).
+    Exclude the session if they are clear and globally localized.
 - [ ] Check for ghosts within the brain:
       - [ ] Overlapping wrap-around.
       - [ ] Nyquist aliases or aliasing ghost (typically through PE direction).
       - [ ] Ghosts caused by external elements such as headsets or mirror frames.
       Exclude the session if any of these ghosts overlap cortical gray matter.
-- [ ] Check for high standard deviation vertical strikes in the sagittal plane of the standard deviation map.
-- [ ] Check for low SNR characterized by a grainy picture.
-    This dataset is specifically subject to this artifact, because we used multiband acceleration.
+- [ ] Check for missing or particularly blurry slices (coil failure or local noise).
+- [ ] Check for intensity non-uniformity (uneven brightness, especially near the head coils).
+- [ ] Check for blurriness (local noise if confined to one region, global if throughout the image).
+- [ ] Check for low SNR (grainy picture); this dataset is especially prone to it because of the multiband acceleration.
 
 ??? warning "Do not exclude subjects presenting susceptibility distortion artifacts yet!"
 
@@ -153,14 +155,12 @@ As such, verifying that the subjects were attempting to perform the instructed t
 
 #### Group report
 
-- [ ] Check again the individual visual report of runs with outlying-high FD, outlying-high tSNR or outlying-low SNR, ensuring they do not fall into one of the [exclusion criteria](#function-mri).
+- [ ] Check again the individual visual report of runs with outlying-high FD, outlying-high tSNR or outlying-low SNR, ensuring they do not fall into one of the [exclusion criteria](#functional-mri).
 - [ ] Re-examine the individual visual report of sessions for which `fd_perc` > 50% and double-check that the data does not fall into one of the [exclusion criteria](#functional-mri).
 - [ ] Verify that smoothness estimates (FWHM) are roughly consistent across all sessions since they were all acquired with the same protocol.
     If this is not the case, re-examine the individual visual report of sessions with outlying (both low or high) FWHM.
 
 ## Diffusion MRI
-
-The visual assessment of the *MRIQC* diffusion reportlets below follows the *MRIQC* protocol<sup>[2]</sup>.
 
 #### Shell-wise joint distribution of SNR vs FA in every voxel
 
@@ -209,3 +209,5 @@ Enhanced view of the background noise; artifacts here may also appear in the FA 
 
 [1]: https://www.frontiersin.org/articles/10.3389/fnimg.2023.1070274 "Etzel, Joset A. “Efficient Evaluation of the Open QC Task fMRI Dataset.” Frontiers in Neuroimaging 2 (2023). doi:10.3389/fnimg.2023.1070274."
 [2]: https://doi.org/10.1038/s41596-026-01352-y "Hagen, M. P., Provins, C., MacNicol, E., et al. “Quality assessment and control of unprocessed anatomical, functional and diffusion MRI of the human brain using MRIQC.” Nature Protocols (2026). doi:10.1038/s41596-026-01352-y."
+[3]: https://doi.org/10.1101/2024.10.21.619532 "Hagen, M. P., Provins, C., MacNicol, E., et al. “Quality assessment and control of unprocessed anatomical, functional, and diffusion MRI of the human brain using MRIQC.” bioRxiv (2024). doi:10.1101/2024.10.21.619532."
+[4]: https://doi.org/10.3389/fnimg.2022.1073734 "Provins, C., MacNicol, E., Seeley, S. H., Hagmann, P. & Esteban, O. “Quality control in functional MRI studies with MRIQC and fMRIPrep.” Frontiers in Neuroimaging 1, 1073734 (2023). doi:10.3389/fnimg.2022.1073734."
