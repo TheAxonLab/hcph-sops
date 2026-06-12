@@ -3285,7 +3285,7 @@ The following objects are masked from ‘package:base’:
 <span class="s">confounds_path = dataset_path / "phenotype" / "mood_env_quest.tsv"</span>
 
 <span class="s"># Initialize the BIDS layout</span>
-<span class="s">config_path = code_path / "code/bids/indexer.json"</span>
+<span class="s">config_path = code_path / "code/data_loader/indexer.json"</span>
 <span class="s">try:</span>
 <span class="s">    add_config_paths(hcph=config_path)</span>
 <span class="s">except ValueError as e:</span>
@@ -3331,7 +3331,7 @@ fmriprep_gen_path = Path("/data/derivatives/hcph-fmriprep-generalization")
 confounds_path = dataset_path / "phenotype" / "mood_env_quest.tsv"
 
 # Initialize the BIDS layout
-config_path = code_path / "code/bids/indexer.json"
+config_path = code_path / "code/data_loader/indexer.json"
 try:
     add_config_paths(hcph=config_path)
 except ValueError as e:
