@@ -955,6 +955,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#assessing-diffusion-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessing diffusion images
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1951,6 +1962,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#assessing-diffusion-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessing diffusion images
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2205,6 +2227,22 @@ Screening the reports in the prescribed order (<abbr title="quality control task
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Proceed as <a href="#mriqc-failed">earlier</a> if errors are reported within the "Errors" section.</p>
 </li>
+</ul>
+<h3 id="assessing-diffusion-images">Assessing diffusion images<a class="headerlink" href="#assessing-diffusion-images" title="Permanent link">&para;</a></h3>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Open each <em>MRIQC</em> report on a Web Browser.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize all reportlets in the <code>Summary</code> section:<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Inspect the shell-wise joint distribution of <abbr title="signal-to-noise ratio">SNR</abbr> vs <abbr title="fractional anisotropy">FA</abbr> and apply the corresponding <a href="../qaqc-criteria-unprocessed/#shell-wise-joint-distribution-of-snr-vs-fa-in-every-voxel">exclusion criteria</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Scroll down to the fractional anisotropy (<abbr title="fractional anisotropy">FA</abbr>) map and apply the <a href="../qaqc-criteria-unprocessed/#fractional-anisotropy-map">exclusion criteria</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Navigate to the mean diffusivity (<abbr title="mean diffusivity">MD</abbr>) map and apply the <a href="../qaqc-criteria-unprocessed/#mean-diffusivity-map">exclusion criteria</a>.</li>
+</ul>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Continue with the <code>DWI shells</code> section. For each b-value, proceed as follows:<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Visualize the first flickering mosaic presenting the average and the standard deviation across volumes in that <abbr title="diffusion weighted imaging">DWI</abbr> shell and apply the <a href="../qaqc-criteria-unprocessed/#voxel-wise-average-and-standard-deviation-across-volumes-in-a-single-dwi-shell">exclusion criteria</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Scroll down to the view of the background and apply the <a href="../qaqc-criteria-unprocessed/#view-of-the-background-of-the-voxel-wise-average-of-a-single-dwi-shell">exclusion criteria</a>.</li>
+</ul>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Proceed as <a href="#mriqc-failed">earlier</a> if errors are reported within the "Errors" section.</li>
 </ul>
 <h2 id="visualizing-mriqcs-group-reports">Visualizing <em>MRIQC</em>'s group reports<a class="headerlink" href="#visualizing-mriqcs-group-reports" title="Permanent link">&para;</a></h2>
 <p>Visualize the group report for each modality in the following order: anatomical, functional and diffusion.
