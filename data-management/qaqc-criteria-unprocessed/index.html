@@ -2458,6 +2458,10 @@
 
 <h1 id="qaqc-criteria-for-unprocessed-data"><abbr title="quality assessment">QA</abbr>/<abbr title="quality control">QC</abbr> criteria for unprocessed data<a class="headerlink" href="#qaqc-criteria-for-unprocessed-data" title="Permanent link">&para;</a></h1>
 <p>The following lists the pre-defined exclusion criteria for analyses of whole-brain structural and functional connectomes.</p>
+<div class="admonition info">
+<p class="admonition-title">These criteria adapt published <abbr title="quality control">QC</abbr> protocols</p>
+<p>The visual-assessment criteria below are derived from the <em>MRIQC</em> protocol<sup><a href="https://doi.org/10.1038/s41596-026-01352-y" title="Hagen, M. P., Provins, C., MacNicol, E., et al. “Quality assessment and control of unprocessed anatomical, functional and diffusion MRI of the human brain using MRIQC.” Nature Protocols (2026). doi:10.1038/s41596-026-01352-y.">2</a></sup> (preprint<sup><a href="https://doi.org/10.1101/2024.10.21.619532" title="Hagen, M. P., Provins, C., MacNicol, E., et al. “Quality assessment and control of unprocessed anatomical, functional, and diffusion MRI of the human brain using MRIQC.” bioRxiv (2024). doi:10.1101/2024.10.21.619532.">3</a></sup>) and the functional-<abbr title="Magnetic Resonance Imaging">MRI</abbr> quality-control review of Provins et al.<sup><a href="https://doi.org/10.3389/fnimg.2022.1073734" title="Provins, C., MacNicol, E., Seeley, S. H., Hagmann, P. &amp; Esteban, O. “Quality control in functional MRI studies with MRIQC and fMRIPrep.” Frontiers in Neuroimaging 1, 1073734 (2023). doi:10.3389/fnimg.2022.1073734.">4</a></sup>.</p>
+</div>
 <h2 id="anatomical-mri">Anatomical <abbr title="Magnetic Resonance Imaging">MRI</abbr><a class="headerlink" href="#anatomical-mri" title="Permanent link">&para;</a></h2>
 <details class="info">
 <summary>The exclusion criteria are tailored to how the anatomical images will be used.</summary>
@@ -2468,49 +2472,47 @@ However, individual <abbr title="T&lt;sub&gt;1&lt;/sub&gt;-weighted MRI">T1w</ab
 We annotate subjects with visible artifacts in the <abbr title="T&lt;sub&gt;1&lt;/sub&gt;-weighted MRI">T1w</abbr> images in order to ensure rigorous scrutinizing of spatial normalization and surface reconstruction outputs from <em>fMRIPrep</em> (if both modalities passed the first <abbr title="quality control">QC</abbr> checkpoint with <em>MRIQC</em>).</p>
 </details>
 <h3 id="view-of-the-background-of-the-anatomical-image">View of the background of the anatomical image<a class="headerlink" href="#view-of-the-background-of-the-anatomical-image" title="Permanent link">&para;</a></h3>
+<p>This view is lenient: a finding here only matters if it changes the decision made on the <a href="#zoomed-in-mosaic-view-of-the-brain">zoomed-in brain mosaic</a>.</p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for signal <em>ripples</em> around the head typically caused by head motion.
-    Exclude this <abbr title="T&lt;sub&gt;1&lt;/sub&gt;-weighted MRI">T1w</abbr> only if identifying these ripples leads to revising the decision on the brain mosaic.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for signal interference leaked from the eyeballs across the <abbr title="phase-encoding">PE</abbr> direction.
-    Exclude this <abbr title="T&lt;sub&gt;1&lt;/sub&gt;-weighted MRI">T1w</abbr> only if identifying these leakages leads to revising the decision on the brain mosaic.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for ghosts outside the brain, and evaluate whether they may overlap with brain tissue:<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for signal <em>ripples</em> around the head (head motion).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for signal interference leaked from the eyeballs along the <abbr title="phase-encoding">PE</abbr> direction.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for ghosts outside the brain, evaluating whether they overlap brain tissue:<ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Overlapping wrap-around.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Nyquist aliases (typically through <abbr title="phase-encoding">PE</abbr> direction).</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Ghosts caused by external elements such as headsets or mirror frames.
-Exclude this <abbr title="T&lt;sub&gt;1&lt;/sub&gt;-weighted MRI">T1w</abbr> only if identifying these ghosts leads to revising the decision on the brain mosaic.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Nyquist aliases (typically along the <abbr title="phase-encoding">PE</abbr> direction).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Ghosts from external elements such as headsets or mirror frames.</li>
 </ul>
 </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for excessive or "structured" background noise, particularly in or around the brain (reconstruction errors or <abbr title="electromagnetic">EM</abbr> interference).</li>
 </ul>
 <h3 id="zoomed-in-mosaic-view-of-the-brain">Zoomed-in mosaic view of the brain<a class="headerlink" href="#zoomed-in-mosaic-view-of-the-brain" title="Permanent link">&para;</a></h3>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check that the brain is not presented upside down.
-    This indicates a mistake in the header.
-    Either the header needs to be corrected manually or exclude the session.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for signal <em>ripples</em> around the frontal/prefrontal cortex typically caused by head motion.
-    Exclude this particular <abbr title="T&lt;sub&gt;1&lt;/sub&gt;-weighted MRI">T1w</abbr> if ripples are clear and globally localized.
-    These <abbr title="T&lt;sub&gt;1&lt;/sub&gt;-weighted MRI">T1w</abbr> images could degrade the quality of surface reconstruction.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for signal interference leaked from the eyeballs across the <abbr title="phase-encoding">PE</abbr> direction overlapping with brain tissue.
-    Exclude this particular <abbr title="T&lt;sub&gt;1&lt;/sub&gt;-weighted MRI">T1w</abbr> if the leaked signal substantially overlaps cortical brain areas.
-    These <abbr title="T&lt;sub&gt;1&lt;/sub&gt;-weighted MRI">T1w</abbr> images could degrade the quality of surface reconstruction.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check the orientation: an upside-down or axis-flipped/swapped brain indicates a wrong <abbr title="Neuroimaging Informatics Technology Initiative">NIfTI</abbr> orientation header (the <code>qform</code>/<code>sform</code> affine). Correct the header or exclude the session.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for <em>ripples</em> around the frontal/prefrontal cortex (head motion or Gibbs ringing).
+    Exclude this <abbr title="T&lt;sub&gt;1&lt;/sub&gt;-weighted MRI">T1w</abbr> if they are clear and globally localized (they degrade surface reconstruction).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for eyeball signal leaked along the <abbr title="phase-encoding">PE</abbr> direction onto brain tissue.
+    Exclude this <abbr title="T&lt;sub&gt;1&lt;/sub&gt;-weighted MRI">T1w</abbr> if it substantially overlaps cortical areas (degrades surface reconstruction).</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for ghosts within the brain:<ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Overlapping wrap-around.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Nyquist aliases (typically through <abbr title="phase-encoding">PE</abbr> direction).</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Ghosts caused by external elements such as headsets or mirror frames.
-Exclude this particular <abbr title="T&lt;sub&gt;1&lt;/sub&gt;-weighted MRI">T1w</abbr> if any of these ghosts overlap cortical gray matter.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Nyquist aliases (typically along the <abbr title="phase-encoding">PE</abbr> direction).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Ghosts from external elements such as headsets or mirror frames.
+Exclude this <abbr title="T&lt;sub&gt;1&lt;/sub&gt;-weighted MRI">T1w</abbr> if any overlap cortical gray matter.</li>
 </ul>
 </li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for other artifacts such as <a href="https://mriquestions.com/chemical-shift-artifact.html">fat shifts</a> or <abbr title="radiofrequency">RF</abbr> spoiling within the brain.
-   Exclude this particular <abbr title="T&lt;sub&gt;1&lt;/sub&gt;-weighted MRI">T1w</abbr> if any of these artifacts overlap cortical gray matter.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for <a href="https://mriquestions.com/zipper-artifact.html">zipper artifacts</a> and other <abbr title="electromagnetic">EM</abbr> interferences.
-    Exclude this particular <abbr title="T&lt;sub&gt;1&lt;/sub&gt;-weighted MRI">T1w</abbr> if any of these artifacts overlap cortical gray matter.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for <a href="https://mriquestions.com/chemical-shift-artifact.html">fat shifts</a> or <abbr title="radiofrequency">RF</abbr> spoiling within the brain.
+    Exclude this <abbr title="T&lt;sub&gt;1&lt;/sub&gt;-weighted MRI">T1w</abbr> if they overlap cortical gray matter.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for <a href="https://mriquestions.com/zipper-artifact.html">zipper artifacts</a> and other <abbr title="electromagnetic">EM</abbr> interference.
+    Exclude this <abbr title="T&lt;sub&gt;1&lt;/sub&gt;-weighted MRI">T1w</abbr> if they overlap cortical gray matter.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for distorted regions or extreme deviations from typical anatomy (possible incidental finding or susceptibility distortion).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for intensity non-uniformity: a slow, smooth intensity drift across the brain that does not reflect gray-matter/white-matter anatomy.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for excessive B<sub>1</sub> field inhomogeneity.
-    Exclude only if it is evident that a coil failure happened.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for inhomogeneous <a href="https://en.wikipedia.org/wiki/Salt-and-pepper_noise"><em>salt-and-pepper</em> noise patterns</a>.
-    Generally, do not exclude this <abbr title="T&lt;sub&gt;1&lt;/sub&gt;-weighted MRI">T1w</abbr> image unless the noise pattern destroys cortical gray matter areas.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for global <a href="https://en.wikipedia.org/wiki/Salt-and-pepper_noise"><em>salt-and-pepper</em> noise</a> distribution.
-    Generally, do not exclude this <abbr title="T&lt;sub&gt;1&lt;/sub&gt;-weighted MRI">T1w</abbr> image except evident imaging global failure.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for low <abbr title="signal-to-noise ratio">SNR</abbr> characterized by a grainy picture.
-    Generally, do not exclude this <abbr title="T&lt;sub&gt;1&lt;/sub&gt;-weighted MRI">T1w</abbr> image unless the noise pattern destroys cortical gray matter areas.</li>
+    Exclude only if a coil failure is evident.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for blurriness (local noise if confined to one region, global if throughout the image).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for inhomogeneous <a href="https://en.wikipedia.org/wiki/Salt-and-pepper_noise"><em>salt-and-pepper</em> noise</a> patterns.
+    Do not exclude unless the pattern destroys cortical gray-matter areas.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for global <a href="https://en.wikipedia.org/wiki/Salt-and-pepper_noise"><em>salt-and-pepper</em> noise</a>.
+    Do not exclude except on evident global imaging failure.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for low <abbr title="signal-to-noise ratio">SNR</abbr> (grainy picture).
+    Do not exclude unless the noise destroys cortical gray-matter areas.</li>
 </ul>
 <h3 id="group-report">Group report<a class="headerlink" href="#group-report" title="Permanent link">&para;</a></h3>
 <ul class="task-list">
@@ -2557,24 +2559,23 @@ Additionally, a stringent <abbr title="quality control">QC</abbr> is required fo
 </ul>
 </li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for high-standard-deviation vertical strikes in the sagittal plane of the standard deviation map.
-    Exclude the session if the vertical strike continuously traverse more than half of the brain's length.</li>
+    Exclude the session if the vertical strike continuously traverses more than half of the brain's length.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for symmetric brightness along the edges of the skull (head motion).</li>
 </ul>
 <h4 id="carpetplot-and-nuisance-signals">Carpetplot and nuisance signals<a class="headerlink" href="#carpetplot-and-nuisance-signals" title="Permanent link">&para;</a></h4>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for periodic modulations of the signal, which is a sign that your signal is aliased by a regular and slow 
-    motion, like respiration.
-    Exclude the session if the modulation is visible throughout the majority of the scan.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for coil failures.
-    They appear as abrupt changes in overall signal intensity not paired with motion peaks.
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for periodic modulations of the signal (aliasing by regular, slow motion such as respiration).
+    Exclude the session if visible throughout the majority of the scan.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for coil failures (abrupt changes in overall signal intensity not paired with motion peaks).
     Exclude the session if any coil failure is observed.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for strong polarized structure in the crown.
-    Exclude the session if the polarized structure is prolonged throughout the majority of the scan and if the blocks 
-    are particularly pronounced.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for prolonged dark deflections accompanied by peaks in the <abbr title="framewise displacement">FD</abbr> trace as a sign for motion outbursts.
-    Exclude the session in case the prolonged dark deflections cover more than half of the scan duration.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for hyperintensity in single slices.
-    Exclude the session if any single-slice hyperintensities are observed.
-    Correlation analysis are likely to be biased by such peaks.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for strongly polarized structure in the crown.
+    Exclude the session if it is prolonged throughout the majority of the scan and the blocks are particularly pronounced.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for prolonged dark deflections paired with peaks in the <abbr title="framewise displacement">FD</abbr> trace (motion outbursts).
+    Exclude the session if they cover more than half of the scan duration.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check the <abbr title="framewise displacement">FD</abbr> and DVARS traces.
+    Exclude the session on an average <abbr title="framewise displacement">FD</abbr> above the predefined threshold (MRIQC default 0.2 mm) or consistently high DVARS with large peaks (motion).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for hyperintensity in single slices (biases correlation estimates).
+    Exclude the session if any single-slice hyperintensities are observed.</li>
 </ul>
 <h4 id="view-of-the-background-of-the-voxel-wise-average-of-the-bold-timeseries">View of the background of the voxel-wise average of the <abbr title="blood-oxygen-level dependent">BOLD</abbr> timeseries<a class="headerlink" href="#view-of-the-background-of-the-voxel-wise-average-of-the-bold-timeseries" title="Permanent link">&para;</a></h4>
 <ul class="task-list">
@@ -2586,16 +2587,15 @@ Additionally, a stringent <abbr title="quality control">QC</abbr> is required fo
     Exclude the session if the intensity of the ghost is similar to the intensity of the inside of the brain.</li>
 </ul>
 </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for excessive or "structured" background noise, particularly in or around the brain (reconstruction errors or <abbr title="electromagnetic">EM</abbr> interference).</li>
 </ul>
 <h4 id="average-signal-through-time">Average signal through time<a class="headerlink" href="#average-signal-through-time" title="Permanent link">&para;</a></h4>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check that the brain is not presented upside down.
-    This indicates an issue of the header.
-    Either the header needs to be corrected manually or exclude the session.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check the orientation: an upside-down or axis-flipped/swapped brain indicates a wrong <abbr title="Neuroimaging Informatics Technology Initiative">NIfTI</abbr> orientation header (the <code>qform</code>/<code>sform</code> affine). Correct the header or exclude the session.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check that the brain structure is clearly visible.
     Exclude the session if it is not.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for signal <em>ripples</em> around the frontal/prefrontal cortex typically caused by head motion.
-    Exclude the session if ripples are clear and globally localized.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for signal <em>ripples</em> around the frontal/prefrontal cortex (head motion).
+    Exclude the session if they are clear and globally localized.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for ghosts within the brain:<ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Overlapping wrap-around.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Nyquist aliases or aliasing ghost (typically through <abbr title="phase-encoding">PE</abbr> direction).</li>
@@ -2603,9 +2603,10 @@ Additionally, a stringent <abbr title="quality control">QC</abbr> is required fo
   Exclude the session if any of these ghosts overlap cortical gray matter.</li>
 </ul>
 </li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for high standard deviation vertical strikes in the sagittal plane of the standard deviation map.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for low <abbr title="signal-to-noise ratio">SNR</abbr> characterized by a grainy picture.
-    This dataset is specifically subject to this artifact, because we used multiband acceleration.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for missing or particularly blurry slices (coil failure or local noise).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for intensity non-uniformity (uneven brightness, especially near the head coils).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for blurriness (local noise if confined to one region, global if throughout the image).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check for low <abbr title="signal-to-noise ratio">SNR</abbr> (grainy picture); this dataset is especially prone to it because of the multiband acceleration.</li>
 </ul>
 <details class="warning">
 <summary>Do not exclude subjects presenting susceptibility distortion artifacts yet!</summary>
@@ -2614,13 +2615,12 @@ If signal dropouts in particular sessions are especially acute or widespread as 
 </details>
 <h4 id="group-report_1">Group report<a class="headerlink" href="#group-report_1" title="Permanent link">&para;</a></h4>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check again the individual visual report of runs with outlying-high <abbr title="framewise displacement">FD</abbr>, outlying-high <abbr title="temporal signal-to-noise ratio">tSNR</abbr> or outlying-low <abbr title="signal-to-noise ratio">SNR</abbr>, ensuring they do not fall into one of the <a href="#function-mri">exclusion criteria</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check again the individual visual report of runs with outlying-high <abbr title="framewise displacement">FD</abbr>, outlying-high <abbr title="temporal signal-to-noise ratio">tSNR</abbr> or outlying-low <abbr title="signal-to-noise ratio">SNR</abbr>, ensuring they do not fall into one of the <a href="#functional-mri">exclusion criteria</a>.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Re-examine the individual visual report of sessions for which <code>fd_perc</code> &gt; 50% and double-check that the data does not fall into one of the <a href="#functional-mri">exclusion criteria</a>.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Verify that smoothness estimates (<abbr title="full width at half maximum">FWHM</abbr>) are roughly consistent across all sessions since they were all acquired with the same protocol.
     If this is not the case, re-examine the individual visual report of sessions with outlying (both low or high) <abbr title="full width at half maximum">FWHM</abbr>.</li>
 </ul>
 <h2 id="diffusion-mri">Diffusion <abbr title="Magnetic Resonance Imaging">MRI</abbr><a class="headerlink" href="#diffusion-mri" title="Permanent link">&para;</a></h2>
-<p>The visual assessment of the <em>MRIQC</em> diffusion reportlets below follows the <em>MRIQC</em> protocol<sup><a href="https://doi.org/10.1038/s41596-026-01352-y" title="Hagen, M. P., Provins, C., MacNicol, E., et al. “Quality assessment and control of unprocessed anatomical, functional and diffusion MRI of the human brain using MRIQC.” Nature Protocols (2026). doi:10.1038/s41596-026-01352-y.">2</a></sup>.</p>
 <h4 id="shell-wise-joint-distribution-of-snr-vs-fa-in-every-voxel">Shell-wise joint distribution of <abbr title="signal-to-noise ratio">SNR</abbr> vs <abbr title="fractional anisotropy">FA</abbr> in every voxel<a class="headerlink" href="#shell-wise-joint-distribution-of-snr-vs-fa-in-every-voxel" title="Permanent link">&para;</a></h4>
 <p>Heat map of <abbr title="signal-to-noise ratio">SNR</abbr> against <abbr title="fractional anisotropy">FA</abbr> per voxel and shell, with the per-shell <abbr title="signal-to-noise ratio">SNR</abbr> histogram below; higher shells should show lower <abbr title="signal-to-noise ratio">SNR</abbr>.</p>
 <ul class="task-list">
