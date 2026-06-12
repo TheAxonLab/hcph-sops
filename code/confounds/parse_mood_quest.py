@@ -569,7 +569,7 @@ df.loc[df["session_number"] == "014", slept_columns] = "n/a"
 # Complete that the scanner used for the reliability sessions was the Prisma
 df.loc[df["session_number"].str.startswith("0"), "scanner"] = "Prisma"
 
-# put colunm name in small caps
+# put column name in small caps
 df.columns = df.columns.str.lower()
 
 # Save to CSV

@@ -28,7 +28,7 @@
 !!! danger "**If at any point the participant rings the alarm**, you MUST check on the participant IMMEDIATELY with the scanner's speaker system."
 
     - [ ] Press the speaker button (1 in the picture below) and ask if everything is alright. It is possible that the participant triggered the alarm by mistake.
-        ![speaker](../assets/images/speaker.jpg)
+        ![speaker](../assets/images/speakers.png)
 
         !!! warning "Pressing the speaker button (1) or the crossed-bell button (4) will turn the alarm off and open the speaker line to talk to the participant."
 

@@ -2,7 +2,7 @@
 
 This project maintains data under version control thanks to *DataLad*<sup>[1]</sup>.
 For instructions on how to setup *DataLad* on your PC, please refer to the [official documentation](https://handbook.datalad.org/en/latest/intro/installation.html).
-When employing high-performance computing (HPC), we provide [some specific guidelines](../processing/our-cluster.md).
+When employing high-performance computing (HPC), we provide [some specific guidelines](../processing/environment.md).
 
 !!! important "Please read the [*DataLad Handbook*](https://handbook.datalad.org/en/latest/index.html), especially if you are new to this tool"
 
@@ -165,7 +165,7 @@ In this case, the steps are demonstrated for the outputs of *sMRIPrep*.
                 {{ secrets.data.gh_derivs_repo | default('<organization>/<repo_name>') }}
         ```
 
-        If successfull, the output in this case should be something like:
+        If successful, the output in this case should be something like:
 
         ``` Text
         create_sibling_github(ok): [sibling repository 'github' created at https://github.com/<organization>/<repo_name>]
