@@ -291,7 +291,7 @@ To install it as a service, please follow [the documentation in the appendix](no
 
 ### Prepare data management (intake and backup) with {{ secrets.hosts.oesteban | default("███") }}
 
-We employ *{{ secrets.hosts.oesteban | default("███") }}* as the server to automatically upload data to the backup repository (*{{ secrets.data.curnagl_backup | default("\<user>@\<host>:\<path>") }}*).
+We employ *{{ secrets.hosts.oesteban | default("███") }}* as the server to automatically upload data to the backup repository (*{{ secrets.data.curnagl_backup | default("&lt;user&gt;@&lt;host&gt;:&lt;path&gt;") }}*).
 For the physiological recordings (acquired on *{{ secrets.hosts.acqknowledge | default("███") }}* for BIOPAC-registered signals, and on *{{ secrets.hosts.psychopy | default("███") }}* for the eye-tracking), data is synchronized into *{{ secrets.hosts.oesteban | default("███") }}* via *Dropbox*.
 
 - [ ] Create a softlink pointing to the BIOPAC data:
