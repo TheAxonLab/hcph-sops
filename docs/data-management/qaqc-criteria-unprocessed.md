@@ -164,63 +164,44 @@ The visual assessment of the *MRIQC* diffusion reportlets below follows the *MRI
 
 #### Shell-wise joint distribution of SNR vs FA in every voxel
 
-The top panel shows a heat map of the estimated signal-to-noise ratio (SNR) against the FA of every voxel, separated by shell; the bottom panel shows the histogram of SNR values per shell.
-Higher *b*-value shells are expected to exhibit lower SNR.
+Heat map of SNR against FA per voxel and shell, with the per-shell SNR histogram below; higher shells should show lower SNR.
 
-- [ ] Flag the DWI scan if FA and SNR are clearly linearly correlated, which indicates noise contamination.
-- [ ] Flag the DWI scan if the per-shell SNR distributions are markedly non-normal.
-    MRI noise is Rician, so for SNR values mostly above ~2 the distribution within each shell should approximately resemble a normal distribution.
-- [ ] Flag the DWI scan if the SNR distributions of the different shells overlap substantially, which can indicate suboptimal acquisition parameters.
+- [ ] Flag a clear linear FA-SNR correlation (noise contamination).
+- [ ] Flag markedly non-normal per-shell SNR distributions (departure from the expected Rician behavior).
+- [ ] Flag substantial overlap between the shells' SNR distributions (suboptimal acquisition parameters).
 
 #### Fractional anisotropy map
 
-This reportlet shows the reconstructed FA for every voxel in a mosaic layout.
-There should be a clear contrast between gray and white matter — with FA higher in white matter, and especially high where a single fiber orientation predominates (e.g., the corpus callosum) — and only minimal white speckles around the edges.
-
-- [ ] Exclude the DWI scan if the major white matter structures (e.g., the corpus callosum) are not clearly discernible because of blurriness or a lack of white-matter/gray-matter contrast.
-- [ ] Check that the brain is displayed in the correct orientation — the FA map is the quickest reportlet for this.
-    An incorrect orientation (e.g., the brain presented upside down, or with an axis flipped or swapped) points to an inconsistent or wrong orientation header in the NIfTI file, i.e., the `qform`/`sform` fields that encode the voxel-to-world affine.
-    Correct the header manually if possible, otherwise exclude the session.
-- [ ] Exclude the DWI scan if there are excessive white speckles, especially in the interior of the brain (reconstruction error).
+- [ ] Exclude if the major WM structures (e.g., the corpus callosum) are not discernible (blurring or poor WM-GM contrast).
+- [ ] Check the orientation (quickest on the FA map): an upside-down or axis-flipped/swapped brain indicates a wrong NIfTI orientation header (the `qform`/`sform` affine). Correct the header or exclude the session.
+- [ ] Exclude on excessive white speckles, especially in the brain interior (reconstruction error).
 
 #### Mean diffusivity map
 
-This reportlet shows the reconstructed MD for every voxel in a mosaic layout, with a consistent contrast between white matter, gray matter and the ventricles.
-
-- [ ] Exclude the DWI scan if the ventricles and/or the CSF around the brain is not prominently identifiable.
-- [ ] Exclude the DWI scan if there is blurriness or a lack of contrast between white matter, gray matter and the ventricles (local noise if confined to one area, global noise if present throughout the image).
+- [ ] Exclude if the ventricles and/or surrounding CSF are not prominently identifiable.
+- [ ] Exclude on blurring or poor white-matter/gray-matter/ventricle contrast (local or global noise).
 
 #### Voxel-wise average and standard deviation across volumes in a single DWI shell
 
-This reportlet flickers between the voxel-wise average and the standard deviation across the volumes of the shell, with yellow indicating higher variance and a red line delineating the brain mask.
-As the *b*-value increases, the high-variance (yellow) signal should increasingly resemble the white matter tracts; a shell with *b*=0 may show little variability if only one such volume was collected.
+This reportlet flickers between the voxel-wise average and the across-volume standard deviation (yellow: higher variance; red line: brain mask). As the *b*-value increases, the high-variance signal should track the WM tracts.
 
 ##### Voxel-wise average
-- [ ] Check that the brain structure is clearly visible.
-    Exclude the session if it is not.
-- [ ] Check for a piece of the head (usually the front or back) that falls outside the FOV and folds over onto the opposite extreme of the image (wrap-around).
-    Exclude the session only if the folded part overlaps with the region of interest.
+- [ ] Exclude if the brain structure is not clearly visible.
+- [ ] Search for wrap-around artifacts (typically along the phase-encoding direction); exclude only if the fold overlaps the brain.
 
 ##### Standard deviation across volumes
-- [ ] Check that the major white matter tracts, most predominantly the corpus callosum, are clearly visible. Exclude the DWI scan in case it is not.
-- [ ] Check for high-standard-deviation vertical strikes in the coronal plane of the standard deviation map.
-    Exclude the session if the vertical strike continuously traverses more than half of the brain's length.
-- [ ] Exclude the session if there is symmetric brightness along the edges of the skull, which is indicative of head motion.
-- [ ] Exclude the session if there is excessive variability, such as brightness localized to one section of the brain or appearing outside the white matter tracts (local or global noise).
-- [ ] Check for an extra outline of the brain shifted along the acquisition axis.
-    Exclude the session if this aliasing ghost overlaps with the actual image.
+- [ ] Exclude if the major WM tracts (especially the corpus callosum) are not clearly visible.
+- [ ] Exclude on high-SD vertical strikes (coronal plane) spanning more than half the brain.
+- [ ] Exclude on symmetric brightness at the skull edges (head motion).
+- [ ] Exclude on excessive or localized variability, or variance outside the WM tracts (local or global noise).
+- [ ] Exclude on an aliasing ghost (brain outline shifted along the acquisition axis) that overlaps the actual image.
 
 #### View of the background of the voxel-wise average of a single DWI shell
 
-This reportlet enhances the background noise; any artifact identified here may also be visible in the FA or MD maps.
+Enhanced view of the background noise; artifacts here may also appear in the FA or MD maps.
 
-- [ ] Apply the same exclusion criteria as for the fMRI background view, that is check for the following ghosts:
-      - [ ] Overlapping wrap-around.
-      - [ ] Ghosts caused by external elements such as headsets or mirror frames.
-      Exclude the session if any of these ghosts overlap cortical gray matter.
-      - [ ] Nyquist aliases or aliasing ghost (typically through PE direction).
-        Exclude the session if the intensity of the ghost is similar to the intensity of the inside of the brain.
-- [ ] Exclude the session if there is excessive or "structured" visual noise in the background, particularly in or around the brain (local or global noise, image-reconstruction errors or electromagnetic interference).
+- [ ] Apply the same ghost checks as the [fMRI background view](#view-of-the-background-of-the-voxel-wise-average-of-the-bold-timeseries): wrap-around and external-element ghosts (e.g., headsets, mirror frames), excluding if they overlap cortical gray matter; Nyquist/aliasing ghosts (PE direction), excluding if as intense as brain tissue.
+- [ ] Exclude on excessive or structured background noise, especially in or around the brain.
 
 ## Physiological recordings
 
