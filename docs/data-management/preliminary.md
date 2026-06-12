@@ -165,7 +165,7 @@ In this case, the steps are demonstrated for the outputs of *sMRIPrep*.
                 {{ secrets.data.gh_derivs_repo | default('<organization>/<repo_name>') }}
         ```
 
-        If successfull, the output in this case should be something like:
+        If successful, the output in this case should be something like:
 
         ``` Text
         create_sibling_github(ok): [sibling repository 'github' created at https://github.com/<organization>/<repo_name>]

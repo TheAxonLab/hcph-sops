@@ -27,7 +27,7 @@ Our ET device produces EyeLink's EDF recording files, which will be accessed wit
 
 The code snippets are extracted from the [`EyeTrackingRun` object](../assets/code/eyetracking/eyetrackingrun.py), an object we implemented for converting EDF data to BIDS.
 
-!!! warning "Disclamer: despite this code attempting to be general, some parts focus on single-eye recordings"
+!!! warning "Disclaimer: despite this code attempting to be general, some parts focus on single-eye recordings"
 
 ### Parsing the `messages` dataframe
 

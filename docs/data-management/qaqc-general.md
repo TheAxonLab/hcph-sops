@@ -35,7 +35,7 @@ The following admonition will be present to remind this strategy when it applies
 Consistently with this approach, the exclusion criteria for the QCT and the BHT at the different QC checkpoints are very permissive.
 The following admonition will remind this aspect when it applies:
 
-???+ important "IMPORTANT — QCT and BHT runs with low quality MUST be flagged, but they SHOULT NOT be excluded."
+???+ important "IMPORTANT — QCT and BHT runs with low quality MUST be flagged, but they SHOULD NOT be excluded."
 
     The BHT and QCT were primarily acquired for QA/QC purposes and to aid in methodological development (e.g., denoising of the RSfMRI).
     This QA/QC protocol should be revised if the task fMRI data are employed for different purposes.

@@ -42,7 +42,7 @@ The following section describes how to prepare the session on the day of scan, B
 - [ ] Turn BIOPAC's {{ settings.biopac.model }} on with the switch on its back panel.
 - [ ] Open the *AcqKnowledge* software
 - [ ] Select *Create new graph from recently used file* ⤷ select `EXP_BASE.gtl` and click *Open*.
-- [ ] Initiate an *Amphetamin* session to prevent the computer from going to sleep or locking the screen:
+- [ ] Initiate an *Amphetamine* session to prevent the computer from going to sleep or locking the screen:
     - [ ] Click on the pill icon on the Mac's status bar
     - [ ] Select *New session* ⤷ *While is running* ⤷ *Acqknowledge*.
 

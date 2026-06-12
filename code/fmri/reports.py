@@ -620,7 +620,7 @@ def group_reportlet_qc_fc(
         percent_match_ks = (1 - ks_statistic) * 100
 
         # Plot the box in red if the correlation is significant
-        facecolor = "red" if percent_match_ks < PERCENT_MATCH_CUT_OFF else "grey"
+        facecolor = "red" if percent_match_ks < PERCENT_MATCH_CUT_OFF else "gray"
         axs[i].text(
             0.08,
             0.9,
@@ -709,7 +709,7 @@ def group_reportlet_qc_fc_euclidean(
         correlation, p_value = pearsonr(qc_fc, d)
 
         # Plot the box in red if the correlation is significant
-        facecolor = "red" if p_value < ALPHA else "grey"
+        facecolor = "red" if p_value < ALPHA else "gray"
         axs[i].text(
             0.15,
             0.97,

@@ -1,5 +1,9 @@
 [codespell]
-skip = *.pdf,./site/*,./design/*,./docs/stylesheets/*,*-fr.md,./code/heudiconv/*.py,./include/abbreviations.md,*.ipynb
+# Skip generated/asset files that are not prose: SVG figures and the bundled
+# third-party MRIQC sample report produce ~1200 false positives.
+skip = *.pdf,*.svg,./site/*,./design/*,./docs/stylesheets/*,./docs/assets/files/*,*-fr.md,./code/heudiconv/*.py,./include/abbreviations.md,*.ipynb
+# 'mot' is a task-condition label used as a code token, not a typo of 'not'.
+ignore-words-list = mot
 builtin = clear,rare,en-GB_to_en-US
 count =
 quiet-level = 3
