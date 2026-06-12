@@ -178,7 +178,9 @@ This reportlet shows the reconstructed FA for every voxel in a mosaic layout.
 There should be a clear contrast between gray and white matter — with FA higher in white matter, and especially high where a single fiber orientation predominates (e.g., the corpus callosum) — and only minimal white speckles around the edges.
 
 - [ ] Exclude the DWI scan if the major white matter structures (e.g., the corpus callosum) are not clearly discernible because of blurriness or a lack of white-matter/gray-matter contrast.
-- [ ] Exclude the DWI scan if the brain is not displayed in the correct orientation (an axis flipped or switched because of a data-formatting issue).
+- [ ] Check that the brain is displayed in the correct orientation — the FA map is the quickest reportlet for this.
+    An incorrect orientation (e.g., the brain presented upside down, or with an axis flipped or swapped) points to an inconsistent or wrong orientation header in the NIfTI file, i.e., the `qform`/`sform` fields that encode the voxel-to-world affine.
+    Correct the header manually if possible, otherwise exclude the session.
 - [ ] Exclude the DWI scan if there are excessive white speckles, especially in the interior of the brain (reconstruction error).
 
 #### Mean diffusivity map
@@ -186,7 +188,6 @@ There should be a clear contrast between gray and white matter — with FA highe
 This reportlet shows the reconstructed MD for every voxel in a mosaic layout, with a consistent contrast between white matter, gray matter and the ventricles.
 
 - [ ] Exclude the DWI scan if the ventricles and/or the CSF around the brain is not prominently identifiable.
-- [ ] Exclude the DWI scan if the brain is not displayed in the correct orientation (an axis flipped or switched because of a data-formatting issue).
 - [ ] Exclude the DWI scan if there is blurriness or a lack of contrast between white matter, gray matter and the ventricles (local noise if confined to one area, global noise if present throughout the image).
 
 #### Voxel-wise average and standard deviation across volumes in a single DWI shell
@@ -195,9 +196,6 @@ This reportlet flickers between the voxel-wise average and the standard deviatio
 As the *b*-value increases, the high-variance (yellow) signal should increasingly resemble the white matter tracts; a shell with *b*=0 may show little variability if only one such volume was collected.
 
 ##### Voxel-wise average
-- [ ] Check that the brain is not presented upside down.
-    This indicates an issue of the header.
-    Either the header needs to be corrected manually or exclude the session.
 - [ ] Check that the brain structure is clearly visible.
     Exclude the session if it is not.
 - [ ] Check for a piece of the head (usually the front or back) that falls outside the FOV and folds over onto the opposite extreme of the image (wrap-around).
