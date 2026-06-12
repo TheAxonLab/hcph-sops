@@ -4,17 +4,18 @@
 -r requirements-docs.txt
 
 # Authoring/QA tooling
-codespell
-git-changelog
+codespell==2.4.1
+git-changelog==2.6.3
 
-# Scientific/analysis stack for the notebooks (rendered from stored outputs)
-matplotlib
-pybids
-nilearn>=0.10.1
-git+https://github.com/celprov/mriqc-learn.git@enh/xgboost_model
-arviz
-h5py
-pymc
-seaborn
-plotly
-nireports
+# Scientific/analysis stack for the notebooks (rendered from stored outputs).
+# Pinned for reproducibility; the git fork is pinned to a commit (not a branch).
+matplotlib==3.10.6
+pybids==0.20.0
+nilearn==0.12.1
+git+https://github.com/celprov/mriqc-learn.git@c612f902ea44cda94fecd4df382c9af5d3b38c09
+arviz==0.22.0
+h5py==3.14.0
+pymc==5.25.1
+seaborn==0.13.2
+plotly==6.3.1
+nireports==25.3.0
