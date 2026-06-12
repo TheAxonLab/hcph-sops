@@ -160,17 +160,42 @@ As such, verifying that the subjects were attempting to perform the instructed t
 
 ## Diffusion MRI
 
+The visual assessment of the *MRIQC* diffusion reportlets below follows the *MRIQC* protocol<sup>[2]</sup>.
+
 #### Shell-wise joint distribution of SNR vs FA in every voxel
+
+The top panel shows a heat map of the estimated signal-to-noise ratio (SNR) against the FA of every voxel, separated by shell; the bottom panel shows the histogram of SNR values per shell.
+Higher *b*-value shells are expected to exhibit lower SNR.
+
+- [ ] Flag the DWI scan if FA and SNR are clearly linearly correlated, which indicates noise contamination.
+- [ ] Flag the DWI scan if the per-shell SNR distributions are markedly non-normal.
+    MRI noise is Rician, so for SNR values mostly above ~2 the distribution within each shell should approximately resemble a normal distribution.
+- [ ] Flag the DWI scan if the SNR distributions of the different shells overlap substantially, which can indicate suboptimal acquisition parameters.
 
 #### Fractional anisotropy map
 
-- [ ] Exclude the DWI scans if the major WM tracts (corpus callosum [WHAT ELSE?]) are not clearly discernible. 
+This reportlet shows the reconstructed FA for every voxel in a mosaic layout.
+There should be a clear contrast between gray and white matter — with FA higher in white matter, and especially high where a single fiber orientation predominates (e.g., the corpus callosum) — and only minimal white speckles around the edges.
+
+- [ ] Exclude the DWI scan if the major white matter structures (e.g., the corpus callosum) are not clearly discernible because of blurriness or a lack of white-matter/gray-matter contrast.
+- [ ] Exclude the DWI scan if the brain is not displayed in the correct orientation (an axis flipped or switched because of a data-formatting issue).
+- [ ] Exclude the DWI scan if there are excessive white speckles, especially in the interior of the brain (reconstruction error).
+- [ ] Check for a piece of the head (usually the front or back) that falls outside the FOV and folds over onto the opposite extreme of the image (wrap-around).
+    Exclude the DWI scan only if the folded part overlaps with the region of interest.
 
 #### Mean diffusivity map
 
-- [ ] Exclude the DWI scan if the ventricles and/or the CSF around the brain is not prominently identifiable. 
+This reportlet shows the reconstructed MD for every voxel in a mosaic layout, with a consistent contrast between white matter, gray matter and the ventricles.
+
+- [ ] Exclude the DWI scan if the ventricles and/or the CSF around the brain is not prominently identifiable.
+- [ ] Exclude the DWI scan if the brain is not displayed in the correct orientation (an axis flipped or switched because of a data-formatting issue).
+- [ ] Exclude the DWI scan if there is blurriness or a lack of contrast between white matter, gray matter and the ventricles (local noise if confined to one area, global noise if present throughout the image).
+- [ ] Check for a piece of the head that falls outside the FOV and folds over onto the opposite extreme of the image (wrap-around).
 
 #### Voxel-wise average and standard deviation across volumes in a single DWI shell
+
+This reportlet flickers between the voxel-wise average and the standard deviation across the volumes of the shell, with yellow indicating higher variance and a red line delineating the brain mask.
+As the *b*-value increases, the high-variance (yellow) signal should increasingly resemble the white matter tracts; a shell with *b*=0 may show little variability if only one such volume was collected.
 
 ##### Voxel-wise average
 - [ ] Check that the brain is not presented upside down.
@@ -179,12 +204,18 @@ As such, verifying that the subjects were attempting to perform the instructed t
 - [ ] Check that the brain structure is clearly visible.
     Exclude the session if it is not.
 
-#### Shelled images standard deviation
-- [ ] Check that the major white matter tracts, most predominently the corpus callosum, are clearly visible. Exclude the DWI scan in case it is not.
+##### Standard deviation across volumes
+- [ ] Check that the major white matter tracts, most predominantly the corpus callosum, are clearly visible. Exclude the DWI scan in case it is not.
 - [ ] Check for high-standard-deviation vertical strikes in the coronal plane of the standard deviation map.
-    Exclude the session if the vertical strike continuously traverse more than half of the brain's length.
+    Exclude the session if the vertical strike continuously traverses more than half of the brain's length.
+- [ ] Exclude the session if there is symmetric brightness along the edges of the skull, which is indicative of head motion.
+- [ ] Exclude the session if there is excessive variability, such as brightness localized to one section of the brain or appearing outside the white matter tracts (local or global noise).
+- [ ] Check for an extra outline of the brain shifted along the acquisition axis.
+    Exclude the session if this aliasing ghost overlaps with the actual image.
 
 #### View of the background of the voxel-wise average of a single DWI shell
+
+This reportlet enhances the background noise; any artifact identified here may also be visible in the FA or MD maps.
 
 - [ ] Apply the same exclusion criteria as for the fMRI background view, that is check for the following ghosts:
       - [ ] Overlapping wrap-around.
@@ -192,9 +223,11 @@ As such, verifying that the subjects were attempting to perform the instructed t
       Exclude the session if any of these ghosts overlap cortical gray matter.
       - [ ] Nyquist aliases or aliasing ghost (typically through PE direction).
         Exclude the session if the intensity of the ghost is similar to the intensity of the inside of the brain.
+- [ ] Exclude the session if there is excessive or "structured" visual noise in the background, particularly in or around the brain (local or global noise, image-reconstruction errors or electromagnetic interference).
 
 ## Physiological recordings
 
 ## Eye-tracking
 
 [1]: https://www.frontiersin.org/articles/10.3389/fnimg.2023.1070274 "Etzel, Joset A. “Efficient Evaluation of the Open QC Task fMRI Dataset.” Frontiers in Neuroimaging 2 (2023). doi:10.3389/fnimg.2023.1070274."
+[2]: https://doi.org/10.1038/s41596-026-01352-y "Hagen, M. P., Provins, C., MacNicol, E., et al. “Quality assessment and control of unprocessed anatomical, functional and diffusion MRI of the human brain using MRIQC.” Nature Protocols (2026). doi:10.1038/s41596-026-01352-y."
