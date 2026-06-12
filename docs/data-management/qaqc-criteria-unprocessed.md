@@ -4,7 +4,7 @@ The following lists the pre-defined exclusion criteria for analyses of whole-bra
 
 !!! info "These criteria adapt published QC protocols"
 
-    The visual-assessment criteria below are derived from the *MRIQC* protocol<sup>[2]</sup> (preprint<sup>[3]</sup>) and the functional-MRI quality-control review of Provins et al.<sup>[4]</sup>, several of which were co-authored within the lab.
+    The visual-assessment criteria below are derived from the *MRIQC* protocol<sup>[2]</sup> (preprint<sup>[3]</sup>) and the functional-MRI quality-control review of Provins et al.<sup>[4]</sup>.
 
 ## Anatomical MRI
 
