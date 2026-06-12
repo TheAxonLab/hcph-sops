@@ -1,7 +1,12 @@
 bump = 'auto'
 convention = 'angular'
-in-place = true
-output = 'docs/changes.md'
+# The published changelog (docs/changes.md) is hand-curated by THEME, not a
+# per-commit dump. This tool only produces a raw DRAFT to curate from, so it must
+# NOT write in place over the curated file.
+in-place = false
+output = '.maint/changelog-draft.md'
 parse-refs = true
-sections = 'feat,fix,maint'
+# One representative key per section title (aliases are merged by .maint/changelog.py).
+# Order here is the order sections appear in the changelog.
+sections = 'feat,fix,doc,sty,refactor,perf,ci,build,maint,test,wip'
 template = 'path:./.maint/history.md.jinja'

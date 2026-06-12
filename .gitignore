@@ -133,3 +133,6 @@ dmypy.json
 
 #Git submodule
 .gitmodules
+
+# git-changelog raw draft (curate into docs/changes.md by theme)
+.maint/changelog-draft.md

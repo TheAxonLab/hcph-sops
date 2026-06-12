@@ -1,10 +1,9 @@
 {#- macro: render_subject -#}
+{#- git-changelog already strips the "type:" prefix, so just capitalize the -#}
+{#- first character of the cleaned subject (do NOT split on ":" -- subjects -#}
+{#- may legitimately contain colons). -#}
 {%- macro render_subject(subject) -%}
-{%- set sub_list = subject.split(":", 1) -%}
-{%- if sub_list|length == 2 %}
-{%- set title = sub_list[1].strip() -%}{{ sub_list[0].strip().upper() }}: {{ title[0]|upper }}{{ title[1:] }}
-{%- else %}{{ subject.strip()[0]|upper }}{{ subject.strip()[1:] }}
-{% endif -%}
+{%- set s = subject.strip() -%}{{ s[0]|upper }}{{ s[1:] }}
 {%- endmacro -%}
 {#- macro: render_author -#}
 {%- macro render_author(author) -%}
