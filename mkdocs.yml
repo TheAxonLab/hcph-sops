@@ -38,6 +38,7 @@ nav:
       - Calibrating regressor to flag HCPh T1w images for exclusion: analysis/qc-regressor-hcph.ipynb
       - Investigating T1w reliability: analysis/t1w-reliability.ipynb
       - Investigating T2w reliability: analysis/t2w-reliability.ipynb
+      - Paper supplementary material: analysis/supplementary.html
     - Release of data: release.md
     - Appendices:
       - Notes on the scanner's console: data-collection/notes-scanning.md

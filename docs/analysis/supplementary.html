@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paper supplementary figures</title>
+  <style>
+    :root {
+      --chrome-bg: #dee1e6;
+      --chrome-border: #b9bcc3;
+      --tab-inactive: #e8eaed;
+      --tab-active: #fff;
+      --radius: 8px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: #f0f2f5;
+      color: #1a1a1a;
+      min-height: 100vh;
+    }
+    .page {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 1rem 1rem 2rem;
+    }
+    h1 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0 0 0.75rem;
+    }
+    .experiment-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem 1.25rem;
+      margin-bottom: 1rem;
+      padding: 0.75rem 1rem;
+      background: var(--tab-active);
+      border: 1px solid var(--chrome-border);
+      border-radius: var(--radius);
+    }
+    .experiment-bar label {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .experiment-bar select {
+      min-width: min(100%, 22rem);
+      padding: 0.45rem 0.6rem;
+      font-size: 0.95rem;
+      border: 1px solid var(--chrome-border);
+      border-radius: 6px;
+      background: #fff;
+    }
+    /* Browser-style tab strip */
+    .tab-strip-wrap {
+      background: var(--chrome-bg);
+      border: 1px solid var(--chrome-border);
+      border-bottom: none;
+      border-radius: var(--radius) var(--radius) 0 0;
+      padding: 0.35rem 0.35rem 0 0.5rem;
+    }
+    .tab-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px;
+      align-items: flex-end;
+    }
+    .tab {
+      appearance: none;
+      border: 1px solid transparent;
+      border-bottom: none;
+      background: var(--tab-inactive);
+      color: #3c4043;
+      padding: 0.45rem 0.85rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      border-radius: 6px 6px 0 0;
+      cursor: pointer;
+      max-width: 14rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+    }
+    .tab:hover {
+      background: #f1f3f4;
+    }
+    .tab.active {
+      background: var(--tab-active);
+      border-color: var(--chrome-border);
+      border-bottom: 1px solid var(--tab-active);
+      margin-bottom: -1px;
+      color: #111;
+      z-index: 1;
+      position: relative;
+      box-shadow: none;
+    }
+    .tab-panel-shell {
+      background: var(--tab-active);
+      border: 1px solid var(--chrome-border);
+      border-radius: 0 0 var(--radius) var(--radius);
+      min-height: 420px;
+    }
+    .tab-panel {
+      display: none;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: stretch;
+      gap: 0;
+    }
+    .tab-panel.active { display: flex; }
+    .sidebar {
+      width: 280px;
+      flex-shrink: 0;
+      padding: 1rem 1rem 1.25rem;
+      background: #f8f9fa;
+      border-right: 1px solid var(--chrome-border);
+    }
+    .sidebar h2 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin: 0 0 0.35rem;
+      line-height: 1.3;
+    }
+    .sidebar label {
+      font-weight: 600;
+      font-size: 0.78rem;
+      display: block;
+      margin-top: 0.75rem;
+      margin-bottom: 0.25rem;
+      color: #3c4043;
+    }
+    .sidebar select {
+      width: 100%;
+      padding: 0.35rem 0.45rem;
+      font-size: 0.85rem;
+      border: 1px solid var(--chrome-border);
+      border-radius: 4px;
+      background: #fff;
+    }
+    .viewer {
+      flex: 1;
+      min-width: 200px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .viewer img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid var(--chrome-border);
+      border-radius: 4px;
+      background: #fff;
+    }
+    .path-line {
+      font-family: ui-monospace, monospace;
+      font-size: 0.7rem;
+      color: #5f6368;
+      margin-top: 0.5rem;
+      word-break: break-all;
+      text-align: center;
+      max-width: 100%;
+    }
+    @media (max-width: 720px) {
+      .tab-panel { flex-direction: column; }
+      .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--chrome-border);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h1>Paper supplementary figures</h1>
+
+    <div class="experiment-bar">
+      <label for="experiment">Experiment</label>
+      <select id="experiment" aria-label="Experiment"></select>
+    </div>
+
+    <div class="tab-strip-wrap">
+      <div id="tabStrip" class="tab-strip" role="tablist" aria-label="Visualization tabs"></div>
+    </div>
+    <div class="tab-panel-shell">
+      <div id="tabPanels"></div>
+    </div>
+  </div>
+
+  <script>
+    const IMAGE_FOLDER = "/data/derivatives/hcph-suppl/sub-001/figures/";
+
+    const EXPERIMENTS = {
+      icc: {
+        id: "icc",
+        label: "FC Variability across Scanners and Paradigms",
+        tabs: [
+          {
+            id: "icccomparative",
+            title: "FC Variability Ranking",
+            ext: "png",
+            build: (p) =>
+              `sub-001_desc-icccomparative_scale-${p.scale}_fdthresh-${p.fdthresh}_exp-scannereffects_bold.png`,
+            controls: ["scale", "fdthresh_icc"],
+          },
+          {
+            id: "iccVSsleep",
+            title: "Sleep Influence on ICC",
+            ext: "png",
+            build: (p) =>
+              `sub-001_desc-iccVSsleep_scale-${p.scale}_fdthresh-${p.fdthresh}_meas-${p.meas}_exp-scannereffects_bold.png`,
+            controls: ["scale", "fdthresh_icc", "meas"],
+          },
+          {
+            id: "iccVSscanner",
+            title: "Reliability Differences Between Scanners",
+            ext: "png",
+            build: (p) =>
+              `sub-001_desc-iccVSscanner_scale-${p.scale}_fdthresh-${p.fdthresh}_meas-${p.meas}_exp-scannereffects_bold.png`,
+            controls: ["scale", "fdthresh_icc", "meas"],
+          },
+          {
+            id: "FDvsScanner",
+            title: "Motion Differences Between Scanners",
+            ext: "png",
+            build: (p) =>
+              `sub-001_desc-FDvsScanner_scale-${p.scale}_fdthresh-${p.fdthresh}_meas-${p.meas}_exp-scannereffects_bold.png`,
+            controls: ["scale", "fdthresh_icc", "meas"],
+          },
+        ],
+      },
+      fmrivar: {
+        id: "fmrivar",
+        label: "Movie Habituation in Resting-State fMRI",
+        tabs: [
+          {
+            id: "similmat",
+            title: "FC Similarity Matrix",
+            ext: "svg",
+            build: (p) =>
+              `sub-001_task-rsmovie_scale-${p.scale}_fdthresh-${p.fdthresh}_meas-${p.meas}_exp-fmrivar_viz-similmat_bold.svg`,
+            controls: ["scale", "fdthresh_fmri", "meas"],
+          },
+          {
+            id: "explainedvar",
+            title: "PCA explained variance",
+            ext: "svg",
+            build: (p) =>
+              `sub-001_task-rsmovie_scale-${p.scale}_fdthresh-${p.fdthresh}_meas-${p.meas}_exp-fmrivar_viz-explainedvar_bold.svg`,
+            controls: ["scale", "fdthresh_fmri", "meas"],
+          },
+          {
+            id: "pcInterpret",
+            title: "PC Visualization",
+            ext: "svg",
+            build: (p) =>
+              `sub-001_task-rsmovie_scale-${p.scale}_fdthresh-${p.fdthresh}_meas-${p.meas}_exp-fmrivar_viz-${p.pc_sel}_bold.svg`,
+            controls: ["scale", "fdthresh_fmri", "meas", "pc_component"],
+          },
+          {
+            id: "pcweights",
+            title: "PC weights",
+            ext: "svg",
+            build: (p) =>
+              `sub-001_task-rsmovie_scale-${p.scale}_fdthresh-${p.fdthresh}_meas-${p.meas}_exp-fmrivar_viz-pcweights_bold.svg`,
+            controls: ["scale", "fdthresh_fmri", "meas"],
+          },
+          {
+            id: "resvar",
+            title: "Residual Variance Evolution",
+            ext: "svg",
+            build: (p) =>
+              `sub-001_task-rsmovie_scale-${p.scale}_fdthresh-${p.fdthresh}_meas-${p.meas}_exp-fmrivar_conf-${p.conf}_viz-resvar_bold.svg`,
+            controls: ["scale", "fdthresh_fmri", "meas", "conf"],
+          },
+          {
+            id: "edgewisevar",
+            title: "Edgewise Variance Evolution",
+            ext: "svg",
+            build: (p) => {
+              const viz = fmriEdgewiseVizSlug("edgewisevar", p.conf);
+              return `sub-001_task-rsmovie_scale-${p.scale}_fdthresh-${p.fdthresh}_meas-${p.meas}_exp-fmrivar_conf-${p.conf}_viz-${viz}_bold.svg`;
+            },
+            controls: ["scale", "fdthresh_fmri", "meas", "conf"],
+          },
+          {
+            id: "confounddist",
+            title: "Confound Distribution",
+            ext: "svg",
+            build: (p) =>
+              `sub-001_task-rsmovie_scale-${p.scale}_fdthresh-${p.fdthresh}_meas-${p.meas}_exp-fmrivar_viz-confounddist_bold.svg`,
+            controls: ["scale", "fdthresh_fmri", "meas"],
+          },
+        ],
+      },
+      clustering_fc: {
+        id: "clustering_fc",
+        label: "Within-Scanner Clustering (FC)",
+        tabs: [
+          {
+            id: "clusteringFcConfevolv",
+            title: "Confound Evolution",
+            ext: "svg",
+            build: (p) =>
+              `sub-001_task-rsmovie_scale-${p.scale}_fdthresh-${p.fdthresh}_meas-${p.meas}_exp-clusteringfc_conf-${p.clust_fc_conf}_viz-confevolv_bold.svg`,
+            controls: ["scale", "fdthresh_fmri", "meas", "clustering_fc_conf"],
+          },
+          {
+            id: "clusteringFcResdendrogram",
+            title: "Dendrogram & t-SNE Results",
+            ext: "svg",
+            build: (p) =>
+              `sub-001_task-rsmovie_scale-${p.scale}_fdthresh-${p.fdthresh}_meas-${p.meas}_exp-clusteringfc_conf-${p.clust_fc_conf}_viz-resdendrogramtsne_bold.svg`,
+            controls: ["scale", "fdthresh_fmri", "meas", "clustering_fc_conf"],
+          },
+        ],
+      },
+      clustering_sc: {
+        id: "clustering_sc",
+        label: "Within-Scanner Clustering (SC)",
+        tabs: [
+          {
+            id: "clusteringScConfevolv",
+            title: "Confound Evolution",
+            ext: "svg",
+            build: (p) =>
+              `sub-001_task-rsmovie_scale-${p.scale}_fdthresh-${p.fdthresh}_exp-clusteringsc_conf-${p.clust_sc_conf}_viz-confevolv_bold.svg`,
+            controls: ["scale", "fdthresh_fmri", "clustering_sc_conf"],
+          },
+          {
+            id: "clusteringScResdendrogram",
+            title: "Dendrogram & t-SNE Results",
+            ext: "svg",
+            build: (p) =>
+              `sub-001_scale-${p.scale}_fdthresh-${p.fdthresh}_exp-clusteringsc_conf-${p.clust_sc_conf}_viz-resdendrogramtsne_dwi.svg`,
+            controls: ["scale", "fdthresh_fmri", "clustering_sc_conf"],
+          },
+        ],
+      },
+    };
+
+    /** On-disk typo: conf-day + edgewise uses viz-edgewiseres instead of viz-edgewisevar */
+    function fmriEdgewiseVizSlug(kind, conf) {
+      if (conf === "day" && kind === "edgewisevar") return "edgewiseres";
+      return kind;
+    }
+
+    const CONTROL_OPTIONS = {
+      scale: {
+        html: `<label>Atlas dimension</label><select data-k="scale" class="param">${["64", "128", "512"].map((v) => `<option value="${v}">${v}</option>`).join("")}</select>`,
+      },
+      fdthresh_icc: {
+        html: `<label>FD threshold</label><select data-k="fdthresh" class="param">${[
+          ["05", "0.5"],
+          ["100", "1.0"],
+        ].map(([v, t]) => `<option value="${v}">${t}</option>`).join("")}</select>`,
+      },
+      fdthresh_fmri: {
+        html: `<label>FD threshold</label><select data-k="fdthresh" class="param">${[
+          ["04", "0.4"],
+          ["05", "0.5"],
+          ["02", "0.2"],
+          ["08", "0.8"],
+        ].map(([v, t]) => `<option value="${v}">${t}</option>`).join("")}</select>`,
+      },
+      meas: {
+        html: `<label>Dependency metric</label><select data-k="meas" class="param">
+          <option value="correlation">Correlation</option>
+          <option value="sparseinversecovariance">Sparse inverse covariance</option>
+        </select>`,
+      },
+      pc_component: {
+        html: `<label>Component</label><select data-k="pc_sel" class="param">
+          <option value="pc1">1</option>
+          <option value="pc2">2</option>
+          <option value="pc3">3</option>
+          <option value="pc4">4</option>
+          <option value="pc5">5</option>
+          <option value="pc6">6</option>
+          <option value="pcall">All</option>
+        </select>`,
+      },
+      conf: {
+        html: `<label>Grouping confound</label><select data-k="conf" class="param">
+          <option value="day">Day of week</option>
+          <option value="time">Time of day</option>
+          <option value="pe_dir">Phase-encoding direction</option>
+          <option value="pedir">Phase-encoding direction (legacy tag: pedir)</option>
+          <option value="caffeine2h">Caffeine (last 2h)</option>
+          <option value="caffeine24h">Caffeine (last 24h)</option>
+        </select>`,
+      },
+      clustering_fc_conf: {
+        html: `<label>Confound / grouping</label><select data-k="clust_fc_conf" class="param">
+          <option value="coffee24h">Coffee (24h)</option>
+          <option value="coffee2h">Coffee (2h)</option>
+          <option value="day">Day of week</option>
+          <option value="fd">Framewise Displacement</option>
+          <option value="pe_dir">Phase-encoding direction</option>
+          <option value="roomtemp">Room temperature</option>
+          <option value="time">Time of day</option>
+        </select>`,
+      },
+      clustering_sc_conf: {
+        html: `<label>Confound / grouping</label><select data-k="clust_sc_conf" class="param">
+          <option value="coffee24h">Coffee (24h)</option>
+          <option value="coffee2h">Coffee (2h)</option>
+          <option value="day">Day of week</option>
+          <option value="fd">Framewise Displacement</option>
+          <option value="pe_dir">Phase-encoding direction</option>
+          <option value="roomtemp">Room temperature</option>
+          <option value="time">Time of day</option>
+        </select>`,
+      },
+    };
+
+    const expSelect = document.getElementById("experiment");
+    const tabStrip = document.getElementById("tabStrip");
+    const tabPanels = document.getElementById("tabPanels");
+
+    let activeExp = "icc";
+    let activeTabIndex = 0;
+
+    function currentExpDef() {
+      return EXPERIMENTS[activeExp];
+    }
+
+    function readParams(panel) {
+      const out = {};
+      panel.querySelectorAll("select.param").forEach((sel) => {
+        out[sel.getAttribute("data-k")] = sel.value;
+      });
+      return out;
+    }
+
+    function updateImage(panel) {
+      const exp = panel.getAttribute("data-exp");
+      const tabId = panel.getAttribute("data-tab");
+      const tab = EXPERIMENTS[exp].tabs.find((t) => t.id === tabId);
+      if (!tab) return;
+      const p = readParams(panel);
+      const name = tab.build(p);
+      const url = IMAGE_FOLDER + name;
+      const img = panel.querySelector("img");
+      const pathEl = panel.querySelector(".path-line");
+      img.src = url;
+      img.alt = name;
+      if (pathEl) pathEl.textContent = name;
+    }
+
+    function wirePanel(panel) {
+      panel.querySelectorAll("select.param").forEach((sel) => {
+        sel.addEventListener("change", () => updateImage(panel));
+      });
+      updateImage(panel);
+    }
+
+    function renderTabs() {
+      const def = currentExpDef();
+      tabStrip.innerHTML = "";
+      tabPanels.innerHTML = "";
+
+      def.tabs.forEach((tab, i) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "tab" + (i === activeTabIndex ? " active" : "");
+        btn.textContent = tab.title;
+        btn.setAttribute("role", "tab");
+        btn.setAttribute("aria-selected", i === activeTabIndex ? "true" : "false");
+        btn.addEventListener("click", () => {
+          activeTabIndex = i;
+          renderTabs();
+        });
+        tabStrip.appendChild(btn);
+
+        const panel = document.createElement("div");
+        panel.className = "tab-panel" + (i === activeTabIndex ? " active" : "");
+        panel.setAttribute("role", "tabpanel");
+        panel.setAttribute("data-exp", def.id);
+        panel.setAttribute("data-tab", tab.id);
+
+        const controlsHtml = tab.controls.map((c) => CONTROL_OPTIONS[c].html).join("");
+
+        panel.innerHTML = `
+          <div class="sidebar">
+            <h2>${tab.title}</h2>
+            ${controlsHtml}
+          </div>
+          <div class="viewer">
+            <img src="" alt="">
+            <div class="path-line"></div>
+          </div>
+        `;
+        tabPanels.appendChild(panel);
+        wirePanel(panel);
+      });
+    }
+
+    Object.values(EXPERIMENTS).forEach((e) => {
+      const opt = document.createElement("option");
+      opt.value = e.id;
+      opt.textContent = e.label;
+      expSelect.appendChild(opt);
+    });
+    expSelect.value = activeExp;
+
+    expSelect.addEventListener("change", () => {
+      activeExp = expSelect.value;
+      activeTabIndex = 0;
+      renderTabs();
+    });
+
+    renderTabs();
+  </script>
+</body>
+</html>
